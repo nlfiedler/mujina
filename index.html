@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Hello World!</title>
+    <style>
+      #drop {
+        min-height: 150px;
+        width: 250px;
+        border: 1px solid blue;
+        margin: 10px;
+        padding: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Hello World!</h1>
+    <!-- All of the Node.js APIs are available in this renderer process. -->
+    We are using Node.js <script>document.write(process.versions.node)</script>,
+    Chromium <script>document.write(process.versions.chrome)</script>,
+    and Electron <script>document.write(process.versions.electron)</script>.
+
+    <div>
+      <button type="button" onclick="rr.fetchTags()">Get Tags</button>
+    </div>
+
+    <div id="tags">
+    </div>
+
+    <div id="drop">Drop files here.</div>
+    <div id="status"></div>
+
+    <script>
+      // You can also require other files to run in this process
+      const rr = require('./renderer.js')
+    </script>
+  </body>
+</html>

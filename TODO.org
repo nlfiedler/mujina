@@ -1,0 +1,40 @@
+# TODO
+
+## Learning
+
+- [DONE] Go through Dan Abramov's Redux course on egghead.io
+- [DONE] Go through Dan Abramov's React/Redux course
+- [DONE] What is the difference between `export` and `exports`?
+  * The `export` statement is new and only supported in Chrome and Safari.
+  * Transpilers such as Babel support it
+
+## Overall
+
+- [DONE] Get it connected to the backend, log tags in console
+- [DONE] Get a list of available tags, show in the page
+- [DONE] Set up a persistent configuration for development
+- [DONE] Learn how to write doc comments (apparently it's JSDoc)
+- [DONE] Create a drop zone for drag-n-drop; combine with file selector
+- [DONE] Have dropped files get uploaded into the backend
+- [DONE] Add a copyright header to all of the source code
+- [TODO] Figure out how to manage multiple windows
+- [TODO] Figure out how to add React and Redux
+- [TODO] Look for examples of source code layout
+- [TODO] Model the state of the application in Redux
+- [TODO] Use React to build the tags list and drop zone
+- [TODO] With React, show uploaded assets in a list with editable fields
+- [TODO] Get the edited data committed to the corresponding database records
+- [TODO] Investigate how to localize the app
+  * https://www.npmjs.com/package/oftn-l10n
+  * https://developer.mozilla.org/en-US/docs/Mozilla/Localization/Localization_content_best_practices
+- [TODO] Decide on how to do routing (static vs dynamic), see NOTES.md
+- [TODO] Consider storing assets in timestamped directories with original file names
+  * How to deal with name collisions? Would that even happen?
+  * If assets are uploaded individually, do they each go in a separate directory?
+  * Would need an in-memory mapping of SHA256 to asset file path to avoid DB query
+- [TODO] Look into automated testing frameworks
+- [TODO] Look at `normalizr` npm for "Normalizing API Responses" (see Abramov's react #26)
+
+## App/Daemon combo
+
+- [TODO] Change backend to support 'upload' in which asset is already in position
