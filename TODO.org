@@ -17,6 +17,7 @@
 - [DONE] Create a drop zone for drag-n-drop; combine with file selector
 - [DONE] Have dropped files get uploaded into the backend
 - [DONE] Add a copyright header to all of the source code
+- [DONE] Write a basic README file
 - [TODO] Figure out how to manage multiple windows
 - [TODO] Figure out how to add React and Redux
 - [TODO] Look for examples of source code layout
