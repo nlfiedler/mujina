@@ -12,38 +12,35 @@ const request = require('request')
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
-let mainWindow
+let mainWindows = new Map()
 
 const createWindow = () => {
   // Create the browser window.
-  let mainWindowState = windowStateKeeper({
+  let windowState = windowStateKeeper({
     defaultWidth: 800,
     defaultHeight: 600
   })
-  mainWindow = new BrowserWindow({
-    x: mainWindowState.x,
-    y: mainWindowState.y,
-    width: mainWindowState.width,
-    height: mainWindowState.height
+  let win = new BrowserWindow({
+    x: windowState.x,
+    y: windowState.y,
+    width: windowState.width,
+    height: windowState.height,
+    minWidth: 400,
+    minHeight: 300
   })
-  mainWindowState.manage(mainWindow)
+  windowState.manage(win)
+  mainWindows.set(win.id, win)
 
   // and load the index.html of the app.
-  mainWindow.loadURL(url.format({
+  win.loadURL(url.format({
     pathname: path.join(__dirname, 'index.html'),
     protocol: 'file:',
     slashes: true
   }))
 
-  // Open the DevTools.
-  // mainWindow.webContents.openDevTools()
-
   // Emitted when the window is closed.
-  mainWindow.on('closed', () => {
-    // Dereference the window object, usually you would store windows
-    // in an array if your app supports multi windows, this is the time
-    // when you should delete the corresponding element.
-    mainWindow = null
+  win.on('closed', () => {
+    mainWindows.delete(win.id)
   })
 }
 
@@ -64,7 +61,7 @@ app.on('window-all-closed', () => {
 app.on('activate', () => {
   // On OS X it's common to re-create a window in the app when the
   // dock icon is clicked and there are no other windows open.
-  if (mainWindow === null) {
+  if (mainWindows.size === 0) {
     createWindow()
   }
 })
@@ -116,6 +113,8 @@ ipcMain.on('files:upload', (event, files) => {
       }),
       formData
     }, (err, response, body) => {
+      // TODO: should map the results to the original file,
+      //       otherwise the last result overwrites everything else
       if (err) {
         event.sender.send('files:error', err.toString())
       } else {
