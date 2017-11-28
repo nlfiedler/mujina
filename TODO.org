@@ -40,6 +40,20 @@
 - [TODO] Consider setting the application menu appropriately for macOS and win32
 - [TODO] Create a "New Window" menu item that invokes createWindow()
 - [TODO] Find out how to handle unresponsive windows
+- [TODO] Start filing issues to track progress, with milestones
+- [TODO] Make the number of cached thumbnails depend on the available memory
+- [TODO] Support browsing by year and month (likely without paging)
+- [TODO] Show video thumbnails using video HTML tag so they can play directly
+- [TODO] Bulk edit feature
+  - Design a query page that allows searching on several fields (tags, date, location)
+  - Use a temporary view (http://docs.couchdb.org/en/1.6.1/api/database/temp-views.html)
+  - Multi-select the displayed results
+  - Present a form for changing one or more fields of the selected assets
+- [TODO] Option on asset screen to rotate an image (some images lack orientation data)
+
+## Research
+
+- [TODO] What does macOS Photos offer? Should at least be better than that
 
 ## App/Daemon combo
 

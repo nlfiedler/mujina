@@ -122,6 +122,7 @@ myfunc = (param1) => (param2) => (param2) => {
 
 ## Design ideas
 
+* When viewing an asset, keep the other assets in a marquee across the top/bottom (a la Lyn)
 * Free, easily customizable icons: http://fontawesome.io
 * Mini styling "framework": http://bulma.io
     - not sure how this works with React, maybe React is sufficient
@@ -165,6 +166,26 @@ myfunc = (param1) => (param2) => (param2) => {
 
 ## Features
 
+* Albums
+* Categories
+* Browsing by timeline
+* Rating
+* Keyboard shortcuts
+* Task automation (i.e. batch processing)
+    - editing (EXIF, IPTC, XMP) metadata
+    - resize, rotate, format conversion
+    - watermarks
+* Hierarchical locations (e.g. USA -> California -> Los Angeles)
+* Hierarchical categories (e.g. People -> Friends -> School)
+* Store metadata in image (XMP, IPTC, EXIF)
+* Display photos by location on a map
+* Spell checking
+* Some basic photo touchups seem like a good idea
+    - Red-eye reduction
+    - Sharpen, sepia, etc
+    - Strip GPS data
+* Multi-user
+* Network support
 * Browse photos by groups taken around the same date
 * A button/link to "quick edit" an asset on the thumbnails page
     - pops up a modal for editing the asset details

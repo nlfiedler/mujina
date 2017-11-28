@@ -73,7 +73,7 @@ ipcMain.on('tags:fetch', (event) => {
   const request = net.request({
     method: 'GET',
     hostname: store.get('backend.host', 'localhost'),
-    port: store.get('backend.port', 4000),
+    port: store.get('backend.port', 3000),
     path: '/api/tags'
   })
   request.on('response', (response) => {
@@ -108,7 +108,7 @@ ipcMain.on('files:upload', (event, files) => {
       url: url.format({
         protocol: 'http:',
         hostname: store.get('backend.host', 'localhost'),
-        port: store.get('backend.port', 4000),
+        port: store.get('backend.port', 3000),
         pathname: '/api/assets'
       }),
       formData
