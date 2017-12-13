@@ -70,5 +70,3 @@ ipcRenderer.on('files:error', (event, err) => {
   const div = document.querySelector('div#status')
   div.innerHTML = err
 })
-
-module.exports = exports
