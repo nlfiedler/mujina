@@ -29,7 +29,8 @@ const createWindow = () => {
     minHeight: 300
   })
   windowState.manage(win)
-  mainWindows.set(win.id, win)
+  let winId = win.id
+  mainWindows.set(winId, win)
 
   // and load the index.html of the app.
   win.loadURL(url.format({
@@ -40,7 +41,7 @@ const createWindow = () => {
 
   // Emitted when the window is closed.
   win.on('closed', () => {
-    mainWindows.delete(win.id)
+    mainWindows.delete(winId)
   })
 }
 
