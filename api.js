@@ -3,8 +3,8 @@
 //
 // using node's http instead of electron's net for sake of using nock
 const http = require('http')
-// const Store = require('electron-store')
-// const configStore = new Store()
+const Store = require('electron-store')
+const configStore = new Store()
 
 /**
  * Call the backend to get the available tags.
@@ -15,10 +15,8 @@ function fetchTags () {
   return new Promise((resolve, reject) => {
     const request = http.request({
       method: 'GET',
-      // hostname: configStore.get('backend.host', 'localhost'),
-      // port: configStore.get('backend.port', 3000),
-      hostname: 'localhost',
-      port: 3000,
+      hostname: configStore.get('backend.host', 'localhost'),
+      port: configStore.get('backend.port', 3000),
       path: '/api/tags'
     })
     request.on('response', (response) => {

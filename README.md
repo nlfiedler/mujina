@@ -11,5 +11,6 @@ The Electron-based desktop interface to the tanuki backend.
 
 ```shell
 $ npm install
+$ npm test
 $ npm start
 ```

@@ -25,9 +25,7 @@
   - [TODO] Go through a Redux tutorial
   - [DONE] Write some redux actions and reducers to get started
   - [DONE] Write mocha tests for the redux code
-  - [TODO] need to set up electron for testing so we can load its modules
-    - use https://github.com/jprichardson/electron-mocha
-    - enable the use of electron-store in the rest of the code base
+  - [DONE] need to set up electron for testing so we can load its modules
   - [TODO] Look for a library that does the basics of async API calls like Elm's remotedata
     - In order to streamline the reducers/index.js code
   - [DONE] Set up a mock backend for testing
