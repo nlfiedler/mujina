@@ -28,6 +28,8 @@ myfunc = (param1) => (param2) => (param2) => {
     - [react-redux](https://github.com/reactjs/react-redux)
 * Look into [react-router](https://reacttraining.com/react-router/)
     - dynamic routing for React components
+* https://github.com/hardchor/electron-redux
+    - Use redux in the main and browser processes
 * There are lots of helpful react and redux npms
     - redux-promise
     - redux-logger
@@ -63,53 +65,35 @@ myfunc = (param1) => (param2) => (param2) => {
     - date/time of import
     - SHA256
     - tags, location
-* Have CouchDB routinely make a backup of the database
-    - Daily, keep several copies
+* Have PouchDB routinely make a backup of the database
+    - Every N changes, make a backup
 
 ## Implementation Details
 
-* With app/daemon combination, large files can be "uploaded" directly to final location on disk
-    - App settings will include path to assets on local disk
-* With daemon on separate machine...
-    - Large files can be imported via special directory feature
-    - Or mount remote disk and add to app settings as the asset path
-    - If local path is unset, warn user that large files cannot be "uploaded"
 * Meta data: support XMP, IPTC, and EXIF
     - Need to be able to read and write
 
 ## Technology
 
-* Use async/await rather than callbacks
-    - async/await are sugar for promises, just looks nicer
 * Use HTML imports to bring in snippets
-* Build tool: http://brunch.io/docs/why-brunch
-    - brunch and webpack are both declarative
-    - other tools are task runners (e.g. grunt, gulp)
-    - brunch still seems like the better tool
 * Testing: https://github.com/facebook/jest
     - uses `expect` library
     - handles React apps
 * https://github.com/electron/spectron
     - Test Electron apps using ChromeDriver
-* https://github.com/hardchor/electron-redux
-    - Use redux in the main and browser processes
 * https://github.com/electron/devtron
     - Official DevTools extension
-* https://www.npmjs.com/package/fluent-ffmpeg
-    - wraps ffmpeg with JavaScript
 * https://github.com/rhysd/electron-about-window
     - a fancier about window
 
 ## Behavior
 
-* Downloads and installs the backend (or include somehow)
-    - include ERTS and dependencies
+* Includes the backend code
     - version-compatible with desktop app
     - probably platform-specific
 * Ensures the backend is running (no need to shutdown)
 * Have a first-start wizard to walk the user through the setup
-* Maybe interface with CouchDB directly for complex queries
-* Somehow get ImageMagick static binaries installed
+* Maybe interface with PouchDB directly for complex queries
 * Somehow get ffmpeg installed
     - https://github.com/adaptlearning/adapt_authoring/wiki/Installing-FFmpeg
     - https://github.com/eugeneware/ffmpeg-static
@@ -152,7 +136,6 @@ myfunc = (param1) => (param2) => (param2) => {
     - apparently electron-forge uses electron-packager
 * Paul Betts recommends electron-forge
     - invokes electron-packager internally
-* Combine the CouchDB ERTS and the one for tanuki
 * Building each app on the target platforms seems sensible
 * Use a code obfuscator as the JS code is part of the app bundle
 * Use asar as the output format for additional obfuscation
@@ -160,7 +143,7 @@ myfunc = (param1) => (param2) => (param2) => {
 * Need to register with Apple for $100/year to use app store
     - Need a Developer ID certificate for signing apps
         + Need to save this file securely and permanently
-    - Application/Installer certicate is for the app store only
+    - Application/Installer certificate is for the app store only
 * Can host package files on S3 or similar
 * Squirrel updater can do deltas efficiently
 
@@ -200,7 +183,7 @@ myfunc = (param1) => (param2) => (param2) => {
     - Winery > vinification > fermentation tanks
     - Architecture > Buildings > underground cellar
 * Custom metadata fields
-    - Keep a list of field definitions in CouchDB
+    - Keep a list of field definitions in PouchDB
     - e.g.
       {
         "formLabel": "Location" (on HTML forms)
@@ -220,20 +203,17 @@ myfunc = (param1) => (param2) => (param2) => {
 * Share assets online (e.g. Flickr, Smugmug, email)
 * Script support (a la HyperScript)
     - can probably use JavaScript for this
-    - can leverage ImageMagick to perform alterations on images
+    - can leverage lovell/sharp to perform alterations on images
 * Preview PDF documents
 * Grouping assets
     - e.g. assets owned by particular user
 * Authentication and authorization
     - Username/password
     - Access control to certain assets, groups
-    - Password protect the admin page, like CouchDB
+    - Password protect the admin page
 * Automatic backups to Google Cloud or Amazon Glacier
-    - Yeah, we have the software, so why not?
     - Configuration for credentials, when to run, how often, how many old copies to retain
-    - Probably should make recovery of individual assets easier
-        + OTOH, the purpose is largely about disaster recovery
-        + After all, tanuki does not make deleting assets remotely easy
+    - Should make recovery of individual assets easier
 * Printing an image or PDF
 * Converting videos to animated GIFs
 * Extracting a frame from a video

@@ -6,9 +6,21 @@ const path = require('path')
 const url = require('url')
 const fs = require('fs')
 const Store = require('electron-store')
-const store = new Store()
+const configStore = new Store()
 const windowStateKeeper = require('electron-window-state')
 const request = require('request')
+
+// TODO: decide where and how to set up the redux store and middleware
+// const {createStore, applyMiddleware} = require('redux')
+// const createSagaMiddleware = require('redux-saga').default()
+// const reducer = require('./reducers')
+// const mySaga = require('./sagas')
+// const sagaMiddleware = createSagaMiddleware()
+// const reduxStore = createStore(
+//   reducer,
+//   applyMiddleware(sagaMiddleware)
+// )
+// sagaMiddleware.run(mySaga)
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -73,8 +85,8 @@ app.on('activate', () => {
 ipcMain.on('tags:fetch', (event) => {
   const request = net.request({
     method: 'GET',
-    hostname: store.get('backend.host', 'localhost'),
-    port: store.get('backend.port', 3000),
+    hostname: configStore.get('backend.host', 'localhost'),
+    port: configStore.get('backend.port', 3000),
     path: '/api/tags'
   })
   request.on('response', (response) => {
@@ -108,8 +120,8 @@ ipcMain.on('files:upload', (event, files) => {
     request.post({
       url: url.format({
         protocol: 'http:',
-        hostname: store.get('backend.host', 'localhost'),
-        port: store.get('backend.port', 3000),
+        hostname: configStore.get('backend.host', 'localhost'),
+        port: configStore.get('backend.port', 3000),
         pathname: '/api/assets'
       }),
       formData

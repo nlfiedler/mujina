@@ -5,8 +5,9 @@
 - [DONE] Go through Dan Abramov's Redux course on egghead.io
 - [DONE] Go through Dan Abramov's React/Redux course
 - [DONE] What is the difference between `export` and `exports`?
-  * The `export` statement is new and only supported in Chrome and Safari.
-  * Transpilers such as Babel support it
+  - The `export` statement is new and only supported in Chrome and Safari.
+  - Transpilers such as Babel support it
+  - node.js is entirely its own thing, with module.exports and exports
 
 ## Overall
 
@@ -20,23 +21,52 @@
 - [DONE] Write a basic README file
 - [DONE] Figure out how to manage multiple windows
 - [DONE] Set the minimum size of the main window to something reasonable
-- [TODO] Figure out how to add React and Redux
+- [TODO] Figure out how to use Redux for modeling the app state
+  - [TODO] Go through a Redux tutorial
+  - [DONE] Write some redux actions and reducers to get started
+  - [DONE] Write mocha tests for the redux code
+  - [TODO] need to set up electron for testing so we can load its modules
+    - use https://github.com/jprichardson/electron-mocha
+    - enable the use of electron-store in the rest of the code base
+  - [TODO] Look for a library that does the basics of async API calls like Elm's remotedata
+    - In order to streamline the reducers/index.js code
+  - [DONE] Set up a mock backend for testing
+  - [DONE] Use https://redux-saga.js.org for data fetching
+  - [TODO] Look at what https://github.com/jmeas/redux-resource can offer
+  - [TODO] Look at using https://github.com/svrcekmichal/redux-axios-middleware
+  - [TODO] Look at using https://github.com/leoasis/redux-immutable-state-invariant
+  - [TODO] Look at using https://github.com/socialtables/redux-unhandled-action
+  - [TODO] Look at `normalizr` npm for "Normalizing API Responses" (see Abramov's react #26)
 - [TODO] Look for examples of source code layout
 - [TODO] Model the state of the application in Redux
+  - Use https://github.com/reactjs/reselect for efficiently selecting things (i.e. paging)
+  - Use https://github.com/samiskin/redux-electron-store for cross-process syncing
+- [TODO] Set up basic interface with React
+  - [TODO] Go through a React tutorial (again)
+  - [TODO] Read https://reactjs.org/docs/thinking-in-react.html
+  - [TODO] Maybe watch https://reactforbeginners.com ($139)
+  - [TODO] Look at https://github.com/reactjs/react-router-redux for routing
+  - [TODO] See how https://github.com/erikras/redux-form can help
+  - [TODO] See how https://github.com/davidkpiano/react-redux-form can help
+  - [TODO] See http://airbnb.io/enzyme/ for writing React tests
 - [TODO] Use React to build the tags list
 - [TODO] Use React to build the drop zone
 - [TODO] Show uploaded assets in a list with editable fields
 - [TODO] Commit edited data to the corresponding database records
+- [TODO] Consider how to make app/backend combination more efficient
+  - That is, if both are on the same machine, access assets directly
+    - Can generate thumbnails and previews in the app vs backend
+  - And, "upload" assets by storing them directly to the destination
+  - Otherwise, must upload via HTTP
 - [TODO] Investigate how to localize the app
-  * https://www.npmjs.com/package/oftn-l10n
-  * https://developer.mozilla.org/en-US/docs/Mozilla/Localization/Localization_content_best_practices
+  - https://www.npmjs.com/package/oftn-l10n
+  - https://developer.mozilla.org/en-US/docs/Mozilla/Localization/Localization_content_best_practices
 - [TODO] Decide on how to do routing (static vs dynamic), see NOTES.md
 - [TODO] Consider storing assets in timestamped directories with original file names
-  * How to deal with name collisions? Would that even happen?
-  * If assets are uploaded individually, do they each go in a separate directory?
-  * Would need an in-memory mapping of SHA256 to asset file path to avoid DB query
-- [TODO] Look into automated testing frameworks
-- [TODO] Look at `normalizr` npm for "Normalizing API Responses" (see Abramov's react #26)
+  - How to deal with name collisions? Would that even happen?
+  - If assets are uploaded individually, do they each go in a separate directory?
+  - Would need an in-memory mapping of SHA256 to asset file path to avoid DB query
+- [TODO] Look into automated testing frameworks for Electron apps
 - [TODO] Consider setting the application menu appropriately for macOS and win32
 - [TODO] Create a "New Window" menu item that invokes createWindow()
 - [TODO] Find out how to handle unresponsive windows
@@ -44,6 +74,7 @@
 - [TODO] Make the number of cached thumbnails depend on the available memory
 - [TODO] Support browsing by year and month (likely without paging)
 - [TODO] Show video thumbnails using video HTML tag so they can play directly
+- [TODO] Show selected frames from videos on mouse-over
 - [TODO] Bulk edit feature
   - Design a query page that allows searching on several fields (tags, date, location)
   - Use a temporary view (http://docs.couchdb.org/en/1.6.1/api/database/temp-views.html)
