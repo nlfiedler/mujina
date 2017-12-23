@@ -30,8 +30,8 @@ describe('Async Actions', () => {
     const store = mockStore({})
     sagaMiddleware.run(rootSaga)
     const expectedActions = [
-      {type: actions.TAG_FETCH_REQUESTED},
-      {type: actions.TAG_FETCH_SUCCEEDED, tags}
+      {type: actions.LOAD_TAGS},
+      {type: actions.LOAD_TAGS_SUCCESS, tags}
     ]
     store.subscribe(() => {
       // once both actions have dispatched, then compare
@@ -60,7 +60,7 @@ describe('Async Actions', () => {
 describe('Actions', () => {
   it('should create an action to fetch tags', () => {
     const expectedAction = {
-      type: actions.TAG_FETCH_REQUESTED
+      type: actions.LOAD_TAGS
     }
     assert.deepEqual(actions.requestTags(), expectedAction)
   })
@@ -68,7 +68,7 @@ describe('Actions', () => {
   it('should create an action to fail tag request', () => {
     const errMsg = 'oh no'
     const expectedAction = {
-      type: actions.TAG_FETCH_FAILED,
+      type: actions.LOAD_TAGS_FAIL,
       err: errMsg
     }
     assert.deepEqual(actions.failTags(errMsg), expectedAction)
@@ -77,7 +77,7 @@ describe('Actions', () => {
   it('should create an action to receive tags', () => {
     const json = '[{"tag":"pie","count":4},{"tag":"cake","count":2}]'
     const expectedAction = {
-      type: actions.TAG_FETCH_SUCCEEDED,
+      type: actions.LOAD_TAGS_SUCCESS,
       tags: json
     }
     assert.deepEqual(actions.receiveTags(json), expectedAction)

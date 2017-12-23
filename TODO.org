@@ -28,10 +28,9 @@
   - [DONE] need to set up electron for testing so we can load its modules
   - [TODO] Look for a library that does the basics of async API calls like Elm's remotedata
     - In order to streamline the reducers/index.js code
+  - [TODO] Write tests that exercise the reducers code, if that is even possible
   - [DONE] Set up a mock backend for testing
   - [DONE] Use https://redux-saga.js.org for data fetching
-  - [TODO] Look at what https://github.com/jmeas/redux-resource can offer
-  - [TODO] Look at using https://github.com/svrcekmichal/redux-axios-middleware
   - [TODO] Look at using https://github.com/leoasis/redux-immutable-state-invariant
   - [TODO] Look at using https://github.com/socialtables/redux-unhandled-action
   - [TODO] Look at `normalizr` npm for "Normalizing API Responses" (see Abramov's react #26)

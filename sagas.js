@@ -15,7 +15,7 @@ function * fetchTags (action) {
 }
 
 function * watchFetchTags () {
-  yield takeEvery(actions.TAG_FETCH_REQUESTED, fetchTags)
+  yield takeEvery(actions.LOAD_TAGS, fetchTags)
 }
 
 function * rootSaga () {

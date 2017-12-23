@@ -1,19 +1,19 @@
 //
 // Copyright (c) 2017 Nathan Fiedler
 //
-const TAG_FETCH_REQUESTED = 'TAG_FETCH_REQUESTED'
-const TAG_FETCH_SUCCEEDED = 'TAG_FETCH_SUCCEEDED'
-const TAG_FETCH_FAILED = 'TAG_FETCH_FAILED'
+const LOAD_TAGS = 'LOAD_TAGS'
+const LOAD_TAGS_SUCCESS = 'LOAD_TAGS_SUCCESS'
+const LOAD_TAGS_FAIL = 'LOAD_TAGS_FAIL'
 
 function requestTags () {
   return {
-    type: TAG_FETCH_REQUESTED
+    type: LOAD_TAGS
   }
 }
 
 function receiveTags (json) {
   return {
-    type: TAG_FETCH_SUCCEEDED,
+    type: LOAD_TAGS_SUCCESS,
     tags: json
     // receivedAt: Date.now()
   }
@@ -21,15 +21,15 @@ function receiveTags (json) {
 
 function failTags (err) {
   return {
-    type: TAG_FETCH_FAILED,
+    type: LOAD_TAGS_FAIL,
     err
   }
 }
 
 module.exports = {
-  TAG_FETCH_REQUESTED,
-  TAG_FETCH_SUCCEEDED,
-  TAG_FETCH_FAILED,
+  LOAD_TAGS,
+  LOAD_TAGS_SUCCESS,
+  LOAD_TAGS_FAIL,
   requestTags,
   receiveTags,
   failTags

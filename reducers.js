@@ -2,10 +2,9 @@
 // Copyright (c) 2017 Nathan Fiedler
 //
 const {
-  INVALIDATE_TAGS,
-  TAG_FETCH_REQUESTED,
-  TAG_FETCH_SUCCEEDED,
-  TAG_FETCH_FAILED
+  LOAD_TAGS,
+  LOAD_TAGS_SUCCESS,
+  LOAD_TAGS_FAIL
 } = require('../actions')
 
 function tags (
@@ -18,24 +17,20 @@ function tags (
   action
 ) {
   switch (action.type) {
-    case INVALIDATE_TAGS:
-      return Object.assign({}, state, {
-        didInvalidate: true
-      })
-    case TAG_FETCH_REQUESTED:
+    case LOAD_TAGS:
       return Object.assign({}, state, {
         isFetching: true,
         didInvalidate: false,
         error: null
       })
-    case TAG_FETCH_SUCCEEDED:
+    case LOAD_TAGS_SUCCESS:
       return Object.assign({}, state, {
         isFetching: false,
         didInvalidate: false,
         items: action.tags,
         error: null
       })
-    case TAG_FETCH_FAILED:
+    case LOAD_TAGS_FAIL:
       return Object.assign({}, state, {
         isFetching: false,
         didInvalidate: false,
