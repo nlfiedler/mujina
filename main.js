@@ -12,7 +12,7 @@ const request = require('request')
 
 // TODO: decide where and how to set up the redux store and middleware
 // const {createStore, applyMiddleware} = require('redux')
-// const createSagaMiddleware = require('redux-saga').default()
+// const createSagaMiddleware = require('redux-saga').default
 // const reducer = require('./reducers')
 // const mySaga = require('./sagas')
 // const sagaMiddleware = createSagaMiddleware()

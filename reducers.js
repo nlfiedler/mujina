@@ -5,12 +5,11 @@ const {
   LOAD_TAGS,
   LOAD_TAGS_SUCCESS,
   LOAD_TAGS_FAIL
-} = require('../actions')
+} = require('./actions')
 
 function tags (
   state = {
     isFetching: false,
-    didInvalidate: false,
     items: [],
     error: null
   },
@@ -20,20 +19,17 @@ function tags (
     case LOAD_TAGS:
       return Object.assign({}, state, {
         isFetching: true,
-        didInvalidate: false,
         error: null
       })
     case LOAD_TAGS_SUCCESS:
       return Object.assign({}, state, {
         isFetching: false,
-        didInvalidate: false,
         items: action.tags,
         error: null
       })
     case LOAD_TAGS_FAIL:
       return Object.assign({}, state, {
         isFetching: false,
-        didInvalidate: false,
         items: [],
         error: action.err
       })
@@ -43,5 +39,5 @@ function tags (
 }
 
 module.exports = {
-  tags
+  reducer: tags
 }

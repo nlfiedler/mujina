@@ -20,20 +20,12 @@ myfunc = (param1) => (param2) => (param2) => {
 * State management
     - http://redux.js.org
     - inspired in part by Elm
-    - consider using [deep-freeze](https://www.npmjs.com/package/deep-freeze)
-      to strictly enforce immutability of the state objects
-    - probably easier to just use [immutable.js](https://github.com/facebook/immutable-js)
-      along with Object.freeze()
 * Using React and Redux together
     - [react-redux](https://github.com/reactjs/react-redux)
 * Look into [react-router](https://reacttraining.com/react-router/)
     - dynamic routing for React components
 * https://github.com/hardchor/electron-redux
     - Use redux in the main and browser processes
-* There are lots of helpful react and redux npms
-    - redux-promise
-    - redux-logger
-    - redux-thunk
 * See how Dan Abramov uses thunks and redux to handle "loading" status
     - https://egghead.io/courses/building-react-applications-with-idiomatic-redux #21 to #24
 * Background throttling

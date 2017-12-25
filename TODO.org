@@ -22,18 +22,26 @@
 - [DONE] Figure out how to manage multiple windows
 - [DONE] Set the minimum size of the main window to something reasonable
 - [TODO] Figure out how to use Redux for modeling the app state
-  - [TODO] Go through a Redux tutorial
+  - [DONE] Go through a Redux tutorial
   - [DONE] Write some redux actions and reducers to get started
   - [DONE] Write mocha tests for the redux code
   - [DONE] need to set up electron for testing so we can load its modules
   - [TODO] Look for a library that does the basics of async API calls like Elm's remotedata
     - In order to streamline the reducers/index.js code
-  - [TODO] Write tests that exercise the reducers code, if that is even possible
+  - [DONE] Write tests that exercise the reducers code
+  - [TODO] Consider https://github.com/pburtchaell/redux-promise-middleware
+    - converts a "FOO" promise action into "FULFILLED" and "REJECTED" actions
+  - [TODO] See "runSaga" in redux-saga API reference for code organization and startup
   - [DONE] Set up a mock backend for testing
   - [DONE] Use https://redux-saga.js.org for data fetching
+  - [TODO] Look at using immutable.js for the redux state
+    - https://github.com/AnatoliyGatt/deep-freeze-node
+    - https://github.com/facebook/immutable-js
+    - https://github.com/gajus/redux-immutable
   - [TODO] Look at using https://github.com/leoasis/redux-immutable-state-invariant
   - [TODO] Look at using https://github.com/socialtables/redux-unhandled-action
   - [TODO] Look at `normalizr` npm for "Normalizing API Responses" (see Abramov's react #26)
+  - [TODO] Look at https://github.com/evgenyrodionov/redux-logger for logging state changes for debugging and support
 - [TODO] Look for examples of source code layout
 - [TODO] Model the state of the application in Redux
   - Use https://github.com/reactjs/reselect for efficiently selecting things (i.e. paging)
