@@ -1,7 +1,7 @@
 //
 // Copyright (c) 2017 Nathan Fiedler
 //
-const {app, BrowserWindow, ipcMain, net} = require('electron')
+const {app, BrowserWindow, ipcMain} = require('electron')
 const path = require('path')
 const url = require('url')
 const fs = require('fs')
@@ -9,18 +9,8 @@ const Store = require('electron-store')
 const configStore = new Store()
 const windowStateKeeper = require('electron-window-state')
 const request = require('request')
-
-// TODO: decide where and how to set up the redux store and middleware
-// const {createStore, applyMiddleware} = require('redux')
-// const createSagaMiddleware = require('redux-saga').default
-// const reducer = require('./reducers')
-// const mySaga = require('./sagas')
-// const sagaMiddleware = createSagaMiddleware()
-// const reduxStore = createStore(
-//   reducer,
-//   applyMiddleware(sagaMiddleware)
-// )
-// sagaMiddleware.run(mySaga)
+const actions = require('./actions')
+const reduxStore = require('./store').createStore()
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -83,27 +73,18 @@ app.on('activate', () => {
 // code. You can also put them in separate files and require them here.
 
 ipcMain.on('tags:fetch', (event) => {
-  const request = net.request({
-    method: 'GET',
-    hostname: configStore.get('backend.host', 'localhost'),
-    port: configStore.get('backend.port', 3000),
-    path: '/api/tags'
+  const unsubscribe = reduxStore.subscribe(() => {
+    const state = reduxStore.getState().tags
+    if (!state.isPending) {
+      if (state.error === null) {
+        event.sender.send('tags:result', state.items)
+      } else {
+        event.sender.send('tags:error', state.error.toString())
+      }
+      unsubscribe()
+    }
   })
-  request.on('response', (response) => {
-    let rawData = ''
-    response.on('data', (chunk) => {
-      rawData += chunk
-    })
-    response.on('end', () => {
-      const parsedData = JSON.parse(rawData)
-      event.sender.send('tags:result', parsedData)
-    })
-  })
-  request.on('error', (err) => {
-    // Error object does not serialize properly?
-    event.sender.send('tags:error', err.toString())
-  })
-  request.end()
+  reduxStore.dispatch(actions.requestTags())
 })
 
 ipcMain.on('files:upload', (event, files) => {

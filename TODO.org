@@ -21,7 +21,7 @@
 - [DONE] Write a basic README file
 - [DONE] Figure out how to manage multiple windows
 - [DONE] Set the minimum size of the main window to something reasonable
-- [TODO] Figure out how to use Redux for modeling the app state
+- [DONE] Figure out how to use Redux for modeling the app state
   - [DONE] Go through a Redux tutorial
   - [DONE] Write some redux actions and reducers to get started
   - [DONE] Write mocha tests for the redux code
@@ -29,19 +29,16 @@
   - [DONE] Look for a library that does the basics of async API calls like Elm's remotedata
   - [DONE] Write tests that exercise the reducers code
   - [DONE] Consider https://github.com/pburtchaell/redux-promise-middleware
-  - [TODO] See "runSaga" in redux-saga API reference for code organization and startup
+  - [DONE] See "runSaga" in redux-saga API reference for code organization and startup
   - [DONE] Look at redux guides for streamlining the reducers code
   - [DONE] Set up a mock backend for testing
   - [DONE] Use https://redux-saga.js.org for data fetching
-  - [TODO] Look at using immutable.js for the redux state
-    - https://github.com/AnatoliyGatt/deep-freeze-node
-    - https://github.com/facebook/immutable-js
-    - https://github.com/gajus/redux-immutable
+  - [DONE] Look at using immutable.js for the redux state
   - [DONE] Look at using https://github.com/leoasis/redux-immutable-state-invariant
-  - [TODO] Look at using https://github.com/socialtables/redux-unhandled-action
+  - [DONE] Look at using https://github.com/socialtables/redux-unhandled-action
   - [DONE] Look at `normalizr` npm for "Normalizing API Responses" (see Abramov's react #26)
-  - [TODO] Look at https://github.com/evgenyrodionov/redux-logger for logging state changes for debugging and support
-- [TODO] Look for examples of source code layout
+  - [DONE] Look at https://github.com/evgenyrodionov/redux-logger
+- [DONE] Look for examples of source code layout
 - [TODO] Model the state of the application in Redux
   - Use https://github.com/reactjs/reselect for efficiently selecting things (i.e. paging)
   - Use https://github.com/samiskin/redux-electron-store for cross-process syncing
