@@ -6,6 +6,20 @@
 // All of the Node.js APIs are available in this process.
 
 const {ipcRenderer} = require('electron')
+const React = require('react')
+const ReactDOM = require('react-dom')
+const {Provider} = require('react-redux')
+const {App} = require('./components/App')
+const actions = require('./actions')
+const reduxStore = require('./store').configureStore({scope: 'renderer'})
+
+reduxStore.dispatch(actions.requestTags())
+
+exports.bootstrap = () => {
+  const app = React.createElement(App, [])  // TODO: is the [] necessary?
+  const provider = React.createElement(Provider, {store: reduxStore}, app)
+  ReactDOM.render(provider, document.getElementById('app'))
+}
 
 exports.fetchTags = () => {
   ipcRenderer.send('tags:fetch')

@@ -39,19 +39,30 @@
   - [DONE] Look at `normalizr` npm for "Normalizing API Responses" (see Abramov's react #26)
   - [DONE] Look at https://github.com/evgenyrodionov/redux-logger
 - [DONE] Look for examples of source code layout
-- [TODO] Model the state of the application in Redux
-  - Use https://github.com/reactjs/reselect for efficiently selecting things (i.e. paging)
-  - Use https://github.com/samiskin/redux-electron-store for cross-process syncing
 - [TODO] Set up basic interface with React
-  - [TODO] Go through a React tutorial (again)
-  - [TODO] Read https://reactjs.org/docs/thinking-in-react.html
+  - [DONE] Go through a React tutorial (again)
+  - [DONE] Read https://reactjs.org/docs/thinking-in-react.html
+  - [DONE] Set up gulp to build the React components
+  - [DONE] Plug the React components into index.html
+  - [DONE] Move source code into some directory
+  - [DONE] Read https://redux.js.org/docs/basics/UsageWithReact.html for integrating redux
   - [TODO] Maybe watch https://reactforbeginners.com ($139)
-  - [TODO] Look at https://github.com/reactjs/react-router-redux for routing
+  - [TODO] Use https://reacttraining.com/react-router/ for routing
+    - It has react-router-redux to stay in sync with redux
   - [TODO] See how https://github.com/erikras/redux-form can help
   - [TODO] See how https://github.com/davidkpiano/react-redux-form can help
   - [TODO] See http://airbnb.io/enzyme/ for writing React tests
-- [TODO] Use React to build the tags list
+- [DONE] Use React to build the tags list
+  - [DONE] Implement the TOGGLE_TAG in reducers.js
+  - [DONE] Use some styling to make the tag list look interesting
+  - [DONE] Use https://github.com/hardchor/electron-redux so main/renderer share a single instance
+- [TODO] Introduce bulma or something for the styling
 - [TODO] Use React to build the drop zone
+- [TODO] Consider https://github.com/reactjs/reselect for efficiently selecting things (i.e. paging)
+- [TODO] See how Dan Abramov uses thunks and redux to handle "loading" status
+  - https://egghead.io/courses/building-react-applications-with-idiomatic-redux #21 to #24
+- [TODO] Consider options for streamlining development process
+  - https://github.com/Quramy/electron-connect to reload electron
 - [TODO] Show uploaded assets in a list with editable fields
 - [TODO] Commit edited data to the corresponding database records
 - [TODO] Consider how to make app/backend combination more efficient
@@ -82,6 +93,8 @@
   - Multi-select the displayed results
   - Present a form for changing one or more fields of the selected assets
 - [TODO] Option on asset screen to rotate an image (some images lack orientation data)
+- [TODO] See https://github.com/Quramy/electron-jsx-babel-boilerplate/
+  - uses gulp to minify and uglify everything
 
 ## Research
 

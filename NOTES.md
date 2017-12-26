@@ -20,17 +20,6 @@ myfunc = (param1) => (param2) => (param2) => {
 * State management
     - http://redux.js.org
     - inspired in part by Elm
-* Using React and Redux together
-    - [react-redux](https://github.com/reactjs/react-redux)
-* Look into [react-router](https://reacttraining.com/react-router/)
-    - dynamic routing for React components
-* https://github.com/hardchor/electron-redux
-    - Use redux in the main and browser processes
-* See how Dan Abramov uses thunks and redux to handle "loading" status
-    - https://egghead.io/courses/building-react-applications-with-idiomatic-redux #21 to #24
-* Background throttling
-    - Chromium throttles JS when window is not focused
-    - in BrowserWindow constructor, pass `webPreferences: { backgroundThrottling: false }`
 
 ## Internal Design
 
@@ -62,6 +51,9 @@ myfunc = (param1) => (param2) => (param2) => {
 
 ## Implementation Details
 
+* Background throttling
+    - Chromium throttles JS when window is not focused
+    - in BrowserWindow constructor, pass `webPreferences: { backgroundThrottling: false }`
 * Meta data: support XMP, IPTC, and EXIF
     - Need to be able to read and write
 
