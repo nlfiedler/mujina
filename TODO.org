@@ -37,7 +37,7 @@
     - https://github.com/AnatoliyGatt/deep-freeze-node
     - https://github.com/facebook/immutable-js
     - https://github.com/gajus/redux-immutable
-  - [TODO] Look at using https://github.com/leoasis/redux-immutable-state-invariant
+  - [DONE] Look at using https://github.com/leoasis/redux-immutable-state-invariant
   - [TODO] Look at using https://github.com/socialtables/redux-unhandled-action
   - [DONE] Look at `normalizr` npm for "Normalizing API Responses" (see Abramov's react #26)
   - [TODO] Look at https://github.com/evgenyrodionov/redux-logger for logging state changes for debugging and support
