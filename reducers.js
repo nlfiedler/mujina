@@ -1,6 +1,7 @@
 //
 // Copyright (c) 2017 Nathan Fiedler
 //
+const {combineReducers} = require('redux')
 const actions = require('./actions')
 
 function tags (
@@ -34,6 +35,70 @@ function tags (
   }
 }
 
-module.exports = {
-  reducer: tags
+function years (
+  state = {
+    isPending: false,
+    items: [],
+    error: null
+  },
+  action
+) {
+  switch (action.type) {
+    case actions.GET_YEARS:
+      return Object.assign({}, state, {
+        isPending: true,
+        error: null
+      })
+    case actions.GET_YEARS_FULFILLED:
+      return Object.assign({}, state, {
+        isPending: false,
+        items: action.years,
+        error: null
+      })
+    case actions.GET_YEARS_REJECTED:
+      return Object.assign({}, state, {
+        isPending: false,
+        items: [],
+        error: action.err
+      })
+    default:
+      return state
+  }
 }
+
+function locations (
+  state = {
+    isPending: false,
+    items: [],
+    error: null
+  },
+  action
+) {
+  switch (action.type) {
+    case actions.GET_LOCATIONS:
+      return Object.assign({}, state, {
+        isPending: true,
+        error: null
+      })
+    case actions.GET_LOCATIONS_FULFILLED:
+      return Object.assign({}, state, {
+        isPending: false,
+        items: action.locations,
+        error: null
+      })
+    case actions.GET_LOCATIONS_REJECTED:
+      return Object.assign({}, state, {
+        isPending: false,
+        items: [],
+        error: action.err
+      })
+    default:
+      return state
+  }
+}
+
+exports.reducer = combineReducers({
+  tags,
+  years,
+  locations
+})

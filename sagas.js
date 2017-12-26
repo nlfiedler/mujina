@@ -1,7 +1,7 @@
 //
 // Copyright (c) 2017 Nathan Fiedler
 //
-const {all, call, put, takeEvery} = require('redux-saga/effects')
+const {all, call, put, takeLatest} = require('redux-saga/effects')
 const Api = require('./api')
 const actions = require('./actions')
 
@@ -14,13 +14,41 @@ function * fetchTags (action) {
   }
 }
 
+function * fetchYears (action) {
+  try {
+    const json = yield call(Api.fetchYears)
+    yield put(actions.receiveYears(json))
+  } catch (err) {
+    yield put(actions.failYears(err))
+  }
+}
+
+function * fetchLocations (action) {
+  try {
+    const json = yield call(Api.fetchLocations)
+    yield put(actions.receiveLocations(json))
+  } catch (err) {
+    yield put(actions.failLocations(err))
+  }
+}
+
 function * watchFetchTags () {
-  yield takeEvery(actions.GET_TAGS, fetchTags)
+  yield takeLatest(actions.GET_TAGS, fetchTags)
+}
+
+function * watchFetchYears () {
+  yield takeLatest(actions.GET_YEARS, fetchYears)
+}
+
+function * watchFetchLocations () {
+  yield takeLatest(actions.GET_LOCATIONS, fetchLocations)
 }
 
 function * rootSaga () {
   yield all([
-    watchFetchTags()
+    watchFetchTags(),
+    watchFetchYears(),
+    watchFetchLocations()
   ])
 }
 

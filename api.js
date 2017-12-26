@@ -7,17 +7,17 @@ const Store = require('electron-store')
 const configStore = new Store()
 
 /**
- * Call the backend to get the available tags.
+ * Call the backend to get the given list of attributes.
  *
- * @return {Promise<Array>} of tags.
+ * @return {Promise<Array>} of attributes.
  */
-function fetchTags () {
+function fetchAttributes (key) {
   return new Promise((resolve, reject) => {
     const request = http.request({
       method: 'GET',
       hostname: configStore.get('backend.host', 'localhost'),
       port: configStore.get('backend.port', 3000),
-      path: '/api/tags'
+      path: '/api/' + key
     })
     request.on('response', (response) => {
       let rawData = ''
@@ -33,6 +33,14 @@ function fetchTags () {
   })
 }
 
-module.exports = {
-  fetchTags
+exports.fetchTags = () => {
+  return fetchAttributes('tags')
+}
+
+exports.fetchYears = () => {
+  return fetchAttributes('years')
+}
+
+exports.fetchLocations = () => {
+  return fetchAttributes('locations')
 }

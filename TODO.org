@@ -30,7 +30,7 @@
   - [DONE] Write tests that exercise the reducers code
   - [DONE] Consider https://github.com/pburtchaell/redux-promise-middleware
   - [TODO] See "runSaga" in redux-saga API reference for code organization and startup
-  - [TODO] Look at redux guides for streamlining the reducers code to handle tags, years, locations with less boilerplate
+  - [DONE] Look at redux guides for streamlining the reducers code
   - [DONE] Set up a mock backend for testing
   - [DONE] Use https://redux-saga.js.org for data fetching
   - [TODO] Look at using immutable.js for the redux state
