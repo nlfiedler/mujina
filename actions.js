@@ -1,36 +1,26 @@
 //
 // Copyright (c) 2017 Nathan Fiedler
 //
-const LOAD_TAGS = 'LOAD_TAGS'
-const LOAD_TAGS_SUCCESS = 'LOAD_TAGS_SUCCESS'
-const LOAD_TAGS_FAIL = 'LOAD_TAGS_FAIL'
+exports.GET_TAGS = 'GET_TAGS'
+exports.GET_TAGS_FULFILLED = 'GET_TAGS_FULFILLED'
+exports.GET_TAGS_REJECTED = 'GET_TAGS_REJECTED'
 
-function requestTags () {
+exports.requestTags = () => {
   return {
-    type: LOAD_TAGS
+    type: exports.GET_TAGS
   }
 }
 
-function receiveTags (json) {
+exports.receiveTags = (json) => {
   return {
-    type: LOAD_TAGS_SUCCESS,
+    type: exports.GET_TAGS_FULFILLED,
     tags: json
-    // receivedAt: Date.now()
   }
 }
 
-function failTags (err) {
+exports.failTags = (err) => {
   return {
-    type: LOAD_TAGS_FAIL,
+    type: exports.GET_TAGS_REJECTED,
     err
   }
-}
-
-module.exports = {
-  LOAD_TAGS,
-  LOAD_TAGS_SUCCESS,
-  LOAD_TAGS_FAIL,
-  requestTags,
-  receiveTags,
-  failTags
 }

@@ -1,35 +1,31 @@
 //
 // Copyright (c) 2017 Nathan Fiedler
 //
-const {
-  LOAD_TAGS,
-  LOAD_TAGS_SUCCESS,
-  LOAD_TAGS_FAIL
-} = require('./actions')
+const actions = require('./actions')
 
 function tags (
   state = {
-    isFetching: false,
+    isPending: false,
     items: [],
     error: null
   },
   action
 ) {
   switch (action.type) {
-    case LOAD_TAGS:
+    case actions.GET_TAGS:
       return Object.assign({}, state, {
-        isFetching: true,
+        isPending: true,
         error: null
       })
-    case LOAD_TAGS_SUCCESS:
+    case actions.GET_TAGS_FULFILLED:
       return Object.assign({}, state, {
-        isFetching: false,
+        isPending: false,
         items: action.tags,
         error: null
       })
-    case LOAD_TAGS_FAIL:
+    case actions.GET_TAGS_REJECTED:
       return Object.assign({}, state, {
-        isFetching: false,
+        isPending: false,
         items: [],
         error: action.err
       })

@@ -39,7 +39,7 @@ describe('tags reducer', () => {
       const state = store.getState()
       // 1. called when fetching
       // 2. called again after fetch complete, with items
-      if (state.isFetching) {
+      if (state.isPending) {
         assert.isNull(state.error)
       } else {
         assert.deepEqual(state.items, tags)
