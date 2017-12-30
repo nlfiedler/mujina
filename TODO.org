@@ -57,6 +57,9 @@
   - [DONE] Use some styling to make the tag list look interesting
   - [DONE] Use https://github.com/hardchor/electron-redux so main/renderer share a single instance
 - [TODO] Introduce bulma or something for the styling
+  - [TODO] Add some placeholder content in the middle
+  - [TODO] Add the years and locations selectors
+  - [TODO] Get the drop zone into a tile
 - [TODO] Use React to build the drop zone
 - [TODO] Consider https://github.com/reactjs/reselect for efficiently selecting things (i.e. paging)
 - [TODO] See how Dan Abramov uses thunks and redux to handle "loading" status
@@ -95,6 +98,7 @@
 - [TODO] Option on asset screen to rotate an image (some images lack orientation data)
 - [TODO] See https://github.com/Quramy/electron-jsx-babel-boilerplate/
   - uses gulp to minify and uglify everything
+- [TODO] Set the browser window title (in index.html) to something sensible
 
 ## Research
 

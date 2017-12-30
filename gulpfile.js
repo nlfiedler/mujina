@@ -1,19 +1,22 @@
+//
+// Copyright (c) 2017 Nathan Fiedler
+//
 const gulp = require('gulp')
 const babel = require('gulp-babel')
 const del = require('del')
 
 const reactSrc = [
   'app/components/**/*.js'
-  // 'app/containers/**/*.js'
 ]
 const scriptSrc = [
   'app/**/*.js',
   'app/package.json',
   '!app/components/**'
-  // '!app/containers/**'
 ]
 const assetSrc = [
-  'app/**/*.html'
+  'assets/**/*.css',
+  'assets/**/*.html',
+  'assets/fonts'
 ]
 
 gulp.task('compile:react', () => {
@@ -30,7 +33,7 @@ gulp.task('copy:scripts', () => {
 })
 
 gulp.task('copy:assets', () => {
-  return gulp.src(assetSrc, {base: 'app'})
+  return gulp.src(assetSrc, {base: 'assets'})
     .pipe(gulp.dest('build'))
 })
 
@@ -38,6 +41,10 @@ gulp.task('clean', () => {
   return del(['build'])
 })
 
-gulp.task('build', ['compile:react', 'copy:scripts', 'copy:assets'])
+gulp.task('build', [
+  'compile:react',
+  'copy:scripts',
+  'copy:assets'
+])
 
 gulp.task('default', ['build'])

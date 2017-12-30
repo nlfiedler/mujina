@@ -3,19 +3,21 @@
 //
 const React = require('react')
 const PropTypes = require('prop-types')
+const {MenuLink} = require('bloomer')
 
 const Attribute = ({onClick, label, active}) => {
   return (
-    <li className={active ? 'tag-active' : 'tag-plain'}><a
-      href=''
-      className='tag-link'
-      onClick={e => {
-        e.preventDefault()
-        onClick()
-      }}
-    >
-      {label}
-    </a></li>
+    <li>
+      <MenuLink
+        isActive={active}
+        onClick={e => {
+          e.preventDefault()
+          onClick()
+        }}
+      >
+        {label}
+      </MenuLink>
+    </li>
   )
 }
 

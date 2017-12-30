@@ -9,8 +9,7 @@ const Store = require('electron-store')
 const configStore = new Store()
 const windowStateKeeper = require('electron-window-state')
 const request = require('request')
-const actions = require('./actions')
-const reduxStore = require('./store').configureStore()
+require('./store').configureStore()
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -71,21 +70,6 @@ app.on('activate', () => {
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.
-
-ipcMain.on('tags:fetch', (event) => {
-  const unsubscribe = reduxStore.subscribe(() => {
-    const state = reduxStore.getState().tags
-    if (!state.isPending) {
-      if (state.error === null) {
-        event.sender.send('tags:result', state.items)
-      } else {
-        event.sender.send('tags:error', state.error.toString())
-      }
-      unsubscribe()
-    }
-  })
-  reduxStore.dispatch(actions.requestTags())
-})
 
 ipcMain.on('files:upload', (event, files) => {
   for (let file of files) {

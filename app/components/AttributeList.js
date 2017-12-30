@@ -4,13 +4,14 @@
 const React = require('react')
 const PropTypes = require('prop-types')
 const {Attribute} = require('./Attribute')
+const {MenuList} = require('bloomer')
 
 const AttributeList = ({attributes, onAttrClick}) => (
-  <ul className='tag-list'>
+  <MenuList>
     {attributes.map((attr) => (
       <Attribute key={attr.label} onClick={() => onAttrClick(attr.label)} {...attr} />
     ))}
-  </ul>
+  </MenuList>
 )
 
 AttributeList.propTypes = {

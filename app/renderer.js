@@ -16,22 +16,10 @@ const reduxStore = require('./store').configureStore({scope: 'renderer'})
 reduxStore.dispatch(actions.requestTags())
 
 exports.bootstrap = () => {
-  const app = React.createElement(App, [])  // TODO: is the [] necessary?
+  const app = React.createElement(App)
   const provider = React.createElement(Provider, {store: reduxStore}, app)
   ReactDOM.render(provider, document.getElementById('app'))
 }
-
-exports.fetchTags = () => {
-  ipcRenderer.send('tags:fetch')
-}
-ipcRenderer.on('tags:result', (event, tags) => {
-  const div = document.querySelector('div#tags')
-  div.innerHTML = JSON.stringify(tags)
-})
-ipcRenderer.on('tags:error', (event, err) => {
-  const div = document.querySelector('div#tags')
-  div.innerHTML = err
-})
 
 exports.dragover_handler = (ev) => {
   ev.preventDefault()
