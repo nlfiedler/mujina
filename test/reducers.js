@@ -18,11 +18,29 @@ describe('Reducers', () => {
     store = appStore.configureStore({middleware})
   })
 
-  afterEach(() => {
-    nock.cleanAll()
-  })
-
   describe('Tags', () => {
+    afterEach(() => {
+      nock.cleanAll()
+    })
+
+    it('handles data fetch errors', (done) => {
+      nock('http://localhost:3000')
+        .get('/api/tags')
+        .reply(500)
+      const unsubscribe = store.subscribe(() => {
+        const state = store.getState().tags
+        // 1. called when fetching
+        // 2. called again after fetch failed
+        if (!state.isPending) {
+          assert.isNotNull(state.error)
+          assert.isEmpty(state.items)
+          unsubscribe()
+          done()
+        }
+      })
+      store.dispatch(actions.requestTags())
+    })
+
     it('fetches tags and updates the store', (done) => {
       nock('http://localhost:3000')
         .get('/api/tags')
@@ -34,9 +52,7 @@ describe('Reducers', () => {
         const state = store.getState().tags
         // 1. called when fetching
         // 2. called again after fetch complete, with items
-        if (state.isPending) {
-          assert.isNull(state.error)
-        } else {
+        if (!state.isPending) {
           assert.deepEqual(state.items, [
             {label: 'pie', count: 4, active: false},
             {label: 'cake', count: 2, active: false}
@@ -63,6 +79,28 @@ describe('Reducers', () => {
   })
 
   describe('Years', () => {
+    afterEach(() => {
+      nock.cleanAll()
+    })
+
+    it('handles data fetch errors', (done) => {
+      nock('http://localhost:3000')
+        .get('/api/years')
+        .reply(500)
+      const unsubscribe = store.subscribe(() => {
+        const state = store.getState().years
+        // 1. called when fetching
+        // 2. called again after fetch failed
+        if (!state.isPending) {
+          assert.isNotNull(state.error)
+          assert.isEmpty(state.items)
+          unsubscribe()
+          done()
+        }
+      })
+      store.dispatch(actions.requestYears())
+    })
+
     it('fetches years and updates the store', (done) => {
       nock('http://localhost:3000')
         .get('/api/years')
@@ -74,9 +112,7 @@ describe('Reducers', () => {
         const state = store.getState().years
         // 1. called when fetching
         // 2. called again after fetch complete, with items
-        if (state.isPending) {
-          assert.isNull(state.error)
-        } else {
+        if (!state.isPending) {
           assert.deepEqual(state.items, [
             {label: '2007', count: 9, active: false},
             {label: '2015', count: 81, active: false}
@@ -103,6 +139,28 @@ describe('Reducers', () => {
   })
 
   describe('Locations', () => {
+    afterEach(() => {
+      nock.cleanAll()
+    })
+
+    it('handles data fetch errors', (done) => {
+      nock('http://localhost:3000')
+        .get('/api/locations')
+        .reply(500)
+      const unsubscribe = store.subscribe(() => {
+        const state = store.getState().locations
+        // 1. called when fetching
+        // 2. called again after fetch failed
+        if (!state.isPending) {
+          assert.isNotNull(state.error)
+          assert.isEmpty(state.items)
+          unsubscribe()
+          done()
+        }
+      })
+      store.dispatch(actions.requestLocations())
+    })
+
     it('fetches locations and updates the store', (done) => {
       nock('http://localhost:3000')
         .get('/api/locations')
@@ -114,9 +172,7 @@ describe('Reducers', () => {
         const state = store.getState().locations
         // 1. called when fetching
         // 2. called again after fetch complete, with items
-        if (state.isPending) {
-          assert.isNull(state.error)
-        } else {
+        if (!state.isPending) {
           assert.deepEqual(state.items, [
             {label: 'outside', count: 11, active: false},
             {label: 'inside', count: 5, active: false}

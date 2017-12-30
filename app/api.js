@@ -20,13 +20,19 @@ function fetchAttributes (key) {
       path: '/api/' + key
     })
     request.on('response', (response) => {
-      let rawData = ''
-      response.on('data', (chunk) => {
-        rawData += chunk
-      })
-      response.on('end', () => {
-        resolve(JSON.parse(rawData))
-      })
+      if (response.statusCode >= 400) {
+        let err = new Error(response.statusMessage || 'no status message')
+        err.code = response.statusCode
+        reject(err)
+      } else {
+        let rawData = ''
+        response.on('data', (chunk) => {
+          rawData += chunk
+        })
+        response.on('end', () => {
+          resolve(JSON.parse(rawData))
+        })
+      }
     })
     request.on('error', reject)
     request.end()

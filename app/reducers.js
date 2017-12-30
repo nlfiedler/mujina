@@ -15,8 +15,7 @@ function tags (
   switch (action.type) {
     case actions.GET_TAGS:
       return Object.assign({}, state, {
-        isPending: true,
-        error: null
+        isPending: true
       })
     case actions.GET_TAGS_FULFILLED:
       return Object.assign({}, state, {
@@ -54,8 +53,7 @@ function years (
   switch (action.type) {
     case actions.GET_YEARS:
       return Object.assign({}, state, {
-        isPending: true,
-        error: null
+        isPending: true
       })
     case actions.GET_YEARS_FULFILLED:
       return Object.assign({}, state, {
@@ -93,8 +91,7 @@ function locations (
   switch (action.type) {
     case actions.GET_LOCATIONS:
       return Object.assign({}, state, {
-        isPending: true,
-        error: null
+        isPending: true
       })
     case actions.GET_LOCATIONS_FULFILLED:
       return Object.assign({}, state, {
