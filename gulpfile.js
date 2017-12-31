@@ -16,7 +16,8 @@ const scriptSrc = [
 const assetSrc = [
   'assets/**/*.css',
   'assets/**/*.html',
-  'assets/fonts'
+  'assets/fonts/**/*',
+  'assets/images/**/*'
 ]
 
 gulp.task('compile:react', () => {

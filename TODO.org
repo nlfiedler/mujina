@@ -57,10 +57,13 @@
   - [DONE] Use some styling to make the tag list look interesting
   - [DONE] Use https://github.com/hardchor/electron-redux so main/renderer share a single instance
 - [TODO] Introduce bulma or something for the styling
-  - [TODO] Add some placeholder content in the middle
+  - [DONE] Add some placeholder content in the middle
   - [TODO] Add the years and locations selectors
-  - [TODO] Get the drop zone into a tile
 - [TODO] Use React to build the drop zone
+  - [TODO] Clicking on upload icon should open file selector
+  - [TODO] Replace the placeholder image with Content with a background color
+- [TODO] Build the thumbnail grid using Table and Card (with CardHeader, CardImage, CardContent)
+- [TODO] Use bulma Level to make a toolbar sort of thing at the top/bottom
 - [TODO] Consider https://github.com/reactjs/reselect for efficiently selecting things (i.e. paging)
 - [TODO] See how Dan Abramov uses thunks and redux to handle "loading" status
   - https://egghead.io/courses/building-react-applications-with-idiomatic-redux #21 to #24
