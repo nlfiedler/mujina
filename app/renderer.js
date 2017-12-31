@@ -13,7 +13,9 @@ const {App} = require('./components/App')
 const actions = require('./actions')
 const reduxStore = require('./store').configureStore({scope: 'renderer'})
 
+reduxStore.dispatch(actions.requestLocations())
 reduxStore.dispatch(actions.requestTags())
+reduxStore.dispatch(actions.requestYears())
 
 exports.bootstrap = () => {
   const app = React.createElement(App)

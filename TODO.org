@@ -56,21 +56,22 @@
   - [DONE] Implement the TOGGLE_TAG in reducers.js
   - [DONE] Use some styling to make the tag list look interesting
   - [DONE] Use https://github.com/hardchor/electron-redux so main/renderer share a single instance
-- [TODO] Introduce bulma or something for the styling
+- [DONE] Introduce bulma or something for the styling
   - [DONE] Add some placeholder content in the middle
-  - [TODO] Add the years and locations selectors
+  - [DONE] Build the thumbnail grid using Table and Card
+  - [DONE] Add the years and locations selectors
 - [TODO] Use React to build the drop zone
+  - [DONE] Add some padding around the entire App
   - [TODO] Clicking on upload icon should open file selector
+    - Or use "tag" property to change the default HTML element to a non-A tag
   - [TODO] Replace the placeholder image with Content with a background color
-- [TODO] Build the thumbnail grid using Table and Card (with CardHeader, CardImage, CardContent)
+  - [TODO] Show uploaded assets in a list with editable fields
+  - [TODO] Commit edited data to the corresponding database records
 - [TODO] Use bulma Level to make a toolbar sort of thing at the top/bottom
 - [TODO] Consider https://github.com/reactjs/reselect for efficiently selecting things (i.e. paging)
-- [TODO] See how Dan Abramov uses thunks and redux to handle "loading" status
-  - https://egghead.io/courses/building-react-applications-with-idiomatic-redux #21 to #24
+- [DONE] See how Dan Abramov uses thunks and redux to handle "loading" status
 - [TODO] Consider options for streamlining development process
   - https://github.com/Quramy/electron-connect to reload electron
-- [TODO] Show uploaded assets in a list with editable fields
-- [TODO] Commit edited data to the corresponding database records
 - [TODO] Consider how to make app/backend combination more efficient
   - That is, if both are on the same machine, access assets directly
     - Can generate thumbnails and previews in the app vs backend
@@ -92,7 +93,7 @@
 - [TODO] Make the number of cached thumbnails depend on the available memory
 - [TODO] Support browsing by year and month (likely without paging)
 - [TODO] Show video thumbnails using video HTML tag so they can play directly
-- [TODO] Show selected frames from videos on mouse-over
+- [TODO] Show selected frames from videos on hover
 - [TODO] Bulk edit feature
   - Design a query page that allows searching on several fields (tags, date, location)
   - Use a temporary view (http://docs.couchdb.org/en/1.6.1/api/database/temp-views.html)

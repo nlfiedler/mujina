@@ -17,15 +17,21 @@ const {
   Table,
   Tile
 } = require('bloomer')
+const {LocationList} = require('../containers/LocationList')
 const {TagList} = require('../containers/TagList')
+const {YearList} = require('../containers/YearList')
 
 const App = () => (
-  <Tile isAncestor>
+  <Tile isAncestor style={{margin: 0}}>
     <Tile isSize={2} isVertical isParent>
       <Tile isChild>
         <Menu>
           <MenuLabel>Tags</MenuLabel>
           <TagList />
+          <MenuLabel>Locations</MenuLabel>
+          <LocationList />
+          <MenuLabel>Years</MenuLabel>
+          <YearList />
         </Menu>
       </Tile>
     </Tile>
