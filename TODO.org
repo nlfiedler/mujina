@@ -39,19 +39,6 @@
   - [DONE] Look at `normalizr` npm for "Normalizing API Responses" (see Abramov's react #26)
   - [DONE] Look at https://github.com/evgenyrodionov/redux-logger
 - [DONE] Look for examples of source code layout
-- [TODO] Set up basic interface with React
-  - [DONE] Go through a React tutorial (again)
-  - [DONE] Read https://reactjs.org/docs/thinking-in-react.html
-  - [DONE] Set up gulp to build the React components
-  - [DONE] Plug the React components into index.html
-  - [DONE] Move source code into some directory
-  - [DONE] Read https://redux.js.org/docs/basics/UsageWithReact.html for integrating redux
-  - [TODO] Maybe watch https://reactforbeginners.com ($139)
-  - [TODO] Use https://reacttraining.com/react-router/ for routing
-    - It has react-router-redux to stay in sync with redux
-  - [TODO] See how https://github.com/erikras/redux-form can help
-  - [TODO] See how https://github.com/davidkpiano/react-redux-form can help
-  - [TODO] See http://airbnb.io/enzyme/ for writing React tests
 - [DONE] Use React to build the tags list
   - [DONE] Implement the TOGGLE_TAG in reducers.js
   - [DONE] Use some styling to make the tag list look interesting
@@ -60,34 +47,18 @@
   - [DONE] Add some placeholder content in the middle
   - [DONE] Build the thumbnail grid using Table and Card
   - [DONE] Add the years and locations selectors
-- [TODO] Use React to build the drop zone
-  - [DONE] Add some padding around the entire App
-  - [TODO] Clicking on upload icon should open file selector
-    - Or use "tag" property to change the default HTML element to a non-A tag
-  - [TODO] Replace the placeholder image with Content with a background color
-  - [TODO] Show uploaded assets in a list with editable fields
-  - [TODO] Commit edited data to the corresponding database records
-- [TODO] Use bulma Level to make a toolbar sort of thing at the top/bottom
 - [TODO] Consider https://github.com/reactjs/reselect for efficiently selecting things (i.e. paging)
 - [DONE] See how Dan Abramov uses thunks and redux to handle "loading" status
 - [TODO] Consider options for streamlining development process
   - https://github.com/Quramy/electron-connect to reload electron
-- [TODO] Consider how to make app/backend combination more efficient
-  - That is, if both are on the same machine, access assets directly
-    - Can generate thumbnails and previews in the app vs backend
-  - And, "upload" assets by storing them directly to the destination
-  - Otherwise, must upload via HTTP
 - [TODO] Investigate how to localize the app
   - https://www.npmjs.com/package/oftn-l10n
   - https://developer.mozilla.org/en-US/docs/Mozilla/Localization/Localization_content_best_practices
-- [TODO] Decide on how to do routing (static vs dynamic), see NOTES.md
 - [TODO] Consider storing assets in timestamped directories with original file names
   - How to deal with name collisions? Would that even happen?
   - If assets are uploaded individually, do they each go in a separate directory?
   - Would need an in-memory mapping of SHA256 to asset file path to avoid DB query
 - [TODO] Look into automated testing frameworks for Electron apps
-- [TODO] Consider setting the application menu appropriately for macOS and win32
-- [TODO] Create a "New Window" menu item that invokes createWindow()
 - [TODO] Find out how to handle unresponsive windows
 - [TODO] Start filing issues to track progress, with milestones
 - [TODO] Make the number of cached thumbnails depend on the available memory
@@ -102,7 +73,45 @@
 - [TODO] Option on asset screen to rotate an image (some images lack orientation data)
 - [TODO] See https://github.com/Quramy/electron-jsx-babel-boilerplate/
   - uses gulp to minify and uglify everything
+
+## Interface
+
+### General
+
+- [DONE] Go through a React tutorial (again)
+- [DONE] Read https://reactjs.org/docs/thinking-in-react.html
+- [DONE] Set up gulp to build the React components
+- [DONE] Plug the React components into index.html
+- [DONE] Move source code into some directory
+- [DONE] Read https://redux.js.org/docs/basics/UsageWithReact.html for integrating redux
+- [DONE] Maybe watch https://reactforbeginners.com; not really relevant
+- [DONE] Add some padding around the entire App
+- [TODO] See how https://github.com/erikras/redux-form can help
+- [TODO] See how https://github.com/davidkpiano/react-redux-form can help
+- [TODO] See http://airbnb.io/enzyme/ for writing React tests
+- [TODO] Add menu item to open file selector to import new assets
+- [TODO] Use bulma Level to make a toolbar sort of thing at the top/bottom
+- [TODO] Consider setting the application menu appropriately for macOS and win32
+- [TODO] Create a "New Window" menu item that invokes createWindow()
 - [TODO] Set the browser window title (in index.html) to something sensible
+
+### Routing
+
+- [TODO] Decide on how to do routing (static vs dynamic), see NOTES.md
+- [TODO] Use https://reacttraining.com/react-router/ for routing
+  - It has react-router-redux to stay in sync with redux
+
+### Drop Zone
+
+- [DONE] Consider https://react-dropzone.js.org
+- [DONE] Consider https://github.com/electron-utils/electron-drag-drop/
+- [DONE] Consider http://react-dnd.github.io/react-dnd/
+- [TODO] Fire a redux action to signal received files
+  - Use the files:upload handler in main.js to perform the upload
+- [TODO] Show uploaded assets in a list with editable fields
+- [TODO] Commit edited data to the corresponding database records
+- [TODO] Consider some style tricks to show drop readiness
+  - Handle the dragenter and dragleave events to add style properties dynamically
 
 ## Research
 
@@ -111,3 +120,8 @@
 ## App/Daemon combo
 
 - [TODO] Change backend to support 'upload' in which asset is already in position
+- [TODO] Consider how to make app/backend combination more efficient
+  - That is, if both are on the same machine, access assets directly
+    - Can generate thumbnails and previews in the app vs backend
+  - And, "upload" assets by storing them directly to the destination
+  - Otherwise, must upload via HTTP

@@ -7,7 +7,6 @@ const {
   MenuLabel,
   Tile
 } = require('bloomer')
-const {DropZone} = require('./DropZone')
 const {Thumbnails} = require('./Thumbnails')
 const {LocationList} = require('../containers/LocationList')
 const {TagList} = require('../containers/TagList')
@@ -27,14 +26,9 @@ const App = () => (
         </Menu>
       </Tile>
     </Tile>
-    <Tile isSize={8} isParent>
+    <Tile isSize={10} isParent>
       <Tile isChild>
         <Thumbnails />
-      </Tile>
-    </Tile>
-    <Tile isSize={2} isParent>
-      <Tile isChild>
-        <DropZone />
       </Tile>
     </Tile>
   </Tile>

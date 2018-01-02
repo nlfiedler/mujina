@@ -33,9 +33,6 @@ myfunc = (param1) => (param2) => (param2) => {
     - `/`
         + landing page with latest assets already shown
         + links to filter assets
-        + small area to drop files
-    - `/upload`
-        + large drop area / file selector for importing assets
     - `/asset/:id`
         + shows asset details / edit page
 
@@ -94,11 +91,6 @@ myfunc = (param1) => (param2) => (param2) => {
 * Free, easily customizable icons: http://fontawesome.io
 * Mini styling "framework": http://bulma.io
     - not sure how this works with React, maybe React is sufficient
-* Drag and drop assets onto the window to import
-    - with React: https://react-dnd.github.io/react-dnd/
-    - Stephen Grider's "convert" app has drag-n-drop with React
-    - w/o React: https://github.com/electron-utils/electron-drag-drop
-    - it is pretty easy, just use standard HTML/JS event listeners
 * All of the "admin" tasks become menu items
 * Can scan a directory of assets without having to upload or create documents
     - allow user to edit details before submitting everything

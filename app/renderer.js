@@ -4,8 +4,7 @@
 // This file is required by the index.html file and will
 // be executed in the renderer process for that window.
 // All of the Node.js APIs are available in this process.
-
-const {ipcRenderer} = require('electron')
+//
 const React = require('react')
 const ReactDOM = require('react-dom')
 const {Provider} = require('react-redux')
@@ -17,60 +16,67 @@ reduxStore.dispatch(actions.requestLocations())
 reduxStore.dispatch(actions.requestTags())
 reduxStore.dispatch(actions.requestYears())
 
-exports.bootstrap = () => {
+window.addEventListener('load', function () {
+  attachReact()
+  initDragAndDrop()
+}, false)
+
+function attachReact () {
   const app = React.createElement(App)
   const provider = React.createElement(Provider, {store: reduxStore}, app)
   ReactDOM.render(provider, document.getElementById('app'))
 }
 
-exports.dragover_handler = (ev) => {
-  ev.preventDefault()
-  ev.dataTransfer.dropEffect = 'copy'
-}
-exports.drop_handler = (ev) => {
-  ev.preventDefault()
-  let data = ev.dataTransfer.getData('text')
-  console.log(data)
-}
+function initDragAndDrop () {
+  const drop = document.getElementById('app')
 
-window.addEventListener('load', function () {
-  let drop = document.getElementById('drop')
-
-  function cancel (e) {
-    if (e.preventDefault) {
-      e.preventDefault()
-    }
-    return false
+  function cleanUp (ev) {
+    // Use DataTransfer interface to remove the drag data; Electron/Chromium
+    // says the DataTransferItemList items are read-only, so invoking remove()
+    // on them results in an error.
+    ev.dataTransfer.clearData()
   }
 
-  // Tells the browser that we *can* drop on this target
-  drop.addEventListener('dragover', cancel, false)
-  drop.addEventListener('dragenter', cancel, false)
+  drop.addEventListener('dragover', (ev) => {
+    // prevent default to allow drop
+    ev.preventDefault()
+    ev.dataTransfer.dropEffect = 'copy'
+  }, false)
+  drop.addEventListener('dragend', (ev) => {
+    // have not seen this event fired, but just in case
+    cleanUp(ev)
+  }, false)
 
-  // Handle the actual drop event.
-  drop.addEventListener('drop', function (e) {
-    // stops the browser from redirecting off to the image
-    e.preventDefault()
+  drop.addEventListener('drop', function (ev) {
+    // stop the browser from redirecting to the file
+    ev.preventDefault()
+    // hack a generator as an iterator onto the transfer object
+    ev.dataTransfer[Symbol.iterator] = function * () {
+      if (ev.dataTransfer.items) {
+        // Use DataTransferItemList interface to access the file(s)
+        for (let item of ev.dataTransfer.items) {
+          if (item.kind === 'file') {
+            yield item.getAsFile()
+          }
+        }
+      } else {
+        // Use DataTransfer interface to access the file(s)
+        for (let file of ev.dataTransfer.files) {
+          yield file
+        }
+      }
+    }
     let files = []
-    for (let file of e.dataTransfer.files) {
-      // the file objects are not serializable, convert to objects...
+    for (let file of ev.dataTransfer) {
       files.push({
         name: file.name,  // just the file name
         path: file.path,  // full path of file
-        type: file.type,  // mimetype
-        size: file.size   // size in bytes
+        size: file.size,  // size in bytes
+        type: file.type   // mimetype
       })
     }
-    ipcRenderer.send('files:upload', files)
+    console.log('drop:', files)
+    cleanUp(ev)
     return false
   }, false)
-}, false)
-
-ipcRenderer.on('files:success', (event, body) => {
-  const div = document.querySelector('div#status')
-  div.innerHTML = body
-})
-ipcRenderer.on('files:error', (event, err) => {
-  const div = document.querySelector('div#status')
-  div.innerHTML = err
-})
+}
