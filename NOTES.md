@@ -23,19 +23,6 @@ myfunc = (param1) => (param2) => (param2) => {
 
 ## Internal Design
 
-### Routing
-
-* Do we want routing, or is Electron SPA sufficient?
-* Do we want static (a la express) or dynamic routing (a la react-router)?
-* There are no nav buttons in Electron
-    - all pages have to have buttons/links to get back to other pages
-* Possible routes:
-    - `/`
-        + landing page with latest assets already shown
-        + links to filter assets
-    - `/asset/:id`
-        + shows asset details / edit page
-
 ### Reliability
 
 * Write an append-only log that captures important details (JSON format?)

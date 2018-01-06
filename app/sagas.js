@@ -1,7 +1,8 @@
 //
 // Copyright (c) 2017 Nathan Fiedler
 //
-const {all, call, put, takeLatest} = require('redux-saga/effects')
+const {all, call, put, takeEvery, takeLatest} = require('redux-saga/effects')
+const {push} = require('react-router-redux')
 const Api = require('./api')
 const actions = require('./actions')
 
@@ -32,6 +33,30 @@ function * fetchLocations (action) {
   }
 }
 
+function * checksumDrops (action) {
+  try {
+    const files = yield call(Api.checksumFiles, action.payload)
+    yield put(actions.receiveDropFiles(files))
+    yield put(push('/upload'))
+  } catch (err) {
+    yield put(actions.failDropFiles(err))
+    yield put(actions.setError(err))
+    yield put(push('/error'))
+  }
+}
+
+function * uploadFiles (action) {
+  try {
+    const files = yield call(Api.uploadFiles, action.payload)
+    yield put(actions.receiveUploadFiles(files))
+    yield put(push('/'))
+  } catch (err) {
+    yield put(actions.failUploadFiles(err))
+    yield put(actions.setError(err))
+    yield put(push('/error'))
+  }
+}
+
 function * watchFetchTags () {
   yield takeLatest(actions.GET_TAGS, fetchTags)
 }
@@ -44,11 +69,21 @@ function * watchFetchLocations () {
   yield takeLatest(actions.GET_LOCATIONS, fetchLocations)
 }
 
+function * watchDropFiles () {
+  yield takeEvery(actions.DROP_FILES, checksumDrops)
+}
+
+function * watchUploadFiles () {
+  yield takeEvery(actions.UPLOAD_FILES, uploadFiles)
+}
+
 function * rootSaga () {
   yield all([
     watchFetchTags(),
     watchFetchYears(),
-    watchFetchLocations()
+    watchFetchLocations(),
+    watchDropFiles(),
+    watchUploadFiles()
   ])
 }
 

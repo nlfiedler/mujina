@@ -1,14 +1,10 @@
 //
 // Copyright (c) 2017 Nathan Fiedler
 //
-const {app, BrowserWindow, ipcMain} = require('electron')
+const {app, BrowserWindow} = require('electron')
 const path = require('path')
 const url = require('url')
-const fs = require('fs')
-const Store = require('electron-store')
-const configStore = new Store()
 const windowStateKeeper = require('electron-window-state')
-const request = require('request')
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -69,34 +65,3 @@ app.on('activate', () => {
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.
-
-ipcMain.on('files:upload', (event, files) => {
-  for (let file of files) {
-    let formData = {
-      asset: {
-        value: fs.createReadStream(file.path),
-        options: {
-          filename: file.name,
-          contentType: file.type
-        }
-      }
-    }
-    request.post({
-      url: url.format({
-        protocol: 'http:',
-        hostname: configStore.get('backend.host', 'localhost'),
-        port: configStore.get('backend.port', 3000),
-        pathname: '/api/assets'
-      }),
-      formData
-    }, (err, response, body) => {
-      // TODO: should map the results to the original file,
-      //       otherwise the last result overwrites everything else
-      if (err) {
-        event.sender.send('files:error', err.toString())
-      } else {
-        event.sender.send('files:success', body)
-      }
-    })
-  }
-})

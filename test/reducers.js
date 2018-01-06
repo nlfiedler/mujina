@@ -197,4 +197,74 @@ describe('Reducers', () => {
       store.dispatch(actions.toggleLocation('inside'))
     })
   })
+
+  describe('Uploads', () => {
+    afterEach(() => {
+      nock.cleanAll()
+    })
+
+    it('computes checksum of file paths', (done) => {
+      const unsubscribe = store.subscribe(() => {
+        const state = store.getState().uploads
+        // 1. called when computing
+        // 2. called again after checksum complete
+        if (!state.isPending) {
+          assert.deepEqual(state.files, [
+            {
+              path: 'app/containers/DroppedFiles.js',
+              kagi: 'd26aa8cc2cf64e36910bcb67f994897c11cb9e37'
+            },
+            {
+              path: 'assets/images/128x128.png',
+              kagi: 'e3b790af8d990325138be8e7ec59c86bee5e13ff'
+            }
+          ])
+          unsubscribe()
+          done()
+        }
+      })
+      store.dispatch(actions.dropFiles([
+        {path: 'app/containers/DroppedFiles.js'},
+        {path: 'assets/images/128x128.png'}
+      ]))
+    })
+
+    it('uploads a file and receives an asset checksum', (done) => {
+      const sum1 = '095964d07f3e821659d4eb27ed9e20cd5160c53385562df727e98eb815bb371f'
+      nock('http://localhost:3000')
+        .post('/api/assets')
+        .reply(200, {status: 'success', id: sum1})
+      nock('http://localhost:3000')
+        .put(`/api/assets/${sum1}`)
+        .reply(200, {status: 'success'})
+      const unsubscribe = store.subscribe(() => {
+        const state = store.getState().uploads
+        // 1. called when uploading
+        // 2. called again after upload complete, with checksums
+        if (!state.isPending) {
+          assert.deepEqual(state.files, [
+            {
+              name: 'lorem-ipsum.txt',
+              path: 'test/fixtures/lorem-ipsum.txt',
+              type: 'text/plain',
+              location: 'outside',
+              tags: 'one,two',
+              checksum: sum1
+            }
+          ])
+          unsubscribe()
+          done()
+        }
+      })
+      store.dispatch(actions.uploadFiles([
+        {
+          name: 'lorem-ipsum.txt',
+          path: 'test/fixtures/lorem-ipsum.txt',
+          type: 'text/plain',
+          location: 'outside',
+          tags: 'one,two'
+        }
+      ]))
+    })
+  })
 })

@@ -11,10 +11,12 @@ const {Provider} = require('react-redux')
 const {App} = require('./components/App')
 const actions = require('./actions')
 const reduxStore = require('./store').configureStore()
+const {push} = require('react-router-redux')
 
 reduxStore.dispatch(actions.requestLocations())
 reduxStore.dispatch(actions.requestTags())
 reduxStore.dispatch(actions.requestYears())
+reduxStore.dispatch(push('/'))
 
 window.addEventListener('load', function () {
   attachReact()
@@ -69,13 +71,17 @@ function initDragAndDrop () {
     let files = []
     for (let file of ev.dataTransfer) {
       files.push({
-        name: file.name,  // just the file name
-        path: file.path,  // full path of file
-        size: file.size,  // size in bytes
-        type: file.type   // mimetype
+        // just the file name
+        name: file.name,
+        // full path of file
+        path: file.path,
+        // size in bytes
+        size: file.size,
+        // mimetype (is null if unrecognized by browser?)
+        mimetype: file.type || 'application/octet-stream'
       })
     }
-    console.log('drop:', files)
+    reduxStore.dispatch(actions.dropFiles(files))
     cleanUp(ev)
     return false
   }, false)

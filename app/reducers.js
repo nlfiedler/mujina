@@ -3,6 +3,8 @@
 //
 const {combineReducers} = require('redux')
 const actions = require('./actions')
+const {routerReducer} = require('react-router-redux')
+const {modelReducer, formReducer} = require('react-redux-form')
 
 function tags (
   state = {
@@ -118,18 +120,77 @@ function locations (
   }
 }
 
+function uploads (
+  state = {
+    isPending: false,
+    files: [],
+    error: null
+  },
+  action
+) {
+  switch (action.type) {
+    case actions.DROP_FILES:
+      return Object.assign({}, state, {
+        isPending: true,
+        files: action.payload
+      })
+    case actions.DROP_FILES_FULFILLED:
+      return Object.assign({}, state, {
+        isPending: false,
+        files: action.payload
+      })
+    case actions.DROP_FILES_REJECTED:
+      return Object.assign({}, state, {
+        isPending: false,
+        error: action.payload
+      })
+    case actions.UPLOAD_FILES:
+      return Object.assign({}, state, {
+        isPending: true,
+        files: action.payload
+      })
+    case actions.UPLOAD_FILES_FULFILLED:
+      return Object.assign({}, state, {
+        isPending: false,
+        files: action.payload
+      })
+    case actions.UPLOAD_FILES_REJECTED:
+      return Object.assign({}, state, {
+        isPending: false,
+        error: action.payload
+      })
+    default:
+      return state
+  }
+}
+
+function errors (
+  state = null,
+  action
+) {
+  switch (action.type) {
+    case actions.SET_ERROR:
+      return action.payload
+    default:
+      return state
+  }
+}
+
 function toggleActive (state, action) {
   return Object.assign({}, state, {
     items: state.items.map(item =>
-      // Need node.js 8.6 to have object spread operator support, so for now...
-      // item.label === action.payload ? {...item, active: !item.active} : item
       item.label === action.payload ? Object.assign({}, item, {active: !item.active}) : item
     )
   })
 }
 
 exports.reducer = combineReducers({
+  errors,
   tags,
   years,
-  locations
+  locations,
+  uploads,
+  router: routerReducer,
+  drops: modelReducer('drops'),
+  forms: formReducer('')
 })

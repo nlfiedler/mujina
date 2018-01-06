@@ -58,7 +58,6 @@
   - How to deal with name collisions? Would that even happen?
   - If assets are uploaded individually, do they each go in a separate directory?
   - Would need an in-memory mapping of SHA256 to asset file path to avoid DB query
-- [TODO] Look into automated testing frameworks for Electron apps
 - [TODO] Find out how to handle unresponsive windows
 - [TODO] Start filing issues to track progress, with milestones
 - [TODO] Make the number of cached thumbnails depend on the available memory
@@ -73,6 +72,14 @@
 - [TODO] Option on asset screen to rotate an image (some images lack orientation data)
 - [TODO] See https://github.com/Quramy/electron-jsx-babel-boilerplate/
   - uses gulp to minify and uglify everything
+- [TODO] Write a design document
+  - Why there is a redux store for each render process
+
+## Testing
+
+- [TODO] Look into automated testing frameworks for Electron apps
+- [TODO] See http://airbnb.io/enzyme/ for writing React tests
+- [TODO] Read https://reacttraining.com/react-router/web/guides/testing
 
 ## Interface
 
@@ -86,32 +93,51 @@
 - [DONE] Read https://redux.js.org/docs/basics/UsageWithReact.html for integrating redux
 - [DONE] Maybe watch https://reactforbeginners.com; not really relevant
 - [DONE] Add some padding around the entire App
-- [TODO] See how https://github.com/erikras/redux-form can help
-- [TODO] See how https://github.com/davidkpiano/react-redux-form can help
-- [TODO] See http://airbnb.io/enzyme/ for writing React tests
+- [DONE] See how https://github.com/erikras/redux-form can help
+- [DONE] See how https://github.com/davidkpiano/react-redux-form can help
+- [TODO] Add a route and page for viewing a single asset
 - [TODO] Add menu item to open file selector to import new assets
 - [TODO] Use bulma Level to make a toolbar sort of thing at the top/bottom
 - [TODO] Consider setting the application menu appropriately for macOS and win32
 - [TODO] Create a "New Window" menu item that invokes createWindow()
 - [TODO] Set the browser window title (in index.html) to something sensible
+- [TODO] Allow editing the attributes on an asset
 
 ### Routing
 
-- [TODO] Decide on how to do routing (static vs dynamic), see NOTES.md
-- [TODO] Use https://reacttraining.com/react-router/ for routing
-  - It has react-router-redux to stay in sync with redux
+- [DONE] Decide what the routing will look like
+- [DONE] Use https://reacttraining.com/react-router/ for routing
+- [DONE] Read https://reacttraining.com/react-router/web/guides/redux-integration
+- [DONE] Read https://github.com/reacttraining/react-router/tree/master/packages/react-router-redux
+- [DONE] Look at the examples https://reacttraining.com/react-router/web/example/basic
 
 ### Drop Zone
 
 - [DONE] Consider https://react-dropzone.js.org
 - [DONE] Consider https://github.com/electron-utils/electron-drag-drop/
 - [DONE] Consider http://react-dnd.github.io/react-dnd/
-- [TODO] Fire a redux action to signal received files
-  - Use the files:upload handler in main.js to perform the upload
-- [TODO] Show uploaded assets in a list with editable fields
-- [TODO] Commit edited data to the corresponding database records
+- [DONE] Fire a redux action to signal received files
+- [DONE] Remove electron-redux because it caused actions to be out of order
+- [DONE] Show uploaded assets in a list with editable fields
+  - [DONE] Sync problem with DROP_FILES action and route change
+  - [DONE] Probably use a form of some sort for the asset details
+  - [DONE] Figure out how react-redux-form can handle an array of things
+  - [DONE] Fire actions when form values are updated to keep state updated
+- [DONE] Commit edited data to the corresponding database records
+  - [DONE] Use a saga to checksum dropped file paths to produce unique keys
+  - [DONE] Somehow fire the route change to /upload
+  - [DONE] NewFile[List] uses digest as the key instead of file path
+  - [DONE] When dropped files are submitted, fire an action to upload files
+  - [DONE] After the files are uploaded, need to update the tags, locations for each asset
+  - [DONE] If there are errors, route to an error page (untested)
+  - [DONE] If successful, route to home page
 - [TODO] Consider some style tricks to show drop readiness
   - Handle the dragenter and dragleave events to add style properties dynamically
+- [TODO] Show small thumbnails next to the new files (using "Media" component?)
+- [TODO] Include form field for caption and add to api.uploadFiles()
+- [TODO] Maybe a "save" button next to each dropped file, and another (at the top) to save everything at once
+- [TODO] Design shortcuts for entering identical values for multiple dropped files
+- [TODO] Probably need a progress bar for the uploads
 
 ## Research
 

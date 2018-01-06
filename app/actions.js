@@ -105,3 +105,63 @@ exports.toggleLocation = (label) => {
     payload: label
   }
 }
+
+exports.DROP_FILES = 'DROP_FILES'
+exports.dropFiles = (files) => {
+  return {
+    type: exports.DROP_FILES,
+    payload: files
+  }
+}
+
+exports.DROP_FILES_FULFILLED = 'DROP_FILES_FULFILLED'
+exports.receiveDropFiles = (files) => {
+  return {
+    type: exports.DROP_FILES_FULFILLED,
+    payload: files
+  }
+}
+
+exports.DROP_FILES_REJECTED = 'DROP_FILES_REJECTED'
+exports.failDropFiles = (err) => {
+  return {
+    type: exports.DROP_FILES_REJECTED,
+    payload: err,
+    error: true
+  }
+}
+
+exports.UPLOAD_FILES = 'UPLOAD_FILES'
+exports.uploadFiles = (files) => {
+  return {
+    type: exports.UPLOAD_FILES,
+    payload: files
+  }
+}
+
+exports.UPLOAD_FILES_FULFILLED = 'UPLOAD_FILES_FULFILLED'
+exports.receiveUploadFiles = (files) => {
+  return {
+    type: exports.UPLOAD_FILES_FULFILLED,
+    payload: files
+  }
+}
+
+exports.UPLOAD_FILES_REJECTED = 'UPLOAD_FILES_REJECTED'
+exports.failUploadFiles = (err) => {
+  return {
+    type: exports.UPLOAD_FILES_REJECTED,
+    payload: err,
+    error: true
+  }
+}
+
+// Set a global error for the error page to display.
+exports.SET_ERROR = 'SET_ERROR'
+exports.setError = (err) => {
+  return {
+    type: exports.SET_ERROR,
+    payload: err,
+    error: true
+  }
+}
