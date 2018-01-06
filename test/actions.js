@@ -17,7 +17,7 @@ describe('Async Actions', () => {
     const store = mockStore({})
     sagaMiddleware.run(rootSaga)
     const expectedActions = [
-      {type: 'ALIASED', meta: {trigger: actions.GET_TAGS}, payload: []}
+      {type: actions.GET_TAGS, payload: null}
     ]
     store.subscribe(() => {
       // once both actions have dispatched, then compare
@@ -34,9 +34,8 @@ describe('Async Actions', () => {
 describe('Actions', () => {
   it('should create an action to fetch tags', () => {
     const expectedAction = {
-      type: 'ALIASED',
-      meta: {trigger: actions.GET_TAGS},
-      payload: []
+      type: actions.GET_TAGS,
+      payload: null
     }
     assert.deepEqual(actions.requestTags(), expectedAction)
   })

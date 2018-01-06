@@ -10,7 +10,7 @@ const ReactDOM = require('react-dom')
 const {Provider} = require('react-redux')
 const {App} = require('./components/App')
 const actions = require('./actions')
-const reduxStore = require('./store').configureStore({scope: 'renderer'})
+const reduxStore = require('./store').configureStore()
 
 reduxStore.dispatch(actions.requestLocations())
 reduxStore.dispatch(actions.requestTags())

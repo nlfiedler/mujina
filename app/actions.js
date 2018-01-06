@@ -1,19 +1,16 @@
 //
 // Copyright (c) 2017 Nathan Fiedler
 //
-const {createAliasedAction} = require('electron-redux')
-
 exports.GET_TAGS = 'GET_TAGS'
 exports.GET_TAGS_FULFILLED = 'GET_TAGS_FULFILLED'
 exports.GET_TAGS_REJECTED = 'GET_TAGS_REJECTED'
 
-exports.requestTags = createAliasedAction(
-  exports.GET_TAGS,
-  () => ({
+exports.requestTags = () => {
+  return {
     type: exports.GET_TAGS,
     payload: null
-  })
-)
+  }
+}
 
 exports.receiveTags = (json) => {
   return {
@@ -34,13 +31,12 @@ exports.GET_YEARS = 'GET_YEARS'
 exports.GET_YEARS_FULFILLED = 'GET_YEARS_FULFILLED'
 exports.GET_YEARS_REJECTED = 'GET_YEARS_REJECTED'
 
-exports.requestYears = createAliasedAction(
-  exports.GET_YEARS,
-  () => ({
+exports.requestYears = () => {
+  return {
     type: exports.GET_YEARS,
     payload: null
-  })
-)
+  }
+}
 
 exports.receiveYears = (json) => {
   return {
@@ -61,13 +57,12 @@ exports.GET_LOCATIONS = 'GET_LOCATIONS'
 exports.GET_LOCATIONS_FULFILLED = 'GET_LOCATIONS_FULFILLED'
 exports.GET_LOCATIONS_REJECTED = 'GET_LOCATIONS_REJECTED'
 
-exports.requestLocations = createAliasedAction(
-  exports.GET_LOCATIONS,
-  () => ({
+exports.requestLocations = () => {
+  return {
     type: exports.GET_LOCATIONS,
     payload: null
-  })
-)
+  }
+}
 
 exports.receiveLocations = (json) => {
   return {

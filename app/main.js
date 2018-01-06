@@ -9,7 +9,6 @@ const Store = require('electron-store')
 const configStore = new Store()
 const windowStateKeeper = require('electron-window-state')
 const request = require('request')
-require('./store').configureStore()
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
