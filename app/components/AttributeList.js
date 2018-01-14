@@ -20,7 +20,7 @@ const AttributeList = ({attributes, onAttrClick}) => {
     inner = '(none)'
   } else {
     inner = attributes.items.map((attr) => (
-      <Attribute key={attr.label} onClick={() => onAttrClick(attr.label)} {...attr} />
+      <Attribute key={attr.label} onClick={onAttrClick} {...attr} />
     ))
   }
   return (

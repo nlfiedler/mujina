@@ -12,7 +12,7 @@ const Attribute = ({onClick, label, active}) => {
         isActive={active}
         onClick={e => {
           e.preventDefault()
-          onClick()
+          onClick(label)
         }}
       >
         {label}

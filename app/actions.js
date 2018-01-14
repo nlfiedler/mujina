@@ -2,9 +2,6 @@
 // Copyright (c) 2017 Nathan Fiedler
 //
 exports.GET_TAGS = 'GET_TAGS'
-exports.GET_TAGS_FULFILLED = 'GET_TAGS_FULFILLED'
-exports.GET_TAGS_REJECTED = 'GET_TAGS_REJECTED'
-
 exports.requestTags = () => {
   return {
     type: exports.GET_TAGS,
@@ -12,6 +9,7 @@ exports.requestTags = () => {
   }
 }
 
+exports.GET_TAGS_FULFILLED = 'GET_TAGS_FULFILLED'
 exports.receiveTags = (json) => {
   return {
     type: exports.GET_TAGS_FULFILLED,
@@ -19,6 +17,7 @@ exports.receiveTags = (json) => {
   }
 }
 
+exports.GET_TAGS_REJECTED = 'GET_TAGS_REJECTED'
 exports.failTags = (err) => {
   return {
     type: exports.GET_TAGS_REJECTED,
@@ -28,9 +27,6 @@ exports.failTags = (err) => {
 }
 
 exports.GET_YEARS = 'GET_YEARS'
-exports.GET_YEARS_FULFILLED = 'GET_YEARS_FULFILLED'
-exports.GET_YEARS_REJECTED = 'GET_YEARS_REJECTED'
-
 exports.requestYears = () => {
   return {
     type: exports.GET_YEARS,
@@ -38,6 +34,7 @@ exports.requestYears = () => {
   }
 }
 
+exports.GET_YEARS_FULFILLED = 'GET_YEARS_FULFILLED'
 exports.receiveYears = (json) => {
   return {
     type: exports.GET_YEARS_FULFILLED,
@@ -45,6 +42,7 @@ exports.receiveYears = (json) => {
   }
 }
 
+exports.GET_YEARS_REJECTED = 'GET_YEARS_REJECTED'
 exports.failYears = (err) => {
   return {
     type: exports.GET_YEARS_REJECTED,
@@ -54,9 +52,6 @@ exports.failYears = (err) => {
 }
 
 exports.GET_LOCATIONS = 'GET_LOCATIONS'
-exports.GET_LOCATIONS_FULFILLED = 'GET_LOCATIONS_FULFILLED'
-exports.GET_LOCATIONS_REJECTED = 'GET_LOCATIONS_REJECTED'
-
 exports.requestLocations = () => {
   return {
     type: exports.GET_LOCATIONS,
@@ -64,6 +59,7 @@ exports.requestLocations = () => {
   }
 }
 
+exports.GET_LOCATIONS_FULFILLED = 'GET_LOCATIONS_FULFILLED'
 exports.receiveLocations = (json) => {
   return {
     type: exports.GET_LOCATIONS_FULFILLED,
@@ -71,6 +67,7 @@ exports.receiveLocations = (json) => {
   }
 }
 
+exports.GET_LOCATIONS_REJECTED = 'GET_LOCATIONS_REJECTED'
 exports.failLocations = (err) => {
   return {
     type: exports.GET_LOCATIONS_REJECTED,
@@ -80,7 +77,6 @@ exports.failLocations = (err) => {
 }
 
 exports.TOGGLE_TAG = 'TOGGLE_TAG'
-
 exports.toggleTag = (label) => {
   return {
     type: exports.TOGGLE_TAG,
@@ -89,7 +85,6 @@ exports.toggleTag = (label) => {
 }
 
 exports.TOGGLE_YEAR = 'TOGGLE_YEAR'
-
 exports.toggleYear = (label) => {
   return {
     type: exports.TOGGLE_YEAR,
@@ -98,7 +93,6 @@ exports.toggleYear = (label) => {
 }
 
 exports.TOGGLE_LOCATION = 'TOGGLE_LOCATION'
-
 exports.toggleLocation = (label) => {
   return {
     type: exports.TOGGLE_LOCATION,
