@@ -120,6 +120,86 @@ function locations (
   }
 }
 
+function assets (
+  state = {
+    isPending: false,
+    items: [],
+    error: null
+  },
+  action
+) {
+  switch (action.type) {
+    case actions.GET_ASSETS:
+      return Object.assign({}, state, {
+        isPending: true
+      })
+    case actions.GET_ASSETS_FULFILLED:
+      return Object.assign({}, state, {
+        isPending: false,
+        items: action.payload.assets.map(item => {
+          return {
+            checksum: item.checksum,
+            filename: item.file_name,
+            // TODO: parse the asset date into a Date object
+            date: item.date,
+            location: item.location
+          }
+        }),
+        error: null
+      })
+    case actions.GET_ASSETS_REJECTED:
+      return Object.assign({}, state, {
+        isPending: false,
+        items: [],
+        error: action.payload
+      })
+    default:
+      return state
+  }
+}
+
+function details (
+  state = {
+    isPending: false,
+    single: {},
+    error: null
+  },
+  action
+) {
+  switch (action.type) {
+    case actions.FETCH_ASSET:
+      return Object.assign({}, state, {
+        isPending: true
+      })
+    case actions.FETCH_ASSET_FULFILLED:
+      return Object.assign({}, state, {
+        isPending: false,
+        single: {
+          checksum: action.payload.checksum,
+          filename: action.payload.file_name,
+          filesize: action.payload.file_size,
+          // TODO: parse the asset date/time into a Date object
+          datetime: action.payload.datetime,
+          location: action.payload.location,
+          mimetype: action.payload.mimetype,
+          userdate: action.payload.user_date,
+          caption: action.payload.caption,
+          duration: action.payload.duration,
+          tags: action.payload.tags
+        },
+        error: null
+      })
+    case actions.FETCH_ASSET_REJECTED:
+      return Object.assign({}, state, {
+        isPending: false,
+        single: {},
+        error: action.payload
+      })
+    default:
+      return state
+  }
+}
+
 function uploads (
   state = {
     isPending: false,
@@ -189,6 +269,8 @@ exports.reducer = combineReducers({
   tags,
   years,
   locations,
+  assets,
+  details,
   uploads,
   router: routerReducer,
   drops: modelReducer('drops'),

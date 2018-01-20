@@ -1,54 +1,8 @@
 # TODO
 
-## Learning
-
-- [DONE] Go through Dan Abramov's Redux course on egghead.io
-- [DONE] Go through Dan Abramov's React/Redux course
-- [DONE] What is the difference between `export` and `exports`?
-  - The `export` statement is new and only supported in Chrome and Safari.
-  - Transpilers such as Babel support it
-  - node.js is entirely its own thing, with module.exports and exports
-
 ## Overall
 
-- [DONE] Get it connected to the backend, log tags in console
-- [DONE] Get a list of available tags, show in the page
-- [DONE] Set up a persistent configuration for development
-- [DONE] Learn how to write doc comments (apparently it's JSDoc)
-- [DONE] Create a drop zone for drag-n-drop; combine with file selector
-- [DONE] Have dropped files get uploaded into the backend
-- [DONE] Add a copyright header to all of the source code
-- [DONE] Write a basic README file
-- [DONE] Figure out how to manage multiple windows
-- [DONE] Set the minimum size of the main window to something reasonable
-- [DONE] Figure out how to use Redux for modeling the app state
-  - [DONE] Go through a Redux tutorial
-  - [DONE] Write some redux actions and reducers to get started
-  - [DONE] Write mocha tests for the redux code
-  - [DONE] need to set up electron for testing so we can load its modules
-  - [DONE] Look for a library that does the basics of async API calls like Elm's remotedata
-  - [DONE] Write tests that exercise the reducers code
-  - [DONE] Consider https://github.com/pburtchaell/redux-promise-middleware
-  - [DONE] See "runSaga" in redux-saga API reference for code organization and startup
-  - [DONE] Look at redux guides for streamlining the reducers code
-  - [DONE] Set up a mock backend for testing
-  - [DONE] Use https://redux-saga.js.org for data fetching
-  - [DONE] Look at using immutable.js for the redux state
-  - [DONE] Look at using https://github.com/leoasis/redux-immutable-state-invariant
-  - [DONE] Look at using https://github.com/socialtables/redux-unhandled-action
-  - [DONE] Look at `normalizr` npm for "Normalizing API Responses" (see Abramov's react #26)
-  - [DONE] Look at https://github.com/evgenyrodionov/redux-logger
-- [DONE] Look for examples of source code layout
-- [DONE] Use React to build the tags list
-  - [DONE] Implement the TOGGLE_TAG in reducers.js
-  - [DONE] Use some styling to make the tag list look interesting
-  - [DONE] Use https://github.com/hardchor/electron-redux so main/renderer share a single instance
-- [DONE] Introduce bulma or something for the styling
-  - [DONE] Add some placeholder content in the middle
-  - [DONE] Build the thumbnail grid using Table and Card
-  - [DONE] Add the years and locations selectors
 - [TODO] Consider https://github.com/reactjs/reselect for efficiently selecting things (i.e. paging)
-- [DONE] See how Dan Abramov uses thunks and redux to handle "loading" status
 - [TODO] Consider options for streamlining development process
   - https://github.com/Quramy/electron-connect to reload electron
 - [TODO] Investigate how to localize the app
@@ -60,10 +14,7 @@
   - Would need an in-memory mapping of SHA256 to asset file path to avoid DB query
 - [TODO] Find out how to handle unresponsive windows
 - [TODO] Start filing issues to track progress, with milestones
-- [TODO] Make the number of cached thumbnails depend on the available memory
 - [TODO] Support browsing by year and month (likely without paging)
-- [TODO] Show video thumbnails using video HTML tag so they can play directly
-- [TODO] Show selected frames from videos on hover
 - [TODO] Bulk edit feature
   - Design a query page that allows searching on several fields (tags, date, location)
   - Use a temporary view (http://docs.couchdb.org/en/1.6.1/api/database/temp-views.html)
@@ -85,16 +36,7 @@
 
 ### General
 
-- [DONE] Go through a React tutorial (again)
-- [DONE] Read https://reactjs.org/docs/thinking-in-react.html
-- [DONE] Set up gulp to build the React components
-- [DONE] Plug the React components into index.html
-- [DONE] Move source code into some directory
-- [DONE] Read https://redux.js.org/docs/basics/UsageWithReact.html for integrating redux
-- [DONE] Maybe watch https://reactforbeginners.com; not really relevant
-- [DONE] Add some padding around the entire App
-- [DONE] See how https://github.com/erikras/redux-form can help
-- [DONE] See how https://github.com/davidkpiano/react-redux-form can help
+- [TODO] Read https://fb.me/react-error-boundaries to learn about error handling
 - [TODO] Add a route and page for viewing a single asset
 - [TODO] Add menu item to open file selector to import new assets
 - [TODO] Use bulma Level to make a toolbar sort of thing at the top/bottom
@@ -102,41 +44,17 @@
 - [TODO] Create a "New Window" menu item that invokes createWindow()
 - [TODO] Set the browser window title (in index.html) to something sensible
 - [TODO] Allow editing the attributes on an asset
-
-### Routing
-
-- [DONE] Decide what the routing will look like
-- [DONE] Use https://reacttraining.com/react-router/ for routing
-- [DONE] Read https://reacttraining.com/react-router/web/guides/redux-integration
-- [DONE] Read https://github.com/reacttraining/react-router/tree/master/packages/react-router-redux
-- [DONE] Look at the examples https://reacttraining.com/react-router/web/example/basic
+- [TODO] When selecting attributes, disable those that no longer help
 
 ### Drop Zone
 
-- [DONE] Consider https://react-dropzone.js.org
-- [DONE] Consider https://github.com/electron-utils/electron-drag-drop/
-- [DONE] Consider http://react-dnd.github.io/react-dnd/
-- [DONE] Fire a redux action to signal received files
-- [DONE] Remove electron-redux because it caused actions to be out of order
-- [DONE] Show uploaded assets in a list with editable fields
-  - [DONE] Sync problem with DROP_FILES action and route change
-  - [DONE] Probably use a form of some sort for the asset details
-  - [DONE] Figure out how react-redux-form can handle an array of things
-  - [DONE] Fire actions when form values are updated to keep state updated
-- [DONE] Commit edited data to the corresponding database records
-  - [DONE] Use a saga to checksum dropped file paths to produce unique keys
-  - [DONE] Somehow fire the route change to /upload
-  - [DONE] NewFile[List] uses digest as the key instead of file path
-  - [DONE] When dropped files are submitted, fire an action to upload files
-  - [DONE] After the files are uploaded, need to update the tags, locations for each asset
-  - [DONE] If there are errors, route to an error page (untested)
-  - [DONE] If successful, route to home page
 - [TODO] Consider some style tricks to show drop readiness
   - Handle the dragenter and dragleave events to add style properties dynamically
+- [TODO] Allow #tags and @location in 'caption' field; no need for 'tags' and 'location' fields
 - [TODO] Show small thumbnails next to the new files (using "Media" component?)
 - [TODO] Include form field for caption and add to api.uploadFiles()
-- [TODO] Maybe a "save" button next to each dropped file, and another (at the top) to save everything at once
 - [TODO] Design shortcuts for entering identical values for multiple dropped files
+  - Maybe select several and type into one field, auto copied to the others, keystroke by keystroke
 - [TODO] Probably need a progress bar for the uploads
 
 ## Research

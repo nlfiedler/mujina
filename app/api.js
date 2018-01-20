@@ -68,6 +68,96 @@ exports.fetchLocations = () => {
 }
 
 /**
+ * Fetch the details for the asset with the given checksum.
+ *
+ * Return value shape:
+ *
+ * [
+ *   {
+ *     checksum: string
+ *     file_name: string
+ *     file_size: number
+ *     mimetype: string
+ *     datetime: string
+ *     user_date: (nullable string)
+ *     caption: (nullable string)
+ *     location: (nullable string)
+ *     duration: (nullable number)
+ *     tags: (array string)
+ *   },
+ *   ...
+ * ]
+ *
+ * @param {String} checksum - identifier of asset to be retrieved.
+ * @return {Promise<Object>} - resolves to the asset details.
+ */
+exports.fetchAsset = (checksum) => {
+  return new Promise((resolve, reject) => {
+    request.get({
+      url: url.format({
+        protocol: 'http:',
+        hostname: configStore.get('backend.host', 'localhost'),
+        port: configStore.get('backend.port', 3000),
+        pathname: '/api/assets/' + checksum
+      })
+    }, (err, response, body) => {
+      const error = maybeError(err, response)
+      if (error) {
+        reject(error)
+      } else {
+        resolve(JSON.parse(body || '[]'))
+      }
+    })
+  })
+}
+
+/**
+ * Shape of the selections argument:
+ *
+ * {
+ *   locations: [{label},...],
+ *   tags:  [{label},...],
+ *   years: [{label},...]
+ * }
+ *
+ * Return value shape:
+ *
+ * {
+ *   assets: [
+ *     {checksum, file_name, date, location},
+ *     ...
+ *   ]
+ *   count: n
+ * }
+ */
+exports.queryAssets = (selections) => {
+  const locations = selections.locations.map(item => 'locations[]=' + item.label)
+  const tags = selections.tags.map(item => 'tags[]=' + item.label)
+  const years = selections.years.map(item => 'years[]=' + item.label)
+  // TODO: will need a param to disable paging on the backend
+  const params = locations.concat(tags).concat(years).join('&')
+  return new Promise((resolve, reject) => {
+    // TODO: consider if using a form body instead of URL would be better
+    request.get({
+      url: url.format({
+        protocol: 'http:',
+        hostname: configStore.get('backend.host', 'localhost'),
+        port: configStore.get('backend.port', 3000),
+        pathname: '/api/assets',
+        search: params
+      })
+    }, (err, response, body) => {
+      const error = maybeError(err, response)
+      if (error) {
+        reject(error)
+      } else {
+        resolve(JSON.parse(body || '[]'))
+      }
+    })
+  })
+}
+
+/**
  * Compute alpha-numeric keys for each of the given file paths.
  *
  * @param {Array<object>} files list of file objects, with 'path' property

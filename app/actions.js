@@ -100,6 +100,56 @@ exports.toggleLocation = (label) => {
   }
 }
 
+exports.GET_ASSETS = 'GET_ASSETS'
+exports.requestAssets = () => {
+  return {
+    type: exports.GET_ASSETS,
+    payload: null
+  }
+}
+
+exports.GET_ASSETS_FULFILLED = 'GET_ASSETS_FULFILLED'
+exports.receiveAssets = (results) => {
+  return {
+    type: exports.GET_ASSETS_FULFILLED,
+    payload: results
+  }
+}
+
+exports.GET_ASSETS_REJECTED = 'GET_ASSETS_REJECTED'
+exports.failAssets = (err) => {
+  return {
+    type: exports.GET_ASSETS_REJECTED,
+    payload: err,
+    error: true
+  }
+}
+
+exports.FETCH_ASSET = 'FETCH_ASSET'
+exports.fetchAssetDetails = (checksum) => {
+  return {
+    type: exports.FETCH_ASSET,
+    payload: checksum
+  }
+}
+
+exports.FETCH_ASSET_FULFILLED = 'FETCH_ASSET_FULFILLED'
+exports.receiveAssetDetails = (results) => {
+  return {
+    type: exports.FETCH_ASSET_FULFILLED,
+    payload: results
+  }
+}
+
+exports.FETCH_ASSET_REJECTED = 'FETCH_ASSET_REJECTED'
+exports.failAssetDetails = (err) => {
+  return {
+    type: exports.FETCH_ASSET_REJECTED,
+    payload: err,
+    error: true
+  }
+}
+
 exports.DROP_FILES = 'DROP_FILES'
 exports.dropFiles = (files) => {
   return {

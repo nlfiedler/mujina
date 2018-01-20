@@ -1,10 +1,11 @@
 //
 // Copyright (c) 2017 Nathan Fiedler
 //
-const {all, call, put, takeEvery, takeLatest} = require('redux-saga/effects')
+const {all, call, put, select, takeEvery, takeLatest} = require('redux-saga/effects')
 const {push} = require('react-router-redux')
 const Api = require('./api')
 const actions = require('./actions')
+const {getSelectedAttrs} = require('./selectors')
 
 function * fetchTags (action) {
   try {
@@ -57,6 +58,34 @@ function * uploadFiles (action) {
   }
 }
 
+function * handleSelection (action) {
+  // Gather the selected attributes (years, locations, tags).
+  const selections = yield select(getSelectedAttrs)
+  try {
+    // Start by indicating that assets are about to be queried, then start the
+    // process of actually querying them.
+    yield put(actions.requestAssets())
+    const assets = yield call(Api.queryAssets, selections)
+    yield put(actions.receiveAssets(assets))
+  } catch (err) {
+    yield put(actions.failAssets(err))
+    yield put(actions.setError(err))
+    yield put(push('/error'))
+  }
+}
+
+function * fetchAssetDetails (action) {
+  try {
+    const details = yield call(Api.fetchAsset, action.payload)
+    yield put(actions.receiveAssetDetails(details))
+    yield put(push('/asset/' + action.payload))
+  } catch (err) {
+    yield put(actions.failAssetDetails(err))
+    yield put(actions.setError(err))
+    yield put(push('/error'))
+  }
+}
+
 function * watchFetchTags () {
   yield takeLatest(actions.GET_TAGS, fetchTags)
 }
@@ -77,11 +106,26 @@ function * watchUploadFiles () {
   yield takeEvery(actions.UPLOAD_FILES, uploadFiles)
 }
 
+function * watchSelectorToggles () {
+  // TODO: consider a delay with watchSelectorToggles saga to avoid frequent fetching
+  yield takeLatest([
+    actions.TOGGLE_LOCATION,
+    actions.TOGGLE_TAG,
+    actions.TOGGLE_YEAR
+  ], handleSelection)
+}
+
+function * watchFetchAsset () {
+  yield takeLatest(actions.FETCH_ASSET, fetchAssetDetails)
+}
+
 function * rootSaga () {
   yield all([
     watchFetchTags(),
     watchFetchYears(),
     watchFetchLocations(),
+    watchSelectorToggles(),
+    watchFetchAsset(),
     watchDropFiles(),
     watchUploadFiles()
   ])

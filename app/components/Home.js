@@ -7,7 +7,7 @@ const {
   MenuLabel,
   Tile
 } = require('bloomer')
-const {Thumbnails} = require('./Thumbnails')
+const {Thumbnails} = require('../containers/Thumbnails')
 const {LocationList} = require('../containers/LocationList')
 const {TagList} = require('../containers/TagList')
 const {YearList} = require('../containers/YearList')
