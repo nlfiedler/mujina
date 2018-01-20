@@ -2,11 +2,9 @@
 // Copyright (c) 2017 Nathan Fiedler
 //
 const crypto = require('crypto')
-const Store = require('electron-store')
-const configStore = new Store()
-const url = require('url')
 const fs = require('fs')
 const request = require('request')
+const config = require('./config')
 
 /**
  * Check for an error condition, whether from a failed request or
@@ -38,12 +36,7 @@ function maybeError (error, response) {
 function fetchAttributes (key) {
   return new Promise((resolve, reject) => {
     request.get({
-      url: url.format({
-        protocol: 'http:',
-        hostname: configStore.get('backend.host', 'localhost'),
-        port: configStore.get('backend.port', 3000),
-        pathname: '/api/' + key
-      })
+      url: config.serverUrl({pathname: '/api/' + key})
     }, (err, response, body) => {
       const error = maybeError(err, response)
       if (error) {
@@ -94,12 +87,7 @@ exports.fetchLocations = () => {
 exports.fetchAsset = (checksum) => {
   return new Promise((resolve, reject) => {
     request.get({
-      url: url.format({
-        protocol: 'http:',
-        hostname: configStore.get('backend.host', 'localhost'),
-        port: configStore.get('backend.port', 3000),
-        pathname: '/api/assets/' + checksum
-      })
+      url: config.serverUrl({pathname: '/api/assets/' + checksum})
     }, (err, response, body) => {
       const error = maybeError(err, response)
       if (error) {
@@ -139,13 +127,7 @@ exports.queryAssets = (selections) => {
   return new Promise((resolve, reject) => {
     // TODO: consider if using a form body instead of URL would be better
     request.get({
-      url: url.format({
-        protocol: 'http:',
-        hostname: configStore.get('backend.host', 'localhost'),
-        port: configStore.get('backend.port', 3000),
-        pathname: '/api/assets',
-        search: params
-      })
+      url: config.serverUrl({pathname: '/api/assets', search: params})
     }, (err, response, body) => {
       const error = maybeError(err, response)
       if (error) {
@@ -193,12 +175,7 @@ exports.uploadFiles = (files) => {
         }
       }
       request.post({
-        url: url.format({
-          protocol: 'http:',
-          hostname: configStore.get('backend.host', 'localhost'),
-          port: configStore.get('backend.port', 3000),
-          pathname: '/api/assets'
-        }),
+        url: config.serverUrl({pathname: '/api/assets'}),
         formData
       }, (err, response, body) => {
         const error = maybeError(err, response)
@@ -215,12 +192,7 @@ exports.uploadFiles = (files) => {
       new Promise((resolve, reject) => {
         // Now that we have a checksum, update the asset attributes.
         request.put({
-          url: url.format({
-            protocol: 'http:',
-            hostname: configStore.get('backend.host', 'localhost'),
-            port: configStore.get('backend.port', 3000),
-            pathname: '/api/assets/' + res.checksum
-          }),
+          url: config.serverUrl({pathname: '/api/assets/' + res.checksum}),
           json: {
             location: res.location,
             // caption: res.caption,

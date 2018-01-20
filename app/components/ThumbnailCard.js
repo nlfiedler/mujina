@@ -9,18 +9,10 @@ const {
   CardContent,
   Content
 } = require('bloomer')
-const url = require('url')
-const Store = require('electron-store')
-const configStore = new Store()
+const config = require('../config')
 
 const ThumbnailCard = ({checksum, filename, date, location, onClick}) => {
-  // TODO: move to a config.js so we create a single Store instance
-  const thumbnailUrl = url.format({
-    protocol: 'http:',
-    hostname: configStore.get('backend.host', 'localhost'),
-    port: configStore.get('backend.port', 3000),
-    pathname: '/thumbnail/' + checksum
-  })
+  const thumbnailUrl = config.serverUrl({pathname: '/thumbnail/' + checksum})
   // TODO: format the date (if it is a Date object) appropriately
   // TODO: show video thumbnails using video HTML tag so they can play directly
   // TODO: show selected frames from videos on hover

@@ -12,21 +12,13 @@ const {
   Content,
   Icon
 } = require('bloomer')
-const url = require('url')
-const Store = require('electron-store')
-const configStore = new Store()
+const config = require('../config')
 
 // TODO: once date/time is a Date object, format appropriately
 
 // TODO: show videos using the video tag
 const AssetDetails = ({details}) => {
-  // TODO: move to a config.js so we create a single Store instance
-  const previewUrl = url.format({
-    protocol: 'http:',
-    hostname: configStore.get('backend.host', 'localhost'),
-    port: configStore.get('backend.port', 3000),
-    pathname: '/preview/' + details.checksum
-  })
+  const previewUrl = config.serverUrl({pathname: '/preview/' + details.checksum})
   // TODO: add more details to the display
   // TODO: center the image/card? maybe use div className='container'
   return (

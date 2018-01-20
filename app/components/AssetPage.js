@@ -17,6 +17,14 @@ const {history} = require('../store')
 // React-router needs a real component to navigate to; however, it ends up being
 // nothing more than a wrapper around the container component.
 const AssetPage = () => {
+  //
+  // TODO: another layout idea
+  //       1. selectors on left
+  //       2. sidebar next to selectors
+  //       3. detail tile next to sidebar
+  //       4. detail tile has close button
+  //          (returns to thumbnail grid)
+  //
   // TODO: maybe use Navbar instead of Level for the Home button
   // TODO: should the home button be above the sidebar?
   // TODO: ensure the right tile remains at the top of the window (does not scroll away)
