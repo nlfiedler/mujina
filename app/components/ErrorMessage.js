@@ -15,13 +15,13 @@ const ErrorMessage = ({error}) => (
       <p>Uh oh, something went wrong...</p>
     </MessageHeader>
     <MessageBody>
-      {error}
+      {error.stack || error.toString() || 'missing error stack and message!'}
     </MessageBody>
   </Message>
 )
 
 ErrorMessage.propTypes = {
-  error: PropTypes.string.isRequired
+  error: PropTypes.object.isRequired
 }
 
 module.exports = {
