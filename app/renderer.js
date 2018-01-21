@@ -49,6 +49,7 @@ function initDragAndDrop () {
     cleanUp(ev)
   }, false)
 
+  // TODO: dropping a second time seems to not work
   drop.addEventListener('drop', function (ev) {
     // stop the browser from redirecting to the file
     ev.preventDefault()

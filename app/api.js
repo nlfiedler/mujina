@@ -170,7 +170,7 @@ exports.uploadFiles = (files) => {
           value: fs.createReadStream(file.path),
           options: {
             filename: file.name,
-            contentType: file.type
+            contentType: file.mimetype
           }
         }
       }

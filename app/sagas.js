@@ -6,6 +6,7 @@ const {push} = require('react-router-redux')
 const Api = require('./api')
 const actions = require('./actions')
 const {getSelectedAttrs} = require('./selectors')
+const preview = require('./preview')
 
 function * fetchTags (action) {
   try {
@@ -36,8 +37,9 @@ function * fetchLocations (action) {
 
 function * checksumDrops (action) {
   try {
-    const files = yield call(Api.checksumFiles, action.payload)
-    yield put(actions.receiveDropFiles(files))
+    const summed = yield call(Api.checksumFiles, action.payload)
+    const thumbed = yield call(preview.generateNewThumbnails, summed)
+    yield put(actions.receiveDropFiles(thumbed))
     yield put(push('/upload'))
   } catch (err) {
     yield put(actions.failDropFiles(err))

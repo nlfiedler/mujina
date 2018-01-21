@@ -203,29 +203,28 @@ describe('Reducers', () => {
       nock.cleanAll()
     })
 
-    it('computes checksum of file paths', (done) => {
+    it('processes file drops', (done) => {
       const unsubscribe = store.subscribe(() => {
         const state = store.getState().uploads
         // 1. called when computing
         // 2. called again after checksum complete
         if (!state.isPending) {
-          assert.deepEqual(state.files, [
-            {
-              path: 'app/containers/DroppedFiles.js',
-              kagi: 'd26aa8cc2cf64e36910bcb67f994897c11cb9e37'
-            },
-            {
-              path: 'assets/images/128x128.png',
-              kagi: 'e3b790af8d990325138be8e7ec59c86bee5e13ff'
-            }
-          ])
+          assert.equal(state.files.length, 2)
+          assert.equal(state.files[0].path, 'test/fixtures/lorem-ipsum.txt')
+          assert.equal(state.files[0].kagi, 'a1e1a77875220625fbe18b7d795a42df6c3316af')
+          assert.equal(state.files[0].mimetype, 'text/plain')
+          assert.isNull(state.files[0].image)
+          assert.equal(state.files[1].path, 'test/fixtures/128x128.png')
+          assert.equal(state.files[1].kagi, '7b44b712a9a3b2d851d9bfb74affa302e81dc05f')
+          assert.equal(state.files[1].mimetype, 'image/png')
+          assert.isTrue(state.files[1].image.startsWith('data:image/jpg;base64,'))
           unsubscribe()
           done()
         }
       })
       store.dispatch(actions.dropFiles([
-        {path: 'app/containers/DroppedFiles.js'},
-        {path: 'assets/images/128x128.png'}
+        {path: 'test/fixtures/lorem-ipsum.txt', mimetype: 'text/plain'},
+        {path: 'test/fixtures/128x128.png', mimetype: 'image/png'}
       ]))
     })
 
@@ -242,16 +241,13 @@ describe('Reducers', () => {
         // 1. called when uploading
         // 2. called again after upload complete, with checksums
         if (!state.isPending) {
-          assert.deepEqual(state.files, [
-            {
-              name: 'lorem-ipsum.txt',
-              path: 'test/fixtures/lorem-ipsum.txt',
-              type: 'text/plain',
-              location: 'outside',
-              tags: 'one,two',
-              checksum: sum1
-            }
-          ])
+          assert.equal(state.files.length, 1)
+          assert.equal(state.files[0].name, 'lorem-ipsum.txt')
+          assert.equal(state.files[0].path, 'test/fixtures/lorem-ipsum.txt')
+          assert.equal(state.files[0].mimetype, 'text/plain')
+          assert.equal(state.files[0].location, 'outside')
+          assert.equal(state.files[0].tags, 'one,two')
+          assert.equal(state.files[0].checksum, sum1)
           unsubscribe()
           done()
         }
@@ -260,7 +256,7 @@ describe('Reducers', () => {
         {
           name: 'lorem-ipsum.txt',
           path: 'test/fixtures/lorem-ipsum.txt',
-          type: 'text/plain',
+          mimetype: 'text/plain',
           location: 'outside',
           tags: 'one,two'
         }

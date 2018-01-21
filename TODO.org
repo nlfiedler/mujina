@@ -50,9 +50,6 @@
 
 - [TODO] Consider some style tricks to show drop readiness
   - Handle the dragenter and dragleave events to add style properties dynamically
-- [TODO] Allow #tags and @location in 'caption' field; no need for 'tags' and 'location' fields
-- [TODO] Show small thumbnails next to the new files (using "Media" component?)
-- [TODO] Include form field for caption and add to api.uploadFiles()
 - [TODO] Design shortcuts for entering identical values for multiple dropped files
   - Maybe select several and type into one field, auto copied to the others, keystroke by keystroke
 - [TODO] Probably need a progress bar for the uploads
