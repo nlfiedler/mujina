@@ -29,6 +29,8 @@ const AssetPage = () => {
   // TODO: should the home button be above the sidebar?
   // TODO: ensure the right tile remains at the top of the window (does not scroll away)
   //       (need lots more assets to test with)
+  // TODO: allow dragging out images (and videos?) as a form of export
+  //       (likely need a "File > Export" option with Save dialog for larger files)
   return (
     <Tile isAncestor style={{margin: 0}}>
       <Tile isSize={2} isVertical isParent>

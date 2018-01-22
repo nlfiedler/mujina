@@ -52,6 +52,10 @@ function * uploadFiles (action) {
   try {
     const files = yield call(Api.uploadFiles, action.payload)
     yield put(actions.receiveUploadFiles(files))
+    // need to update the selectors after uploading new assets
+    yield put(actions.requestTags())
+    yield put(actions.requestLocations())
+    yield put(actions.requestYears())
     yield put(push('/'))
   } catch (err) {
     yield put(actions.failUploadFiles(err))

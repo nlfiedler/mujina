@@ -195,7 +195,7 @@ exports.uploadFiles = (files) => {
           url: config.serverUrl({pathname: '/api/assets/' + res.checksum}),
           json: {
             location: res.location,
-            // caption: res.caption,
+            caption: res.caption,
             tags: res.tags
           }
         }, (err, response, body) => {
