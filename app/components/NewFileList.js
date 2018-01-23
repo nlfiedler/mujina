@@ -4,10 +4,14 @@
 const React = require('react')
 const PropTypes = require('prop-types')
 const {
-  Button
+  Button,
+  Column,
+  Columns,
+  Icon
 } = require('bloomer')
 const {NewFile} = require('./NewFile')
 const {Form} = require('react-redux-form')
+const {history} = require('../store')
 
 class NewFileList extends React.Component {
   constructor (props) {
@@ -45,7 +49,16 @@ class NewFileList extends React.Component {
         onSubmit={(drops) => this.handleSubmit(drops)}
       >
         {inner}
-        <Button isActive isColor='primary' type='submit'>Save</Button>
+        <Columns>
+          <Column>
+            <Button isActive isColor='primary' type='submit'>Save</Button>
+          </Column>
+          <Column hasTextAlign='right'>
+            <Button isOutlined isColor='warning' onClick={() => history.push('/')}>
+              <Icon isSize='medium' className='fa fa-trash' />
+            </Button>
+          </Column>
+        </Columns>
       </Form>
     )
   }
