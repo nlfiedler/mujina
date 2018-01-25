@@ -1,7 +1,38 @@
 # TODO
 
+## Migration
+
+### Course of Action
+
+- [TODO] Get mujina working sufficiently well
+  - basic asset edit
+  - decent browsing
+- [TODO] Get tanuki installed on FreeBSD (alongside old deployment)
+- [TODO] Write a one-off migration tool
+  - Assets continue to stay where they are
+  - Read old documents from CouchDB via http
+  - Write new documents to PouchDB via http
+
+## Wifey Enablement
+
+### Course of Action
+
+- [TODO] Need remote host/port configuration
+  - For now, hand-edit the electron-store config in ~/Library/Application Support/mujina/userData
+- [TODO] Install/Update Homebrew installation
+- [TODO] Install node, gulp-cli, etc
+- [TODO] Build mujina on her machine
+- [TODO] Add a shortcut to start mujina
+
 ## Overall
 
+- [TODO] Design a "folders" feature
+  - Add a "folders" field to the database records
+  - Store them as a list of strings
+  - Each asset can be in multiple folders
+  - Use multiple selection to quickly assign folders to assets
+  - Show folders with the other filters, selectors
+  - Wifey suggests "project" instead of folders, but folders is more general
 - [TODO] Consider https://github.com/reactjs/reselect for efficiently selecting things (i.e. paging)
 - [TODO] Consider options for streamlining development process
   - https://github.com/Quramy/electron-connect to reload electron
@@ -23,8 +54,6 @@
 - [TODO] Option on asset screen to rotate an image (some images lack orientation data)
 - [TODO] See https://github.com/Quramy/electron-jsx-babel-boilerplate/
   - uses gulp to minify and uglify everything
-- [TODO] Write a design document
-  - Why there is a redux store for each render process
 
 ## Testing
 
@@ -36,6 +65,7 @@
 
 ### General
 
+- [TODO] Maybe a set of Tabs to select between Pictures, Music, Videos, Documents, etc
 - [TODO] Read https://fb.me/react-error-boundaries to learn about error handling
 - [TODO] Add a route and page for viewing a single asset
 - [TODO] Add menu item to open file selector to import new assets

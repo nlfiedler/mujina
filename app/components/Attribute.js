@@ -3,9 +3,12 @@
 //
 const React = require('react')
 const PropTypes = require('prop-types')
-const {MenuLink} = require('bloomer')
+const {
+  Icon,
+  MenuLink
+} = require('bloomer')
 
-const Attribute = ({onClick, label, active}) => {
+const Attribute = ({onClick, label, active, iconName}) => {
   return (
     <li>
       <MenuLink
@@ -15,6 +18,7 @@ const Attribute = ({onClick, label, active}) => {
           onClick(label)
         }}
       >
+        <Icon isSize='small' className={iconName} />
         {label}
       </MenuLink>
     </li>

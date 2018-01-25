@@ -33,7 +33,7 @@ const AssetDetails = ({details}) => {
       </CardImage>
       <CardContent>
         <Content>
-          <Icon isSize='small' className='fa fa-hashtag' />
+          <Icon isSize='small' className='fa fa-tag' />
           <strong>{details.tags.join(', ')}</strong>
           <br />
           {details.caption}

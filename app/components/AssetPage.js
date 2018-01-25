@@ -14,8 +14,6 @@ const {Asset} = require('../containers/Asset')
 const {AssetSidebar} = require('../containers/AssetSidebar')
 const {history} = require('../store')
 
-// React-router needs a real component to navigate to; however, it ends up being
-// nothing more than a wrapper around the container component.
 const AssetPage = () => {
   //
   // TODO: another layout idea

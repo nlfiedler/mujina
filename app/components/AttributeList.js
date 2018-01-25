@@ -6,7 +6,13 @@ const PropTypes = require('prop-types')
 const {Attribute} = require('./Attribute')
 const {MenuList} = require('bloomer')
 
-const AttributeList = ({attributes, onAttrClick}) => {
+// TODO: change to show the top 10 by count
+//       maybe use a Dropdown for the rest (or accordion)
+// TODO: extra filters could be shown via an "accordion"
+//       - Bulma-Extensions has an Accordion component
+//       - how would this affect the scrolling?
+
+const AttributeList = ({attributes, onAttrClick, iconName}) => {
   let inner = null
   if (attributes.isPending) {
     inner = 'loading...'
@@ -20,7 +26,7 @@ const AttributeList = ({attributes, onAttrClick}) => {
     inner = '(none)'
   } else {
     inner = attributes.items.map((attr) => (
-      <Attribute key={attr.label} onClick={onAttrClick} {...attr} />
+      <Attribute key={attr.label} onClick={onAttrClick} {...attr} iconName={iconName} />
     ))
   }
   return (

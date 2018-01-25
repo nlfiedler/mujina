@@ -7,7 +7,8 @@ const {AttributeList} = require('../components/AttributeList')
 
 const mapStateToProps = state => {
   return {
-    attributes: state.years
+    attributes: state.years,
+    iconName: 'fa fa-calendar'
   }
 }
 
