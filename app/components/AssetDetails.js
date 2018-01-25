@@ -14,8 +14,8 @@ const {
 } = require('bloomer')
 const config = require('../config')
 
+// TODO: use a Delete element to return to the '/' (home) route
 // TODO: once date/time is a Date object, format appropriately
-
 // TODO: show videos using the video tag
 const AssetDetails = ({details}) => {
   const previewUrl = config.serverUrl({pathname: '/preview/' + details.checksum})

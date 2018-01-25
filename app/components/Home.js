@@ -8,13 +8,6 @@ const {
 const {AssetFilters} = require('./AssetFilters')
 const {Thumbnails} = require('../containers/Thumbnails')
 
-//
-// DONE: Home page has selectors on left, thumbnails in middle
-// TODO: rename/rewrite AssetSidebar to AssetSelector
-// TODO: rename/rewrite ThumbnailColumn to be ThumbnailRow
-// TODO: AssetPage has filters on left, asset selector on top, asset detail in middle
-//
-
 // The default padding on the parent tile causes the asset filters to be too
 // large by that same amount, so remove all padding from the left tile.
 const Home = () => (

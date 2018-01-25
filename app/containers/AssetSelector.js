@@ -3,7 +3,7 @@
 //
 const {connect} = require('react-redux')
 const {fetchAssetDetails} = require('../actions')
-const {ThumbnailColumn} = require('../components/ThumbnailColumn')
+const {ThumbnailRow} = require('../components/ThumbnailRow')
 
 const mapStateToProps = state => {
   return {
@@ -19,11 +19,11 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-const AssetSidebar = connect(
+const AssetSelector = connect(
   mapStateToProps,
   mapDispatchToProps
-)(ThumbnailColumn)
+)(ThumbnailRow)
 
 module.exports = {
-  AssetSidebar
+  AssetSelector
 }

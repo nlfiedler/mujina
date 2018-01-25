@@ -3,28 +3,33 @@
 //
 const React = require('react')
 const PropTypes = require('prop-types')
+const {
+  Container
+} = require('bloomer')
 const config = require('../config')
 
+// TODO: thumbnail images are kind big, maybe make them smaller somehow
+// TODO: add some padding around the thumbnails
+// TODO: show placeholder icons for thumbnails that fail to load (use 'onerror' handler)
 const ThumbnailImage = ({checksum, filename, onClick}) => {
   const thumbnailUrl = config.serverUrl({pathname: '/thumbnail/' + checksum})
-  // TODO: show placeholder icons for thumbnails that fail to load (use 'onerror' handler)
   return (
     <img alt={filename} src={thumbnailUrl} onClick={() => onClick(checksum)} />
   )
 }
 
-const ThumbnailColumn = ({assets, onClick}) => {
+const ThumbnailRow = ({assets, onClick}) => {
   const items = assets.map(asset => (
-    <li key={asset.checksum}><ThumbnailImage onClick={onClick} {...asset} /></li>
+    <ThumbnailImage key={asset.checksum} onClick={onClick} {...asset} />
   ))
   return (
-    <ul style={{'listStyleType': 'none', 'margin': 0, 'padding': 0}}>
+    <Container isFluid isMarginless style={{'overflow': 'auto', 'width': '100vw'}}>
       {items}
-    </ul>
+    </Container>
   )
 }
 
-ThumbnailColumn.propTypes = {
+ThumbnailRow.propTypes = {
   assets: PropTypes.arrayOf(
     PropTypes.shape({
       checksum: PropTypes.string.isRequired,
@@ -37,5 +42,5 @@ ThumbnailColumn.propTypes = {
 }
 
 module.exports = {
-  ThumbnailColumn
+  ThumbnailRow
 }
