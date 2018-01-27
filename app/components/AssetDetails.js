@@ -7,36 +7,48 @@ const {
   Card,
   CardContent,
   CardHeader,
+  CardHeaderIcon,
   CardHeaderTitle,
   CardImage,
   Content,
-  Icon
+  Delete,
+  Icon,
+  Image
 } = require('bloomer')
 const config = require('../config')
+const {history} = require('../store')
 
-// TODO: use a Delete element to return to the '/' (home) route
+// TODO: the img alt is not working, use a Tooltip from Bulma-Extensions
+//       use multi-line tooltip to include filesize and mimetype
+// TODO: add a hamburger icon next to Delete for menu items (e.g. Edit)
 // TODO: once date/time is a Date object, format appropriately
 // TODO: show videos using the video tag
+// TODO: show duration for videos
 const AssetDetails = ({details}) => {
   const previewUrl = config.serverUrl({pathname: '/preview/' + details.checksum})
-  // TODO: add more details to the display
-  // TODO: center the image/card? maybe use div className='container'
   return (
     <Card>
       <CardHeader>
         <CardHeaderTitle>
           {details.filename}
         </CardHeaderTitle>
+        <CardHeaderIcon>
+          <Delete onClick={() => history.push('/')} />
+        </CardHeaderIcon>
       </CardHeader>
-      <CardImage>
-        <img alt={details.filename} src={previewUrl} />
+      <CardImage hasTextAlign='centered'>
+        <Image alt={details.checksum} src={previewUrl} />
       </CardImage>
       <CardContent>
         <Content>
           <Icon isSize='small' className='fa fa-tag' />
           <strong>{details.tags.join(', ')}</strong>
           <br />
+          <Icon isSize='small'><span className='fa fa-quote-left' /></Icon>
           {details.caption}
+          <br />
+          <Icon isSize='small'><span className='fa fa-map-marker' /></Icon>
+          {details.location}
           <br />
           <small>{details.datetime}</small>
         </Content>

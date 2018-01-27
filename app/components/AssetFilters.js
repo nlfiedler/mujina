@@ -60,8 +60,12 @@ class AssetFilters extends React.Component {
         onClick={this.handleTabClick} />
     ))
     const panelContent = panelContents[this.state.activeTabIndex]
+    // TODO: make the panelContent scroll, not the entire Panel
+    //       (need to force its height to be the same as the container)
+    //       maybe isDisplay, isClearFix, isOverlay, could help?
+    //       maybe set max-height: 100% on the Panel and set its overflow-y, not the Container
     return (
-      <Container isFluid isMarginless style={{'overflow': 'auto', 'height': '100vh'}}>
+      <Container isFluid isMarginless style={{'height': '100vh', 'overflowY': 'auto'}}>
         <Panel>
           <PanelBlock>
             <Control hasIcons='left'>

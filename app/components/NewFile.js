@@ -16,6 +16,7 @@ const {
 const rrf = require('react-redux-form')
 const preview = require('../preview')
 
+// TODO: add a trash icon to remove a single file from the uploads list
 // TODO: try to center the image vertically
 const NewFile = ({kagi, name, path, size, mimetype, image}) => {
   const thumbnail = preview.createThumbnailElement(image, mimetype)

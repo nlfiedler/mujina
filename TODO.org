@@ -6,7 +6,6 @@
 
 - [TODO] Get mujina working sufficiently well
   - basic asset edit
-  - decent browsing
 - [TODO] Get tanuki installed on FreeBSD (alongside old deployment)
 - [TODO] Write a one-off migration tool
   - Assets continue to stay where they are

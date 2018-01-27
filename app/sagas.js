@@ -37,6 +37,9 @@ function * fetchLocations (action) {
 
 function * checksumDrops (action) {
   try {
+    // TODO: should process them 1 by 1 and update the state after each one,
+    //       giving the interface a chance to show the uploads
+    //       (will need to fire the page change first)
     const summed = yield call(Api.checksumFiles, action.payload)
     const thumbed = yield call(preview.generateNewThumbnails, summed)
     yield put(actions.receiveDropFiles(thumbed))

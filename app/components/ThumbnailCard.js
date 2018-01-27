@@ -7,7 +7,8 @@ const PropTypes = require('prop-types')
 const {
   Card,
   CardContent,
-  Content
+  Content,
+  Image
 } = require('bloomer')
 const config = require('../config')
 
@@ -21,7 +22,7 @@ const ThumbnailCard = ({checksum, filename, date, location, onClick}) => {
   return (
     <Card>
       <CardContent>
-        <img alt={filename} src={thumbnailUrl} onClick={() => onClick(checksum)} />
+        <Image alt={filename} src={thumbnailUrl} onClick={() => onClick(checksum)} />
         <Content>
           <small>{shortName} - {date}</small>
         </Content>
