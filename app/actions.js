@@ -150,6 +150,31 @@ exports.failAssetDetails = (err) => {
   }
 }
 
+exports.UPDATE_ASSET = 'UPDATE_ASSET'
+exports.updateAssetDetails = (details) => {
+  return {
+    type: exports.UPDATE_ASSET,
+    payload: details
+  }
+}
+
+exports.UPDATE_ASSET_FULFILLED = 'UPDATE_ASSET_FULFILLED'
+exports.receiveAssetUpdate = (results) => {
+  return {
+    type: exports.UPDATE_ASSET_FULFILLED,
+    payload: results
+  }
+}
+
+exports.UPDATE_ASSET_REJECTED = 'UPDATE_ASSET_REJECTED'
+exports.failAssetUpdate = (err) => {
+  return {
+    type: exports.UPDATE_ASSET_REJECTED,
+    payload: err,
+    error: true
+  }
+}
+
 exports.DROP_FILES = 'DROP_FILES'
 exports.dropFiles = (files) => {
   return {

@@ -40,6 +40,15 @@ function generateNewThumbnails (files) {
  */
 function createThumbnailElement (image, mimetype) {
   if (image) {
+    // TODO: change to produce a figure/img and set the object-fit property to 'cover'
+    //       just like this...
+    // <figure className='image is-96x96'>
+    //   <img
+    //     style={{'objectFit': 'cover', 'height': '96px', 'width': '96px'}}
+    //     src={thumbnailUrl}
+    //     onClick={() => onClick(checksum)}
+    //   />
+    // </figure>
     return React.createElement(Image, {
       isSize: `${imageSize}x${imageSize}`,
       src: image

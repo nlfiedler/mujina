@@ -6,6 +6,7 @@ const {Route} = require('react-router')
 const {ConnectedRouter} = require('react-router-redux')
 const {Home} = require('./Home')
 const {AssetPage} = require('./AssetPage')
+const {AssetEditPage} = require('./AssetEditPage')
 const {Upload} = require('./Upload')
 const {ErrorPage} = require('./ErrorPage')
 const {history} = require('../store')
@@ -15,6 +16,7 @@ const App = () => (
     <div>
       <Route exact path='/' component={Home} />
       <Route path='/asset/:id' component={AssetPage} />
+      <Route path='/edit/:id' component={AssetEditPage} />
       <Route path='/upload' component={Upload} />
       <Route path='/error' component={ErrorPage} />
     </div>

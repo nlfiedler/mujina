@@ -95,6 +95,19 @@ function * fetchAssetDetails (action) {
   }
 }
 
+function * updateAssetDetails (action) {
+  try {
+    const result = yield call(Api.updateAsset, action.payload)
+    yield put(actions.receiveAssetUpdate(result))
+    // go back to the asset detail page
+    yield put(push('/asset/' + action.payload.checksum))
+  } catch (err) {
+    yield put(actions.failAssetUpdate(err))
+    yield put(actions.setError(err))
+    yield put(push('/error'))
+  }
+}
+
 function * watchFetchTags () {
   yield takeLatest(actions.GET_TAGS, fetchTags)
 }
@@ -128,6 +141,10 @@ function * watchFetchAsset () {
   yield takeLatest(actions.FETCH_ASSET, fetchAssetDetails)
 }
 
+function * watchUpdateAsset () {
+  yield takeEvery(actions.UPDATE_ASSET, updateAssetDetails)
+}
+
 function * rootSaga () {
   yield all([
     watchFetchTags(),
@@ -135,6 +152,7 @@ function * rootSaga () {
     watchFetchLocations(),
     watchSelectorToggles(),
     watchFetchAsset(),
+    watchUpdateAsset(),
     watchDropFiles(),
     watchUploadFiles()
   ])

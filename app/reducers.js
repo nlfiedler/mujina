@@ -180,10 +180,11 @@ function details (
           filesize: action.payload.file_size,
           // TODO: parse the asset date/time into a Date object
           datetime: action.payload.datetime,
-          location: action.payload.location,
+          // avoid having null fields, the React components don't like it
+          location: action.payload.location || '',
           mimetype: action.payload.mimetype,
           userdate: action.payload.user_date,
-          caption: action.payload.caption,
+          caption: action.payload.caption || '',
           duration: action.payload.duration,
           tags: action.payload.tags
         },
@@ -193,6 +194,21 @@ function details (
       return Object.assign({}, state, {
         isPending: false,
         single: {},
+        error: action.payload
+      })
+    case actions.UPDATE_ASSET:
+      return Object.assign({}, state, {
+        isPending: true,
+        single: action.payload
+      })
+    case actions.UPDATE_ASSET_FULFILLED:
+      return Object.assign({}, state, {
+        isPending: false,
+        error: null
+      })
+    case actions.UPDATE_ASSET_REJECTED:
+      return Object.assign({}, state, {
+        isPending: false,
         error: action.payload
       })
     default:
@@ -217,7 +233,8 @@ function uploads (
     case actions.DROP_FILES_FULFILLED:
       return Object.assign({}, state, {
         isPending: false,
-        files: action.payload
+        files: action.payload,
+        error: null
       })
     case actions.DROP_FILES_REJECTED:
       return Object.assign({}, state, {
@@ -232,7 +249,8 @@ function uploads (
     case actions.UPLOAD_FILES_FULFILLED:
       return Object.assign({}, state, {
         isPending: false,
-        files: action.payload
+        files: action.payload,
+        error: null
       })
     case actions.UPLOAD_FILES_REJECTED:
       return Object.assign({}, state, {
@@ -274,5 +292,6 @@ exports.reducer = combineReducers({
   uploads,
   router: routerReducer,
   drops: modelReducer('drops'),
+  editor: modelReducer('editor'),
   forms: formReducer('')
 })

@@ -100,6 +100,36 @@ exports.fetchAsset = (checksum) => {
 }
 
 /**
+ * Update the asset details on the backend.
+ *
+ * @param {Object} details - the asset details, with location, caption, etc.
+ * @param {String} details.checksum - the asset checksum.
+ * @param {String} details.location - the asset location value.
+ * @param {String} details.caption - the asset caption value.
+ * @param {String} details.tags - the asset tags value (list of strings).
+ * @return {Promise<Object>} - resolves to the server response.
+ */
+exports.updateAsset = (details) => {
+  return new Promise((resolve, reject) => {
+    request.put({
+      url: config.serverUrl({pathname: '/api/assets/' + details.checksum}),
+      json: {
+        location: details.location,
+        caption: details.caption,
+        tags: details.tags
+      }
+    }, (err, response, body) => {
+      const error = maybeError(err, response)
+      if (error) {
+        reject(error)
+      } else {
+        resolve(body)
+      }
+    })
+  })
+}
+
+/**
  * Shape of the selections argument:
  *
  * {

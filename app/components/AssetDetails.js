@@ -4,23 +4,28 @@
 const React = require('react')
 const PropTypes = require('prop-types')
 const {
+  Button,
   Card,
   CardContent,
   CardHeader,
-  CardHeaderIcon,
-  CardHeaderTitle,
   CardImage,
   Content,
   Delete,
   Icon,
-  Image
+  Image,
+  Navbar,
+  NavbarBrand,
+  NavbarEnd,
+  NavbarItem,
+  NavbarMenu,
+  NavbarStart
 } = require('bloomer')
 const config = require('../config')
 const {history} = require('../store')
 
 // TODO: the img alt is not working, use a Tooltip from Bulma-Extensions
 //       use multi-line tooltip to include filesize and mimetype
-// TODO: add a hamburger icon next to Delete for menu items (e.g. Edit)
+// TODO: have a tooltip on the edit button
 // TODO: once date/time is a Date object, format appropriately
 // TODO: show videos using the video tag
 // TODO: show duration for videos
@@ -29,12 +34,27 @@ const AssetDetails = ({details}) => {
   return (
     <Card>
       <CardHeader>
-        <CardHeaderTitle>
-          {details.filename}
-        </CardHeaderTitle>
-        <CardHeaderIcon>
-          <Delete onClick={() => history.push('/')} />
-        </CardHeaderIcon>
+        <Navbar isTransparent style={{'width': '100%'}}>
+          <NavbarBrand>
+            <NavbarItem>
+              {details.filename}
+            </NavbarItem>
+          </NavbarBrand>
+          <NavbarMenu>
+            <NavbarStart>
+              <NavbarItem>
+                <Button onClick={() => history.push('/edit/' + details.checksum)}>
+                  <Icon isSize='medium' className='fa fa-edit' />
+                </Button>
+              </NavbarItem>
+            </NavbarStart>
+            <NavbarEnd>
+              <NavbarItem>
+                <Delete onClick={() => history.push('/')} />
+              </NavbarItem>
+            </NavbarEnd>
+          </NavbarMenu>
+        </Navbar>
       </CardHeader>
       <CardImage hasTextAlign='centered'>
         <Image alt={details.checksum} src={previewUrl} />
