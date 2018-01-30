@@ -4,13 +4,14 @@
 
 ### Course of Action
 
-- [TODO] Get mujina working sufficiently well
-  - basic asset edit
+- [TODO] Write a configuration page
+  - Access via Preferences menu item
+  - Set the host and port of the server
 - [TODO] Get tanuki installed on FreeBSD (alongside old deployment)
 - [TODO] Write a one-off migration tool
   - Assets continue to stay where they are
-  - Read old documents from CouchDB via http
-  - Write new documents to PouchDB via http
+  - Read old documents from CouchDB (via http)
+  - Write new documents to PouchDB
 
 ## Wifey Enablement
 

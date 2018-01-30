@@ -2,7 +2,7 @@
 // Copyright (c) 2017 Nathan Fiedler
 //
 const {connect} = require('react-redux')
-const {AssetDetails} = require('../components/AssetDetails')
+const {AssetPreview} = require('../components/AssetPreview')
 
 const mapStateToProps = state => {
   return {
@@ -23,7 +23,7 @@ const mapDispatchToProps = dispatch => {
 const Asset = connect(
   mapStateToProps,
   mapDispatchToProps
-)(AssetDetails)
+)(AssetPreview)
 
 module.exports = {
   Asset

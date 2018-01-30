@@ -29,7 +29,7 @@ const {history} = require('../store')
 // TODO: once date/time is a Date object, format appropriately
 // TODO: show videos using the video tag
 // TODO: show duration for videos
-const AssetDetails = ({details}) => {
+const AssetPreview = ({details}) => {
   const previewUrl = config.serverUrl({pathname: '/preview/' + details.checksum})
   return (
     <Card>
@@ -93,7 +93,7 @@ const AssetDetails = ({details}) => {
 //               , alt asset.file_name ] [ ]
 //         ]
 
-AssetDetails.propTypes = {
+AssetPreview.propTypes = {
   details: PropTypes.shape({
     checksum: PropTypes.string.isRequired,
     filename: PropTypes.string.isRequired,
@@ -111,5 +111,5 @@ AssetDetails.propTypes = {
 }
 
 module.exports = {
-  AssetDetails
+  AssetPreview
 }
