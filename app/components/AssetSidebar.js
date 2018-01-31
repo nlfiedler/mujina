@@ -13,8 +13,8 @@ const boxStyle = {
   'padding': '1rem'
 }
 const termStyle = {
-  'fontWeight': 'bold',
-  'textDecoration': 'underline'
+  'fontSize': '0.75em',
+  'textTransform': 'uppercase'
 }
 const dataStyle = {
   'margin': '0'

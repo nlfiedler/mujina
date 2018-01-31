@@ -30,7 +30,7 @@ const AttributeList = ({attributes, onAttrClick, iconName}) => {
     ))
   }
   return (
-    <MenuList>
+    <MenuList style={{'width': '100%'}}>
       {inner}
     </MenuList>
   )
