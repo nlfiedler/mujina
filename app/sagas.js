@@ -5,6 +5,7 @@ const {all, call, put, select, takeEvery, takeLatest} = require('redux-saga/effe
 const {push} = require('react-router-redux')
 const Api = require('./api')
 const actions = require('./actions')
+const config = require('./config')
 const {getSelectedAttrs} = require('./selectors')
 const preview = require('./preview')
 
@@ -108,6 +109,19 @@ function * updateAssetDetails (action) {
   }
 }
 
+function * saveOptions (action) {
+  try {
+    yield call(config.setOptions, action.payload)
+    yield put(actions.requestTags())
+    yield put(actions.requestLocations())
+    yield put(actions.requestYears())
+    yield put(push('/'))
+  } catch (err) {
+    yield put(actions.setError(err))
+    yield put(push('/error'))
+  }
+}
+
 function * watchFetchTags () {
   yield takeLatest(actions.GET_TAGS, fetchTags)
 }
@@ -145,6 +159,10 @@ function * watchUpdateAsset () {
   yield takeEvery(actions.UPDATE_ASSET, updateAssetDetails)
 }
 
+function * watchSaveOptions () {
+  yield takeLatest(actions.SAVE_OPTIONS, saveOptions)
+}
+
 function * rootSaga () {
   yield all([
     watchFetchTags(),
@@ -154,7 +172,8 @@ function * rootSaga () {
     watchFetchAsset(),
     watchUpdateAsset(),
     watchDropFiles(),
-    watchUploadFiles()
+    watchUploadFiles(),
+    watchSaveOptions()
   ])
 }
 

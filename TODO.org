@@ -4,9 +4,6 @@
 
 ### Course of Action
 
-- [TODO] Write a configuration page
-  - Access via Preferences menu item
-  - Set the host and port of the server
 - [TODO] Get tanuki installed on FreeBSD (alongside old deployment)
 - [TODO] Write a one-off migration tool
   - Assets continue to stay where they are
@@ -85,6 +82,12 @@
 - [TODO] Probably need a progress bar for the uploads
 - [TODO] Allow dragging out images (and videos?) as a form of export
   - Likely need a "File > Export" option with Save dialog for larger files
+
+## Easy Browsing/Slideshow via web
+
+- To compete with Apple Photos and the Apple TV photo browsing feature
+  - Make it easy to peruse the assets organized as "memories"
+  - Make a slideshow feature in the web interface
 
 ## Research
 

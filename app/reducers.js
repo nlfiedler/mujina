@@ -293,5 +293,6 @@ exports.reducer = combineReducers({
   router: routerReducer,
   drops: modelReducer('drops'),
   editor: modelReducer('editor'),
+  options: modelReducer('options'),
   forms: formReducer('')
 })

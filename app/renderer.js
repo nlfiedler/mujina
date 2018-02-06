@@ -12,6 +12,7 @@ const {App} = require('./components/App')
 const actions = require('./actions')
 const reduxStore = require('./store').configureStore()
 const {push} = require('react-router-redux')
+const {ipcRenderer} = require('electron')
 
 reduxStore.dispatch(actions.requestLocations())
 reduxStore.dispatch(actions.requestTags())
@@ -87,3 +88,11 @@ function initDragAndDrop () {
     return false
   }, false)
 }
+
+ipcRenderer.on('route:options', (event, arg) => {
+  if (arg === 'go') {
+    reduxStore.dispatch(push('/options'))
+  } else {
+    console.warn(`received ${arg} for route:options event`)
+  }
+})

@@ -225,6 +225,14 @@ exports.failUploadFiles = (err) => {
   }
 }
 
+exports.SAVE_OPTIONS = 'SAVE_OPTIONS'
+exports.saveOptions = (opts) => {
+  return {
+    type: exports.SAVE_OPTIONS,
+    payload: opts
+  }
+}
+
 // Set a global error for the error page to display.
 exports.SET_ERROR = 'SET_ERROR'
 exports.setError = (err) => {
