@@ -6,8 +6,7 @@ const fs = require('fs')
 const sharp = require('sharp')
 const ffmpeg = require('fluent-ffmpeg')
 const {
-  Icon,
-  Image
+  Icon
 } = require('bloomer')
 
 // Pixel size of the generated thumbnails for the dropped file screen.
@@ -40,19 +39,18 @@ function generateNewThumbnails (files) {
  */
 function createThumbnailElement (image, mimetype) {
   if (image) {
-    // TODO: change to produce a figure/img and set the object-fit property to 'cover'
-    //       just like this...
-    // <figure className='image is-96x96'>
-    //   <img
-    //     style={{'objectFit': 'cover', 'height': '96px', 'width': '96px'}}
-    //     src={thumbnailUrl}
-    //     onClick={() => onClick(checksum)}
-    //   />
-    // </figure>
-    return React.createElement(Image, {
-      isSize: `${imageSize}x${imageSize}`,
+    const dimension = `${imageSize}px`
+    const imgElement = React.createElement('img', {
+      style: {
+        'objectFit': 'cover',
+        'height': dimension,
+        'width': dimension
+      },
       src: image
     })
+    return React.createElement('figure', {
+      className: 'image is-96x96'
+    }, imgElement)
   }
   const icon = mimetypeToIcon(mimetype)
   return React.createElement(Icon, {
@@ -69,11 +67,13 @@ async function generateThumbnail (mimetype, filepath, pixels) {
   if (mimetype.startsWith('video/')) {
     return generateVideoThumbnail(filepath, pixels)
   } else if (mimetype.startsWith('image/')) {
-    // fit the image into a box of the given size, convert to jpeg
+    // fit the image into a box of the given size, convert to jpeg,
+    // and auto-rotate as needed (server makes the final correction)
     let bits = await sharp(filepath)
       .resize(pixels, pixels)
       .max()
       .withoutEnlargement()
+      .rotate()
       .toFormat('jpeg')
       .toBuffer()
     return {

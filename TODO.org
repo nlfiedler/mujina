@@ -1,21 +1,12 @@
 # TODO
 
-## Migration
-
-### Course of Action
-
-- [TODO] Get tanuki installed on FreeBSD (alongside old deployment)
-- [TODO] Write a one-off migration tool
-  - Assets continue to stay where they are
-  - Read old documents from CouchDB (via http)
-  - Write new documents to PouchDB
-
 ## Wifey Enablement
 
 ### Course of Action
 
-- [TODO] Need remote host/port configuration
-  - For now, hand-edit the electron-store config in ~/Library/Application Support/mujina/userData
+- [TODO] Get some form of paging to work for many assets
+- [TODO] Enable copy/paste in dropped files text fields
+- [TODO] Drag and drop from Photos is not working
 - [TODO] Install/Update Homebrew installation
 - [TODO] Install node, gulp-cli, etc
 - [TODO] Build mujina on her machine
@@ -23,6 +14,7 @@
 
 ## Overall
 
+- [TODO] Enable copy of selected text in asset sidebar component
 - [TODO] Design a "folders" feature
   - Add a "folders" field to the database records
   - Store them as a list of strings
