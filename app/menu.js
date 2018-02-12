@@ -8,20 +8,20 @@ function showPreferences (item, focusedWindow) {
 }
 
 const template = [
-  // {
-  //   label: 'Edit',
-  //   submenu: [
-  //     {role: 'undo'},
-  //     {role: 'redo'},
-  //     {type: 'separator'},
-  //     {role: 'cut'},
-  //     {role: 'copy'},
-  //     {role: 'paste'},
-  //     {role: 'pasteandmatchstyle'},
-  //     {role: 'delete'},
-  //     {role: 'selectall'}
-  //   ]
-  // },
+  {
+    label: 'Edit',
+    submenu: [
+      {role: 'undo'},
+      {role: 'redo'},
+      {type: 'separator'},
+      {role: 'cut'},
+      {role: 'copy'},
+      {role: 'paste'},
+      {role: 'pasteandmatchstyle'},
+      {role: 'delete'},
+      {role: 'selectall'}
+    ]
+  },
   {
     label: 'View',
     submenu: [
@@ -79,25 +79,25 @@ if (process.platform === 'darwin') {
   })
 
   // Edit menu
-  // template[1].submenu.push(
-  //   {type: 'separator'},
-  //   {
-  //     label: 'Speech',
-  //     submenu: [
-  //       {role: 'startspeaking'},
-  //       {role: 'stopspeaking'}
-  //     ]
-  //   }
-  // )
+  template[1].submenu.push(
+    {type: 'separator'},
+    {
+      label: 'Speech',
+      submenu: [
+        {role: 'startspeaking'},
+        {role: 'stopspeaking'}
+      ]
+    }
+  )
 
   // Window menu
-  // template[3].submenu = [
-  //   {role: 'close'},
-  //   {role: 'minimize'},
-  //   {role: 'zoom'},
-  //   {type: 'separator'},
-  //   {role: 'front'}
-  // ]
+  template[3].submenu = [
+    {role: 'close'},
+    {role: 'minimize'},
+    {role: 'zoom'},
+    {type: 'separator'},
+    {role: 'front'}
+  ]
 }
 
 exports.setMainMenu = () => {
