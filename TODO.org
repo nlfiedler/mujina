@@ -13,13 +13,14 @@
 
 ## Overall
 
-- [TODO] Design a "folders" feature
-  - Add a "folders" field to the database records
+- [TODO] Design an "albums" feature
+  - Add an "albums" field to the database records
   - Store them as a list of strings
-  - Each asset can be in multiple folders
-  - Use multiple selection to quickly assign folders to assets
-  - Show folders with the other filters, selectors
-  - Wifey suggests "project" instead of folders, but folders is more general
+  - Each asset can be in multiple albums
+  - Enable selecting multiple assets to quickly assign albums
+  - Show albums with the other filters, selectors
+  - Wifey suggests "projects" instead of albums, but albums is more general
+    - Photos has both albums and projects
 - [TODO] Consider https://github.com/reactjs/reselect for efficiently selecting things (i.e. paging)
 - [TODO] Consider options for streamlining development process
   - https://github.com/Quramy/electron-connect to reload electron
@@ -67,8 +68,6 @@
 
 - [TODO] Consider some style tricks to show drop readiness
   - Handle the dragenter and dragleave events to add style properties dynamically
-- [TODO] Design shortcuts for entering identical values for multiple dropped files
-  - Maybe select several and type into one field, auto copied to the others, keystroke by keystroke
 - [TODO] Probably need a progress bar for the uploads
 - [TODO] Allow dragging out images (and videos?) as a form of export
   - Likely need a "File > Export" option with Save dialog for larger files
