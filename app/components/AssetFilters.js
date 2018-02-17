@@ -65,7 +65,13 @@ class AssetFilters extends React.Component {
     //       maybe isDisplay, isClearFix, isOverlay, could help?
     //       maybe set max-height: 100% on the Panel and set its overflow-y, not the Container
     return (
-      <Container isFluid isMarginless style={{'height': '100vh', 'overflowY': 'auto'}}>
+      <Container isFluid isMarginless style={{
+        'height': '100vh',
+        'overflowY': 'auto',
+        'position': 'fixed',
+        'top': 0,
+        'left': 0
+      }}>
         <Panel>
           <PanelBlock>
             <Control hasIcons='left'>
