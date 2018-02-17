@@ -4,7 +4,7 @@
 const {assert} = require('chai')
 const {describe, it} = require('mocha')
 const actions = require('../app/actions')
-const configureStore = require('redux-mock-store').default
+const configureStore = require('redux-mock-store')
 const createSagaMiddleware = require('redux-saga').default
 const {rootSaga} = require('../app/sagas')
 
