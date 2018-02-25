@@ -13,7 +13,7 @@ const {AssetEdit} = require('../containers/AssetEdit')
 //       (rotate, flip)
 const AssetEditPage = () => {
   return (
-    <Tile isAncestor style={{margin: 0}}>
+    <Tile isAncestor isMarginLess>
       <Tile isSize={3} isVertical isParent isPaddingless>
         <Tile isChild>
           <AssetDetails />

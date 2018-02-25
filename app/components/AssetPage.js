@@ -16,7 +16,7 @@ const {AssetFilters} = require('./AssetFilters')
 //       (need lots more assets to test with)
 const AssetPage = () => {
   return (
-    <Tile isAncestor style={{margin: 0}}>
+    <Tile isAncestor isMarginLess>
       <Tile isSize={2} isVertical isParent isPaddingless>
         <Tile isChild>
           <AssetFilters />

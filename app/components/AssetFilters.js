@@ -3,6 +3,7 @@
 //
 const React = require('react')
 const {
+  Button,
   Container,
   Control,
   Icon,
@@ -60,14 +61,26 @@ class AssetFilters extends React.Component {
         onClick={this.handleTabClick} />
     ))
     const panelContent = panelContents[this.state.activeTabIndex]
-    // TODO: make the panelContent scroll, not the entire Panel
-    //       (need to force its height to be the same as the container)
-    //       maybe isDisplay, isClearFix, isOverlay, could help?
-    //       maybe set max-height: 100% on the Panel and set its overflow-y, not the Container
+    //
+    // The Container is needed to ensure the components only grow to the
+    // height of the viewport at maximum.
+    //
+    // TODO: make the Panel width fixed so it doesn't change when switching
+    //       to a tab that has wider or narrower menu items
+    // TODO: need to somehow set the height of the panelContent Block
+    //       flex-basis: NNNpx|auto did nothing
+    //       flex-grow: 1,2,10 did nothing
+    // - maybe set min-height: 100vh on the body
+    //   (https://philipwalton.github.io/solved-by-flexbox/demos/sticky-footer/)
+    // - https://codepen.io/stephenbunch/pen/KWBNVo
+    //   - doesn't help
+    // - https://www.bitovi.com/blog/use-flexbox-to-create-a-sticky-header-and-sidebar-with-flexible-content
+    // - https://codepen.io/sulfurious/pen/eWPBjY
+    // - https://codepen.io/anon/pen/doyVxj
+    //
     return (
       <Container isFluid isMarginless style={{
         'height': '100vh',
-        'overflowY': 'auto',
         'position': 'fixed',
         'top': 0,
         'left': 0
@@ -77,15 +90,21 @@ class AssetFilters extends React.Component {
             <Control hasIcons='left'>
               <Input isSize='small' placeholder='Search' />
               <Icon isSize='small' isAlign='left'>
-                <span className='fa fa-search' aria-hidden='true' />
+                <span className='fa fa-search' />
               </Icon>
             </Control>
           </PanelBlock>
           <PanelTabs>
             {filterTabs}
           </PanelTabs>
-          <PanelBlock>
+          <PanelBlock style={{
+            'height': '85vh',
+            'overflowY': 'auto'
+          }}>
             {panelContent}
+          </PanelBlock>
+          <PanelBlock>
+            <Button isLink isOutlined isFullWidth>reset all filters</Button>
           </PanelBlock>
         </Panel>
       </Container>

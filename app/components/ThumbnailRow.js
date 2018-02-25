@@ -39,7 +39,7 @@ const ThumbnailRow = ({assets, onClick}) => {
   // Overflow property does not work on the Table itself.
   return (
     <Container isFluid isMarginless style={{'overflowX': 'auto'}}>
-      <Table isMarginless>
+      <Table style={{margin: 0}}>
         <tbody>
           <tr>
             {items}

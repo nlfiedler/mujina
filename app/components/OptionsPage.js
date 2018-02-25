@@ -9,7 +9,7 @@ const {
 const {OptionsEditor} = require('../containers/OptionsEditor')
 
 const OptionsPage = () => (
-  <Tile isAncestor style={{margin: 0}}>
+  <Tile isAncestor isMarginLess>
     <Tile isSize={12} isVertical isParent>
       <Tile isChild>
         <Title>Options</Title>

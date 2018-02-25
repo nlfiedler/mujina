@@ -23,6 +23,7 @@ const {
 const config = require('../config')
 const {history} = require('../store')
 
+// TODO: use flexbox or fixed position to keep current CardContent on the bottom
 // TODO: the img alt is not working, use a Tooltip from Bulma-Extensions
 //       use multi-line tooltip to include filesize and mimetype
 // TODO: have a tooltip on the edit button

@@ -11,16 +11,14 @@ const {Thumbnails} = require('../containers/Thumbnails')
 // The default padding on the parent tile causes the asset filters to be too
 // large by that same amount, so remove all padding from the left tile.
 const Home = () => (
-  <Tile isAncestor style={{margin: 0}}>
+  <Tile isAncestor isMarginless>
     <Tile isSize={2} isVertical isParent isPaddingless>
       <Tile isChild>
         <AssetFilters />
       </Tile>
     </Tile>
     <Tile isSize={10} isParent>
-      <Tile isChild>
-        <Thumbnails />
-      </Tile>
+      <Thumbnails />
     </Tile>
   </Tile>
 )
