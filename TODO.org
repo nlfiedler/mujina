@@ -4,9 +4,6 @@
 
 ### Course of Action
 
-- [TODO] Improve the scrolling fluidity
-  - Seems like the virtual paging is making the scrolling jittery
-  - Perhaps some react-visibility settings could be employed
 - [TODO] Drag and drop from Photos is not working
 - [TODO] Install/Update Homebrew installation
 - [TODO] Install node, gulp-cli, etc
@@ -15,8 +12,9 @@
 
 ## Overall
 
+- [TODO] Implement the search feature
+  - A general search that checks caption, tags, locations, dates
 - Look at the Flexbox section below and take care of some things
-  - [TODO] Fix ThumbnailRow to use flexbox and not a table
   - [TODO] Fix up the image preview page
   - [TODO] Try to get the asset filters panel to stretch as desired
 - [TODO] show N most recent assets by default
@@ -61,6 +59,9 @@
 
 ### General
 
+- [TODO] Improve the scrolling fluidity
+  - Seems like the virtual paging is making the scrolling jittery
+  - Perhaps some react-visibility settings could be employed
 - [TODO] Maybe a set of Tabs to select between Pictures, Music, Videos, Documents, etc
 - [TODO] Read https://fb.me/react-error-boundaries to learn about error handling
 - [TODO] Add a route and page for viewing a single asset
@@ -71,6 +72,21 @@
 - [TODO] Set the browser window title (in index.html) to something sensible
 - [TODO] Allow editing the attributes on an asset
 - [TODO] When selecting attributes, disable those that no longer help
+
+### Bulma Extensions
+
+- [TODO] use https://wikiki.github.io for bulma extensions
+  - Tooltip, Tags input, Accordion, Carousel, QuickView, Timeline
+- [TODO] making text not selectable, Bloomer has isUnselectable
+- Carousel
+  - Bulma extensions has a Carousel component
+  - Good for swiping through a bunch of assets
+  - Need to make clicking the arrows fire a fetchAsset action
+  - Use this in the ThumbnailRow component
+- Timeline
+  - Use the Bulma-Extensions Timeline component to show assets sorted by date
+- Better tags input
+   - Use Bulma-Extensions TagsInput on the asset edit screen
 
 ### Drop Zone
 
@@ -111,11 +127,6 @@
     + it is okay to nest flexible boxes
   - nice reference: https://cssreference.io/flexbox/
   - https://philipwalton.github.io/solved-by-flexbox/
-
-* Nice horizontal scrolling image viewer
-  - https://codepen.io/argyleink/pen/Eaqec
-  - ensure `flex-wrap: nowrap;` (the default)
-  - should `align-items: center;`
 
 * Image preview
   - Use `justify-content: center;` and `align-items: center;` to center the preview image

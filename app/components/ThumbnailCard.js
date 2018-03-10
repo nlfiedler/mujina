@@ -89,9 +89,7 @@ class ThumbnailCard extends React.Component {
     // TODO: format the date (if it is a Date object) appropriately
     const shortName = _.truncate(this.props.filename, {length: 24})
     return (
-      <VisibilitySensor
-        onChange={this.onVisibilityChange}
-        partialVisibility>
+      <VisibilitySensor onChange={this.onVisibilityChange} partialVisibility>
         <Card style={{'boxShadow': 'none'}}>
           <CardContent>
             {this.getImageComponent()}

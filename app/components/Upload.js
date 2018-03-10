@@ -8,7 +8,7 @@ const {
 const {DroppedFiles} = require('../containers/DroppedFiles')
 
 const Upload = () => (
-  <Tile isAncestor isMarginLess>
+  <Tile isAncestor isMarginless>
     <Tile isSize={12} isVertical isParent>
       <Tile isChild>
         <DroppedFiles />

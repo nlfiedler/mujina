@@ -11,7 +11,7 @@ const {ErrorReporter} = require('../containers/ErrorReporter')
 const {history} = require('../store')
 
 const ErrorPage = () => (
-  <Tile isAncestor isMarginLess>
+  <Tile isAncestor isMarginless>
     <Tile isSize={12} isVertical isParent>
       <Tile isChild>
         <ErrorReporter />
