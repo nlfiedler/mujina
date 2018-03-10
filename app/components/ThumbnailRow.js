@@ -61,8 +61,8 @@ class ThumbnailImage extends React.Component {
     // from somewhere and raising an exception because it only wants one
     // (React.Children.only, invalid prop 'children').
     return React.createElement(VisibilitySensor, {
-      'onChange': this.onVisibilityChange,
-      'partialVisibility': true
+      onChange: this.onVisibilityChange,
+      partialVisibility: true
     }, figure)
   }
 }

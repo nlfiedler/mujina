@@ -3,7 +3,6 @@
 //
 const React = require('react')
 const {
-  Button,
   Container,
   Control,
   Icon,
@@ -14,6 +13,7 @@ const {
   PanelTabs
 } = require('bloomer')
 const {LocationList} = require('../containers/LocationList')
+const {ResetFilters} = require('../containers/ResetFilters')
 const {TagList} = require('../containers/TagList')
 const {YearList} = require('../containers/YearList')
 
@@ -104,7 +104,7 @@ class AssetFilters extends React.Component {
             {panelContent}
           </PanelBlock>
           <PanelBlock>
-            <Button isLink isOutlined isFullWidth>reset all filters</Button>
+            <ResetFilters />
           </PanelBlock>
         </Panel>
       </Container>

@@ -16,7 +16,6 @@
   - A general search that checks caption, tags, locations, dates
 - [TODO] Try to get the asset filters panel to stretch as desired (see flexbox section below)
 - [TODO] show N most recent assets by default
-- [TODO] Add a 'reset all filters' button to the bottom of the asset filters
 - [TODO] Design an "albums" feature
   - Add an "albums" field to the database records
   - Store them as a list of strings

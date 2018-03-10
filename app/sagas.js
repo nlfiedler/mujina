@@ -147,7 +147,8 @@ function * watchSelectorToggles () {
   yield takeLatest([
     actions.TOGGLE_LOCATION,
     actions.TOGGLE_TAG,
-    actions.TOGGLE_YEAR
+    actions.TOGGLE_YEAR,
+    actions.RESET_FILTERS
   ], handleSelection)
 }
 

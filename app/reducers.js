@@ -39,6 +39,8 @@ function tags (
       })
     case actions.TOGGLE_TAG:
       return toggleActive(state, action)
+    case actions.RESET_FILTERS:
+      return resetSelections(state)
     default:
       return state
   }
@@ -77,6 +79,8 @@ function years (
       })
     case actions.TOGGLE_YEAR:
       return toggleActive(state, action)
+    case actions.RESET_FILTERS:
+      return resetSelections(state)
     default:
       return state
   }
@@ -115,6 +119,8 @@ function locations (
       })
     case actions.TOGGLE_LOCATION:
       return toggleActive(state, action)
+    case actions.RESET_FILTERS:
+      return resetSelections(state)
     default:
       return state
   }
@@ -279,6 +285,12 @@ function toggleActive (state, action) {
     items: state.items.map(item =>
       item.label === action.payload ? Object.assign({}, item, {active: !item.active}) : item
     )
+  })
+}
+
+function resetSelections (state) {
+  return Object.assign({}, state, {
+    items: state.items.map(item => Object.assign({}, item, {active: false}))
   })
 }
 

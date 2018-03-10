@@ -100,6 +100,14 @@ exports.toggleLocation = (label) => {
   }
 }
 
+exports.RESET_FILTERS = 'RESET_FILTERS'
+exports.resetFilters = () => {
+  return {
+    type: exports.RESET_FILTERS,
+    payload: null
+  }
+}
+
 exports.GET_ASSETS = 'GET_ASSETS'
 exports.requestAssets = () => {
   return {
