@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2017 Nathan Fiedler
+// Copyright (c) 2018 Nathan Fiedler
 //
 // This file is required by the index.html file and will
 // be executed in the renderer process for that window.
@@ -31,8 +31,6 @@ function attachReact () {
 }
 
 function initDragAndDrop () {
-  const drop = document.getElementById('app')
-
   function cleanUp (ev) {
     // Use DataTransfer interface to remove the drag data; Electron/Chromium
     // says the DataTransferItemList items are read-only, so invoking remove()
@@ -40,18 +38,19 @@ function initDragAndDrop () {
     ev.dataTransfer.clearData()
   }
 
-  drop.addEventListener('dragover', (ev) => {
+  // At some point it became necessary to add the event handlers to the
+  // 'document' rather than an element within the document.
+  document.addEventListener('dragover', (ev) => {
     // prevent default to allow drop
     ev.preventDefault()
     ev.dataTransfer.dropEffect = 'copy'
   }, false)
-  drop.addEventListener('dragend', (ev) => {
+  document.addEventListener('dragend', (ev) => {
     // have not seen this event fired, but just in case
     cleanUp(ev)
   }, false)
 
-  // TODO: dropping a second time seems to not work
-  drop.addEventListener('drop', function (ev) {
+  document.addEventListener('drop', function (ev) {
     // stop the browser from redirecting to the file
     ev.preventDefault()
     // hack a generator as an iterator onto the transfer object

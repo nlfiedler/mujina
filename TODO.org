@@ -4,7 +4,6 @@
 
 ### Course of Action
 
-- [TODO] Drag and drop from Photos is not working
 - [TODO] Install/Update Homebrew installation
 - [TODO] Install node, gulp-cli, etc
 - [TODO] Build mujina on her machine
@@ -14,6 +13,7 @@
 
 - [TODO] Implement the search feature
   - A general search that checks caption, tags, locations, dates
+  - Maybe the search only considers captions among those assets with the given selections (e.g. years, tags)
 - [TODO] Try to get the asset filters panel to stretch as desired (see flexbox section below)
 - [TODO] show N most recent assets by default
 - [TODO] Design an "albums" feature
@@ -45,6 +45,8 @@
 - [TODO] Option on asset screen to rotate an image (some images lack orientation data)
 - [TODO] See https://github.com/Quramy/electron-jsx-babel-boilerplate/
   - uses gulp to minify and uglify everything
+- [TODO] Drag and drop from Photos is not working
+  - No drag events are fired at all, it just does nothing
 
 ## Testing
 
