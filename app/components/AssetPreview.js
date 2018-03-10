@@ -12,7 +12,6 @@ const {
   Content,
   Delete,
   Icon,
-  Image,
   Navbar,
   NavbarBrand,
   NavbarEnd,
@@ -58,7 +57,16 @@ const AssetPreview = ({details}) => {
         </Navbar>
       </CardHeader>
       <CardImage hasTextAlign='centered'>
-        <Image alt={details.checksum} src={previewUrl} />
+        <figure className='image'>
+          <img
+            alt={details.checksum}
+            style={{
+              'display': 'inline',
+              'width': 'auto'
+            }}
+            src={previewUrl}
+          />
+        </figure>
       </CardImage>
       <CardContent>
         <Content>
