@@ -152,8 +152,7 @@ exports.queryAssets = (selections) => {
   const locations = selections.locations.map(item => 'locations[]=' + item.label)
   const tags = selections.tags.map(item => 'tags[]=' + item.label)
   const years = selections.years.map(item => 'years[]=' + item.label)
-  const paging = ['page_size=100']
-  // TODO: will need a param to disable paging on the backend
+  const paging = ['page_size=10000']
   const params = locations.concat(tags).concat(years).concat(paging).join('&')
   return new Promise((resolve, reject) => {
     // TODO: consider if using a form body instead of URL would be better

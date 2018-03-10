@@ -4,7 +4,9 @@
 
 ### Course of Action
 
-- [TODO] Get some form of paging to work for many assets
+- [TODO] Improve the scrolling fluidity
+  - Seems like the virtual paging is making the scrolling jittery
+  - Perhaps some react-visibility settings could be employed
 - [TODO] Drag and drop from Photos is not working
 - [TODO] Install/Update Homebrew installation
 - [TODO] Install node, gulp-cli, etc

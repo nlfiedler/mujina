@@ -12,7 +12,7 @@ const {Thumbnails} = require('../containers/Thumbnails')
 // large by that same amount, so remove all padding from the left tile.
 const Home = () => (
   <Tile isAncestor isMarginless>
-    <Tile isSize={2} isVertical isParent isPaddingless>
+    <Tile isSize={2} isParent isPaddingless>
       <Tile isChild>
         <AssetFilters />
       </Tile>

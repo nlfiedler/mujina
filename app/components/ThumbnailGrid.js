@@ -17,7 +17,8 @@ const ThumbnailGrid = ({assets, onClick}) => {
     <Tile isChild style={{
       'display': 'flex',
       'flexFlow': 'row wrap',
-      'justifyContent': 'space-around'
+      'justifyContent': 'space-around',
+      'alignItems': 'center'
     }}>
       {items}
     </Tile>
