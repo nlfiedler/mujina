@@ -25,7 +25,7 @@ describe('Reducers', () => {
 
     it('handles data fetch errors', (done) => {
       nock('http://localhost:3000')
-        .get('/api/tags')
+        .post('/graphql')
         .reply(500)
       const unsubscribe = store.subscribe(() => {
         const state = store.getState().tags
@@ -43,11 +43,15 @@ describe('Reducers', () => {
 
     it('fetches tags and updates the store', (done) => {
       nock('http://localhost:3000')
-        .get('/api/tags')
-        .reply(200, [
-          {tag: 'pie', count: 4},
-          {tag: 'cake', count: 2}
-        ])
+        .post('/graphql', /query/)
+        .reply(200, {
+          data: {
+            tags: [
+              {value: 'pie', count: 4},
+              {value: 'cake', count: 2}
+            ]
+          }
+        })
       const unsubscribe = store.subscribe(() => {
         const state = store.getState().tags
         // 1. called when fetching
@@ -85,7 +89,7 @@ describe('Reducers', () => {
 
     it('handles data fetch errors', (done) => {
       nock('http://localhost:3000')
-        .get('/api/years')
+        .post('/graphql')
         .reply(500)
       const unsubscribe = store.subscribe(() => {
         const state = store.getState().years
@@ -103,11 +107,15 @@ describe('Reducers', () => {
 
     it('fetches years and updates the store', (done) => {
       nock('http://localhost:3000')
-        .get('/api/years')
-        .reply(200, [
-          {year: 2007, count: 9},
-          {year: 2015, count: 81}
-        ])
+        .post('/graphql', /query/)
+        .reply(200, {
+          data: {
+            years: [
+              {value: 2007, count: 9},
+              {value: 2015, count: 81}
+            ]
+          }
+        })
       const unsubscribe = store.subscribe(() => {
         const state = store.getState().years
         // 1. called when fetching
@@ -145,7 +153,7 @@ describe('Reducers', () => {
 
     it('handles data fetch errors', (done) => {
       nock('http://localhost:3000')
-        .get('/api/locations')
+        .post('/graphql')
         .reply(500)
       const unsubscribe = store.subscribe(() => {
         const state = store.getState().locations
@@ -163,11 +171,15 @@ describe('Reducers', () => {
 
     it('fetches locations and updates the store', (done) => {
       nock('http://localhost:3000')
-        .get('/api/locations')
-        .reply(200, [
-          {location: 'outside', count: 11},
-          {location: 'inside', count: 5}
-        ])
+        .post('/graphql', /query/)
+        .reply(200, {
+          data: {
+            locations: [
+              {value: 'outside', count: 11},
+              {value: 'inside', count: 5}
+            ]
+          }
+        })
       const unsubscribe = store.subscribe(() => {
         const state = store.getState().locations
         // 1. called when fetching
@@ -234,8 +246,8 @@ describe('Reducers', () => {
         .post('/api/assets')
         .reply(200, {status: 'success', id: sum1})
       nock('http://localhost:3000')
-        .put(`/api/assets/${sum1}`)
-        .reply(200, {status: 'success'})
+        .post('/graphql', /query/)
+        .reply(200, {data: {update: {location: 'outside', tags: ['one', 'two']}}})
       const unsubscribe = store.subscribe(() => {
         const state = store.getState().uploads
         // 1. called when uploading
@@ -246,7 +258,7 @@ describe('Reducers', () => {
           assert.equal(state.files[0].path, 'test/fixtures/lorem-ipsum.txt')
           assert.equal(state.files[0].mimetype, 'text/plain')
           assert.equal(state.files[0].location, 'outside')
-          assert.equal(state.files[0].tags, 'one,two')
+          assert.deepEqual(state.files[0].tags, ['one', 'two'])
           assert.equal(state.files[0].checksum, sum1)
           unsubscribe()
           done()
@@ -258,7 +270,7 @@ describe('Reducers', () => {
           path: 'test/fixtures/lorem-ipsum.txt',
           mimetype: 'text/plain',
           location: 'outside',
-          tags: 'one,two'
+          tags: ['one', 'two']
         }
       ]))
     })

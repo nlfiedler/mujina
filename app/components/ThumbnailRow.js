@@ -89,7 +89,7 @@ ThumbnailRow.propTypes = {
     PropTypes.shape({
       checksum: PropTypes.string.isRequired,
       filename: PropTypes.string.isRequired,
-      date: PropTypes.string.isRequired,
+      datetime: PropTypes.instanceOf(Date).isRequired,
       location: PropTypes.string.isRequired
     }).isRequired
   ).isRequired,

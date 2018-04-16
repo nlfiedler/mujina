@@ -24,7 +24,7 @@ function tags (
         isPending: false,
         items: action.payload.map((item) => {
           return {
-            label: item.tag,
+            label: item.value,
             count: item.count,
             active: false
           }
@@ -64,7 +64,7 @@ function years (
         isPending: false,
         items: action.payload.map((item) => {
           return {
-            label: item.year.toString(),
+            label: item.value.toString(),
             count: item.count,
             active: false
           }
@@ -104,7 +104,7 @@ function locations (
         isPending: false,
         items: action.payload.map((item) => {
           return {
-            label: item.location,
+            label: item.value,
             count: item.count,
             active: false
           }
@@ -142,12 +142,11 @@ function assets (
     case actions.GET_ASSETS_FULFILLED:
       return Object.assign({}, state, {
         isPending: false,
-        items: action.payload.assets.map(item => {
+        items: action.payload.results.map(item => {
           return {
-            checksum: item.checksum,
-            filename: item.file_name,
-            // TODO: parse the asset date into a Date object
-            date: item.date,
+            checksum: item.id,
+            filename: item.filename,
+            datetime: new Date(item.datetime),
             location: item.location
           }
         }),
@@ -181,15 +180,14 @@ function details (
       return Object.assign({}, state, {
         isPending: false,
         single: {
-          checksum: action.payload.checksum,
-          filename: action.payload.file_name,
-          filesize: action.payload.file_size,
-          // TODO: parse the asset date/time into a Date object
-          datetime: action.payload.datetime,
+          checksum: action.payload.id,
+          filename: action.payload.filename,
+          filesize: action.payload.filesize,
+          datetime: new Date(action.payload.datetime),
           // avoid having null fields, the React components don't like it
           location: action.payload.location || '',
           mimetype: action.payload.mimetype,
-          userdate: action.payload.user_date,
+          userdate: action.payload.userdate,
           caption: action.payload.caption || '',
           duration: action.payload.duration,
           tags: action.payload.tags
@@ -205,11 +203,15 @@ function details (
     case actions.UPDATE_ASSET:
       return Object.assign({}, state, {
         isPending: true,
-        single: action.payload
+        single: Object.assing({}, action.payload)
       })
     case actions.UPDATE_ASSET_FULFILLED:
       return Object.assign({}, state, {
         isPending: false,
+        single: Object.assign({}, state.single, {
+          // server may have modified the tags during update
+          tags: Array.from(action.payload.tags)
+        }),
         error: null
       })
     case actions.UPDATE_ASSET_REJECTED:
@@ -234,12 +236,12 @@ function uploads (
     case actions.DROP_FILES:
       return Object.assign({}, state, {
         isPending: true,
-        files: action.payload
+        files: action.payload.map(item => Object.assign({}, item))
       })
     case actions.DROP_FILES_FULFILLED:
       return Object.assign({}, state, {
         isPending: false,
-        files: action.payload,
+        files: action.payload.map(item => Object.assign({}, item)),
         error: null
       })
     case actions.DROP_FILES_REJECTED:
@@ -250,12 +252,12 @@ function uploads (
     case actions.UPLOAD_FILES:
       return Object.assign({}, state, {
         isPending: true,
-        files: action.payload
+        files: action.payload.map(item => Object.assign({}, item))
       })
     case actions.UPLOAD_FILES_FULFILLED:
       return Object.assign({}, state, {
         isPending: false,
-        files: action.payload,
+        files: action.payload.map(item => Object.assign({}, item)),
         error: null
       })
     case actions.UPLOAD_FILES_REJECTED:

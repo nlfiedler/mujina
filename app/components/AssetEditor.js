@@ -44,7 +44,9 @@ class AssetEditor extends React.Component {
   }
 
   componentWillMount () {
-    this.populateForm(this.details)
+    this.populateForm(Object.assign({}, this.details, {
+      tags: this.details.tags.join(', ')
+    }))
   }
 
   render () {
@@ -144,10 +146,10 @@ AssetEditor.propTypes = {
     checksum: PropTypes.string.isRequired,
     filename: PropTypes.string.isRequired,
     filesize: PropTypes.number.isRequired,
-    datetime: PropTypes.string.isRequired,
+    datetime: PropTypes.instanceOf(Date).isRequired,
     mimetype: PropTypes.string.isRequired,
     location: PropTypes.string,
-    userdate: PropTypes.string,
+    userdate: PropTypes.instanceOf(Date),
     caption: PropTypes.string,
     duration: PropTypes.string,
     tags: PropTypes.arrayOf(

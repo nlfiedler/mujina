@@ -19,8 +19,12 @@ describe('API', () => {
         {'tag': 'cake', 'count': 1}
       ]
       nock('http://localhost:3000')
-        .get('/api/tags')
-        .reply(200, expected)
+        .post('/graphql', /query/)
+        .reply(200, {
+          data: {
+            tags: expected
+          }
+        })
       const results = await Api.fetchTags()
       assert.deepEqual(results, expected)
     })
@@ -37,8 +41,8 @@ describe('API', () => {
         .post('/api/assets')
         .reply(200, {status: 'success', id: sum1})
       nock('http://localhost:3000')
-        .put(`/api/assets/${sum1}`)
-        .reply(200, {status: 'success'})
+        .post('/graphql', /query/)
+        .reply(200, {data: {update: {tags: ['one', 'two']}}})
       const results = await Api.uploadFiles([
         {
           name: 'lorem-ipsum.txt',
@@ -54,7 +58,7 @@ describe('API', () => {
           path: 'test/fixtures/lorem-ipsum.txt',
           type: 'text/plain',
           location: 'outside',
-          tags: 'one,two',
+          tags: ['one', 'two'],
           checksum: sum1
         }
       ])

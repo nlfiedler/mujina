@@ -26,7 +26,6 @@ const {history} = require('../store')
 // TODO: the img alt is not working, use a Tooltip from Bulma-Extensions
 //       use multi-line tooltip to include filesize and mimetype
 // TODO: have a tooltip on the edit button
-// TODO: once date/time is a Date object, format appropriately
 // TODO: show videos using the video tag
 // TODO: show duration for videos
 const AssetPreview = ({details}) => {
@@ -79,7 +78,7 @@ const AssetPreview = ({details}) => {
           <Icon isSize='small'><span className='fa fa-map-marker' /></Icon>
           {details.location}
           <br />
-          <small>{details.datetime}</small>
+          <small>{details.datetime.toLocaleString()}</small>
         </Content>
       </CardContent>
     </Card>
@@ -107,10 +106,10 @@ AssetPreview.propTypes = {
     checksum: PropTypes.string.isRequired,
     filename: PropTypes.string.isRequired,
     filesize: PropTypes.number.isRequired,
-    datetime: PropTypes.string.isRequired,
+    datetime: PropTypes.instanceOf(Date).isRequired,
     mimetype: PropTypes.string.isRequired,
     location: PropTypes.string,
-    userdate: PropTypes.string,
+    userdate: PropTypes.instanceOf(Date),
     caption: PropTypes.string,
     duration: PropTypes.string,
     tags: PropTypes.arrayOf(

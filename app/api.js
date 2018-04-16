@@ -35,14 +35,22 @@ function maybeError (error, response) {
  */
 function fetchAttributes (key) {
   return new Promise((resolve, reject) => {
-    request.get({
-      url: config.serverUrl({pathname: '/api/' + key})
+    request.post({
+      url: config.serverUrl({pathname: '/graphql'}),
+      json: {
+        query: `query {
+          ${key} {
+            value
+            count
+          }
+        }`
+      }
     }, (err, response, body) => {
       const error = maybeError(err, response)
       if (error) {
         reject(error)
       } else {
-        resolve(JSON.parse(body || '[]'))
+        resolve(body.data[key])
       }
     })
   })
@@ -63,37 +71,35 @@ exports.fetchLocations = () => {
 /**
  * Fetch the details for the asset with the given checksum.
  *
- * Return value shape:
- *
- * [
- *   {
- *     checksum: string
- *     file_name: string
- *     file_size: number
- *     mimetype: string
- *     datetime: string
- *     user_date: (nullable string)
- *     caption: (nullable string)
- *     location: (nullable string)
- *     duration: (nullable number)
- *     tags: (array string)
- *   },
- *   ...
- * ]
- *
  * @param {String} checksum - identifier of asset to be retrieved.
  * @return {Promise<Object>} - resolves to the asset details.
  */
 exports.fetchAsset = (checksum) => {
   return new Promise((resolve, reject) => {
-    request.get({
-      url: config.serverUrl({pathname: '/api/assets/' + checksum})
+    request.post({
+      url: config.serverUrl({pathname: '/graphql'}),
+      json: {
+        query: `query {
+          asset(id: "${checksum}") {
+            id
+            caption
+            datetime
+            duration
+            filename
+            filesize
+            location
+            mimetype
+            tags
+            userdate
+          }
+        }`
+      }
     }, (err, response, body) => {
       const error = maybeError(err, response)
       if (error) {
         reject(error)
       } else {
-        resolve(JSON.parse(body || '[]'))
+        resolve(body.data.asset)
       }
     })
   })
@@ -107,63 +113,74 @@ exports.fetchAsset = (checksum) => {
  * @param {String} details.location - the asset location value.
  * @param {String} details.caption - the asset caption value.
  * @param {String} details.tags - the asset tags value (list of strings).
- * @return {Promise<Object>} - resolves to the server response.
+ * @return {Promise<Object>} - resolves to an updated details object.
  */
 exports.updateAsset = (details) => {
   return new Promise((resolve, reject) => {
-    request.put({
-      url: config.serverUrl({pathname: '/api/assets/' + details.checksum}),
+    request.post({
+      url: config.serverUrl({pathname: '/graphql'}),
       json: {
-        location: details.location,
-        caption: details.caption,
-        tags: details.tags
+        variables: JSON.stringify({
+          input: {
+            caption: details.caption,
+            location: details.location,
+            tags: details.tags
+          }
+        }),
+        operationName: 'Update',
+        // retrieve the tags in case the server modified the input
+        query: `mutation Update($input: AssetInput!) {
+          update(id: "${details.checksum}", asset: $input) {
+            tags
+          }
+        }`
       }
     }, (err, response, body) => {
       const error = maybeError(err, response)
       if (error) {
         reject(error)
       } else {
-        resolve(body)
+        // return the original input merged with the updated values
+        // as the caller may be depending on having a merged result
+        resolve(Object.assign({}, details, body.data.update))
       }
     })
   })
 }
 
 /**
- * Shape of the selections argument:
+ * Search for assets matching the given criteria.
  *
- * {
- *   locations: [{label},...],
- *   tags:  [{label},...],
- *   years: [{label},...]
- * }
- *
- * Return value shape:
- *
- * {
- *   assets: [
- *     {checksum, file_name, date, location},
- *     ...
- *   ]
- *   count: n
- * }
+ * @param {Array} selections.locations - location obects with label property.
+ * @param {Array} selections.tags - tag obects with label property.
+ * @param {Array} selections.years - year obects with label property.
  */
 exports.queryAssets = (selections) => {
-  const locations = selections.locations.map(item => 'locations[]=' + item.label)
-  const tags = selections.tags.map(item => 'tags[]=' + item.label)
-  const years = selections.years.map(item => 'years[]=' + item.label)
-  const paging = ['page_size=10000']
-  const params = locations.concat(tags).concat(years).concat(paging).join('&')
+  const locations = JSON.stringify(selections.locations.map(item => item.label))
+  const tags = JSON.stringify(selections.tags.map(item => item.label))
+  const years = JSON.stringify(selections.years.map(item => Number.parseInt(item.label)))
   return new Promise((resolve, reject) => {
-    // TODO: consider if using a form body instead of URL would be better
-    request.get({
-      url: config.serverUrl({pathname: '/api/assets', search: params})
+    request.post({
+      url: config.serverUrl({pathname: '/graphql'}),
+      json: {
+        query: `query {
+          search(tags: ${tags}, locations: ${locations}, years: ${years}, count: 10000) {
+            results {
+              id
+              datetime
+              filename
+              location
+            }
+            count
+          }
+        }`
+      }
     }, (err, response, body) => {
       const error = maybeError(err, response)
       if (error) {
         reject(error)
       } else {
-        resolve(JSON.parse(body || '[]'))
+        resolve(body.data.search)
       }
     })
   })
@@ -204,6 +221,7 @@ exports.uploadFiles = (files) => {
           }
         }
       }
+      // use multipart/form-data request form
       request.post({
         url: config.serverUrl({pathname: '/api/assets'}),
         formData
@@ -219,24 +237,8 @@ exports.uploadFiles = (files) => {
         }
       })
     }).then((res) =>
-      new Promise((resolve, reject) => {
-        // Now that we have a checksum, update the asset attributes.
-        request.put({
-          url: config.serverUrl({pathname: '/api/assets/' + res.checksum}),
-          json: {
-            location: res.location,
-            caption: res.caption,
-            tags: res.tags
-          }
-        }, (err, response, body) => {
-          const error = maybeError(err, response)
-          if (error) {
-            reject(error)
-          } else {
-            resolve(res)
-          }
-        })
-      })
+      // Now that we have a checksum, update the asset attributes.
+      exports.updateAsset(res)
     )
   ))
 }

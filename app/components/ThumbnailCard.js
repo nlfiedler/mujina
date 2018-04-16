@@ -86,7 +86,6 @@ class ThumbnailCard extends React.Component {
   }
 
   render () {
-    // TODO: format the date (if it is a Date object) appropriately
     const shortName = _.truncate(this.props.filename, {length: 24})
     return (
       <VisibilitySensor onChange={this.onVisibilityChange} partialVisibility>
@@ -98,7 +97,7 @@ class ThumbnailCard extends React.Component {
                 <LevelItem><small>{shortName}</small></LevelItem>
               </LevelLeft>
               <LevelRight>
-                <LevelItem><small>{this.props.date}</small></LevelItem>
+                <LevelItem><small>{this.props.datetime.toLocaleDateString()}</small></LevelItem>
               </LevelRight>
             </Level>
           </CardContent>
@@ -111,7 +110,7 @@ class ThumbnailCard extends React.Component {
 ThumbnailCard.propTypes = {
   checksum: PropTypes.string.isRequired,
   filename: PropTypes.string.isRequired,
-  date: PropTypes.string.isRequired,
+  datetime: PropTypes.instanceOf(Date).isRequired,
   location: PropTypes.string.isRequired
 }
 
