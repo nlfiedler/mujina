@@ -16,7 +16,7 @@ const scriptSrc = [
 const assetSrc = [
   'assets/**/*.css',
   'assets/**/*.html',
-  'assets/fonts/**/*',
+  'assets/webfonts/**/*',
   'assets/images/**/*'
 ]
 

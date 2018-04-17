@@ -2,7 +2,6 @@
 
 ## Overall
 
-- [TODO] upgrade bulma and fontawesome
 - [TODO] Implement the search feature
   - A general search that checks caption, tags, locations, dates
   - Maybe the search only considers captions among those assets with the given selections (e.g. years, tags)
