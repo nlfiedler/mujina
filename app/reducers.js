@@ -203,7 +203,7 @@ function details (
     case actions.UPDATE_ASSET:
       return Object.assign({}, state, {
         isPending: true,
-        single: Object.assing({}, action.payload)
+        single: Object.assign({}, action.payload)
       })
     case actions.UPDATE_ASSET_FULFILLED:
       return Object.assign({}, state, {
