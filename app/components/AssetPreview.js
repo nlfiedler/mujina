@@ -78,6 +78,7 @@ const AssetPreview = ({details}) => {
           <Icon isSize='small'><span className='fa fa-map-marker' /></Icon>
           {details.location}
           <br />
+          <Icon isSize='small'><span className='fa fa-calendar' /></Icon>
           <small>{details.datetime.toLocaleString()}</small>
         </Content>
       </CardContent>

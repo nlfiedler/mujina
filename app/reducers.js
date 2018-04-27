@@ -177,6 +177,9 @@ function details (
         isPending: true
       })
     case actions.FETCH_ASSET_FULFILLED:
+      const userdate = action.payload.userdate ? (
+        new Date(action.payload.userdate)
+      ) : null
       return Object.assign({}, state, {
         isPending: false,
         single: {
@@ -187,10 +190,10 @@ function details (
           // avoid having null fields, the React components don't like it
           location: action.payload.location || '',
           mimetype: action.payload.mimetype,
-          userdate: action.payload.userdate,
           caption: action.payload.caption || '',
           duration: action.payload.duration,
-          tags: action.payload.tags
+          tags: action.payload.tags,
+          userdate
         },
         error: null
       })
@@ -209,6 +212,8 @@ function details (
       return Object.assign({}, state, {
         isPending: false,
         single: Object.assign({}, state.single, {
+          // user may have changed custom date/time
+          datetime: new Date(action.payload.datetime),
           // server may have modified the tags during update
           tags: Array.from(action.payload.tags)
         }),

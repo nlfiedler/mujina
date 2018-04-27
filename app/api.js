@@ -113,9 +113,11 @@ exports.fetchAsset = (checksum) => {
  * @param {String} details.location - the asset location value.
  * @param {String} details.caption - the asset caption value.
  * @param {String} details.tags - the asset tags value (list of strings).
+ * @param {Date} details.userdate - custom date/time, or null to clear.
  * @return {Promise<Object>} - resolves to an updated details object.
  */
 exports.updateAsset = (details) => {
+  const datetime = details.userdate ? details.userdate.getTime() : null
   return new Promise((resolve, reject) => {
     request.post({
       url: config.serverUrl({pathname: '/graphql'}),
@@ -124,13 +126,16 @@ exports.updateAsset = (details) => {
           input: {
             caption: details.caption,
             location: details.location,
-            tags: details.tags
+            tags: details.tags,
+            datetime
           }
         }),
         operationName: 'Update',
         // retrieve the tags in case the server modified the input
+        // retrieve the datetime in case the user set/reset the userdate
         query: `mutation Update($input: AssetInput!) {
           update(id: "${details.checksum}", asset: $input) {
+            datetime
             tags
           }
         }`

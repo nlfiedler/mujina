@@ -26,6 +26,7 @@ const {
 const rrf = require('react-redux-form')
 const config = require('../config')
 const {history} = require('../store')
+const datefmt = require('date-fns/format')
 
 // TODO: have a tooltip on the Save button
 // TODO: use Bulma-Extensions TagsInput for the tags field
@@ -40,12 +41,23 @@ class AssetEditor extends React.Component {
   handleSubmit (details) {
     const updated = Object.assign({}, this.details, details)
     updated.tags = details.tags.split(',').map(t => t.trim())
+    if (details.userdate) {
+      // Parse the ISO 8601 formatted input date, if available.
+      // Because the input type is datetime-local, we use the
+      // local version of Date, and not Date.UTC()
+      updated.userdate = new Date(details.userdate)
+    }
     this.onSubmit(updated)
   }
 
   componentWillMount () {
+    const userdate = this.details.userdate ? (
+      // yes, a date library just so we can format the date, seriously
+      datefmt(this.details.userdate, 'YYYY-MM-DD[T]HH:mm:ss')
+    ) : ''
     this.populateForm(Object.assign({}, this.details, {
-      tags: this.details.tags.join(', ')
+      tags: this.details.tags.join(', '),
+      userdate
     }))
   }
 
@@ -130,6 +142,23 @@ class AssetEditor extends React.Component {
                       placeholder='Comma-separated keywords'
                     />
                     <Icon isSize='small' isAlign='left'><span className='fa fa-tag' /></Icon>
+                  </Control>
+                </Field>
+              </FieldBody>
+            </Field>
+            <Field isHorizontal>
+              <FieldLabel isNormal>Custom Date</FieldLabel>
+              <FieldBody>
+                <Field>
+                  <Control isExpanded hasIcons='left'>
+                    <rrf.Control.input
+                      type='datetime-local'
+                      model='editor.userdate'
+                      id='editor.userdate'
+                      className='input'
+                      placeholder='Optional custom date/time'
+                    />
+                    <Icon isSize='small' isAlign='left'><span className='fa fa-calendar' /></Icon>
                   </Control>
                 </Field>
               </FieldBody>
