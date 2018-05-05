@@ -216,6 +216,17 @@ exports.uploadFiles = (files) => {
   }
 }
 
+exports.UPLOAD_FILES_PROGRESS = 'UPLOAD_FILES_PROGRESS'
+exports.uploadFilesProgress = (count, filename) => {
+  return {
+    type: exports.UPLOAD_FILES_PROGRESS,
+    payload: {
+      count,
+      filename
+    }
+  }
+}
+
 exports.UPLOAD_FILES_FULFILLED = 'UPLOAD_FILES_FULFILLED'
 exports.receiveUploadFiles = (files) => {
   return {

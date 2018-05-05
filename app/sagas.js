@@ -38,9 +38,8 @@ function * fetchLocations (action) {
 
 function * checksumDrops (action) {
   try {
-    // TODO: should process them 1 by 1 and update the state after each one,
-    //       giving the interface a chance to show the uploads
-    //       (will need to fire the page change first)
+    // TODO: have the same 1 by 1 progress screen here as for uploads
+    //       (even though this step is likely very fast)
     const summed = yield call(Api.checksumFiles, action.payload)
     const thumbed = yield call(preview.generateNewThumbnails, summed)
     yield put(actions.receiveDropFiles(thumbed))
@@ -54,7 +53,12 @@ function * checksumDrops (action) {
 
 function * uploadFiles (action) {
   try {
-    const files = yield call(Api.uploadFiles, action.payload)
+    let files = []
+    for (let file of action.payload) {
+      let newfile = yield call(Api.uploadFile, file)
+      files.push(newfile)
+      yield put(actions.uploadFilesProgress(files.length, file.name))
+    }
     yield put(actions.receiveUploadFiles(files))
     // need to update the selectors after uploading new assets
     yield put(actions.requestTags())
@@ -144,6 +148,7 @@ function * watchUploadFiles () {
 
 function * watchSelectorToggles () {
   // TODO: consider a delay with watchSelectorToggles saga to avoid frequent fetching
+  //       see "Debouncing" in "Recipes" on redux-sagas site
   yield takeLatest([
     actions.TOGGLE_LOCATION,
     actions.TOGGLE_TAG,

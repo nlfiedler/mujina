@@ -233,6 +233,7 @@ function uploads (
   state = {
     isPending: false,
     files: [],
+    progress: null,
     error: null
   },
   action
@@ -258,6 +259,11 @@ function uploads (
       return Object.assign({}, state, {
         isPending: true,
         files: action.payload.map(item => Object.assign({}, item))
+      })
+    case actions.UPLOAD_FILES_PROGRESS:
+      return Object.assign({}, state, {
+        // no need to clone this one-off payload hidden inside actions module
+        progress: action.payload
       })
     case actions.UPLOAD_FILES_FULFILLED:
       return Object.assign({}, state, {

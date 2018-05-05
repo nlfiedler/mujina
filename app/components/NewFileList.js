@@ -30,7 +30,9 @@ class NewFileList extends React.Component {
     // The form values are contained in objects within 'drops', keyed by the
     // kagi values, which are properties of the drops object.
     for (const prop in drops) {
-      if (drops.hasOwnProperty(prop)) {
+      // Not all properties of the drops object are keyed inputs;
+      // seems like a $form property is also introduced at some point.
+      if (drops.hasOwnProperty(prop) && filesByKey.has(prop)) {
         Object.assign(filesByKey.get(prop), drops[prop])
       }
     }

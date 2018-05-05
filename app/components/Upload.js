@@ -6,12 +6,16 @@ const {
   Tile
 } = require('bloomer')
 const {DroppedFiles} = require('../containers/DroppedFiles')
+const {UploadingFiles} = require('../containers/UploadingFiles')
 
 const Upload = () => (
   <Tile isAncestor isMarginless>
     <Tile isSize={12} isVertical isParent>
       <Tile isChild>
         <DroppedFiles />
+      </Tile>
+      <Tile isChild>
+        <UploadingFiles />
       </Tile>
     </Tile>
   </Tile>

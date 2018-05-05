@@ -43,7 +43,7 @@ describe('API', () => {
       nock('http://localhost:3000')
         .post('/graphql', /query/)
         .reply(200, {data: {update: {tags: ['one', 'two']}}})
-      const results = await Api.uploadFiles([
+      const result = await Api.uploadFile(
         {
           name: 'lorem-ipsum.txt',
           path: 'test/fixtures/lorem-ipsum.txt',
@@ -51,8 +51,8 @@ describe('API', () => {
           location: 'outside',
           tags: 'one,two'
         }
-      ])
-      assert.deepEqual(results, [
+      )
+      assert.deepEqual(result,
         {
           name: 'lorem-ipsum.txt',
           path: 'test/fixtures/lorem-ipsum.txt',
@@ -61,7 +61,7 @@ describe('API', () => {
           tags: ['one', 'two'],
           checksum: sum1
         }
-      ])
+      )
     })
   })
 })

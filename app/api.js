@@ -210,40 +210,41 @@ exports.checksumFiles = (files) => {
 /**
  * Perform the upload of the assets and their metadata.
  *
- * @param {Array<object>} files list of files objects and metadata
- * @return {Promise} resolving to list of file paths or errors
+ * @param {Object} file files object and metadata
+ * @param {String} file.path path to the asset to be uploaded.
+ * @param {String} file.name name of the file.
+ * @param {String} file.mimetype the mimetype as detected by the browser.
+ * @return {Promise} resolving to updated asset details
  */
-exports.uploadFiles = (files) => {
-  return Promise.all(files.map((file) =>
-    new Promise((resolve, reject) => {
-      // First upload the asset itself and get the checksum.
-      let formData = {
-        asset: {
-          value: fs.createReadStream(file.path),
-          options: {
-            filename: file.name,
-            contentType: file.mimetype
-          }
+exports.uploadFile = (file) => {
+  return new Promise((resolve, reject) => {
+    // First upload the asset itself and get the checksum.
+    let formData = {
+      asset: {
+        value: fs.createReadStream(file.path),
+        options: {
+          filename: file.name,
+          contentType: file.mimetype
         }
       }
-      // use multipart/form-data request form
-      request.post({
-        url: config.serverUrl({pathname: '/api/assets'}),
-        formData
-      }, (err, response, body) => {
-        const error = maybeError(err, response)
-        if (error) {
-          reject(error)
-        } else {
-          const parsedBody = JSON.parse(body)
-          resolve(Object.assign({}, file, {
-            checksum: parsedBody.id
-          }))
-        }
-      })
-    }).then((res) =>
-      // Now that we have a checksum, update the asset attributes.
-      exports.updateAsset(res)
-    )
-  ))
+    }
+    // use multipart/form-data request form
+    request.post({
+      url: config.serverUrl({pathname: '/api/assets'}),
+      formData
+    }, (err, response, body) => {
+      const error = maybeError(err, response)
+      if (error) {
+        reject(error)
+      } else {
+        const parsedBody = JSON.parse(body)
+        resolve(Object.assign({}, file, {
+          checksum: parsedBody.id
+        }))
+      }
+    })
+  }).then((res) =>
+    // Now that we have a checksum, update the asset attributes.
+    exports.updateAsset(res)
+  )
 }

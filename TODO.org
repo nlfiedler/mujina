@@ -2,6 +2,21 @@
 
 ## Overall
 
+- [TODO] Years probably should be listed in descending order
+- [TODO] Design bulk edit solution, probably similar to JIRA
+  - Design a query page that allows searching on several fields
+    - date range
+    - tags
+    - location
+  - Access the bulk edit screen via a menu item
+  - Use a temporary view (http://docs.couchdb.org/en/1.6.1/api/database/temp-views.html)
+  - Perform search, present list of results in a scrollable list
+  - Check off results as desired
+  - Next page allows:
+    - set location
+    - add a tag
+    - remove a tag
+    - rename a tag
 - [TODO] Implement the search feature
   - A general search that checks caption, tags, locations, dates
   - Maybe the search only considers captions among those assets with the given selections (e.g. years, tags)
@@ -11,15 +26,6 @@
 - [TODO] Try to get the asset filters panel to stretch as desired (see flexbox section below)
 - [TODO] show N most recent assets by default
 - [TODO] What does supporting emoji codes (in captions/comments) entail?
-- [TODO] Design bulk edit solution, probably similar to JIRA
-  - Access via a menu item
-  - Perform search, get list of results
-  - Check off results as desired
-  - Next page allows:
-    - set location
-    - add a tag
-    - remove a tag
-    - rename a tag
 - [TODO] Begin designing for "families" (see below)
 - [TODO] Design an "albums" feature
   - Add an "albums" field to the database records
@@ -42,11 +48,6 @@
 - [TODO] Find out how to handle unresponsive windows
 - [TODO] Start filing issues to track progress, with milestones
 - [TODO] Support browsing by year and month (likely without paging)
-- [TODO] Bulk edit feature
-  - Design a query page that allows searching on several fields (tags, date, location)
-  - Use a temporary view (http://docs.couchdb.org/en/1.6.1/api/database/temp-views.html)
-  - Multi-select the displayed results
-  - Present a form for changing one or more fields of the selected assets
 - [TODO] Option on asset screen to rotate an image (some images lack orientation data)
 - [TODO] See https://github.com/Quramy/electron-jsx-babel-boilerplate/
   - uses gulp to minify and uglify everything
@@ -96,7 +97,6 @@
 
 - [TODO] Consider some style tricks to show drop readiness
   - Handle the dragenter and dragleave events to add style properties dynamically
-- [TODO] Probably need a progress bar for the uploads
 - [TODO] Allow dragging out images (and videos?) as a form of export
   - Likely need a "File > Export" option with Save dialog for larger files
 
