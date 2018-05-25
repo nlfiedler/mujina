@@ -2,21 +2,37 @@
 
 ## Overall
 
+- [TODO] Change the asset filters to use the same tag styles as the web ui
 - [TODO] Years probably should be listed in descending order
+- [TODO] Years should only allow one selection at a time
+- [TODO] Detect duplicate assets on drop
+  - At start of checksumDrops(), push to /upload route
+  - As assets are processed 1-by-1, /upload page will show dropped files
+  - After checksumming assets, query backend to check for duplicates
+  - Flag duplicate assets and disable input on dropped files page
+  - Show asset details: tags, location, caption
+  - Help text below caption input should indicate its duplicateness
+  - Mark the asset so it does not get uploaded
+- [TODO] menu item for going to the upload screen
+  - add a button on the upload screen to select additional files
+- [TODO] Add a search bar across the top of most screens
+  - support the fancy queries, like "tag:", "loc:", "before:2017-05", etc
+  - multiple tags requires a "tag:" for each one
+  - "is:image" and similar would be converted to "mimetype:image/*"
 - [TODO] Design bulk edit solution, probably similar to JIRA
-  - Design a query page that allows searching on several fields
-    - date range
-    - tags
-    - location
   - Access the bulk edit screen via a menu item
-  - Use a temporary view (http://docs.couchdb.org/en/1.6.1/api/database/temp-views.html)
+  - Use same search form as webui
   - Perform search, present list of results in a scrollable list
   - Check off results as desired
   - Next page allows:
-    - set location
+    - add location
+    - remove location
+    - rename location
     - add a tag
     - remove a tag
     - rename a tag
+    - set caption
+    - change media type
 - [TODO] Implement the search feature
   - A general search that checks caption, tags, locations, dates
   - Maybe the search only considers captions among those assets with the given selections (e.g. years, tags)
@@ -113,6 +129,8 @@
 
 ## App/Daemon combo
 
+- [TODO] Upon first time startup, configure the backend and start it
+- [TODO] On macOS, store everything under "~/Pictures/Tanuki Photos"
 - [TODO] Change backend to support 'upload' in which asset is already in position
 - [TODO] Consider how to make app/backend combination more efficient
   - That is, if both are on the same machine, access assets directly
@@ -122,19 +140,21 @@
 
 ## Flexbox
 
-* More about Flexbox
-  - https://www.w3schools.com/cSS/css3_flexbox.asp
-  - https://internetingishard.com/html-and-css/flexbox/
-  - https://css-tricks.com/snippets/css/a-guide-to-flexbox/
-  - https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Flexible_Box_Layout/Basic_Concepts_of_Flexbox
-  - https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Flexbox
-    + it is okay to nest flexible boxes
-  - nice reference: https://cssreference.io/flexbox/
-  - https://philipwalton.github.io/solved-by-flexbox/
+### More about Flexbox
 
-* Flexbox and scrollable content and height fill
-  - https://codepen.io/stephenbunch/pen/KWBNVo
-    + doesn't help
-  - https://www.bitovi.com/blog/use-flexbox-to-create-a-sticky-header-and-sidebar-with-flexible-content
-  - https://codepen.io/sulfurious/pen/eWPBjY
-  - https://codepen.io/anon/pen/doyVxj
+- https://www.w3schools.com/cSS/css3_flexbox.asp
+- https://internetingishard.com/html-and-css/flexbox/
+- https://css-tricks.com/snippets/css/a-guide-to-flexbox/
+- https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Flexible_Box_Layout/Basic_Concepts_of_Flexbox
+- https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Flexbox
+  + it is okay to nest flexible boxes
+- nice reference: https://cssreference.io/flexbox/
+- https://philipwalton.github.io/solved-by-flexbox/
+
+### Flexbox and scrollable content and height fill
+
+- https://codepen.io/stephenbunch/pen/KWBNVo
+  + doesn't help
+- https://www.bitovi.com/blog/use-flexbox-to-create-a-sticky-header-and-sidebar-with-flexible-content
+- https://codepen.io/sulfurious/pen/eWPBjY
+- https://codepen.io/anon/pen/doyVxj
