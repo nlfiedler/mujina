@@ -55,10 +55,14 @@ function * uploadFiles (action) {
   try {
     let files = []
     for (let file of action.payload) {
+      // fire the progress first to show that something is happening
+      // during the time the file is uploading
+      yield put(actions.uploadFilesProgress(files.length, file.name))
       let newfile = yield call(Api.uploadFile, file)
       files.push(newfile)
-      yield put(actions.uploadFilesProgress(files.length, file.name))
     }
+    // fire one last time now that everything is uploaded
+    yield put(actions.uploadFilesProgress(files.length, ''))
     yield put(actions.receiveUploadFiles(files))
     // need to update the selectors after uploading new assets
     yield put(actions.requestTags())

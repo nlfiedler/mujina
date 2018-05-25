@@ -242,7 +242,9 @@ function uploads (
     case actions.DROP_FILES:
       return Object.assign({}, state, {
         isPending: true,
-        files: action.payload.map(item => Object.assign({}, item))
+        files: action.payload.map(item => Object.assign({}, item)),
+        // wipe out the previous upload progress
+        progress: null
       })
     case actions.DROP_FILES_FULFILLED:
       return Object.assign({}, state, {

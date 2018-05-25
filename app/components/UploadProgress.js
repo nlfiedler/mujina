@@ -11,11 +11,13 @@ const {
 
 const UploadProgress = ({progress, total}) => (
   <Columns isCentered>
-    <Column isSize='1/3'>
-      {progress.filename}
-    </Column>
-    { progress.count > 0 && (
-      <Column>
+    { progress.filename && (
+      <Column isSize='1/4'>
+        Uploading {progress.filename}...
+      </Column>
+    ) }
+    { progress.count >= 0 && (
+      <Column isSize='1/2'>
         <Progress isColor='info' value={progress.count} max={total} />
       </Column>
     ) }

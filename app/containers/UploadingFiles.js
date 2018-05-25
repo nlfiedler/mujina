@@ -6,7 +6,7 @@ const {UploadProgress} = require('../components/UploadProgress')
 
 const mapStateToProps = state => {
   const total = state.uploads.files ? state.uploads.files.length : 0
-  const progress = state.uploads.progress || {count: 0, filename: ''}
+  const progress = state.uploads.progress || {count: -1, filename: ''}
   return {
     progress,
     total
