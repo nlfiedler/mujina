@@ -111,7 +111,7 @@ ThumbnailCard.propTypes = {
   checksum: PropTypes.string.isRequired,
   filename: PropTypes.string.isRequired,
   datetime: PropTypes.instanceOf(Date).isRequired,
-  location: PropTypes.string.isRequired
+  location: PropTypes.string
 }
 
 module.exports = {

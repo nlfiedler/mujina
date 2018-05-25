@@ -34,7 +34,7 @@ const NewFile = ({kagi, name, path, size, mimetype, image}) => {
                 model={`drops[${kagi}].caption`}
                 id={`drops[${kagi}].caption`}
                 className='input'
-                placeholder='Description with optional #tags and a @location'
+                placeholder='Caption with #tags and @location or @"some location"'
               />
               <Icon isSize='small' isAlign='left'><span className='fa fa-quote-left' /></Icon>
               <Icon isSize='small' isAlign='right'><span className='fa fa-quote-right' /></Icon>
@@ -59,28 +59,3 @@ NewFile.propTypes = {
 module.exports = {
   NewFile
 }
-
-//
-// old tags/location field combo
-//
-// <Field isGrouped>
-//   <Control isExpanded hasIcons='left'>
-//     <rrf.Control.text
-//       model={`drops[${kagi}].tags`}
-//       id={`drops[${kagi}].tags`}
-//       className='input'
-//       placeholder='Tags'
-//     />
-//     <Icon isSize='small' isAlign='left'><span className='fa fa-hashtag' /></Icon>
-//     <p className='help'>Enter comma-separated labels</p>
-//   </Control>
-//   <Control hasIcons='left'>
-//     <rrf.Control.text
-//       model={`drops[${kagi}].location`}
-//       id={`drops[${kagi}].location`}
-//       className='input'
-//       placeholder='Location'
-//     />
-//     <Icon isSize='small' isAlign='left'><span className='fa fa-map-marker' /></Icon>
-//   </Control>
-// </Field>

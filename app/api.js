@@ -161,15 +161,30 @@ exports.updateAsset = (details) => {
  * @param {Array} selections.years - year obects with label property.
  */
 exports.queryAssets = (selections) => {
-  const locations = JSON.stringify(selections.locations.map(item => item.label))
-  const tags = JSON.stringify(selections.tags.map(item => item.label))
-  const years = JSON.stringify(selections.years.map(item => Number.parseInt(item.label)))
+  const locations = selections.locations.map(item => item.label)
+  const tags = selections.tags.map(item => item.label)
+  const years = selections.years.map(item => Number.parseInt(item.label))
+  let afterTime = null
+  let beforeTime = null
+  if (years.length > 0) {
+    afterTime = new Date(years[0], 0).getTime()
+    beforeTime = new Date(years[0] + 1, 0).getTime()
+  }
   return new Promise((resolve, reject) => {
     request.post({
       url: config.serverUrl({pathname: '/graphql'}),
       json: {
-        query: `query {
-          search(tags: ${tags}, locations: ${locations}, years: ${years}, count: 10000) {
+        variables: JSON.stringify({
+          params: {
+            locations: locations,
+            tags: tags,
+            after: afterTime,
+            before: beforeTime
+          }
+        }),
+        operationName: 'Search',
+        query: `query Search($params: SearchParams!) {
+          search(params: $params, count: 10000) {
             results {
               id
               datetime
