@@ -1,10 +1,9 @@
 //
-// Copyright (c) 2017 Nathan Fiedler
+// Copyright (c) 2018 Nathan Fiedler
 //
 const React = require('react')
 const PropTypes = require('prop-types')
 const {Attribute} = require('./Attribute')
-const {MenuList} = require('bloomer')
 
 // TODO: change to show the top 10 by count
 //       maybe use a Dropdown for the rest (or accordion)
@@ -13,7 +12,7 @@ const {MenuList} = require('bloomer')
 //       - Bulma-Extensions has an Accordion component
 //       - how would this affect the scrolling?
 
-const AttributeList = ({attributes, onAttrClick, iconName}) => {
+const AttributeList = ({attributes, onAttrClick}) => {
   let inner = null
   if (attributes.isPending) {
     inner = 'loading...'
@@ -27,18 +26,22 @@ const AttributeList = ({attributes, onAttrClick, iconName}) => {
     inner = '(none)'
   } else {
     inner = attributes.items.map((attr) => (
-      <Attribute key={attr.label} onClick={onAttrClick} {...attr} iconName={iconName} />
+      <Attribute key={attr.label} onClick={onAttrClick} {...attr} />
     ))
   }
-  // The MenuList needs a height of 100% or some elements (at the top) will get
+  // The div needs a height of 100% or some elements (at the top) will get
   // cut off and the scrolling never reveals them.
+  //
+  // Use block formatting instead of flex, otherwise the elements spread out
+  // vertically and there is seemingly no flex way to fix that.
   return (
-    <MenuList style={{
-      'width': '100%',
+    <div className='tags' style={{
+      'display': 'block',
+      'width': '11em',
       'height': '100%'
     }}>
       {inner}
-    </MenuList>
+    </div>
   )
 }
 

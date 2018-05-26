@@ -7,8 +7,7 @@ const {AttributeList} = require('../components/AttributeList')
 
 const mapStateToProps = state => {
   return {
-    attributes: state.locations,
-    iconName: 'fa fa-map-marker'
+    attributes: state.locations
   }
 }
 

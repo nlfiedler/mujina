@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2017 Nathan Fiedler
+// Copyright (c) 2018 Nathan Fiedler
 //
 const {combineReducers} = require('redux')
 const actions = require('./actions')
@@ -78,7 +78,7 @@ function years (
         error: action.payload
       })
     case actions.TOGGLE_YEAR:
-      return toggleActive(state, action)
+      return toggleActive(state, action, true)
     case actions.RESET_FILTERS:
       return resetSelections(state)
     default:
@@ -295,11 +295,25 @@ function errors (
   }
 }
 
-function toggleActive (state, action) {
+/**
+ * Flip the active flag on the item whose label matches the action payload.
+ *
+ * @param {Object} state - current sub-state to operate on (tags, years, etc).
+ * @param {Object} action - the action being performed (e.g. TOGGLE_TAG).
+ * @param {bool} exclusive - if true, maintains at most one selection.
+ * @return {Object} copy of state with changes applied.
+ */
+function toggleActive (state, action, exclusive = false) {
   return Object.assign({}, state, {
-    items: state.items.map(item =>
-      item.label === action.payload ? Object.assign({}, item, {active: !item.active}) : item
-    )
+    items: state.items.map(item => {
+      if (item.label === action.payload) {
+        return Object.assign({}, item, {active: !item.active})
+      } else if (exclusive && item.active) {
+        return Object.assign({}, item, {active: false})
+      } else {
+        return item
+      }
+    })
   })
 }
 

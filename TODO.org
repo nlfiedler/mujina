@@ -2,9 +2,6 @@
 
 ## Overall
 
-- [TODO] Change the asset filters to use the same tag styles as the web ui
-- [TODO] Years probably should be listed in descending order
-- [TODO] Years should only allow one selection at a time
 - [TODO] Detect duplicate assets on drop
   - At start of checksumDrops(), push to /upload route
   - As assets are processed 1-by-1, /upload page will show dropped files
@@ -33,48 +30,20 @@
     - rename a tag
     - set caption
     - change media type
-- [TODO] Implement the search feature
-  - A general search that checks caption, tags, locations, dates
-  - Maybe the search only considers captions among those assets with the given selections (e.g. years, tags)
-  - Consider how to make search efficient; i.e. reverse index
-    - Include captions and comments
-- [TODO] use [Lua](https://fengari.io) for scripting support
+- [TODO] Move TODO comments in the code to the Milestones.org file
+- [TODO] Convert this file to a proper emacs org-mode file
 - [TODO] Try to get the asset filters panel to stretch as desired (see flexbox section below)
-- [TODO] show N most recent assets by default
+  - may appear to be working, but resize the window to be sure
+- [TODO] show N most recent assets by default (timeline style)
 - [TODO] What does supporting emoji codes (in captions/comments) entail?
-- [TODO] Begin designing for "families" (see below)
-- [TODO] Design an "albums" feature
-  - Add an "albums" field to the database records
-  - Store them as a list of strings
-  - Each asset can be in multiple albums
-  - Enable selecting multiple assets to quickly assign albums
-  - Show albums with the other filters, selectors
-  - Wifey suggests "projects" instead of albums, but albums is more general
-    - Photos has both albums and projects
-- [TODO] Consider https://github.com/reactjs/reselect for efficiently selecting things (i.e. paging)
-- [TODO] Consider options for streamlining development process
-  - https://github.com/Quramy/electron-connect to reload electron
 - [TODO] Investigate how to localize the app
   - https://www.npmjs.com/package/oftn-l10n
   - https://developer.mozilla.org/en-US/docs/Mozilla/Localization/Localization_content_best_practices
-- [TODO] Consider storing assets in timestamped directories with original file names
-  - How to deal with name collisions? Would that even happen?
-  - If assets are uploaded individually, do they each go in a separate directory?
-  - Would need an in-memory mapping of SHA256 to asset file path to avoid DB query
 - [TODO] Find out how to handle unresponsive windows
-- [TODO] Start filing issues to track progress, with milestones
-- [TODO] Support browsing by year and month (likely without paging)
-- [TODO] Option on asset screen to rotate an image (some images lack orientation data)
 - [TODO] See https://github.com/Quramy/electron-jsx-babel-boilerplate/
   - uses gulp to minify and uglify everything
 - [TODO] Drag and drop from Photos is not working
   - No drag events are fired at all, it just does nothing
-
-## Testing
-
-- [TODO] Look into automated testing frameworks for Electron apps
-- [TODO] See http://airbnb.io/enzyme/ for writing React tests
-- [TODO] Read https://reacttraining.com/react-router/web/guides/testing
 
 ## Interface
 
@@ -85,13 +54,11 @@
   - Perhaps some react-visibility settings could be employed
 - [TODO] Maybe a set of Tabs to select between Pictures, Music, Videos, Documents, etc
 - [TODO] Read https://fb.me/react-error-boundaries to learn about error handling
-- [TODO] Add a route and page for viewing a single asset
 - [TODO] Add menu item to open file selector to import new assets
 - [TODO] Use bulma Level to make a toolbar sort of thing at the top/bottom
 - [TODO] Consider setting the application menu appropriately for macOS and win32
 - [TODO] Create a "New Window" menu item that invokes createWindow()
 - [TODO] Set the browser window title (in index.html) to something sensible
-- [TODO] Allow editing the attributes on an asset
 - [TODO] When selecting attributes, disable those that no longer help
 
 ### Bulma Extensions
@@ -115,28 +82,6 @@
   - Handle the dragenter and dragleave events to add style properties dynamically
 - [TODO] Allow dragging out images (and videos?) as a form of export
   - Likely need a "File > Export" option with Save dialog for larger files
-
-## Easy Browsing/Slideshow via web
-
-- To compete with Apple Photos and the Apple TV photo browsing feature
-  - Make it easy to peruse the assets organized as "memories"
-  - Make a slideshow feature in the web interface
-
-## Research
-
-- [TODO] What does macOS Photos offer? Should at least be better than that
-- [TODO] What does Windows 10 photos app offer? Should at least be better than that
-
-## App/Daemon combo
-
-- [TODO] Upon first time startup, configure the backend and start it
-- [TODO] On macOS, store everything under "~/Pictures/Tanuki Photos"
-- [TODO] Change backend to support 'upload' in which asset is already in position
-- [TODO] Consider how to make app/backend combination more efficient
-  - That is, if both are on the same machine, access assets directly
-    - Can generate thumbnails and previews in the app vs backend
-  - And, "upload" assets by storing them directly to the destination
-  - Otherwise, must upload via HTTP
 
 ## Flexbox
 

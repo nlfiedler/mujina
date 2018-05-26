@@ -1,27 +1,24 @@
 //
-// Copyright (c) 2017 Nathan Fiedler
+// Copyright (c) 2018 Nathan Fiedler
 //
 const React = require('react')
 const PropTypes = require('prop-types')
 const {
-  Icon,
-  MenuLink
+  Tag
 } = require('bloomer')
 
-const Attribute = ({onClick, label, active, iconName}) => {
+const Attribute = ({onClick, label, active}) => {
+  const color = active ? 'dark' : 'light'
   return (
-    <li>
-      <MenuLink
-        isActive={active}
-        onClick={e => {
-          e.preventDefault()
-          onClick(label)
-        }}
-      >
-        <Icon isSize='small' className={iconName} />
-        {label}
-      </MenuLink>
-    </li>
+    <Tag tag='a'
+      isColor={color}
+      onClick={e => {
+        e.preventDefault()
+        onClick(label)
+      }}
+    >
+      {label}
+    </Tag>
   )
 }
 

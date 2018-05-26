@@ -7,8 +7,7 @@ const {AttributeList} = require('../components/AttributeList')
 
 const mapStateToProps = state => {
   return {
-    attributes: state.tags,
-    iconName: 'fa fa-tag'
+    attributes: state.tags
   }
 }
 
