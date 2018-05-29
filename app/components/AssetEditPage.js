@@ -9,8 +9,6 @@ const {
 const {AssetDetails} = require('../containers/AssetDetails')
 const {AssetEdit} = require('../containers/AssetEdit')
 
-// TODO: controls for various image editing operations
-//       (rotate, flip)
 const AssetEditPage = () => {
   return (
     <Tile isAncestor isMarginless>

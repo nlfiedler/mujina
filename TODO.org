@@ -34,7 +34,12 @@
   - [ ] set caption
   - [ ] change media type
 
-*** TODO Move TODO comments in the code to this file
+*** TODO Support videos better [0/1]
+- [ ] Show videos using the video tag
+- [ ] Show duration for videos
+- [ ] Use video tag for thumbnail view
+- [ ] Show 5 or so frames from the video on hover
+- [ ] Show placeholder icons for videos that fail to load
 
 ** Investigate
 
@@ -56,12 +61,23 @@
 **** TODO Try to get the asset filters panel to stretch as desired
 - See flexbox section below
 - May appear to be working, but resize the window to be sure
+- Need to somehow set the height of the panelContent Block
+- Maybe set min-height: 100vh on the body
+   (https://philipwalton.github.io/solved-by-flexbox/demos/sticky-footer/)
+- https://codepen.io/stephenbunch/pen/KWBNVo
+  - doesn't help
+- https://www.bitovi.com/blog/use-flexbox-to-create-a-sticky-header-and-sidebar-with-flexible-content
+- https://codepen.io/sulfurious/pen/eWPBjY
+- https://codepen.io/anon/pen/doyVxj
+
+**** TODO Try to center the thumbnail vertically on the dropped files page
 
 **** TODO Improve the scrolling fluidity
 - Seems like the virtual paging is making the scrolling jittery
 - Perhaps some react-visibility settings could be employed
 
 *** Refinements
+**** TODO Add a trash/delete icon next to dropped file to remove individual files
 **** TODO Show N most recent assets by default (timeline style)
 **** TODO Use bulma Level to make a toolbar sort of thing at the top/bottom
 **** TODO Consider setting the application menu appropriately for macOS and win32
@@ -74,6 +90,12 @@
 *** Bulma Extensions
 **** TODO use https://wikiki.github.io for bulma extensions
 - Tooltip, Tags input, Accordion, Carousel, QuickView, Timeline
+
+**** TODO employ tooltip feature for the following [0/4]
+- [ ] Edit button on the asset preview page
+- [ ] Save button on asset edit page
+- [ ] Asset preview image, show the asset ID, file size, media type
+- [ ] Show full asset identifier as tooltip on asset sidebar
 
 **** TODO For making text not selectable, Bloomer has isUnselectable
 

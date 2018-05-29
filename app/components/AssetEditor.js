@@ -28,8 +28,6 @@ const config = require('../config')
 const {history} = require('../store')
 const datefmt = require('date-fns/format')
 
-// TODO: have a tooltip on the Save button
-// TODO: use Bulma-Extensions TagsInput for the tags field
 class AssetEditor extends React.Component {
   constructor (props) {
     super(props)

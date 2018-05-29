@@ -6,7 +6,6 @@ const {afterEach, describe, it} = require('mocha')
 const nock = require('nock')
 const Api = require('../app/api')
 
-// TODO: write a test for api.updateAsset()
 describe('API', () => {
   describe('Attributes', () => {
     afterEach(() => {

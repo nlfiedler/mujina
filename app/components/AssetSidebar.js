@@ -29,7 +29,6 @@ const AssetSidebar = ({details}) => {
     <dd style={dataStyle}>{content}</dd>
   )
 
-  // TODO: add a tooltip to the checksum to show the entire value
   return (
     <Box style={boxStyle}>
       <dl>

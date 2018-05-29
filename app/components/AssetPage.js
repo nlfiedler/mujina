@@ -10,10 +10,6 @@ const {Asset} = require('../containers/Asset')
 const {AssetSelector} = require('../containers/AssetSelector')
 const {AssetFilters} = require('./AssetFilters')
 
-// TODO: see if there's a way to keep the selector tile a certain size
-//       (when preview image is smaller, Asset component shifts down)
-// TODO: ensure the right tile remains at the top of the window (does not scroll away)
-//       (need lots more assets to test with)
 const AssetPage = () => {
   return (
     <Tile isAncestor isMarginless>

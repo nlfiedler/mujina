@@ -12,8 +12,6 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    // TODO: clicking should open the raw asset in a browser?
-    //       or another window, with controls for saving the file locally, etc
     // onClick: asset => {
     //   dispatch(push('/asset/' + asset.id))
     // }

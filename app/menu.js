@@ -25,7 +25,6 @@ const template = [
   {
     label: 'View',
     submenu: [
-      // TODO: reload and devtools should only be visible in dev mode
       {role: 'reload'},
       {role: 'forcereload'},
       {role: 'toggledevtools'},
@@ -62,7 +61,6 @@ if (process.platform === 'darwin') {
       {role: 'about'},
       {type: 'separator'},
       {
-        // TODO: use "Settings" for windows, and an appropriate shortcut
         label: 'Preferences',
         click: showPreferences,
         accelerator: 'CmdOrCtrl+,'

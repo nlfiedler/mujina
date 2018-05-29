@@ -22,12 +22,6 @@ const {
 const config = require('../config')
 const {history} = require('../store')
 
-// TODO: use flexbox or fixed position to keep current CardContent on the bottom
-// TODO: the img alt is not working, use a Tooltip from Bulma-Extensions
-//       use multi-line tooltip to include filesize and mimetype
-// TODO: have a tooltip on the edit button
-// TODO: show videos using the video tag
-// TODO: show duration for videos
 const AssetPreview = ({details}) => {
   const previewUrl = config.serverUrl({pathname: '/preview/' + details.checksum})
   return (

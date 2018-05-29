@@ -12,7 +12,6 @@ const ThumbnailGrid = ({assets, onClick}) => {
   const items = assets.map(asset => (
     <ThumbnailCard key={asset.checksum} onClick={onClick} {...asset} />
   ))
-  // TODO: if no items, show a message "No matching assets..."
   return (
     <Tile isChild style={{
       'display': 'flex',

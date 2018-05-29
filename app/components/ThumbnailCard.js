@@ -45,10 +45,6 @@ class ThumbnailCard extends React.Component {
 
   getImageComponent () {
     const {checksum, filename, onClick} = this.props
-    // TODO: show video thumbnails using video HTML tag so they can play directly
-    // TODO: show selected frames from videos on hover
-    // TODO: show placeholder icons for thumbnails that fail to load (use 'onerror' handler)
-
     // Use figure/img rather than Image for greater style control. In
     // particular, set the width to 'auto' to prevent stretching.
 

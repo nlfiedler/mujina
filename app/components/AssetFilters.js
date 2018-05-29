@@ -65,19 +65,6 @@ class AssetFilters extends React.Component {
     // The Container is needed to ensure the components only grow to the
     // height of the viewport at maximum.
     //
-    // TODO: make the Panel width fixed so it doesn't change when switching
-    //       to a tab that has wider or narrower menu items
-    // TODO: need to somehow set the height of the panelContent Block
-    //       flex-basis: NNNpx|auto did nothing
-    //       flex-grow: 1,2,10 did nothing
-    // - maybe set min-height: 100vh on the body
-    //   (https://philipwalton.github.io/solved-by-flexbox/demos/sticky-footer/)
-    // - https://codepen.io/stephenbunch/pen/KWBNVo
-    //   - doesn't help
-    // - https://www.bitovi.com/blog/use-flexbox-to-create-a-sticky-header-and-sidebar-with-flexible-content
-    // - https://codepen.io/sulfurious/pen/eWPBjY
-    // - https://codepen.io/anon/pen/doyVxj
-    //
     return (
       <Container isFluid isMarginless style={{
         'height': '100vh',

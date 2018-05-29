@@ -11,9 +11,6 @@ const config = require('../config')
 
 const imagePlaceholder = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'
 
-// TODO: maybe add a ":hover" style to the thumbnails, like with buttons
-// TODO: show placeholders for images that fail to load (use 'onerror' handler)
-// TODO: if no assets, show a message "No matching assets..."
 class ThumbnailImage extends React.Component {
   constructor (props) {
     super(props)
