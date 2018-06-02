@@ -34,7 +34,7 @@ describe('API', () => {
       nock.cleanAll()
     })
 
-    it('uploads a file and receives an asset checksum', async function () {
+    it('uploads a file and receives an asset identifier', async function () {
       const sum1 = '095964d07f3e821659d4eb27ed9e20cd5160c53385562df727e98eb815bb371f'
       nock('http://localhost:3000')
         .post('/api/assets')
@@ -58,7 +58,7 @@ describe('API', () => {
           type: 'text/plain',
           location: 'outside',
           tags: ['one', 'two'],
-          checksum: sum1
+          identifier: sum1
         }
       )
     })

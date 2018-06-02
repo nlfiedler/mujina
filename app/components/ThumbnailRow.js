@@ -14,6 +14,8 @@ const imagePlaceholder = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEA
 class ThumbnailImage extends React.Component {
   constructor (props) {
     super(props)
+    // Do _not_ stash props on this, otherwise react/redux has no way of
+    // knowing if the changing props have any effect on this component.
     this.onVisibilityChange = this.onVisibilityChange.bind(this)
     this.state = {visible: false}
   }
@@ -26,12 +28,12 @@ class ThumbnailImage extends React.Component {
   }
 
   getImageComponent () {
-    const {checksum, onClick} = this.props
+    const {identifier, onClick} = this.props
     return this.state.visible ? (
       <img
         style={{'objectFit': 'cover', 'height': '96px', 'width': '96px'}}
-        src={config.serverUrl({pathname: '/thumbnail/' + checksum})}
-        onClick={() => onClick(checksum)}
+        src={config.serverUrl({pathname: '/thumbnail/' + identifier})}
+        onClick={() => onClick(identifier)}
       />
     ) : (
       <img
@@ -66,7 +68,7 @@ class ThumbnailImage extends React.Component {
 
 const ThumbnailRow = ({assets, onClick}) => {
   const items = assets.map(asset => (
-    <ThumbnailImage key={asset.checksum} onClick={onClick} {...asset} />
+    <ThumbnailImage key={asset.identifier} onClick={onClick} {...asset} />
   ))
   return (
     <Container isFluid isMarginless style={{
@@ -84,7 +86,7 @@ const ThumbnailRow = ({assets, onClick}) => {
 ThumbnailRow.propTypes = {
   assets: PropTypes.arrayOf(
     PropTypes.shape({
-      checksum: PropTypes.string.isRequired,
+      identifier: PropTypes.string.isRequired,
       filename: PropTypes.string.isRequired,
       datetime: PropTypes.instanceOf(Date).isRequired,
       location: PropTypes.string

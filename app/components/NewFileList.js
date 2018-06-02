@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2017 Nathan Fiedler
+// Copyright (c) 2018 Nathan Fiedler
 //
 const React = require('react')
 const PropTypes = require('prop-types')
@@ -16,19 +16,20 @@ const {history} = require('../store')
 class NewFileList extends React.Component {
   constructor (props) {
     super(props)
-    this.files = props.files
-    this.onSubmit = props.onSubmit
+    // Do _not_ stash props on this, otherwise react/redux has no way of
+    // knowing if the changing props have any effect on this component.
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   handleSubmit (drops) {
     // Build a mapping of the keys to the file objects.
     const filesByKey = new Map()
-    this.files.forEach((elem) => {
+    this.props.uploads.processed.forEach((elem) => {
       // Clone the file objects since we will be modifying them.
-      filesByKey.set(elem.kagi, Object.assign({}, elem))
+      filesByKey.set(elem.checksum, Object.assign({}, elem))
     })
     // The form values are contained in objects within 'drops', keyed by the
-    // kagi values, which are properties of the drops object.
+    // checksum values, which are properties of the drops object.
     for (const prop in drops) {
       // Not all properties of the drops object are keyed inputs;
       // seems like a $form property is also introduced at some point.
@@ -38,18 +39,22 @@ class NewFileList extends React.Component {
     }
     // Collect the results and submit to the backend.
     const files = Array.from(filesByKey.values())
-    this.onSubmit(files)
+    this.props.onSubmit(files)
   }
 
   render () {
-    let inner = this.files.map((file) => (
-      <NewFile key={file.kagi} {...file} />
+    let message = this.props.uploads.isPending && (
+      <p><em>Processing uploads...</em></p>
+    )
+    let inner = this.props.uploads.processed.map((file) => (
+      <NewFile key={file.checksum} {...file} />
     ))
     return (
       <Form
         model='drops'
         onSubmit={(drops) => this.handleSubmit(drops)}
       >
+        {message}
         {inner}
         <Columns>
           <Column>
@@ -67,15 +72,19 @@ class NewFileList extends React.Component {
 }
 
 NewFileList.propTypes = {
-  files: PropTypes.arrayOf(
-    PropTypes.shape({
-      kagi: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      path: PropTypes.string.isRequired,
-      size: PropTypes.number.isRequired,
-      mimetype: PropTypes.string.isRequired
-    })
-  ).isRequired,
+  uploads: PropTypes.shape({
+    processed: PropTypes.arrayOf(
+      PropTypes.shape({
+        checksum: PropTypes.string.isRequired,
+        name: PropTypes.string.isRequired,
+        path: PropTypes.string.isRequired,
+        size: PropTypes.number.isRequired,
+        mimetype: PropTypes.string.isRequired
+      })
+    ).isRequired,
+    isPending: PropTypes.bool.isRequired,
+    error: PropTypes.object
+  }),
   onSubmit: PropTypes.func.isRequired
 }
 

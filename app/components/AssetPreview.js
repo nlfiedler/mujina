@@ -23,7 +23,7 @@ const config = require('../config')
 const {history} = require('../store')
 
 const AssetPreview = ({details}) => {
-  const previewUrl = config.serverUrl({pathname: '/preview/' + details.checksum})
+  const previewUrl = config.serverUrl({pathname: '/preview/' + details.identifier})
   return (
     <Card>
       <CardHeader>
@@ -36,7 +36,7 @@ const AssetPreview = ({details}) => {
           <NavbarMenu>
             <NavbarStart>
               <NavbarItem>
-                <Button onClick={() => history.push('/edit/' + details.checksum)}>
+                <Button onClick={() => history.push('/edit/' + details.identifier)}>
                   <Icon isSize='medium' className='fa fa-edit' />
                 </Button>
               </NavbarItem>
@@ -52,7 +52,7 @@ const AssetPreview = ({details}) => {
       <CardImage hasTextAlign='centered'>
         <figure className='image'>
           <img
-            alt={details.checksum}
+            alt={details.identifier}
             style={{
               'display': 'inline',
               'width': 'auto'
@@ -83,22 +83,22 @@ const AssetPreview = ({details}) => {
 // if String.startsWith "video/" asset.mimetype then
 //     video [ style [ ("width", "100%"), ("height", "100%") ]
 //           , controls True, preload "auto" ]
-//         [ source [ src ("/asset/" ++ asset.checksum)
+//         [ source [ src ("/asset/" ++ asset.identifier)
 //                  , type_ (assetMimeType asset.mimetype) ] [ ]
 //         , text "Bummer, your browser does not support the HTML5"
 //         , code [ ] [ text "video" ]
 //         , text "tag."
 //         ]
 // else
-//     a [ href ("/asset/" ++ asset.checksum) ]
+//     a [ href ("/asset/" ++ asset.identifier) ]
 //         [ img [ class "asset"
-//               , src ("/preview/" ++ asset.checksum)
+//               , src ("/preview/" ++ asset.identifier)
 //               , alt asset.file_name ] [ ]
 //         ]
 
 AssetPreview.propTypes = {
   details: PropTypes.shape({
-    checksum: PropTypes.string.isRequired,
+    identifier: PropTypes.string.isRequired,
     filename: PropTypes.string.isRequired,
     filesize: PropTypes.number.isRequired,
     datetime: PropTypes.instanceOf(Date).isRequired,

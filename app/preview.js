@@ -13,22 +13,22 @@ const {
 const imageSize = 96
 
 /**
- * Generate thumbnails for each of the given files, as returned from
- * api.checksumFiles(). Returns new objects with 'image' property.
+ * Generate a data URL of the thumbnail image for the given file.
  *
- * @param {Array<Object>} files - each has name, path, size, mimetype properties
- * @return {Promise<Array>} resolves to files with added image property.
+ * Returns the image data (i.e. `data:...;base64,...`).
+ *
+ * @param {String} filepath - path of file to process.
+ * @param {String} mimetype - media type of the file.
+ * @return {Promise} resolves to (image) data URL.
  */
-function generateNewThumbnails (files) {
-  return Promise.all(files.map(async function (file) {
-    const result = await generateThumbnail(file.mimetype, file.path, imageSize)
-    let data = null
-    if (result) {
-      const base64 = result.binary.toString('base64')
-      data = `data:${result.mimetype};base64,${base64}`
-    }
-    return Object.assign({}, file, {image: data})
-  }))
+async function generateThumbnailData (filepath, mimetype) {
+  const result = await generateThumbnail(mimetype, filepath, imageSize)
+  let data = null
+  if (result) {
+    const base64 = result.binary.toString('base64')
+    data = `data:${result.mimetype};base64,${base64}`
+  }
+  return data
 }
 
 /**
@@ -139,6 +139,6 @@ function mimetypeToIcon (mimetype) {
 }
 
 module.exports = {
-  generateNewThumbnails,
+  generateThumbnailData,
   createThumbnailElement
 }

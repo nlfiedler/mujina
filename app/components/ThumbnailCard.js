@@ -20,6 +20,8 @@ const imagePlaceholder = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEA
 class ThumbnailCard extends React.Component {
   constructor (props) {
     super(props)
+    // Do _not_ stash props on this, otherwise react/redux has no way of
+    // knowing if the changing props have any effect on this component.
     this.onVisibilityChange = this.onVisibilityChange.bind(this)
     this.onImageLoad = this.onImageLoad.bind(this)
     this.imageElement = null
@@ -44,7 +46,7 @@ class ThumbnailCard extends React.Component {
   }
 
   getImageComponent () {
-    const {checksum, filename, onClick} = this.props
+    const {identifier, filename, onClick} = this.props
     // Use figure/img rather than Image for greater style control. In
     // particular, set the width to 'auto' to prevent stretching.
 
@@ -61,8 +63,8 @@ class ThumbnailCard extends React.Component {
         <img
           alt={filename}
           style={{'width': 'auto'}}
-          src={config.serverUrl({pathname: '/thumbnail/' + checksum})}
-          onClick={() => onClick(checksum)}
+          src={config.serverUrl({pathname: '/thumbnail/' + identifier})}
+          onClick={() => onClick(identifier)}
           ref={(image) => { this.imageElement = image }}
           onLoad={this.onImageLoad}
         />
@@ -104,7 +106,7 @@ class ThumbnailCard extends React.Component {
 }
 
 ThumbnailCard.propTypes = {
-  checksum: PropTypes.string.isRequired,
+  identifier: PropTypes.string.isRequired,
   filename: PropTypes.string.isRequired,
   datetime: PropTypes.instanceOf(Date).isRequired,
   location: PropTypes.string

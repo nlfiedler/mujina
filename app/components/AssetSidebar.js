@@ -36,8 +36,8 @@ const AssetSidebar = ({details}) => {
         {data(numberFormatter.format(details.filesize) + ' bytes')}
         {term('MIME type')}
         {data(details.mimetype)}
-        {term('SHA256')}
-        {data(_.truncate(details.checksum, {length: 24}))}
+        {term('ID')}
+        {data(_.truncate(details.identifier, {length: 24}))}
         {term('Duration')}
         {data(details.duration || '(none)')}
       </dl>
@@ -47,7 +47,7 @@ const AssetSidebar = ({details}) => {
 
 AssetSidebar.propTypes = {
   details: PropTypes.shape({
-    checksum: PropTypes.string.isRequired,
+    identifier: PropTypes.string.isRequired,
     filename: PropTypes.string.isRequired,
     filesize: PropTypes.number.isRequired,
     datetime: PropTypes.instanceOf(Date).isRequired,

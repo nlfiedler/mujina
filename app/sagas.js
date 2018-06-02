@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2017 Nathan Fiedler
+// Copyright (c) 2018 Nathan Fiedler
 //
 const {all, call, put, select, takeEvery, takeLatest} = require('redux-saga/effects')
 const {push} = require('react-router-redux')
@@ -38,10 +38,37 @@ function * fetchLocations (action) {
 
 function * checksumDrops (action) {
   try {
-    const summed = yield call(Api.checksumFiles, action.payload)
-    const thumbed = yield call(preview.generateNewThumbnails, summed)
-    yield put(actions.receiveDropFiles(thumbed))
+    // head to the upload screen immediately to show progress
     yield put(push('/upload'))
+    for (let file of action.payload) {
+      // file = {
+      //   name,
+      //   path,
+      //   size,
+      //   mimetype
+      // }
+      const sha256 = yield call(Api.checksumFile, file.path)
+      const dataUrl = yield call(preview.generateThumbnailData, file.path, file.mimetype)
+      let entry = Object.assign({}, file, {
+        checksum: sha256,
+        image: dataUrl
+      })
+      const duplicate = yield call(Api.lookupAsset, sha256)
+      // duplicate = {
+      //   id
+      //   caption
+      //   location
+      //   tags
+      // }
+      if (duplicate) {
+        Object.assign(entry, duplicate, {
+          identifier: duplicate.id
+        })
+      }
+      yield put(actions.dropFilesProgress(entry))
+    }
+    // at the end, indicate all files received
+    yield put(actions.receiveDropFiles())
   } catch (err) {
     yield put(actions.failDropFiles(err))
     yield put(actions.setError(err))
@@ -56,8 +83,14 @@ function * uploadFiles (action) {
       // fire the progress first to show that something is happening
       // during the time the file is uploading
       yield put(actions.uploadFilesProgress(files.length, file.name))
-      let newfile = yield call(Api.uploadFile, file)
-      files.push(newfile)
+      // only upload if it does not already exist in storage
+      if ('identifier' in file) {
+        // the already existing file details will suffice
+        files.push(file)
+      } else {
+        let newfile = yield call(Api.uploadFile, file)
+        files.push(newfile)
+      }
     }
     // fire one last time now that everything is uploaded
     yield put(actions.uploadFilesProgress(files.length, ''))
@@ -107,7 +140,7 @@ function * updateAssetDetails (action) {
     const result = yield call(Api.updateAsset, action.payload)
     yield put(actions.receiveAssetUpdate(result))
     // go back to the asset detail page
-    yield put(push('/asset/' + action.payload.checksum))
+    yield put(push('/asset/' + action.payload.identifier))
   } catch (err) {
     yield put(actions.failAssetUpdate(err))
     yield put(actions.setError(err))

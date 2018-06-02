@@ -216,20 +216,32 @@ describe('Reducers', () => {
     })
 
     it('processes file drops', (done) => {
+      nock('http://localhost:3000')
+        .post('/graphql', /query/)
+        .times(2)
+        .reply(200, {
+          data: null
+        })
       const unsubscribe = store.subscribe(() => {
         const state = store.getState().uploads
         // 1. called when computing
         // 2. called again after checksum complete
         if (!state.isPending) {
-          assert.equal(state.files.length, 2)
-          assert.equal(state.files[0].path, 'test/fixtures/lorem-ipsum.txt')
-          assert.equal(state.files[0].kagi, 'a1e1a77875220625fbe18b7d795a42df6c3316af')
-          assert.equal(state.files[0].mimetype, 'text/plain')
-          assert.isNull(state.files[0].image)
-          assert.equal(state.files[1].path, 'test/fixtures/128x128.png')
-          assert.equal(state.files[1].kagi, '7b44b712a9a3b2d851d9bfb74affa302e81dc05f')
-          assert.equal(state.files[1].mimetype, 'image/png')
-          assert.isTrue(state.files[1].image.startsWith('data:image/jpg;base64,'))
+          assert.equal(state.processed.length, 2)
+          assert.equal(state.processed[0].path, 'test/fixtures/lorem-ipsum.txt')
+          assert.equal(
+            state.processed[0].checksum,
+            '095964d07f3e821659d4eb27ed9e20cd5160c53385562df727e98eb815bb371f'
+          )
+          assert.equal(state.processed[0].mimetype, 'text/plain')
+          assert.isNull(state.processed[0].image)
+          assert.equal(state.processed[1].path, 'test/fixtures/128x128.png')
+          assert.equal(
+            state.processed[1].checksum,
+            'ba2bba5f5a187efe6e0ec26614a1e04a44f4856186405991317a8d96780fd179'
+          )
+          assert.equal(state.processed[1].mimetype, 'image/png')
+          assert.isTrue(state.processed[1].image.startsWith('data:image/jpg;base64,'))
           unsubscribe()
           done()
         }
@@ -240,7 +252,7 @@ describe('Reducers', () => {
       ]))
     })
 
-    it('uploads a file and receives an asset checksum', (done) => {
+    it('uploads a file and receives an asset identifier', (done) => {
       const sum1 = '095964d07f3e821659d4eb27ed9e20cd5160c53385562df727e98eb815bb371f'
       nock('http://localhost:3000')
         .post('/api/assets')
@@ -251,15 +263,15 @@ describe('Reducers', () => {
       const unsubscribe = store.subscribe(() => {
         const state = store.getState().uploads
         // 1. called when uploading
-        // 2. called again after upload complete, with checksums
+        // 2. called again after upload complete, with identifiers
         if (!state.isPending) {
-          assert.equal(state.files.length, 1)
-          assert.equal(state.files[0].name, 'lorem-ipsum.txt')
-          assert.equal(state.files[0].path, 'test/fixtures/lorem-ipsum.txt')
-          assert.equal(state.files[0].mimetype, 'text/plain')
-          assert.equal(state.files[0].location, 'outside')
-          assert.deepEqual(state.files[0].tags, ['one', 'two'])
-          assert.equal(state.files[0].checksum, sum1)
+          assert.equal(state.processed.length, 1)
+          assert.equal(state.processed[0].name, 'lorem-ipsum.txt')
+          assert.equal(state.processed[0].path, 'test/fixtures/lorem-ipsum.txt')
+          assert.equal(state.processed[0].mimetype, 'text/plain')
+          assert.equal(state.processed[0].location, 'outside')
+          assert.deepEqual(state.processed[0].tags, ['one', 'two'])
+          assert.equal(state.processed[0].identifier, sum1)
           unsubscribe()
           done()
         }

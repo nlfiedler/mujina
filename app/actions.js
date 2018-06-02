@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2017 Nathan Fiedler
+// Copyright (c) 2018 Nathan Fiedler
 //
 exports.GET_TAGS = 'GET_TAGS'
 exports.requestTags = () => {
@@ -134,10 +134,10 @@ exports.failAssets = (err) => {
 }
 
 exports.FETCH_ASSET = 'FETCH_ASSET'
-exports.fetchAssetDetails = (checksum) => {
+exports.fetchAssetDetails = (identifier) => {
   return {
     type: exports.FETCH_ASSET,
-    payload: checksum
+    payload: identifier
   }
 }
 
@@ -191,11 +191,18 @@ exports.dropFiles = (files) => {
   }
 }
 
-exports.DROP_FILES_FULFILLED = 'DROP_FILES_FULFILLED'
-exports.receiveDropFiles = (files) => {
+exports.DROP_FILES_PROGRESS = 'DROP_FILES_PROGRESS'
+exports.dropFilesProgress = (file) => {
   return {
-    type: exports.DROP_FILES_FULFILLED,
-    payload: files
+    type: exports.DROP_FILES_PROGRESS,
+    payload: file
+  }
+}
+
+exports.DROP_FILES_FULFILLED = 'DROP_FILES_FULFILLED'
+exports.receiveDropFiles = () => {
+  return {
+    type: exports.DROP_FILES_FULFILLED
   }
 }
 

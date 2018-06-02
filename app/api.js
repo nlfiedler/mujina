@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2017 Nathan Fiedler
+// Copyright (c) 2018 Nathan Fiedler
 //
 const crypto = require('crypto')
 const fs = require('fs')
@@ -69,18 +69,53 @@ exports.fetchLocations = () => {
 }
 
 /**
- * Fetch the details for the asset with the given checksum.
+ * Check if an asset with the given checksum already exists.
  *
- * @param {String} checksum - identifier of asset to be retrieved.
- * @return {Promise<Object>} - resolves to the asset details.
+ * @param {String} checksum - checksum of asset to look up.
+ * @return {Promise<Object>} - resolves to the asset details, or null if none.
  */
-exports.fetchAsset = (checksum) => {
+exports.lookupAsset = (checksum) => {
   return new Promise((resolve, reject) => {
     request.post({
       url: config.serverUrl({pathname: '/graphql'}),
       json: {
         query: `query {
-          asset(id: "${checksum}") {
+          lookup(checksum: "${checksum}") {
+            id
+            caption
+            location
+            tags
+          }
+        }`
+      }
+    }, (err, response, body) => {
+      const error = maybeError(err, response)
+      if (error) {
+        reject(error)
+      } else {
+        if (body.data && body.data.lookup) {
+          resolve(body.data.lookup)
+        } else {
+          resolve(null)
+        }
+      }
+    })
+  })
+}
+
+/**
+ * Fetch the details for the asset with the given identifier.
+ *
+ * @param {String} identifier - identifier of asset to be retrieved.
+ * @return {Promise<Object>} - resolves to the asset details.
+ */
+exports.fetchAsset = (identifier) => {
+  return new Promise((resolve, reject) => {
+    request.post({
+      url: config.serverUrl({pathname: '/graphql'}),
+      json: {
+        query: `query {
+          asset(id: "${identifier}") {
             id
             caption
             datetime
@@ -109,7 +144,7 @@ exports.fetchAsset = (checksum) => {
  * Update the asset details on the backend.
  *
  * @param {Object} details - the asset details, with location, caption, etc.
- * @param {String} details.checksum - the asset checksum.
+ * @param {String} details.identifier - the asset identifier.
  * @param {String} details.location - the asset location value.
  * @param {String} details.caption - the asset caption value.
  * @param {String} details.tags - the asset tags value (list of strings).
@@ -134,7 +169,7 @@ exports.updateAsset = (details) => {
         // retrieve the tags in case the server modified the input
         // retrieve the datetime in case the user set/reset the userdate
         query: `mutation Update($input: AssetInput!) {
-          update(id: "${details.checksum}", asset: $input) {
+          update(id: "${details.identifier}", asset: $input) {
             datetime
             tags
           }
@@ -207,18 +242,18 @@ exports.queryAssets = (selections) => {
 }
 
 /**
- * Compute alpha-numeric keys for each of the given file paths.
+ * Compute the SHA256 for the given file.
  *
- * @param {Array<object>} files list of file objects, with 'path' property
- * @return {Array<object>} of files with added 'kagi' property.
+ * @param {String} filepath - path of the file to be checksummed.
+ * @return {String} Promise resolving to the sha256 digest.
  */
-exports.checksumFiles = (files) => {
-  return files.map((file) => {
-    const hash = crypto.createHash('sha1')
-    hash.update(file.path)
-    return Object.assign({}, file, {
-      kagi: hash.digest('hex')
-    })
+exports.checksumFile = (filepath) => {
+  return new Promise((resolve, reject) => {
+    const hash = crypto.createHash('sha256')
+    const rs = fs.createReadStream(filepath)
+    rs.on('error', reject)
+    rs.on('data', chunk => hash.update(chunk))
+    rs.on('end', () => resolve(hash.digest('hex')))
   })
 }
 
@@ -233,7 +268,7 @@ exports.checksumFiles = (files) => {
  */
 exports.uploadFile = (file) => {
   return new Promise((resolve, reject) => {
-    // First upload the asset itself and get the checksum.
+    // First upload the asset itself and get the identifier.
     let formData = {
       asset: {
         value: fs.createReadStream(file.path),
@@ -254,12 +289,12 @@ exports.uploadFile = (file) => {
       } else {
         const parsedBody = JSON.parse(body)
         resolve(Object.assign({}, file, {
-          checksum: parsedBody.id
+          identifier: parsedBody.id
         }))
       }
     })
   }).then((res) =>
-    // Now that we have a checksum, update the asset attributes.
+    // Now that we have a identifier, update the asset attributes.
     exports.updateAsset(res)
   )
 }

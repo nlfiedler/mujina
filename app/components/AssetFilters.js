@@ -39,6 +39,8 @@ const FilterTab = (props) => (
 class AssetFilters extends React.Component {
   constructor (props) {
     super(props)
+    // Do _not_ stash props on this, otherwise react/redux has no way of
+    // knowing if the changing props have any effect on this component.
     this.state = {
       activeTabIndex: 0
     }

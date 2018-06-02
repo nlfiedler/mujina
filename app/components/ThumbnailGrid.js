@@ -10,7 +10,7 @@ const {ThumbnailCard} = require('./ThumbnailCard')
 
 const ThumbnailGrid = ({assets, onClick}) => {
   const items = assets.map(asset => (
-    <ThumbnailCard key={asset.checksum} onClick={onClick} {...asset} />
+    <ThumbnailCard key={asset.identifier} onClick={onClick} {...asset} />
   ))
   return (
     <Tile isChild style={{
@@ -27,7 +27,7 @@ const ThumbnailGrid = ({assets, onClick}) => {
 ThumbnailGrid.propTypes = {
   assets: PropTypes.arrayOf(
     PropTypes.shape({
-      checksum: PropTypes.string.isRequired,
+      identifier: PropTypes.string.isRequired,
       filename: PropTypes.string.isRequired,
       datetime: PropTypes.instanceOf(Date).isRequired,
       location: PropTypes.string

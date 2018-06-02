@@ -2,17 +2,25 @@
 
 ** Next
 
-*** TODO Detect duplicate assets on drop [0/7]
-- [ ] At start of checksumDrops(), push to /upload route
-- [ ] As assets are processed 1-by-1, /upload page will show dropped files
-- [ ] After checksumming assets, query backend to check for duplicates
-- [ ] Flag duplicate assets and disable input on dropped files page
-- [ ] Show asset details: tags, location, caption
-- [ ] Help text below caption input should indicate its duplicateness
-- [ ] Mark the asset so it does not get uploaded
+*** DONE Detect duplicate assets on drop [7/7]
+- [X] At start of checksumDrops(), push to =/upload= route
+- [X] As assets are processed 1-by-1, =/upload= page will show dropped files
+- [X] After checksumming assets, query backend to check for duplicates
+- [X] Flag duplicate assets and disable input on dropped files page
+- [X] Show asset details: tags, location, caption
+- [X] Help text below caption input should indicate its duplicateness
+- [X] Mark the asset so it does not get uploaded
 
+*** TODO Handle additional drop events while on the upload screen
 *** TODO Add menu item for going to the upload screen
 - Add a button on the upload screen to select additional files
+
+*** TODO Consider how to show uploads.error in NewFileList page
+*** TODO Sometimes dropping an image just opens the image
+- How to prevent this behavior?
+- http://www.danieleckermann.com/blog/electron-prevent-dropped-file-from-opening
+- Maybe intercept the 'will-nagivate' event?
+  - Would need to know if our app initiated the event
 
 *** TODO Add a search bar across the top of most screens
 - Support the fancy queries, like "tag:", "loc:", "before:2017-05", etc
@@ -34,7 +42,7 @@
   - [ ] set caption
   - [ ] change media type
 
-*** TODO Support videos better [0/1]
+*** TODO Support videos better [0/5]
 - [ ] Show videos using the video tag
 - [ ] Show duration for videos
 - [ ] Use video tag for thumbnail view
@@ -55,6 +63,8 @@
 *** TODO Drag and drop from Photos is not working
 - No drag events are fired at all, it just does nothing
 - See the Electron guide for native drag & drop
+- Handle 'open-url' and/or 'open-file' on the app instance in main.js
+- Maybe look at that relatively new DataTransfer API business
 
 ** Upcoming
 *** Buggy Interface
@@ -117,6 +127,7 @@
 
 **** TODO Allow dragging out images (and videos?) as a form of export
 - Likely need a "File > Export" option with Save dialog for larger files
+- https://electronjs.org/docs/tutorial/native-file-drag-drop
 
 ** Notes on Flexbox
 *** General Tutorials

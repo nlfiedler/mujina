@@ -144,7 +144,7 @@ function assets (
         isPending: false,
         items: action.payload.results.map(item => {
           return {
-            checksum: item.id,
+            identifier: item.id,
             filename: item.filename,
             datetime: new Date(item.datetime),
             location: item.location
@@ -183,7 +183,7 @@ function details (
       return Object.assign({}, state, {
         isPending: false,
         single: {
-          checksum: action.payload.id,
+          identifier: action.payload.id,
           filename: action.payload.filename,
           filesize: action.payload.filesize,
           datetime: new Date(action.payload.datetime),
@@ -232,7 +232,8 @@ function details (
 function uploads (
   state = {
     isPending: false,
-    files: [],
+    incoming: [],
+    processed: [],
     progress: null,
     error: null
   },
@@ -242,14 +243,19 @@ function uploads (
     case actions.DROP_FILES:
       return Object.assign({}, state, {
         isPending: true,
-        files: action.payload.map(item => Object.assign({}, item)),
+        incoming: action.payload.map(item => Object.assign({}, item)),
+        processed: [],
         // wipe out the previous upload progress
         progress: null
+      })
+    case actions.DROP_FILES_PROGRESS:
+      return Object.assign({}, state, {
+        processed: state.processed.concat(Object.assign({}, action.payload))
       })
     case actions.DROP_FILES_FULFILLED:
       return Object.assign({}, state, {
         isPending: false,
-        files: action.payload.map(item => Object.assign({}, item)),
+        incoming: [],
         error: null
       })
     case actions.DROP_FILES_REJECTED:
@@ -260,7 +266,7 @@ function uploads (
     case actions.UPLOAD_FILES:
       return Object.assign({}, state, {
         isPending: true,
-        files: action.payload.map(item => Object.assign({}, item))
+        processed: action.payload.map(item => Object.assign({}, item))
       })
     case actions.UPLOAD_FILES_PROGRESS:
       return Object.assign({}, state, {
@@ -270,7 +276,7 @@ function uploads (
     case actions.UPLOAD_FILES_FULFILLED:
       return Object.assign({}, state, {
         isPending: false,
-        files: action.payload.map(item => Object.assign({}, item)),
+        processed: action.payload.map(item => Object.assign({}, item)),
         error: null
       })
     case actions.UPLOAD_FILES_REJECTED:

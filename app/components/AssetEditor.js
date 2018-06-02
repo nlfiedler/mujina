@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2017 Nathan Fiedler
+// Copyright (c) 2018 Nathan Fiedler
 //
 const React = require('react')
 const PropTypes = require('prop-types')
@@ -31,13 +31,13 @@ const datefmt = require('date-fns/format')
 class AssetEditor extends React.Component {
   constructor (props) {
     super(props)
-    this.details = props.details
-    this.onSubmit = props.onSubmit
-    this.populateForm = props.populateForm
+    // Do _not_ stash props on this, otherwise react/redux has no way of
+    // knowing if the changing props have any effect on this component.
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   handleSubmit (details) {
-    const updated = Object.assign({}, this.details, details)
+    const updated = Object.assign({}, this.props.details, details)
     updated.tags = details.tags.split(',').map(t => t.trim())
     if (details.userdate) {
       // Parse the ISO 8601 formatted input date, if available.
@@ -45,23 +45,23 @@ class AssetEditor extends React.Component {
       // local version of Date, and not Date.UTC()
       updated.userdate = new Date(details.userdate)
     }
-    this.onSubmit(updated)
+    this.props.onSubmit(updated)
   }
 
   componentWillMount () {
-    const userdate = this.details.userdate ? (
+    const userdate = this.props.details.userdate ? (
       // yes, a date library just so we can format the date, seriously
-      datefmt(this.details.userdate, 'YYYY-MM-DD[T]HH:mm:ss')
+      datefmt(this.props.details.userdate, 'YYYY-MM-DD[T]HH:mm:ss')
     ) : ''
-    this.populateForm(Object.assign({}, this.details, {
-      tags: this.details.tags.join(', '),
+    this.props.populateForm(Object.assign({}, this.props.details, {
+      tags: this.props.details.tags.join(', '),
       userdate
     }))
   }
 
   render () {
-    const {checksum, filename} = this.details
-    const previewUrl = config.serverUrl({pathname: '/preview/' + checksum})
+    const {identifier, filename} = this.props.details
+    const previewUrl = config.serverUrl({pathname: '/preview/' + identifier})
     return (
       <Card>
         <CardHeader>
@@ -81,14 +81,14 @@ class AssetEditor extends React.Component {
               </NavbarStart>
               <NavbarEnd>
                 <NavbarItem>
-                  <Delete onClick={() => history.push('/asset/' + checksum)} />
+                  <Delete onClick={() => history.push('/asset/' + identifier)} />
                 </NavbarItem>
               </NavbarEnd>
             </NavbarMenu>
           </Navbar>
         </CardHeader>
         <CardImage hasTextAlign='centered'>
-          <Image alt={checksum} src={previewUrl} />
+          <Image alt={identifier} src={previewUrl} />
         </CardImage>
         <CardContent>
           <rrf.Form
@@ -170,7 +170,7 @@ class AssetEditor extends React.Component {
 
 AssetEditor.propTypes = {
   details: PropTypes.shape({
-    checksum: PropTypes.string.isRequired,
+    identifier: PropTypes.string.isRequired,
     filename: PropTypes.string.isRequired,
     filesize: PropTypes.number.isRequired,
     datetime: PropTypes.instanceOf(Date).isRequired,

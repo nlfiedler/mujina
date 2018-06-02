@@ -13,8 +13,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onClick: checksum => {
-      dispatch(fetchAssetDetails(checksum))
+    onClick: identifier => {
+      dispatch(fetchAssetDetails(identifier))
     }
   }
 }
