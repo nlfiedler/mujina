@@ -233,7 +233,8 @@ function uploads (
   state = {
     isPending: false,
     incoming: [],
-    processed: [],
+    pending: [],
+    outgoing: [],
     progress: null,
     error: null
   },
@@ -244,13 +245,15 @@ function uploads (
       return Object.assign({}, state, {
         isPending: true,
         incoming: action.payload.map(item => Object.assign({}, item)),
-        processed: [],
         // wipe out the previous upload progress
         progress: null
       })
     case actions.DROP_FILES_PROGRESS:
+      if (state.pending.some(e => e.checksum === action.payload.checksum)) {
+        return state
+      }
       return Object.assign({}, state, {
-        processed: state.processed.concat(Object.assign({}, action.payload))
+        pending: state.pending.concat(Object.assign({}, action.payload))
       })
     case actions.DROP_FILES_FULFILLED:
       return Object.assign({}, state, {
@@ -261,12 +264,13 @@ function uploads (
     case actions.DROP_FILES_REJECTED:
       return Object.assign({}, state, {
         isPending: false,
+        incoming: [],
         error: action.payload
       })
     case actions.UPLOAD_FILES:
       return Object.assign({}, state, {
         isPending: true,
-        processed: action.payload.map(item => Object.assign({}, item))
+        outgoing: action.payload.map(item => Object.assign({}, item))
       })
     case actions.UPLOAD_FILES_PROGRESS:
       return Object.assign({}, state, {
@@ -276,12 +280,15 @@ function uploads (
     case actions.UPLOAD_FILES_FULFILLED:
       return Object.assign({}, state, {
         isPending: false,
-        processed: action.payload.map(item => Object.assign({}, item)),
+        pending: [],
+        outgoing: [],
         error: null
       })
     case actions.UPLOAD_FILES_REJECTED:
       return Object.assign({}, state, {
         isPending: false,
+        pending: [],
+        outgoing: [],
         error: action.payload
       })
     default:

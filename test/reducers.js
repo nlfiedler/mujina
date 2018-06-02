@@ -227,21 +227,21 @@ describe('Reducers', () => {
         // 1. called when computing
         // 2. called again after checksum complete
         if (!state.isPending) {
-          assert.equal(state.processed.length, 2)
-          assert.equal(state.processed[0].path, 'test/fixtures/lorem-ipsum.txt')
+          assert.equal(state.pending.length, 2)
+          assert.equal(state.pending[0].path, 'test/fixtures/lorem-ipsum.txt')
           assert.equal(
-            state.processed[0].checksum,
+            state.pending[0].checksum,
             '095964d07f3e821659d4eb27ed9e20cd5160c53385562df727e98eb815bb371f'
           )
-          assert.equal(state.processed[0].mimetype, 'text/plain')
-          assert.isNull(state.processed[0].image)
-          assert.equal(state.processed[1].path, 'test/fixtures/128x128.png')
+          assert.equal(state.pending[0].mimetype, 'text/plain')
+          assert.isNull(state.pending[0].image)
+          assert.equal(state.pending[1].path, 'test/fixtures/128x128.png')
           assert.equal(
-            state.processed[1].checksum,
+            state.pending[1].checksum,
             'ba2bba5f5a187efe6e0ec26614a1e04a44f4856186405991317a8d96780fd179'
           )
-          assert.equal(state.processed[1].mimetype, 'image/png')
-          assert.isTrue(state.processed[1].image.startsWith('data:image/jpg;base64,'))
+          assert.equal(state.pending[1].mimetype, 'image/png')
+          assert.isTrue(state.pending[1].image.startsWith('data:image/jpg;base64,'))
           unsubscribe()
           done()
         }
@@ -252,11 +252,16 @@ describe('Reducers', () => {
       ]))
     })
 
-    it('uploads a file and receives an asset identifier', (done) => {
-      const sum1 = '095964d07f3e821659d4eb27ed9e20cd5160c53385562df727e98eb815bb371f'
+    it('uploads a file and clears the state', (done) => {
+      //
+      // Not the most meaningful test now that we discard the results of the
+      // upload. There really is no use in keeping that information in the
+      // application state.
+      //
+      const id1 = 'made_up_identifier'
       nock('http://localhost:3000')
         .post('/api/assets')
-        .reply(200, {status: 'success', id: sum1})
+        .reply(200, {status: 'success', id: id1})
       nock('http://localhost:3000')
         .post('/graphql', /query/)
         .reply(200, {data: {update: {location: 'outside', tags: ['one', 'two']}}})
@@ -265,13 +270,9 @@ describe('Reducers', () => {
         // 1. called when uploading
         // 2. called again after upload complete, with identifiers
         if (!state.isPending) {
-          assert.equal(state.processed.length, 1)
-          assert.equal(state.processed[0].name, 'lorem-ipsum.txt')
-          assert.equal(state.processed[0].path, 'test/fixtures/lorem-ipsum.txt')
-          assert.equal(state.processed[0].mimetype, 'text/plain')
-          assert.equal(state.processed[0].location, 'outside')
-          assert.deepEqual(state.processed[0].tags, ['one', 'two'])
-          assert.equal(state.processed[0].identifier, sum1)
+          assert.equal(state.pending.length, 0)
+          assert.equal(state.incoming.length, 0)
+          assert.equal(state.outgoing.length, 0)
           unsubscribe()
           done()
         }

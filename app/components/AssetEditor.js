@@ -44,6 +44,10 @@ class AssetEditor extends React.Component {
       // Because the input type is datetime-local, we use the
       // local version of Date, and not Date.UTC()
       updated.userdate = new Date(details.userdate)
+    } else {
+      // do not leave the userdate as a blank string, it must
+      // be either a Date or null
+      updated.userdate = null
     }
     this.props.onSubmit(updated)
   }

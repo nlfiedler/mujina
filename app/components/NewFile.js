@@ -33,13 +33,13 @@ const NewFile = (entry) => {
             <FieldBody>
               <Field isGrouped>
                 <Control isExpanded hasIcons='left'>
-                  <Input type='text' disabled value={entry.tags} placeholder='Tags' />
+                  <Input type='text' disabled value={entry.tags || ''} placeholder='Tags' />
                   <Icon isSize='small' isAlign='left'><span className='fa fa-tag' /></Icon>
                 </Control>
               </Field>
               <Field>
                 <Control isExpanded hasIcons='left'>
-                  <Input type='text' disabled value={entry.location} placeholder='Location' />
+                  <Input type='text' disabled value={entry.location || ''} placeholder='Location' />
                   <Icon isSize='small' isAlign='left'><span className='fa fa-map-marker' /></Icon>
                 </Control>
               </Field>
@@ -49,7 +49,7 @@ const NewFile = (entry) => {
             <FieldBody>
               <Field>
                 <Control isExpanded hasIcons={['left', 'right']}>
-                  <Input type='text' disabled value={entry.caption} placeholder='Caption' />
+                  <Input type='text' disabled value={entry.caption || ''} placeholder='Caption' />
                   <Icon isSize='small' isAlign='left'><span className='fa fa-quote-left' /></Icon>
                   <Icon isSize='small' isAlign='right'><span className='fa fa-quote-right' /></Icon>
                 </Control>

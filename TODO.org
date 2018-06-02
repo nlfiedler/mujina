@@ -11,7 +11,7 @@
 - [X] Help text below caption input should indicate its duplicateness
 - [X] Mark the asset so it does not get uploaded
 
-*** TODO Handle additional drop events while on the upload screen
+*** DONE Handle additional drop events while on the upload screen
 *** TODO Add menu item for going to the upload screen
 - Add a button on the upload screen to select additional files
 
@@ -50,6 +50,9 @@
 - [ ] Show placeholder icons for videos that fail to load
 
 ** Investigate
+
+*** TODO How to search for assets with no tags or location?
+- GraphQL works, but it is beyond the capability of non-technical people
 
 *** TODO What does supporting emoji codes (in captions/comments) entail?
 *** TODO Investigate how to localize the app

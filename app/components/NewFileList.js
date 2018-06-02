@@ -24,7 +24,7 @@ class NewFileList extends React.Component {
   handleSubmit (drops) {
     // Build a mapping of the keys to the file objects.
     const filesByKey = new Map()
-    this.props.uploads.processed.forEach((elem) => {
+    this.props.uploads.pending.forEach((elem) => {
       // Clone the file objects since we will be modifying them.
       filesByKey.set(elem.checksum, Object.assign({}, elem))
     })
@@ -46,7 +46,7 @@ class NewFileList extends React.Component {
     let message = this.props.uploads.isPending && (
       <p><em>Processing uploads...</em></p>
     )
-    let inner = this.props.uploads.processed.map((file) => (
+    let inner = this.props.uploads.pending.map((file) => (
       <NewFile key={file.checksum} {...file} />
     ))
     return (
@@ -73,7 +73,7 @@ class NewFileList extends React.Component {
 
 NewFileList.propTypes = {
   uploads: PropTypes.shape({
-    processed: PropTypes.arrayOf(
+    pending: PropTypes.arrayOf(
       PropTypes.shape({
         checksum: PropTypes.string.isRequired,
         name: PropTypes.string.isRequired,
