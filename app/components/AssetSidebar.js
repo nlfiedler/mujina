@@ -55,7 +55,7 @@ AssetSidebar.propTypes = {
     location: PropTypes.string,
     userdate: PropTypes.instanceOf(Date),
     caption: PropTypes.string,
-    duration: PropTypes.string,
+    duration: PropTypes.number,
     tags: PropTypes.arrayOf(
       PropTypes.string.isRequired
     ).isRequired
