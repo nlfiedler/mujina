@@ -141,6 +141,9 @@ function * updateAssetDetails (action) {
     yield put(actions.receiveAssetUpdate(result))
     // go back to the asset detail page
     yield put(push('/asset/' + action.payload.identifier))
+    yield put(actions.requestTags())
+    yield put(actions.requestLocations())
+    yield put(actions.requestYears())
   } catch (err) {
     yield put(actions.failAssetUpdate(err))
     yield put(actions.setError(err))

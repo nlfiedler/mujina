@@ -20,13 +20,14 @@ function tags (
         isPending: true
       })
     case actions.GET_TAGS_FULFILLED:
+      const activeSet = getActiveSet(state.items)
       return Object.assign({}, state, {
         isPending: false,
         items: action.payload.map((item) => {
           return {
             label: item.value,
             count: item.count,
-            active: false
+            active: activeSet.has(item.value)
           }
         }),
         error: null
@@ -60,13 +61,15 @@ function years (
         isPending: true
       })
     case actions.GET_YEARS_FULFILLED:
+      const activeSet = getActiveSet(state.items)
       return Object.assign({}, state, {
         isPending: false,
         items: action.payload.map((item) => {
+          const label = item.value.toString()
           return {
-            label: item.value.toString(),
+            label,
             count: item.count,
-            active: false
+            active: activeSet.has(label)
           }
         }),
         error: null
@@ -100,13 +103,14 @@ function locations (
         isPending: true
       })
     case actions.GET_LOCATIONS_FULFILLED:
+      const activeSet = getActiveSet(state.items)
       return Object.assign({}, state, {
         isPending: false,
         items: action.payload.map((item) => {
           return {
             label: item.value,
             count: item.count,
-            active: false
+            active: activeSet.has(item.value)
           }
         }),
         error: null
@@ -124,6 +128,16 @@ function locations (
     default:
       return state
   }
+}
+
+// Return a Set of item labels for those items that are currently active.
+function getActiveSet (items) {
+  return items.reduce((acc, item) => {
+    if (item.active) {
+      acc.add(item.label)
+    }
+    return acc
+  }, new Set())
 }
 
 function assets (
