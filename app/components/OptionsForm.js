@@ -16,11 +16,12 @@ const config = require('../config')
 const {history} = require('../store')
 
 class OptionsForm extends React.Component {
-  // constructor (props) {
-  //   super(props)
-  //   // Do _not_ stash props on this, otherwise react/redux has no way of
-  //   // knowing if the changing props have any effect on this component.
-  // }
+  constructor (props) {
+    super(props)
+    // Do _not_ stash props on this, otherwise react/redux has no way of
+    // knowing if the changing props have any effect on this component.
+    this.handleSubmit = this.handleSubmit.bind(this)
+  }
 
   handleSubmit (options) {
     this.props.onSubmit(options)
@@ -34,7 +35,7 @@ class OptionsForm extends React.Component {
     return (
       <rrf.Form
         model='options'
-        onSubmit={(options) => this.props.handleSubmit(options)}
+        onSubmit={(options) => this.handleSubmit(options)}
       >
         <Field>
           <Control>
