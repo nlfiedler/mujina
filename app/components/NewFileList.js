@@ -19,6 +19,7 @@ class NewFileList extends React.Component {
     // Do _not_ stash props on this, otherwise react/redux has no way of
     // knowing if the changing props have any effect on this component.
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleReject = this.handleReject.bind(this)
   }
 
   handleSubmit (drops) {
@@ -42,6 +43,11 @@ class NewFileList extends React.Component {
     this.props.onSubmit(files)
   }
 
+  handleReject () {
+    this.props.onDiscard(new Error('user cancelled'))
+    history.push('/')
+  }
+
   render () {
     let message = this.props.uploads.isPending && (
       <p><em>Processing uploads...</em></p>
@@ -61,7 +67,7 @@ class NewFileList extends React.Component {
             <Button isActive isColor='primary' type='submit'>Save</Button>
           </Column>
           <Column hasTextAlign='right'>
-            <Button isOutlined isColor='warning' onClick={() => history.push('/')}>
+            <Button isOutlined isColor='warning' onClick={() => this.handleReject()}>
               <Icon isSize='medium' className='fa fa-trash' />
             </Button>
           </Column>
