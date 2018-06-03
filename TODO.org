@@ -1,33 +1,26 @@
 * Mujina
 
 ** Next
+*** General
+**** DONE Edit asset should fetch attributes again
 
-*** DONE Detect duplicate assets on drop [7/7]
-- [X] At start of checksumDrops(), push to =/upload= route
-- [X] As assets are processed 1-by-1, =/upload= page will show dropped files
-- [X] After checksumming assets, query backend to check for duplicates
-- [X] Flag duplicate assets and disable input on dropped files page
-- [X] Show asset details: tags, location, caption
-- [X] Help text below caption input should indicate its duplicateness
-- [X] Mark the asset so it does not get uploaded
+**** TODO Clicking on asset in preview screen should show it full size
+- Need a semi-transparent "delete" button in the corner to go back
 
-*** DONE Handle additional drop events while on the upload screen
-*** TODO Add menu item for going to the upload screen
-- Add a button on the upload screen to select additional files
-
-*** TODO Consider how to show uploads.error in NewFileList page
-*** TODO Sometimes dropping an image just opens the image
-- How to prevent this behavior?
-- http://www.danieleckermann.com/blog/electron-prevent-dropped-file-from-opening
-- Maybe intercept the 'will-nagivate' event?
-  - Would need to know if our app initiated the event
-
-*** TODO Add a search bar across the top of most screens
+*** Search
+**** TODO Add a search bar across the top of most screens
+- General interface
+  - text field
+  - placeholder "Search"
+  - magnifying glass icon
+  - button "Search" to perform the search
 - Support the fancy queries, like "tag:", "loc:", "before:2017-05", etc
 - Multiple tags requires a "tag:" for each one
 - "is:image" and similar would be converted to "mimetype:image/*"
+- Allow searching on the caption field
 
-*** TODO Design bulk edit solution, probably similar to JIRA [0/5]
+*** Bulk Edit
+**** TODO Design bulk edit solution, probably similar to JIRA [0/5]
 - [ ] Access the bulk edit screen via a menu item
 - [ ] Use same search form as webui
 - [ ] Perform search, present list of results in a scrollable list
@@ -42,12 +35,52 @@
   - [ ] set caption
   - [ ] change media type
 
-*** TODO Support videos better [0/5]
-- [ ] Show videos using the video tag
-- [ ] Show duration for videos
-- [ ] Use video tag for thumbnail view
-- [ ] Show 5 or so frames from the video on hover
-- [ ] Show placeholder icons for videos that fail to load
+*** Uploads
+**** DONE Detect duplicate assets on drop [7/7]
+- [X] At start of checksumDrops(), push to =/upload= route
+- [X] As assets are processed 1-by-1, =/upload= page will show dropped files
+- [X] After checksumming assets, query backend to check for duplicates
+- [X] Flag duplicate assets and disable input on dropped files page
+- [X] Show asset details: tags, location, caption
+- [X] Help text below caption input should indicate its duplicateness
+- [X] Mark the asset so it does not get uploaded
+
+**** DONE Handle additional drop events while on the upload screen
+**** TODO Tag and location completion on uploads page
+**** TODO Add a button to remove a single upload entry from the list
+**** TODO Can the upload thumbnails be improved, they are kinda grainy
+**** TODO Upload progress bar needs to be made visible
+- Either squeeze it between the save/cancel buttons
+- Or scroll down to the bottom fo the page when save button is pressed
+
+**** TODO Add menu item for going to the upload screen
+- Add a button on the upload screen to select additional files
+
+**** TODO Consider how to show uploads.error in NewFileList page
+**** TODO Sometimes dropping an image just opens the image
+- Is there a React event that App can listen for, like "unmount"?
+  - and if that happens, fire an action to navigate back home
+- How to prevent this behavior?
+- http://www.danieleckermann.com/blog/electron-prevent-dropped-file-from-opening
+- Maybe intercept the 'will-nagivate' event?
+  - Would need to know if our app initiated the event
+- Maybe a menu item to get back "Home"
+- Maybe a periodic check in main.js to ensure webContents are what is expected
+**** TODO Show a fancy help overlay thingy on dragover
+- See Slack, which shows an overlay while dragging over the window
+- Probably need to add dragover and drop handlers to the top-level App component
+
+**** TODO File/Open dialog to select files to be added (goes to drop screen)
+
+
+*** Videos
+**** TODO How to get large videos into storage?
+**** TODO Show videos using the video tag
+**** TODO Show duration for videos
+**** TODO Use video tag for thumbnail view
+**** TODO Show 5 or so frames from the video on hover
+**** TODO Show placeholder icons for videos that fail to load
+
 
 ** Investigate
 
