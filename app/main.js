@@ -7,6 +7,9 @@ const url = require('url')
 const windowStateKeeper = require('electron-window-state')
 const menu = require('./menu')
 
+// Detect if we are running in development mode or not.
+const isDevMode = process.defaultApp || /node_modules[\\/]electron[\\/]/.test(process.execPath)
+
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindows = new Map()
@@ -29,7 +32,9 @@ const createWindow = () => {
   let winId = win.id
   mainWindows.set(winId, win)
 
-  win.webContents.openDevTools()
+  if (isDevMode) {
+    win.webContents.openDevTools()
+  }
 
   // and load the index.html of the app.
   win.loadURL(url.format({

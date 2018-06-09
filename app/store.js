@@ -11,6 +11,9 @@ const {createLogger} = require('redux-logger')
 
 exports.history = createHistory()
 
+// Detect if we are running in development mode or not.
+const isDevMode = process.defaultApp || /node_modules[\\/]electron[\\/]/.test(process.execPath)
+
 /**
  * Create the redux store with all middleware configured.
  *
@@ -26,7 +29,7 @@ exports.configureStore = ({middleware = []} = {}) => {
   const midware = Array.from(middleware)
   midware.unshift(sagaMiddleware)
   midware.push(routerMiddleware(exports.history))
-  if (process.env.NODE_ENV === 'development') {
+  if (isDevMode) {
     midware.push(createLogger())
   }
   const store = createStore(
