@@ -5,6 +5,7 @@ const crypto = require('crypto')
 const fs = require('fs')
 const request = require('request')
 const config = require('./config')
+const query = require('./query')
 
 /**
  * Check for an error condition, whether from a failed request or
@@ -188,34 +189,14 @@ exports.updateAsset = (details) => {
   })
 }
 
-/**
- * Search for assets matching the given criteria.
- *
- * @param {Array} selections.locations - location obects with label property.
- * @param {Array} selections.tags - tag obects with label property.
- * @param {Array} selections.years - year obects with label property.
- */
-exports.queryAssets = (selections) => {
-  const locations = selections.locations.map(item => item.label)
-  const tags = selections.tags.map(item => item.label)
-  const years = selections.years.map(item => Number.parseInt(item.label))
-  let afterTime = null
-  let beforeTime = null
-  if (years.length > 0) {
-    afterTime = new Date(years[0], 0).getTime()
-    beforeTime = new Date(years[0] + 1, 0).getTime()
-  }
+// Run the query against the GraphQL search field of the Query type.
+function runQuery (params) {
   return new Promise((resolve, reject) => {
     request.post({
       url: config.serverUrl({pathname: '/graphql'}),
       json: {
         variables: JSON.stringify({
-          params: {
-            locations: locations,
-            tags: tags,
-            after: afterTime,
-            before: beforeTime
-          }
+          params
         }),
         operationName: 'Search',
         query: `query Search($params: SearchParams!) {
@@ -242,18 +223,40 @@ exports.queryAssets = (selections) => {
 }
 
 /**
- * Compute the SHA256 for the given file.
+ * Search for assets matching the selected attributes.
+ *
+ * @param {Object} selections - as from query.getSelectedAttrs()
+ * @return {Promise<Array>} a promise resolving to the list of results.
+ */
+exports.queryAssets = (selections) => {
+  return runQuery(query.fromSelections(selections))
+}
+
+/**
+ * Search for assets matching the query string.
+ *
+ * @param {String} input - query string for searching for assets.
+ * @return {Promise<Array>} a promise resolving to the list of results.
+ */
+exports.searchAssets = (input) => {
+  return runQuery(query.fromString(input))
+}
+
+/**
+ * Compute the checksum for the given file. The value will have the algorithm
+ * prefixed with a hyphen separator (e.g. sha256-xxx).
  *
  * @param {String} filepath - path of the file to be checksummed.
- * @return {String} Promise resolving to the sha256 digest.
+ * @return {String} Promise resolving to the hash digest.
  */
 exports.checksumFile = (filepath) => {
+  const algo = 'sha256'
   return new Promise((resolve, reject) => {
-    const hash = crypto.createHash('sha256')
+    const hash = crypto.createHash(algo)
     const rs = fs.createReadStream(filepath)
     rs.on('error', reject)
     rs.on('data', chunk => hash.update(chunk))
-    rs.on('end', () => resolve(hash.digest('hex')))
+    rs.on('end', () => resolve(`${algo}-${hash.digest('hex')}`))
   })
 }
 

@@ -6,7 +6,7 @@ const {push} = require('react-router-redux')
 const Api = require('./api')
 const actions = require('./actions')
 const config = require('./config')
-const {getSelectedAttrs} = require('./selectors')
+const {getSelectedAttrs} = require('./query')
 const preview = require('./preview')
 
 function * fetchTags (action) {
@@ -47,13 +47,13 @@ function * checksumDrops (action) {
       //   size,
       //   mimetype
       // }
-      const sha256 = yield call(Api.checksumFile, file.path)
+      const checksum = yield call(Api.checksumFile, file.path)
       const dataUrl = yield call(preview.generateThumbnailData, file.path, file.mimetype)
       let entry = Object.assign({}, file, {
-        checksum: sha256,
+        checksum,
         image: dataUrl
       })
-      const duplicate = yield call(Api.lookupAsset, sha256)
+      const duplicate = yield call(Api.lookupAsset, checksum)
       // duplicate = {
       //   id
       //   caption
@@ -115,6 +115,17 @@ function * handleSelection (action) {
     // process of actually querying them.
     yield put(actions.requestAssets())
     const assets = yield call(Api.queryAssets, selections)
+    yield put(actions.receiveAssets(assets))
+  } catch (err) {
+    yield put(actions.failAssets(err))
+    yield put(actions.setError(err))
+    yield put(push('/error'))
+  }
+}
+
+function * searchAssets (action) {
+  try {
+    const assets = yield call(Api.searchAssets, action.payload)
     yield put(actions.receiveAssets(assets))
   } catch (err) {
     yield put(actions.failAssets(err))
@@ -197,6 +208,10 @@ function * watchFetchAsset () {
   yield takeLatest(actions.FETCH_ASSET, fetchAssetDetails)
 }
 
+function * watchSearchAssets () {
+  yield takeLatest(actions.SEARCH_ASSETS, searchAssets)
+}
+
 function * watchUpdateAsset () {
   yield takeEvery(actions.UPDATE_ASSET, updateAssetDetails)
 }
@@ -211,6 +226,7 @@ function * rootSaga () {
     watchFetchYears(),
     watchFetchLocations(),
     watchSelectorToggles(),
+    watchSearchAssets(),
     watchFetchAsset(),
     watchUpdateAsset(),
     watchDropFiles(),

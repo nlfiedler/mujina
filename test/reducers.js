@@ -231,14 +231,14 @@ describe('Reducers', () => {
           assert.equal(state.pending[0].path, 'test/fixtures/lorem-ipsum.txt')
           assert.equal(
             state.pending[0].checksum,
-            '095964d07f3e821659d4eb27ed9e20cd5160c53385562df727e98eb815bb371f'
+            'sha256-095964d07f3e821659d4eb27ed9e20cd5160c53385562df727e98eb815bb371f'
           )
           assert.equal(state.pending[0].mimetype, 'text/plain')
           assert.isNull(state.pending[0].image)
           assert.equal(state.pending[1].path, 'test/fixtures/128x128.png')
           assert.equal(
             state.pending[1].checksum,
-            'ba2bba5f5a187efe6e0ec26614a1e04a44f4856186405991317a8d96780fd179'
+            'sha256-ba2bba5f5a187efe6e0ec26614a1e04a44f4856186405991317a8d96780fd179'
           )
           assert.equal(state.pending[1].mimetype, 'image/png')
           assert.isTrue(state.pending[1].image.startsWith('data:image/jpg;base64,'))

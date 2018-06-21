@@ -108,6 +108,14 @@ exports.resetFilters = () => {
   }
 }
 
+exports.SEARCH_ASSETS = 'SEARCH_ASSETS'
+exports.searchAssets = (query) => {
+  return {
+    type: exports.SEARCH_ASSETS,
+    payload: query
+  }
+}
+
 exports.GET_ASSETS = 'GET_ASSETS'
 exports.requestAssets = () => {
   return {

@@ -153,6 +153,10 @@ function assets (
       return Object.assign({}, state, {
         isPending: true
       })
+    case actions.SEARCH_ASSETS:
+      return Object.assign({}, state, {
+        isPending: true
+      })
     case actions.GET_ASSETS_FULFILLED:
       return Object.assign({}, state, {
         isPending: false,
@@ -362,5 +366,6 @@ exports.reducer = combineReducers({
   drops: modelReducer('drops'),
   editor: modelReducer('editor'),
   options: modelReducer('options'),
+  search: modelReducer('search'),
   forms: formReducer('')
 })

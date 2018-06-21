@@ -26,6 +26,7 @@ const ResetButton = ({onClick}) => {
     isLink: true,
     isOutlined: true,
     isFullWidth: true,
+    isSize: 'small',
     onClick: onClick
   }, 'reset all filters')
 }

@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2017 Nathan Fiedler
+// Copyright (c) 2018 Nathan Fiedler
 //
 const {createStore, applyMiddleware} = require('redux')
 const createSagaMiddleware = require('redux-saga').default
@@ -29,7 +29,7 @@ exports.configureStore = ({middleware = []} = {}) => {
   const midware = Array.from(middleware)
   midware.unshift(sagaMiddleware)
   midware.push(routerMiddleware(exports.history))
-  if (isDevMode) {
+  if (isDevMode && process.env.NODE_ENV !== 'test') {
     midware.push(createLogger())
   }
   const store = createStore(

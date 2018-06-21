@@ -1,5 +1,4 @@
 * Mujina
-
 ** Next
 *** General
 **** DONE Edit asset should fetch attributes again
@@ -8,18 +7,59 @@
 - Need a semi-transparent "delete" button in the corner to go back
 
 *** Search
-**** TODO Add a search bar across the top of most screens
-- General interface
-  - text field
-  - placeholder "Search"
-  - magnifying glass icon
-  - button "Search" to perform the search
-- Support the fancy queries, like "tag:", "loc:", "before:2017-05", etc
-- Multiple tags requires a "tag:" for each one
-- "is:image" and similar would be converted to "mimetype:image/*"
-- Allow searching on the caption field
+**** DONE Add a search bar across the top of most screens
+**** DONE Get the basic interface working [7/7]
+- [X] fix the width of the search bar to fit the remainder of the window
+- [X] eliminate the box-shadow below the navbar
+- [X] stretch the text field to fill the available space
+- [X] keep the search bar stuck to the top of the window
+- [X] pressing Enter in the search field should submit
+- [X] submitting should do something
+- [X] Make the "reset" button smaller
+
+**** DONE Get the basic search feature working [6/6]
+- [X] Should use react-redux-form for the search field
+- [X] Implement the parser/evaluator
+- [X] Support multiple "tag:" values
+- [X] Support multiple "loc:" values
+- [X] Support date range search: "before:2017-05", "after:2018-01"
+- [X] Use existing search field to perform the search
+
+**** TODO Fix the =after= and =before= which seem to not work
+**** TODO The reset filters button should reset the search field?
+**** TODO Consider how do asset filters and search should work together
+- May need a mode for searching and another for browsing
+- Design the search bar and selectors accordingly
+
+**** TODO Fix the buggy browsing/search interface
+***** TODO The search navbar is a little too wide, Search button nearly runs off the edge
+***** TODO Fix the search bar positioning before/after assets are shown
+It is initially shifted upward a bit and then it moves down when assets are
+shown in the thumbnail grid.
+***** TODO Filters tile has some mysterious padding on the right that creates a needless gap
+***** TODO Try to get the asset filters panel to stretch as desired
+- See https://www.bitovi.com/blog/use-flexbox-to-create-a-sticky-header-and-sidebar-with-flexible-content
+  which has a full page design; seems to be hard to make this work with bulma since
+  the two "flex" frameworks interfere with each other
+- See flexbox section below
+- May appear to be working, but resize the window to be sure
+- Need to somehow set the height of the panelContent Block
+- Maybe set min-height: 100vh on the body
+   (https://philipwalton.github.io/solved-by-flexbox/demos/sticky-footer/)
+- https://codepen.io/stephenbunch/pen/KWBNVo
+  - doesn't help
+- https://www.bitovi.com/blog/use-flexbox-to-create-a-sticky-header-and-sidebar-with-flexible-content
+- https://codepen.io/sulfurious/pen/eWPBjY
+- https://codepen.io/anon/pen/doyVxj
 
 *** Bulk Edit
+**** TODO Short term solution akin to perkeep web interface [0/4]
+- [ ] Easy selection with hover checkbox button
+- [ ] When selections, show panel for performing actions
+- [ ] Actions include adding, deleting tags, setting location
+  - This is basically a simplified bulk edit
+- [ ] Use a prefix for the checksum values
+
 **** TODO Design bulk edit solution, probably similar to JIRA [0/5]
 - [ ] Access the bulk edit screen via a menu item
 - [ ] Use same search form as webui
@@ -72,7 +112,6 @@
 
 **** TODO File/Open dialog to select files to be added (goes to drop screen)
 
-
 *** Videos
 **** TODO How to get large videos into storage?
 **** TODO Show videos using the video tag
@@ -80,7 +119,6 @@
 **** TODO Use video tag for thumbnail view
 **** TODO Show 5 or so frames from the video on hover
 **** TODO Show placeholder icons for videos that fail to load
-
 
 ** Investigate
 
@@ -104,18 +142,6 @@
 
 ** Upcoming
 *** Buggy Interface
-**** TODO Try to get the asset filters panel to stretch as desired
-- See flexbox section below
-- May appear to be working, but resize the window to be sure
-- Need to somehow set the height of the panelContent Block
-- Maybe set min-height: 100vh on the body
-   (https://philipwalton.github.io/solved-by-flexbox/demos/sticky-footer/)
-- https://codepen.io/stephenbunch/pen/KWBNVo
-  - doesn't help
-- https://www.bitovi.com/blog/use-flexbox-to-create-a-sticky-header-and-sidebar-with-flexible-content
-- https://codepen.io/sulfurious/pen/eWPBjY
-- https://codepen.io/anon/pen/doyVxj
-
 **** TODO Try to center the thumbnail vertically on the dropped files page
 
 **** TODO Improve the scrolling fluidity
@@ -123,6 +149,11 @@
 - Perhaps some react-visibility settings could be employed
 
 *** Refinements
+**** TODO Advanced search features
+***** TODO "is:image" and similar are converted to "mimetype:image/*" :tanuki:
+***** TODO "with:<name>" for searching people
+***** TODO logical operators (and, or) and grouping with parentheses
+
 **** TODO Add a trash/delete icon next to dropped file to remove individual files
 **** TODO Show N most recent assets by default (timeline style)
 **** TODO Use bulma Level to make a toolbar sort of thing at the top/bottom

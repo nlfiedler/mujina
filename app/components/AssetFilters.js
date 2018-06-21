@@ -4,9 +4,6 @@
 const React = require('react')
 const {
   Container,
-  Control,
-  Icon,
-  Input,
   Panel,
   PanelBlock,
   PanelTab,
@@ -16,6 +13,7 @@ const {LocationList} = require('../containers/LocationList')
 const {ResetFilters} = require('../containers/ResetFilters')
 const {TagList} = require('../containers/TagList')
 const {YearList} = require('../containers/YearList')
+const {Search} = require('../containers/Search')
 
 const tabLabels = [
   'Tags',
@@ -76,12 +74,7 @@ class AssetFilters extends React.Component {
       }}>
         <Panel>
           <PanelBlock>
-            <Control hasIcons='left'>
-              <Input isSize='small' placeholder='Search' />
-              <Icon isSize='small' isAlign='left'>
-                <span className='fa fa-search' />
-              </Icon>
-            </Control>
+            <Search />
           </PanelBlock>
           <PanelTabs>
             {filterTabs}
