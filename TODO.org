@@ -25,17 +25,19 @@
 - [X] Support date range search: "before:2017-05", "after:2018-01"
 - [X] Use existing search field to perform the search
 
-**** TODO Fix the =after= and =before= which seem to not work
-**** TODO The reset filters button should reset the search field?
+**** DONE Fix the =after= and =before= which seem to not work
 **** TODO Consider how do asset filters and search should work together
+- Maybe search field on filters panel should be a button
+  - Navigates to search page
+  - Rename Search container to something else
+  - Make a Search component that is like Home component
+  - Top of search page has full width search bar
+  - Bottom is the thumbnail grid
+  - Need a button/link to get back to Home
 - May need a mode for searching and another for browsing
 - Design the search bar and selectors accordingly
 
-**** TODO Fix the buggy browsing/search interface
-***** TODO The search navbar is a little too wide, Search button nearly runs off the edge
-***** TODO Fix the search bar positioning before/after assets are shown
-It is initially shifted upward a bit and then it moves down when assets are
-shown in the thumbnail grid.
+**** TODO Fix the buggy browsing interface
 ***** TODO Filters tile has some mysterious padding on the right that creates a needless gap
 ***** TODO Try to get the asset filters panel to stretch as desired
 - See https://www.bitovi.com/blog/use-flexbox-to-create-a-sticky-header-and-sidebar-with-flexible-content

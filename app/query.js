@@ -606,21 +606,27 @@ function runQuoted (lexer) {
   }
 }
 
-// Parse a date such as "2018", or "2018-08", or "2018-08-30" into a Date.
+// Parse a date such as "2018", or "2018-08", or "2018-08-30" into the
+// milliseconds since 1 January 1970 UTC.
 function parseDate (str) {
   let parts = str.split('-')
   if (parts.length < 1 || parts.length > 3) {
     throw new Error(`invalid date string: ${str}`)
   }
   parts = parts.map(e => Number.parseInt(e))
+  let dt = null
   switch (parts.length) {
     case 3:
-      return new Date(parts[0], parts[1] - 1, parts[2])
+      dt = new Date(parts[0], parts[1] - 1, parts[2])
+      break
     case 2:
-      return new Date(parts[0], parts[1] - 1)
+      dt = new Date(parts[0], parts[1] - 1)
+      break
     default:
-      return new Date(parts[0], 0)
+      dt = new Date(parts[0], 0)
+      break
   }
+  return dt.getTime()
 }
 
 module.exports = {

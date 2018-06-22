@@ -169,8 +169,8 @@ describe('Query', () => {
       const expected = {
         tags: [],
         locations: [],
-        after: new Date(2017, 5),
-        before: new Date(2018, 4, 13)
+        after: 1496300400000,
+        before: 1526194800000
       }
       const actual = query.fromString('after:2017-06 and before:2018-05-13')
       assert.deepEqual(actual, expected)
@@ -180,7 +180,7 @@ describe('Query', () => {
       const expected = {
         tags: ['beach'],
         locations: [],
-        after: new Date(2017, 0),
+        after: 1483257600000,
         before: null
       }
       const actual = query.fromString('after:2017 tag:beach')
