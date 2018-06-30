@@ -8,7 +8,7 @@ const {
 const {DroppedFiles} = require('../containers/DroppedFiles')
 const {UploadingFiles} = require('../containers/UploadingFiles')
 
-const Upload = () => (
+const UploadPage = () => (
   <Tile isAncestor isMarginless>
     <Tile isSize={12} isVertical isParent>
       <Tile isChild>
@@ -22,5 +22,5 @@ const Upload = () => (
 )
 
 module.exports = {
-  Upload
+  UploadPage
 }

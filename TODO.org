@@ -1,45 +1,30 @@
 * Mujina
 ** Next
-*** General
-**** DONE Edit asset should fetch attributes again
+*** Asset preview
+**** TODO Asset preview needs to be modal
+- Because it is easy to change selections and the preview is still there!
+- Should cover/disable the selectors
+- Would not show thumbnails along the top
+- Preview modal would fill 95% of width and height
 
 **** TODO Clicking on asset in preview screen should show it full size
 - Need a semi-transparent "delete" button in the corner to go back
 
 *** Search
-**** DONE Add a search bar across the top of most screens
-**** DONE Get the basic interface working [7/7]
-- [X] fix the width of the search bar to fit the remainder of the window
-- [X] eliminate the box-shadow below the navbar
-- [X] stretch the text field to fill the available space
-- [X] keep the search bar stuck to the top of the window
-- [X] pressing Enter in the search field should submit
-- [X] submitting should do something
-- [X] Make the "reset" button smaller
+**** TODO Search needs to be a separate page
+- Because the search is more sophisticated than the selectors
+- And because search and selectors are not set up to work together
+- Search field on filters panel will be a button to navigate to search page
+- Make a SearchPage component that is like Home component
+- Top of search page has full width search bar
+- Main area is the thumbnail grid
+- Search navbar will need a "brand" button/link to go back Home
+- Switching between search and selectors should refresh results, like webui
 
-**** DONE Get the basic search feature working [6/6]
-- [X] Should use react-redux-form for the search field
-- [X] Implement the parser/evaluator
-- [X] Support multiple "tag:" values
-- [X] Support multiple "loc:" values
-- [X] Support date range search: "before:2017-05", "after:2018-01"
-- [X] Use existing search field to perform the search
-
-**** DONE Fix the =after= and =before= which seem to not work
-**** TODO Consider how do asset filters and search should work together
-- Maybe search field on filters panel should be a button
-  - Navigates to search page
-  - Rename Search container to something else
-  - Make a Search component that is like Home component
-  - Top of search page has full width search bar
-  - Bottom is the thumbnail grid
-  - Need a button/link to get back to Home
-- May need a mode for searching and another for browsing
-- Design the search bar and selectors accordingly
-
-**** TODO Fix the buggy browsing interface
-***** TODO Filters tile has some mysterious padding on the right that creates a needless gap
-***** TODO Try to get the asset filters panel to stretch as desired
+*** Glitches
+**** TODO Filters tile has some mysterious padding on the right that creates a needless gap
+**** TODO Try to get the asset filters panel to stretch as desired
+- Probably the Home component should do away with Tile completely
 - See https://www.bitovi.com/blog/use-flexbox-to-create-a-sticky-header-and-sidebar-with-flexible-content
   which has a full page design; seems to be hard to make this work with bulma since
   the two "flex" frameworks interfere with each other
@@ -47,12 +32,16 @@
 - May appear to be working, but resize the window to be sure
 - Need to somehow set the height of the panelContent Block
 - Maybe set min-height: 100vh on the body
-   (https://philipwalton.github.io/solved-by-flexbox/demos/sticky-footer/)
+  (https://philipwalton.github.io/solved-by-flexbox/demos/sticky-footer/)
 - https://codepen.io/stephenbunch/pen/KWBNVo
   - doesn't help
 - https://www.bitovi.com/blog/use-flexbox-to-create-a-sticky-header-and-sidebar-with-flexible-content
 - https://codepen.io/sulfurious/pen/eWPBjY
 - https://codepen.io/anon/pen/doyVxj
+
+**** TODO Improve the scrolling fluidity
+- Seems like the virtual paging is making the scrolling jittery
+- Perhaps some react-visibility settings could be employed
 
 *** Bulk Edit
 **** TODO Short term solution akin to perkeep web interface [0/4]
@@ -78,25 +67,18 @@
   - [ ] change media type
 
 *** Uploads
-**** DONE Detect duplicate assets on drop [7/7]
-- [X] At start of checksumDrops(), push to =/upload= route
-- [X] As assets are processed 1-by-1, =/upload= page will show dropped files
-- [X] After checksumming assets, query backend to check for duplicates
-- [X] Flag duplicate assets and disable input on dropped files page
-- [X] Show asset details: tags, location, caption
-- [X] Help text below caption input should indicate its duplicateness
-- [X] Mark the asset so it does not get uploaded
+**** TODO Try to center the thumbnail vertically on the dropped files page
+**** TODO Add menu/button to navigate to upload screen
+- Big "primary" style button on home screen?
+- Menu item to reach upload screen
+- Add a button on the upload screen to select additional files
 
-**** DONE Handle additional drop events while on the upload screen
 **** TODO Tag and location completion on uploads page
 **** TODO Add a button to remove a single upload entry from the list
 **** TODO Can the upload thumbnails be improved, they are kinda grainy
 **** TODO Upload progress bar needs to be made visible
 - Either squeeze it between the save/cancel buttons
 - Or scroll down to the bottom fo the page when save button is pressed
-
-**** TODO Add menu item for going to the upload screen
-- Add a button on the upload screen to select additional files
 
 **** TODO Consider how to show uploads.error in NewFileList page
 **** TODO Sometimes dropping an image just opens the image
@@ -112,10 +94,10 @@
 - See Slack, which shows an overlay while dragging over the window
 - Probably need to add dragover and drop handlers to the top-level App component
 
-**** TODO File/Open dialog to select files to be added (goes to drop screen)
-
 *** Videos
 **** TODO How to get large videos into storage?
+- Files up to 100MB seem to be okay, but what about really large files?
+
 **** TODO Show videos using the video tag
 **** TODO Show duration for videos
 **** TODO Use video tag for thumbnail view
@@ -123,7 +105,6 @@
 **** TODO Show placeholder icons for videos that fail to load
 
 ** Investigate
-
 *** TODO How to search for assets with no tags or location?
 - GraphQL works, but it is beyond the capability of non-technical people
 
@@ -143,20 +124,12 @@
 - Maybe look at that relatively new DataTransfer API business
 
 ** Upcoming
-*** Buggy Interface
-**** TODO Try to center the thumbnail vertically on the dropped files page
-
-**** TODO Improve the scrolling fluidity
-- Seems like the virtual paging is making the scrolling jittery
-- Perhaps some react-visibility settings could be employed
-
 *** Refinements
 **** TODO Advanced search features
 ***** TODO "is:image" and similar are converted to "mimetype:image/*" :tanuki:
 ***** TODO "with:<name>" for searching people
 ***** TODO logical operators (and, or) and grouping with parentheses
 
-**** TODO Add a trash/delete icon next to dropped file to remove individual files
 **** TODO Show N most recent assets by default (timeline style)
 **** TODO Use bulma Level to make a toolbar sort of thing at the top/bottom
 **** TODO Consider setting the application menu appropriately for macOS and win32
@@ -190,10 +163,7 @@
 **** Better tags input
 - Use Bulma-Extensions TagsInput on the asset edit screen
 
-*** Drop zone improvements
-**** TODO Consider some style tricks to show drop readiness
-- Handle the dragenter and dragleave events to add style properties dynamically
-
+*** File export
 **** TODO Allow dragging out images (and videos?) as a form of export
 - Likely need a "File > Export" option with Save dialog for larger files
 - https://electronjs.org/docs/tutorial/native-file-drag-drop
