@@ -222,14 +222,6 @@ class Parser {
     }
     if (this.arguments.length) {
       const arg = this.arguments.pop()
-      // if (this.arguments.length === 0 && this.operators.length === 0) {
-      //   if (arg.isOperator) {
-      //     return arg
-      //   }
-      //   const t = new Token('operator', 'and', 0)
-      //   t.addChildren(arg)
-      //   return t
-      // }
       if (this.operators.length === 0 && arg.isOperator) {
         return arg
       }
