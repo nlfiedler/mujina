@@ -1,14 +1,12 @@
 * Mujina
 ** Next
 *** Asset preview
-**** TODO Asset preview needs to be modal
-- Because it is easy to change selections and the preview is still there!
-- Should cover/disable the selectors
-- Would not show thumbnails along the top
-- Preview modal would fill 95% of width and height
-
 **** TODO Clicking on asset in preview screen should show it full size
 - Need a semi-transparent "delete" button in the corner to go back
+
+*** Thumbnail view
+**** TODO Find out how to make it look like pexels.com (or perkeep)
+- Probably a combination of flexbox and object-fit styling
 
 *** Search
 **** TODO Search needs to be a separate page
@@ -46,6 +44,8 @@
 *** Bulk Edit
 **** TODO Short term solution akin to perkeep web interface [0/4]
 - [ ] Easy selection with hover checkbox button
+  - Could use =svg= tag to render the button
+  - See pexels.com in that it uses article tag, with nested img and button with nested svg
 - [ ] When selections, show panel for performing actions
 - [ ] Actions include adding, deleting tags, setting location
   - This is basically a simplified bulk edit

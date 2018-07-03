@@ -32,6 +32,14 @@ const AssetSidebar = ({details}) => {
   return (
     <Box style={boxStyle}>
       <dl>
+        {term('Tags')}
+        {data(details.tags.join(', '))}
+        {term('Location')}
+        {data(details.location || '(none)')}
+        {term('Caption')}
+        {data(details.caption || '(none)')}
+        {term('Date/Time')}
+        {data(details.datetime.toLocaleString())}
         {term('File size')}
         {data(numberFormatter.format(details.filesize) + ' bytes')}
         {term('MIME type')}

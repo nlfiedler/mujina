@@ -1,17 +1,16 @@
 //
-// Copyright (c) 2017 Nathan Fiedler
+// Copyright (c) 2018 Nathan Fiedler
 //
 const React = require('react')
 const PropTypes = require('prop-types')
 const {
   Button,
   Card,
-  CardContent,
   CardHeader,
   CardImage,
-  Content,
   Delete,
   Icon,
+  Image,
   Navbar,
   NavbarBrand,
   NavbarEnd,
@@ -50,32 +49,8 @@ const AssetPreview = ({details}) => {
         </Navbar>
       </CardHeader>
       <CardImage hasTextAlign='centered'>
-        <figure className='image'>
-          <img
-            alt={details.identifier}
-            style={{
-              'display': 'inline',
-              'width': 'auto'
-            }}
-            src={previewUrl}
-          />
-        </figure>
+        <Image alt={details.identifier} src={previewUrl} />
       </CardImage>
-      <CardContent>
-        <Content>
-          <Icon isSize='small' className='fa fa-tag' />
-          <strong>{details.tags.join(', ')}</strong>
-          <br />
-          <Icon isSize='small'><span className='fa fa-quote-left' /></Icon>
-          {details.caption}
-          <br />
-          <Icon isSize='small'><span className='fa fa-map-marker' /></Icon>
-          {details.location || ''}
-          <br />
-          <Icon isSize='small'><span className='fa fa-calendar' /></Icon>
-          <small>{details.datetime.toLocaleString()}</small>
-        </Content>
-      </CardContent>
     </Card>
   )
 }

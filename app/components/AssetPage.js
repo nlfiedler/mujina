@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2017 Nathan Fiedler
+// Copyright (c) 2018 Nathan Fiedler
 //
 const React = require('react')
 const PropTypes = require('prop-types')
@@ -8,17 +8,17 @@ const {
 } = require('bloomer')
 const {Asset} = require('../containers/Asset')
 const {AssetSelector} = require('../containers/AssetSelector')
-const {AssetFilters} = require('./AssetFilters')
+const {AssetDetails} = require('../containers/AssetDetails')
 
 const AssetPage = () => {
   return (
     <Tile isAncestor isMarginless>
-      <Tile isSize={2} isVertical isParent isPaddingless>
+      <Tile isSize={3} isVertical isParent isPaddingless>
         <Tile isChild>
-          <AssetFilters />
+          <AssetDetails />
         </Tile>
       </Tile>
-      <Tile isSize={10} isVertical isParent>
+      <Tile isSize={9} isVertical isParent>
         <Tile isChild>
           <AssetSelector />
         </Tile>
