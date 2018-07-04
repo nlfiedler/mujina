@@ -1,11 +1,11 @@
 //
-// Copyright (c) 2017 Nathan Fiedler
+// Copyright (c) 2018 Nathan Fiedler
 //
 const React = require('react')
 const {
   Tile
 } = require('bloomer')
-const {AssetFilters} = require('./AssetFilters')
+const {AssetFilters} = require('../containers/AssetFilters')
 const {Thumbnails} = require('../containers/Thumbnails')
 
 // The default padding on the parent tile causes the asset filters to be too

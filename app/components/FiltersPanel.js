@@ -1,8 +1,9 @@
 //
-// Copyright (c) 2017 Nathan Fiedler
+// Copyright (c) 2018 Nathan Fiedler
 //
 const React = require('react')
 const {
+  Button,
   Container,
   Panel,
   PanelBlock,
@@ -13,7 +14,7 @@ const {LocationList} = require('../containers/LocationList')
 const {ResetFilters} = require('../containers/ResetFilters')
 const {TagList} = require('../containers/TagList')
 const {YearList} = require('../containers/YearList')
-const {Search} = require('../containers/Search')
+const {history} = require('../store')
 
 const tabLabels = [
   'Tags',
@@ -34,7 +35,7 @@ const FilterTab = (props) => (
   }}>{props.tabLabel}</PanelTab>
 )
 
-class AssetFilters extends React.Component {
+class FiltersPanel extends React.Component {
   constructor (props) {
     super(props)
     // Do _not_ stash props on this, otherwise react/redux has no way of
@@ -43,6 +44,12 @@ class AssetFilters extends React.Component {
       activeTabIndex: 0
     }
     this.handleTabClick = this.handleTabClick.bind(this)
+  }
+
+  componentDidMount () {
+    // Ensure the assets are retrieved in the event we switched from another
+    // page, such as search.
+    this.props.onMount()
   }
 
   handleTabClick (tabIndex) {
@@ -74,7 +81,9 @@ class AssetFilters extends React.Component {
       }}>
         <Panel>
           <PanelBlock>
-            <Search />
+            <Button isSize='small' isLink isOutlined isFullWidth onClick={() => history.push('/search')}>
+              Search
+            </Button>
           </PanelBlock>
           <PanelTabs>
             {filterTabs}
@@ -95,5 +104,5 @@ class AssetFilters extends React.Component {
 }
 
 module.exports = {
-  AssetFilters
+  FiltersPanel
 }

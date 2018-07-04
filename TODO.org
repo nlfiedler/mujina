@@ -6,22 +6,16 @@
 
 *** Thumbnail view
 **** TODO Find out how to make it look like pexels.com (or perkeep)
-- Probably a combination of flexbox and object-fit styling
-
-*** Search
-**** TODO Search needs to be a separate page
-- Because the search is more sophisticated than the selectors
-- And because search and selectors are not set up to work together
-- Search field on filters panel will be a button to navigate to search page
-- Make a SearchPage component that is like Home component
-- Top of search page has full width search bar
-- Main area is the thumbnail grid
-- Search navbar will need a "brand" button/link to go back Home
-- Switching between search and selectors should refresh results, like webui
+- Change the thumb/preview API to take either height/width and fit to that
+  - Client requests thumbs 400 px high and the width will be narrow or wide depending on aspect ratio
+  - Mujina can scale or object-fit the thumbs
+  - Default to the current 240x240 behavior for the sake of webui
+- Need a best fit algo to choose number of thumbs per row
 
 *** Glitches
 **** TODO Filters tile has some mysterious padding on the right that creates a needless gap
 **** TODO Try to get the asset filters panel to stretch as desired
+- Try setting the flex direction to vertical and setting flex-grow: 1 on the panel block containing the filters
 - Probably the Home component should do away with Tile completely
 - See https://www.bitovi.com/blog/use-flexbox-to-create-a-sticky-header-and-sidebar-with-flexible-content
   which has a full page design; seems to be hard to make this work with bulma since
@@ -46,7 +40,7 @@
 - [ ] Easy selection with hover checkbox button
   - Could use =svg= tag to render the button
   - See pexels.com in that it uses article tag, with nested img and button with nested svg
-- [ ] When selections, show panel for performing actions
+- [ ] When selections, filters panel changes to show available actions
 - [ ] Actions include adding, deleting tags, setting location
   - This is basically a simplified bulk edit
 - [ ] Use a prefix for the checksum values
@@ -90,6 +84,7 @@
   - Would need to know if our app initiated the event
 - Maybe a menu item to get back "Home"
 - Maybe a periodic check in main.js to ensure webContents are what is expected
+**** TODO Consider a "recent uploads" button to show newly added assets
 **** TODO Show a fancy help overlay thingy on dragover
 - See Slack, which shows an overlay while dragging over the window
 - Probably need to add dragover and drop handlers to the top-level App component

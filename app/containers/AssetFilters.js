@@ -2,28 +2,27 @@
 // Copyright (c) 2018 Nathan Fiedler
 //
 const {connect} = require('react-redux')
-const {searchAssets} = require('../actions')
-const {SearchBar} = require('../components/SearchBar')
+const {requestAssets} = require('../actions')
+const {FiltersPanel} = require('../components/FiltersPanel')
 
 const mapStateToProps = state => {
   return {
-    search: state.search
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    onSubmit: query => {
-      dispatch(searchAssets(query))
+    onMount: () => {
+      dispatch(requestAssets())
     }
   }
 }
 
-const Search = connect(
+const AssetFilters = connect(
   mapStateToProps,
   mapDispatchToProps
-)(SearchBar)
+)(FiltersPanel)
 
 module.exports = {
-  Search
+  AssetFilters
 }

@@ -107,13 +107,10 @@ function * uploadFiles (action) {
   }
 }
 
-function * handleSelection (action) {
+function * getAssets (action) {
   // Gather the selected attributes (years, locations, tags).
   const selections = yield select(getSelectedAttrs)
   try {
-    // Start by indicating that assets are about to be queried, then start the
-    // process of actually querying them.
-    yield put(actions.requestAssets())
     const assets = yield call(Api.queryAssets, selections)
     yield put(actions.receiveAssets(assets))
   } catch (err) {
@@ -200,8 +197,9 @@ function * watchSelectorToggles () {
     actions.TOGGLE_LOCATION,
     actions.TOGGLE_TAG,
     actions.TOGGLE_YEAR,
-    actions.RESET_FILTERS
-  ], handleSelection)
+    actions.RESET_FILTERS,
+    actions.GET_ASSETS
+  ], getAssets)
 }
 
 function * watchFetchAsset () {

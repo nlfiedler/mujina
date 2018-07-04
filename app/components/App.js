@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2017 Nathan Fiedler
+// Copyright (c) 2018 Nathan Fiedler
 //
 const React = require('react')
 const {Route} = require('react-router')
@@ -9,6 +9,7 @@ const {AssetEditPage} = require('./AssetEditPage')
 const {ErrorPage} = require('./ErrorPage')
 const {HomePage} = require('./HomePage')
 const {OptionsPage} = require('./OptionsPage')
+const {SearchPage} = require('./SearchPage')
 const {UploadPage} = require('./UploadPage')
 const {history} = require('../store')
 
@@ -18,6 +19,7 @@ const App = () => (
       <Route exact path='/' component={HomePage} />
       <Route path='/asset/:id' component={AssetPage} />
       <Route path='/edit/:id' component={AssetEditPage} />
+      <Route path='/search' component={SearchPage} />
       <Route path='/upload' component={UploadPage} />
       <Route path='/options' component={OptionsPage} />
       <Route path='/error' component={ErrorPage} />
