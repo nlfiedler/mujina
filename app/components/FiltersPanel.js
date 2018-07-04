@@ -72,6 +72,9 @@ class FiltersPanel extends React.Component {
     // The Container is needed to ensure the components only grow to the
     // height of the viewport at maximum.
     //
+    // The panel flex grow/shrink and such ensure that the filters content
+    // stretches to fill available space, while the other panels do not.
+    //
     return (
       <Container isFluid isMarginless style={{
         'height': '100vh',
@@ -79,22 +82,27 @@ class FiltersPanel extends React.Component {
         'top': 0,
         'left': 0
       }}>
-        <Panel>
-          <PanelBlock>
+        <Panel style={{
+          'display': 'flex',
+          'flexDirection': 'column',
+          'height': '100%'
+        }}>
+          <PanelBlock style={{'flexShrink': 0}}>
             <Button isSize='small' isLink isOutlined isFullWidth onClick={() => history.push('/search')}>
               Search
             </Button>
           </PanelBlock>
-          <PanelTabs>
+          <PanelTabs style={{'flexShrink': 0}}>
             {filterTabs}
           </PanelTabs>
           <PanelBlock style={{
-            'height': '85vh',
+            'alignItems': 'flex-start',
+            'flexGrow': 1,
             'overflowY': 'auto'
           }}>
             {panelContent}
           </PanelBlock>
-          <PanelBlock>
+          <PanelBlock style={{'flexShrink': 0}}>
             <ResetFilters />
           </PanelBlock>
         </Panel>

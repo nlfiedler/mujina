@@ -14,26 +14,13 @@
 
 *** Glitches
 **** TODO Filters tile has some mysterious padding on the right that creates a needless gap
-**** TODO Try to get the asset filters panel to stretch as desired
-- Try setting the flex direction to vertical and setting flex-grow: 1 on the panel block containing the filters
-- Probably the Home component should do away with Tile completely
-- See https://www.bitovi.com/blog/use-flexbox-to-create-a-sticky-header-and-sidebar-with-flexible-content
-  which has a full page design; seems to be hard to make this work with bulma since
-  the two "flex" frameworks interfere with each other
-- See flexbox section below
-- May appear to be working, but resize the window to be sure
-- Need to somehow set the height of the panelContent Block
-- Maybe set min-height: 100vh on the body
-  (https://philipwalton.github.io/solved-by-flexbox/demos/sticky-footer/)
-- https://codepen.io/stephenbunch/pen/KWBNVo
-  - doesn't help
-- https://www.bitovi.com/blog/use-flexbox-to-create-a-sticky-header-and-sidebar-with-flexible-content
-- https://codepen.io/sulfurious/pen/eWPBjY
-- https://codepen.io/anon/pen/doyVxj
-
 **** TODO Improve the scrolling fluidity
 - Seems like the virtual paging is making the scrolling jittery
 - Perhaps some react-visibility settings could be employed
+
+**** TODO Handle search query string errors better
+- Currently, an error in the query goes to the error page without any helpful hint
+- Currently, once the query is wrong, you can never fix it because it directly goes to the error page
 
 *** Bulk Edit
 **** TODO Short term solution akin to perkeep web interface [0/4]
