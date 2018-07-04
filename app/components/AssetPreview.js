@@ -21,8 +21,31 @@ const {
 const config = require('../config')
 const {history} = require('../store')
 
+function makeImage (details) {
+  // just serve up the full asset, no need for a "preview" that looks grainy
+  // when the window is larger in size
+  const srcUrl = config.serverUrl({pathname: '/asset/' + details.identifier})
+  return (
+    <Image alt={details.identifier} src={srcUrl} />
+  )
+}
+
+function makeVideo (details) {
+  const srcUrl = config.serverUrl({pathname: '/asset/' + details.identifier})
+  // Treat quicktime videos as MP4 so that Chromium will display it without
+  // the need for plugins.
+  const mimetype = details.mimetype === 'video/quicktime' ? 'video/mp4' : details.mimetype
+  return (
+    <video controls preload='auto' style={{'width': '100%', 'height': '100%'}}>
+      <source src={srcUrl} type={mimetype} />
+      'Bummer, your browser does not support the HTML5'
+      <code>video</code>
+      'tag.'
+    </video>
+  )
+}
+
 const AssetPreview = ({details}) => {
-  const previewUrl = config.serverUrl({pathname: '/preview/' + details.identifier})
   return (
     <Card>
       <CardHeader>
@@ -49,27 +72,11 @@ const AssetPreview = ({details}) => {
         </Navbar>
       </CardHeader>
       <CardImage hasTextAlign='centered'>
-        <Image alt={details.identifier} src={previewUrl} />
+        {details.mimetype.startsWith('video/') ? makeVideo(details) : makeImage(details)}
       </CardImage>
     </Card>
   )
 }
-
-// if String.startsWith "video/" asset.mimetype then
-//     video [ style [ ("width", "100%"), ("height", "100%") ]
-//           , controls True, preload "auto" ]
-//         [ source [ src ("/asset/" ++ asset.identifier)
-//                  , type_ (assetMimeType asset.mimetype) ] [ ]
-//         , text "Bummer, your browser does not support the HTML5"
-//         , code [ ] [ text "video" ]
-//         , text "tag."
-//         ]
-// else
-//     a [ href ("/asset/" ++ asset.identifier) ]
-//         [ img [ class "asset"
-//               , src ("/preview/" ++ asset.identifier)
-//               , alt asset.file_name ] [ ]
-//         ]
 
 AssetPreview.propTypes = {
   details: PropTypes.shape({

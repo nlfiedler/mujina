@@ -20,6 +20,17 @@ const dataStyle = {
   'margin': '0'
 }
 const numberFormatter = new Intl.NumberFormat()
+const durationFormatter = new Intl.NumberFormat({maximumFractionDigits: 1})
+
+function formatDuration (value) {
+  if (!value) {
+    return '(none)'
+  }
+  if (value > 60) {
+    return durationFormatter.format(Math.round(value / 60)) + ' minutes'
+  }
+  return durationFormatter.format(Math.round(value)) + ' seconds'
+}
 
 const AssetSidebar = ({details}) => {
   const term = (content) => (
@@ -47,7 +58,7 @@ const AssetSidebar = ({details}) => {
         {term('ID')}
         {data(_.truncate(details.identifier, {length: 24}))}
         {term('Duration')}
-        {data(details.duration || '(none)')}
+        {data(formatDuration(details.duration))}
       </dl>
     </Box>
   )
