@@ -1,16 +1,11 @@
 //
 // Copyright (c) 2018 Nathan Fiedler
 //
-const _ = require('lodash')
 const React = require('react')
 const PropTypes = require('prop-types')
 const {
   Card,
-  CardContent,
-  Level,
-  LevelItem,
-  LevelLeft,
-  LevelRight
+  CardContent
 } = require('bloomer')
 const VisibilitySensor = require('react-visibility-sensor')
 const config = require('../config')
@@ -26,7 +21,7 @@ class ThumbnailCard extends React.Component {
     this.onImageLoad = this.onImageLoad.bind(this)
     this.imageElement = null
     this.state = {visible: false}
-    this.imageDimensions = {width: 240, height: 240}
+    this.imageDimensions = {width: 300, height: 300}
   }
 
   onVisibilityChange (isVisible) {
@@ -51,7 +46,7 @@ class ThumbnailCard extends React.Component {
     // particular, set the width to 'auto' to prevent stretching.
 
     // Initially the images are assumed to be not visible and a single-pixel
-    // transparent image is stretched to fit a 240x240 box. When the component
+    // transparent image is stretched to fit a 300x300 box. When the component
     // is made visible, the state is changed and the real image is fetched. Once
     // that image has been loaded, its dimensions are saved. Those values are
     // used to replace the image with one that is exactly the same dimensions in
@@ -63,7 +58,7 @@ class ThumbnailCard extends React.Component {
         <img
           alt={filename}
           style={{'width': 'auto'}}
-          src={config.serverUrl({pathname: '/thumbnail/' + identifier})}
+          src={config.serverUrl({pathname: '/widethumb/' + identifier})}
           onClick={() => onClick(identifier)}
           ref={(image) => { this.imageElement = image }}
           onLoad={this.onImageLoad}
@@ -84,20 +79,11 @@ class ThumbnailCard extends React.Component {
   }
 
   render () {
-    const shortName = _.truncate(this.props.filename, {length: 24})
     return (
       <VisibilitySensor onChange={this.onVisibilityChange} partialVisibility>
         <Card style={{'boxShadow': 'none'}}>
           <CardContent>
             {this.getImageComponent()}
-            <Level>
-              <LevelLeft>
-                <LevelItem><small>{shortName}</small></LevelItem>
-              </LevelLeft>
-              <LevelRight>
-                <LevelItem><small>{this.props.datetime.toLocaleDateString()}</small></LevelItem>
-              </LevelRight>
-            </Level>
           </CardContent>
         </Card>
       </VisibilitySensor>
