@@ -6,8 +6,13 @@
 
 *** Thumbnail view
 **** TODO Find out how to make it look like pexels.com (or perkeep)
-- Retrieve =/widethumb/:id= to get larger thumbnail
-- Show card without file name and date
+- Need to set the image dimensions to squeeze them into rows, filling all
+  available space, and leaving only a small margin.
+  - No need to resize the thumbnail, just set the =img= dimensions
+- If the row has space, get the next image, scale down so they fit the row.
+  - That is, select one asset at a time, until the combined width exceeds the container,
+    then shrink the images to fit the width (including margins).
+- The placeholder image should be 300x300 on disk and stretched to fit actual thumb size
 
 *** Glitches
 **** TODO Improve the scrolling fluidity
