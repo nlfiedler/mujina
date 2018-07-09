@@ -24,6 +24,9 @@
 - Currently, an error in the query goes to the error page without any helpful hint
 - Currently, once the query is wrong, you can never fix it because it directly goes to the error page
 
+**** TODO Show helpful text and examples on search page instead of results
+**** TODO Make the asset sidebar sticky so it does not scroll away
+**** TODO Make the asset selector (thumbnail row) sticky so it does not scroll away
 *** Bulk Edit
 **** TODO Short term solution akin to perkeep web interface [0/4]
 - [ ] Easy selection with hover checkbox button
@@ -89,6 +92,7 @@
 **** TODO Show 5 or so frames from the video on hover
 **** TODO Show placeholder icons for videos that fail to load
 
+*** TODO Update Electron
 ** Investigate
 *** TODO How to search for assets with no tags or location?
 - GraphQL works, but it is beyond the capability of non-technical people
