@@ -65,7 +65,7 @@ class AssetEditor extends React.Component {
 
   render () {
     const {identifier, filename} = this.props.details
-    const previewUrl = config.serverUrl({pathname: '/preview/' + identifier})
+    const previewUrl = config.serverUrl({pathname: '/asset/' + identifier})
     return (
       <Card>
         <CardHeader>
