@@ -13,6 +13,7 @@
   - That is, select one asset at a time, until the combined width exceeds the container,
     then shrink the images to fit the width (including margins).
 - The placeholder image should be 300x300 on disk and stretched to fit actual thumb size
+- Need to adjust layout when window is resized
 
 *** Glitches
 **** TODO Improve the scrolling fluidity
@@ -156,20 +157,12 @@ the tags tab is selected by default, and the locations is not showing.
 - Likely need a "File > Export" option with Save dialog for larger files
 - https://electronjs.org/docs/tutorial/native-file-drag-drop
 
-** Notes on Flexbox
-*** General Tutorials
+** Notes
+*** Flexbox Tutorials
 - https://www.w3schools.com/cSS/css3_flexbox.asp
 - https://internetingishard.com/html-and-css/flexbox/
 - https://css-tricks.com/snippets/css/a-guide-to-flexbox/
 - https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Flexible_Box_Layout/Basic_Concepts_of_Flexbox
 - https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Flexbox
-  + it is okay to nest flexible boxes
-- nice reference: https://cssreference.io/flexbox/
+- https://cssreference.io/flexbox/
 - https://philipwalton.github.io/solved-by-flexbox/
-
-*** Flexbox and scrollable content and height fill
-- https://codepen.io/stephenbunch/pen/KWBNVo
-  + doesn't help
-- https://www.bitovi.com/blog/use-flexbox-to-create-a-sticky-header-and-sidebar-with-flexible-content
-- https://codepen.io/sulfurious/pen/eWPBjY
-- https://codepen.io/anon/pen/doyVxj

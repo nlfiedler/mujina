@@ -27,7 +27,7 @@
     "fluent-ffmpeg": "^2.1.2",
     "form-data": "^2.3.2",
     "history": "^4.7.2",
-    "lodash": "^4.17.5",
+    "lodash": "^4.17.10",
     "prop-types": "^15.6.1",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
@@ -39,7 +39,7 @@
     "redux": "^3.7.2",
     "redux-logger": "^3.0.6",
     "redux-saga": "^0.16.0",
-    "request": "^2.85.0",
+    "request": "^2.87.0",
     "sharp": "^0.20.1"
   },
   "devDependencies": {
@@ -49,13 +49,13 @@
     "babel-preset-react": "^6.24.1",
     "chai": "^4.1.2",
     "del": "^3.0.0",
-    "electron-mocha": "^6.0.1",
+    "electron-mocha": "^6.0.4",
     "electron-rebuild": "^1.7.3",
     "gulp": "^3.9.1",
     "gulp-babel": "^7.0.1",
-    "mocha": "^5.1.0",
-    "nock": "^9.2.5",
+    "mocha": "^5.2.0",
+    "nock": "^9.4.1",
     "redux-immutable-state-invariant": "^2.1.0",
-    "redux-mock-store": "^1.5.1"
+    "redux-mock-store": "^1.5.3"
   }
 }
