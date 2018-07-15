@@ -165,7 +165,9 @@ function assets (
             identifier: item.id,
             filename: item.filename,
             datetime: new Date(item.datetime),
-            location: item.location
+            location: item.location,
+            thumbWidth: item.thumbWidth,
+            thumbHeight: item.thumbHeight
           }
         }),
         error: null

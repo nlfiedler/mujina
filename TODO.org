@@ -5,6 +5,25 @@
 - Need a semi-transparent "delete" button in the corner to go back
 
 *** Thumbnail view
+**** DONE Improve the thumbnail rendering (reduce jitter) [5/5]
+- [X] Remove the onLoad handler, no longer needed
+- [X] Use a placeholder image file of 300x300 pixels
+- [X] Stretch the image to fit the size of the thumbnail from the search results
+- [X] Get a prettier placeholder image because it is briefly visible
+- [X] See if there is a way to smooth the transition from placeholder image
+  - It flashes briefly when switching over to the real image
+
+**** TODO The =ThumbnailRow= is truncating the results!
+Select ~antonia~ tag and then click on an asset, the row above does not show everything
+
+**** TODO Can =ThumbnailRow= use =react-lazyload-fadein= as well?
+**** TODO Fetch results as needed, rather than all at once
+- Because of the thumbnail size calculation, first fetch is really slow
+- Should fetch new results as the user scrolls down
+- Need new actions that append to the results rather than overwrite
+  - action includes the page number to fetch
+- Fetch a batch at a time (like 18) until there are enough to fill the screen
+
 **** TODO Find out how to make it look like pexels.com (or perkeep)
 - Need to set the image dimensions to squeeze them into rows, filling all
   available space, and leaving only a small margin.
@@ -15,10 +34,13 @@
 - The placeholder image should be 300x300 on disk and stretched to fit actual thumb size
 - Need to adjust layout when window is resized
 
+*** Quick Ones
+**** TODO Use =.npmrc= to avoid creating =package-lock.json= file
 *** Glitches
-**** TODO Improve the scrolling fluidity
-- Seems like the virtual paging is making the scrolling jittery
-- Perhaps some react-visibility settings could be employed
+**** TODO When scrolling thumbnails very quickly, seems to stop rendering at all
+**** TODO Does =react-lazyload-fadein= support unloading the images when they are no longer visible?
+- May be =react-transition-group= supports this?
+- Or may need to hack/extend =react-lazyload-fadein= to do it
 
 **** TODO Handle search query string errors better
 - Currently, an error in the query goes to the error page without any helpful hint
@@ -54,6 +76,7 @@
 
 *** Uploads
 **** TODO Try to center the thumbnail vertically on the dropped files page
+**** TODO Show a larger thumbnail on hover over small thumbnail
 **** TODO Add menu/button to navigate to upload screen
 - Big "primary" style button on home screen?
 - Menu item to reach upload screen

@@ -206,6 +206,8 @@ function runQuery (params) {
               datetime
               filename
               location
+              thumbWidth
+              thumbHeight
             }
             count
           }
