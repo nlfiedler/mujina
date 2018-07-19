@@ -15,15 +15,17 @@ const AssetPage = () => {
     <Tile isAncestor isMarginless>
       <Tile isSize={3} isVertical isParent isPaddingless>
         <Tile isChild>
-          <AssetDetails />
-        </Tile>
-      </Tile>
-      <Tile isSize={9} isVertical isParent>
-        <Tile isChild>
           <AssetSelector />
         </Tile>
+      </Tile>
+      <Tile isSize={6} isVertical isParent>
         <Tile isChild>
           <Asset />
+        </Tile>
+      </Tile>
+      <Tile isSize={3} isVertical isParent isPaddingless>
+        <Tile isChild>
+          <AssetDetails />
         </Tile>
       </Tile>
     </Tile>

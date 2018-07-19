@@ -1,9 +1,10 @@
 //
-// Copyright (c) 2017 Nathan Fiedler
+// Copyright (c) 2018 Nathan Fiedler
 //
 const React = require('react')
 const PropTypes = require('prop-types')
 const {
+  Box,
   Container
 } = require('bloomer')
 const VisibilitySensor = require('react-visibility-sensor')
@@ -50,8 +51,7 @@ class ThumbnailImage extends React.Component {
     const figure = (
       <figure className='image is-96x96' style={{
         'flex': 'initial',
-        'flexShrink': 0,
-        'margin': 'auto 10px'
+        'flexShrink': 0
       }}>
         {this.getImageComponent()}
       </figure>
@@ -66,24 +66,44 @@ class ThumbnailImage extends React.Component {
   }
 }
 
-const ThumbnailRow = ({assets, onClick}) => {
+const ThumbnailColumn = ({assets, onClick}) => {
   const items = assets.map(asset => (
     <ThumbnailImage key={asset.identifier} onClick={onClick} {...asset} />
   ))
+  //
+  // The Container is needed to ensure the components only grow to the
+  // height of the viewport at maximum.
+  //
+  // The panel flex grow/shrink and such ensure that the selectors content
+  // stretches to fill available space.
+  //
   return (
     <Container isFluid isMarginless style={{
-      'display': 'flex',
-      'flexFlow': 'row nowrap',
-      'justifyContent': 'center',
-      'overflowX': 'auto',
-      'paddingTop': '1em'
+      'height': '100vh',
+      'position': 'fixed',
+      'top': 0,
+      'left': 0
     }}>
-      {items}
+      <Box style={{
+        'margin': '1rem',
+        'padding': '1rem',
+        'display': 'flex',
+        'height': '95%',
+        'width': '20em'
+      }}>
+        <div style={{
+          'display': 'flex',
+          'flexFlow': 'row wrap',
+          'overflowY': 'auto'
+        }}>
+          {items}
+        </div>
+      </Box>
     </Container>
   )
 }
 
-ThumbnailRow.propTypes = {
+ThumbnailColumn.propTypes = {
   assets: PropTypes.arrayOf(
     PropTypes.shape({
       identifier: PropTypes.string.isRequired,
@@ -96,5 +116,5 @@ ThumbnailRow.propTypes = {
 }
 
 module.exports = {
-  ThumbnailRow
+  ThumbnailColumn
 }

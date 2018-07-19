@@ -1,8 +1,19 @@
 * Mujina
 ** Next
-*** Asset preview
+*** Asset page
 **** TODO Clicking on asset in preview screen should show it full size
 - Need a semi-transparent "delete" button in the corner to go back
+**** TODO Fix ThumbnailRow =Box= dimensions so they are not hard-coded values
+- Especially the height, which is annoying
+- Play with width value, too, to find optimal value
+
+**** TODO Replace ThumbnailRow with ThumbnailColumn that is just like filters
+**** TODO Get ThumbnailRow =Container= to add space between thumbnails
+- auto margins are not working as hoped
+- Develop the algo for sizing the images with margins, like for thumbnail view
+
+**** TODO AssetSidebar =Box= style should not have to set the width
+- Using =position: fixed= is messing with the width
 
 *** Thumbnail view
 **** DONE Improve the thumbnail rendering (reduce jitter) [5/5]
@@ -13,11 +24,15 @@
 - [X] See if there is a way to smooth the transition from placeholder image
   - It flashes briefly when switching over to the real image
 
-**** TODO The =ThumbnailRow= is truncating the results!
-Select ~antonia~ tag and then click on an asset, the row above does not show everything
+**** DONE The =ThumbnailRow= is truncating the results when there are many
+***** DONE Limit ThumbnailRow =Container= to not grow to fit children
+***** DONE Remove padding from =AssetPage= tiles
+**** TODO Seems like AttributeList =div= is not an ideal solution
+- It has a hard-coded width which surely is altering the layout
+- Makes more sense to remove div and let =PanelBlock= parent manage the children
 
-**** TODO Can =ThumbnailRow= use =react-lazyload-fadein= as well?
 **** TODO Fetch results as needed, rather than all at once
+- Have to fetch for =AssetSelector= component as well
 - Because of the thumbnail size calculation, first fetch is really slow
 - Should fetch new results as the user scrolls down
 - Need new actions that append to the results rather than overwrite

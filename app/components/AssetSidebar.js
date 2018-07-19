@@ -10,7 +10,9 @@ const {
 
 const boxStyle = {
   'margin': '1rem',
-  'padding': '1rem'
+  'padding': '1rem',
+  'position': 'fixed',
+  'width': '22%'
 }
 const termStyle = {
   'fontSize': '0.75em',
