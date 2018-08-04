@@ -17,7 +17,7 @@ const HomePage = () => (
         <AssetFilters />
       </Tile>
     </Tile>
-    <Tile isSize={10} isParent isPaddingless>
+    <Tile isSize={10} isParent>
       <Thumbnails />
     </Tile>
   </Tile>

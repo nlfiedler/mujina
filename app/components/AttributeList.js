@@ -33,7 +33,7 @@ const AttributeList = ({attributes, onAttrClick}) => {
   return (
     <div className='tags' style={{
       'display': 'block',
-      'width': '14em',
+      'width': '12.5em',
       'height': '100%'
     }}>
       {inner}

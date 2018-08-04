@@ -3,6 +3,12 @@
 *** Asset page
 **** TODO Clicking on asset in preview screen should show it full size
 - Need a semi-transparent "delete" button in the corner to go back
+**** TODO Re-evaluate using the thumbnail row, called a "thumbnail carousel"
+- c.f. https://tympanus.net/Tutorials/ResponsiveImageGallery/
+
+**** TODO Use an "image slider" to move from one asset to the next
+- There are lots and lots of these
+
 **** TODO Fix ThumbnailRow =Box= dimensions so they are not hard-coded values
 - Especially the height, which is annoying
 - Play with width value, too, to find optimal value
@@ -28,8 +34,15 @@
 **** DONE The =ThumbnailRow= is truncating the results when there are many
 ***** DONE Limit ThumbnailRow =Container= to not grow to fit children
 ***** DONE Remove padding from =AssetPage= tiles
+**** TODO Try not using =Tile= for the Home page, seems to interact poorly with children
+- This probably will fix the next todo item
+- Have the =AssetFilters= and =Thumbnails= as direct children of a =div=, like =SearchPage=
+
+**** TODO Have a sensible placeholder for the broken images
+- Select "angela" in "2016" to see an example
+
 **** TODO Seems like AttributeList =div= is not an ideal solution
-- It has a hard-coded width which surely is altering the layout
+- It has a hard-coded width which _is_ altering the layout
 - Makes more sense to remove div and let =PanelBlock= parent manage the children
 
 **** TODO Fetch results as needed, rather than all at once
@@ -40,17 +53,15 @@
   - action includes the page number to fetch
 - Fetch a batch at a time (like 18) until there are enough to fill the screen
 
-**** TODO Find out how to make it look like pexels.com (or perkeep)
-- Need to set the image dimensions to squeeze them into rows, filling all
-  available space, and leaving only a small margin.
-  - No need to resize the thumbnail, just set the =img= dimensions
-- If the row has space, get the next image, scale down so they fit the row.
-  - That is, select one asset at a time, until the combined width exceeds the container,
-    then shrink the images to fit the width (including margins).
-- Need to adjust layout when window is resized
-
+**** DONE Find out how to make it look like pexels.com (or perkeep)
+**** TODO Hover should show asset date/time, caption, maybe filename
+- See =Image.js= in https://github.com/benhowell/react-grid-gallery
+**** TODO Use hover "overlay" button to select assets to operate on
+- See =CheckButton.js= in https://github.com/benhowell/react-grid-gallery
 *** Quick Ones
 **** DONE Use =.npmrc= to avoid creating =package-lock.json= file
+**** TODO Show the relative file path of the asset in sidebar
+**** TODO Allow editing the media type of assets
 *** Glitches
 **** TODO When scrolling thumbnails very quickly, seems to stop rendering at all
 **** TODO Does =react-lazyload-fadein= support unloading the images when they are no longer visible?
@@ -161,6 +172,9 @@ the tags tab is selected by default, and the locations is not showing.
 ***** TODO "is:image" and similar are converted to "mimetype:image/*" :tanuki:
 ***** TODO "with:<name>" for searching people
 ***** TODO logical operators (and, or) and grouping with parentheses
+
+**** TODO Have a timeline feature like Google Photos
+- Looks like Time Machine timeline, with marks and years, expands on hover
 
 **** TODO Show N most recent assets by default (timeline style)
 **** TODO Use bulma Level to make a toolbar sort of thing at the top/bottom
