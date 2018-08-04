@@ -205,6 +205,7 @@ function details (
         single: {
           identifier: action.payload.id,
           filename: action.payload.filename,
+          filepath: action.payload.filepath,
           filesize: action.payload.filesize,
           datetime: new Date(action.payload.datetime),
           // avoid having null fields, the React components don't like it

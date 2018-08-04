@@ -1,7 +1,6 @@
 //
-// Copyright (c) 2017 Nathan Fiedler
+// Copyright (c) 2018 Nathan Fiedler
 //
-const _ = require('lodash')
 const React = require('react')
 const PropTypes = require('prop-types')
 const {
@@ -19,7 +18,8 @@ const termStyle = {
   'textTransform': 'uppercase'
 }
 const dataStyle = {
-  'margin': '0'
+  'margin': '0',
+  'wordWrap': 'break-word'
 }
 const numberFormatter = new Intl.NumberFormat()
 const durationFormatter = new Intl.NumberFormat({maximumFractionDigits: 1})
@@ -55,12 +55,14 @@ const AssetSidebar = ({details}) => {
         {data(details.datetime.toLocaleString())}
         {term('File size')}
         {data(numberFormatter.format(details.filesize) + ' bytes')}
-        {term('MIME type')}
+        {term('Media type')}
         {data(details.mimetype)}
         {term('ID')}
-        {data(_.truncate(details.identifier, {length: 24}))}
+        {data(details.identifier)}
         {term('Duration')}
         {data(formatDuration(details.duration))}
+        {term('Relative path')}
+        {data(details.filepath)}
       </dl>
     </Box>
   )

@@ -122,6 +122,7 @@ exports.fetchAsset = (identifier) => {
             datetime
             duration
             filename
+            filepath
             filesize
             location
             mimetype

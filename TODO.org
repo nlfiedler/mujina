@@ -1,6 +1,7 @@
 * Mujina
 ** Next
 *** Asset page
+**** TODO ThumbnailColumn should use (visible) placeholders while image loads
 **** TODO Clicking on asset in preview screen should show it full size
 - Need a semi-transparent "delete" button in the corner to go back
 **** TODO Re-evaluate using the thumbnail row, called a "thumbnail carousel"
@@ -13,37 +14,31 @@
 - Especially the height, which is annoying
 - Play with width value, too, to find optimal value
 
-**** DONE Replace ThumbnailRow with ThumbnailColumn that is just like filters
+**** TODO ThumbnailRow should not spread out thumbnails vertically
 **** TODO Get ThumbnailRow =Container= to add space between thumbnails
 - auto margins are not working as hoped
 - currently adds space between the rows, not the elements
 - Develop the algo for sizing the images with margins, like for thumbnail view
 
+**** TODO AssetSidebar should hard-wrap long values like id, filepath
 **** TODO AssetSidebar =Box= style should not have to set the width
 - Using =position: fixed= is messing with the width
 
-*** Thumbnail view
-**** DONE Improve the thumbnail rendering (reduce jitter) [5/5]
-- [X] Remove the onLoad handler, no longer needed
-- [X] Use a placeholder image file of 300x300 pixels
-- [X] Stretch the image to fit the size of the thumbnail from the search results
-- [X] Get a prettier placeholder image because it is briefly visible
-- [X] See if there is a way to smooth the transition from placeholder image
-  - It flashes briefly when switching over to the real image
+**** TODO AssetSidebar labels maybe should have span width light background
+To set them off from the values and delineate one value from the next.
 
-**** DONE The =ThumbnailRow= is truncating the results when there are many
-***** DONE Limit ThumbnailRow =Container= to not grow to fit children
-***** DONE Remove padding from =AssetPage= tiles
+*** Thumbnail view
+**** TODO Add 'cursor: pointer' to images to get hand mouse pointer
 **** TODO Try not using =Tile= for the Home page, seems to interact poorly with children
 - This probably will fix the next todo item
 - Have the =AssetFilters= and =Thumbnails= as direct children of a =div=, like =SearchPage=
 
-**** TODO Have a sensible placeholder for the broken images
-- Select "angela" in "2016" to see an example
-
 **** TODO Seems like AttributeList =div= is not an ideal solution
 - It has a hard-coded width which _is_ altering the layout
 - Makes more sense to remove div and let =PanelBlock= parent manage the children
+
+**** TODO Have a sensible placeholder for the broken images
+- Select "angela" in "2016" to see an example
 
 **** TODO Fetch results as needed, rather than all at once
 - Have to fetch for =AssetSelector= component as well
@@ -53,14 +48,11 @@
   - action includes the page number to fetch
 - Fetch a batch at a time (like 18) until there are enough to fill the screen
 
-**** DONE Find out how to make it look like pexels.com (or perkeep)
 **** TODO Hover should show asset date/time, caption, maybe filename
 - See =Image.js= in https://github.com/benhowell/react-grid-gallery
 **** TODO Use hover "overlay" button to select assets to operate on
 - See =CheckButton.js= in https://github.com/benhowell/react-grid-gallery
 *** Quick Ones
-**** DONE Use =.npmrc= to avoid creating =package-lock.json= file
-**** TODO Show the relative file path of the asset in sidebar
 **** TODO Allow editing the media type of assets
 *** Glitches
 **** TODO When scrolling thumbnails very quickly, seems to stop rendering at all
@@ -73,8 +65,6 @@
 - Currently, once the query is wrong, you can never fix it because it directly goes to the error page
 
 **** TODO Show helpful text and examples on search page instead of results
-**** DONE Make the asset sidebar sticky so it does not scroll away
-**** DONE Make the asset selector (thumbnail row) sticky so it does not scroll away
 *** Bulk Edit
 **** TODO Short term solution akin to perkeep web interface [0/4]
 - [ ] Easy selection with hover checkbox button
