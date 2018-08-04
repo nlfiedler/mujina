@@ -28,7 +28,6 @@
 To set them off from the values and delineate one value from the next.
 
 *** Thumbnail view
-**** TODO Add 'cursor: pointer' to images to get hand mouse pointer
 **** TODO Try not using =Tile= for the Home page, seems to interact poorly with children
 - This probably will fix the next todo item
 - Have the =AssetFilters= and =Thumbnails= as direct children of a =div=, like =SearchPage=

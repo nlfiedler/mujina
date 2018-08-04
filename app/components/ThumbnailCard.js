@@ -11,7 +11,7 @@ const config = require('../config')
 const ThumbnailCard = (props) => (
   <FadeIn height={props.thumbHeight} duration={300}>
     {(onload) => (
-      <figure className='image'>
+      <figure className='image' style={{'cursor': 'pointer'}}>
         <img
           alt={props.filename}
           style={props.imageStyle}

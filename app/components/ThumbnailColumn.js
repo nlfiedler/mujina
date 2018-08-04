@@ -51,7 +51,8 @@ class ThumbnailImage extends React.Component {
     const figure = (
       <figure className='image is-96x96' style={{
         'flex': 'initial',
-        'flexShrink': 0
+        'flexShrink': 0,
+        'cursor': 'pointer'
       }}>
         {this.getImageComponent()}
       </figure>
