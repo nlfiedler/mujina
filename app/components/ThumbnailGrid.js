@@ -3,9 +3,6 @@
 //
 const React = require('react')
 const PropTypes = require('prop-types')
-const {
-  Tile
-} = require('bloomer')
 const ResizeDetector = require('react-resize-detector').default
 const {ThumbnailCard} = require('./ThumbnailCard')
 
@@ -49,7 +46,7 @@ class ThumbnailGrid extends React.Component {
     // Let the Tile use flex to manage the row wrapping of the thumbnails.
     // No need for margins on the images, space-around will do that.
     return (
-      <Tile isChild style={{
+      <div style={{
         'display': 'flex',
         'flexFlow': 'row wrap',
         'justifyContent': 'space-around',
@@ -57,7 +54,7 @@ class ThumbnailGrid extends React.Component {
       }}>
         {items}
         <ResizeDetector handleWidth onResize={this.handleResize} />
-      </Tile>
+      </div>
     )
   }
 

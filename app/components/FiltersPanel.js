@@ -4,7 +4,6 @@
 const React = require('react')
 const {
   Button,
-  Container,
   Panel,
   PanelBlock,
   PanelTab,
@@ -69,20 +68,24 @@ class FiltersPanel extends React.Component {
     ))
     const panelContent = panelContents[this.state.activeTabIndex]
     //
-    // The Container is needed to ensure the components only grow to the
-    // height of the viewport at maximum.
-    //
     // The panel flex grow/shrink and such ensure that the filters content
     // stretches to fill available space, while the other panels do not.
     //
+    // This panel will tend to grow horizontally, so it must reside in a div
+    // that will constrain its size. Additionally, because of the fixed
+    // position, the panel must have a width applied to it directly, and for
+    // the best effect, it should match the parent value, which is for the
+    // entire window width.
+    //
     return (
-      <Container isFluid isMarginless style={{
+      <div style={{
         'height': '100vh',
+        'width': '20%',
         'position': 'fixed',
         'top': 0,
         'left': 0
       }}>
-        <Panel style={{
+        <Panel tag='div' style={{
           'display': 'flex',
           'flexDirection': 'column',
           'height': '100%'
@@ -106,7 +109,7 @@ class FiltersPanel extends React.Component {
             <ResetFilters />
           </PanelBlock>
         </Panel>
-      </Container>
+      </div>
     )
   }
 }

@@ -16,7 +16,10 @@
 - Play with width value, too, to find optimal value
 
 **** TODO ThumbnailColumn should not spread out thumbnails vertically
-**** TODO Get ThumbnailColumn =Container= to add space between thumbnails
+**** TODO Do not use =Container= for ThumbnailColumn
+- Do it like the filters panel =div= styles
+
+**** TODO Fix the ThumbnailColumn image management
 - auto margins are not working as hoped
 - currently adds space between the rows, not the elements
 - Develop the algo for sizing the images with margins, like for thumbnail view
@@ -25,14 +28,6 @@
 - Using =position: fixed= is messing with the width
 
 *** Thumbnail view
-**** TODO Try not using =Tile= for the Home page, seems to interact poorly with children
-- This probably will fix the next todo item
-- Have the =AssetFilters= and =Thumbnails= as direct children of a =div=, like =SearchPage=
-
-**** TODO Seems like AttributeList =div= is not an ideal solution
-- It has a hard-coded width which _is_ altering the layout
-- Makes more sense to remove div and let =PanelBlock= parent manage the children
-
 **** TODO Have a sensible placeholder for the broken images
 - Select "angela" in "2016" to see an example
 

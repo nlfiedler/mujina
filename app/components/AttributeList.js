@@ -25,15 +25,11 @@ const AttributeList = ({attributes, onAttrClick}) => {
   // The div needs a height of 100% or some elements (at the top) will get
   // cut off and the scrolling never reveals them.
   //
-  // Need to set the width or it fills the parent. Probably should have used
-  // Columns or Tiles with width property.
-  //
   // Use block formatting instead of flex, otherwise the elements spread out
   // vertically and there is seemingly no flex way to fix that.
   return (
     <div className='tags' style={{
       'display': 'block',
-      'width': '12.5em',
       'height': '100%'
     }}>
       {inner}
