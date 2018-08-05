@@ -13,6 +13,7 @@ const boxStyle = {
   'position': 'fixed',
   'width': '22%'
 }
+const termClass = 'has-background-grey-lighter has-text-centered'
 const termStyle = {
   'fontSize': '0.75em',
   'textTransform': 'uppercase'
@@ -36,7 +37,7 @@ function formatDuration (value) {
 
 const AssetSidebar = ({details}) => {
   const term = (content) => (
-    <dt style={termStyle}>{content}</dt>
+    <dt className={termClass} style={termStyle}>{content}</dt>
   )
   const data = (content) => (
     <dd style={dataStyle}>{content}</dd>
@@ -57,9 +58,9 @@ const AssetSidebar = ({details}) => {
         {data(numberFormatter.format(details.filesize) + ' bytes')}
         {term('Media type')}
         {data(details.mimetype)}
-        {term('ID')}
+        {term('Identifier')}
         {data(details.identifier)}
-        {term('Duration')}
+        {term('Video duration')}
         {data(formatDuration(details.duration))}
         {term('Relative path')}
         {data(details.filepath)}

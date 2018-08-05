@@ -9,23 +9,20 @@
 
 **** TODO Use an "image slider" to move from one asset to the next
 - There are lots and lots of these
+- c.f. https://github.com/benhowell/react-grid-gallery
 
-**** TODO Fix ThumbnailRow =Box= dimensions so they are not hard-coded values
+**** TODO Fix ThumbnailColumn =Box= dimensions so they are not hard-coded values
 - Especially the height, which is annoying
 - Play with width value, too, to find optimal value
 
-**** TODO ThumbnailRow should not spread out thumbnails vertically
-**** TODO Get ThumbnailRow =Container= to add space between thumbnails
+**** TODO ThumbnailColumn should not spread out thumbnails vertically
+**** TODO Get ThumbnailColumn =Container= to add space between thumbnails
 - auto margins are not working as hoped
 - currently adds space between the rows, not the elements
 - Develop the algo for sizing the images with margins, like for thumbnail view
 
-**** TODO AssetSidebar should hard-wrap long values like id, filepath
 **** TODO AssetSidebar =Box= style should not have to set the width
 - Using =position: fixed= is messing with the width
-
-**** TODO AssetSidebar labels maybe should have span width light background
-To set them off from the values and delineate one value from the next.
 
 *** Thumbnail view
 **** TODO Try not using =Tile= for the Home page, seems to interact poorly with children
@@ -190,7 +187,7 @@ the tags tab is selected by default, and the locations is not showing.
 - Bulma extensions has a Carousel component
 - Good for swiping through a bunch of assets
 - Need to make clicking the arrows fire a fetchAsset action
-- Use this in the ThumbnailRow component
+- Use this in the ThumbnailColumn component
 
 **** Timeline
 - Use the Bulma-Extensions Timeline component to show assets sorted by date
