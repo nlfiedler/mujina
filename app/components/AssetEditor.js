@@ -65,7 +65,7 @@ class AssetEditor extends React.Component {
 
   render () {
     const {identifier, filename} = this.props.details
-    const previewUrl = config.serverUrl({pathname: '/asset/' + identifier})
+    const previewUrl = config.serverUrl({pathname: '/preview/' + identifier})
     return (
       <Card>
         <CardHeader>
@@ -91,8 +91,17 @@ class AssetEditor extends React.Component {
             </NavbarMenu>
           </Navbar>
         </CardHeader>
-        <CardImage hasTextAlign='centered'>
-          <Image alt={identifier} src={previewUrl} />
+        <CardImage hasTextAlign='centered' style={{
+          'paddingTop': '1em'
+        }}>
+          <figure alt={identifier} className='image'>
+            <img src={previewUrl} style={{
+              'display': 'inline-block',
+              'width': '400px',
+              'height': '400px',
+              'objectFit': 'cover'
+            }} />
+          </figure>
         </CardImage>
         <CardContent>
           <rrf.Form

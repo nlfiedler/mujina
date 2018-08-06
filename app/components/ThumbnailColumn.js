@@ -4,8 +4,7 @@
 const React = require('react')
 const PropTypes = require('prop-types')
 const {
-  Box,
-  Container
+  Box
 } = require('bloomer')
 const VisibilitySensor = require('react-visibility-sensor')
 const config = require('../config')
@@ -72,15 +71,14 @@ const ThumbnailColumn = ({assets, onClick}) => {
     <ThumbnailImage key={asset.identifier} onClick={onClick} {...asset} />
   ))
   //
-  // The Container is needed to ensure the components only grow to the
-  // height of the viewport at maximum.
-  //
-  // The panel flex grow/shrink and such ensure that the selectors content
-  // stretches to fill available space.
+  // Because of the fixed position, the panel must have a width applied to it
+  // directly, and for the best effect, it should match the parent value, which
+  // is for the entire window width.
   //
   return (
-    <Container isFluid isMarginless style={{
+    <div style={{
       'height': '100vh',
+      'width': '25%',
       'position': 'fixed',
       'top': 0,
       'left': 0
@@ -95,12 +93,13 @@ const ThumbnailColumn = ({assets, onClick}) => {
         <div style={{
           'display': 'flex',
           'flexFlow': 'row wrap',
-          'overflowY': 'auto'
+          'overflowY': 'auto',
+          'alignContent': 'flex-start'
         }}>
           {items}
         </div>
       </Box>
-    </Container>
+    </div>
   )
 }
 

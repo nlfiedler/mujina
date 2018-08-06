@@ -3,32 +3,27 @@
 //
 const React = require('react')
 const PropTypes = require('prop-types')
-const {
-  Tile
-} = require('bloomer')
 const {Asset} = require('../containers/Asset')
 const {AssetSelector} = require('../containers/AssetSelector')
 const {AssetDetails} = require('../containers/AssetDetails')
 
 const AssetPage = () => {
   return (
-    <Tile isAncestor isMarginless>
-      <Tile isSize={3} isVertical isParent isPaddingless>
-        <Tile isChild>
-          <AssetSelector />
-        </Tile>
-      </Tile>
-      <Tile isSize={6} isVertical isParent>
-        <Tile isChild>
-          <Asset />
-        </Tile>
-      </Tile>
-      <Tile isSize={3} isVertical isParent isPaddingless>
-        <Tile isChild>
-          <AssetDetails />
-        </Tile>
-      </Tile>
-    </Tile>
+    <div style={{'display': 'flex'}}>
+      <div style={{'width': '25%'}}>
+        <AssetSelector />
+      </div>
+      <div style={{
+        'width': '50%',
+        'paddingTop': '1em',
+        'paddingBottom': '1em'
+      }}>
+        <Asset />
+      </div>
+      <div style={{'width': '25%'}}>
+        <AssetDetails />
+      </div>
+    </div>
   )
 }
 

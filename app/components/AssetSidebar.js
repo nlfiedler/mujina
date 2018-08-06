@@ -9,9 +9,7 @@ const {
 
 const boxStyle = {
   'margin': '1rem',
-  'padding': '1rem',
-  'position': 'fixed',
-  'width': '22%'
+  'padding': '1rem'
 }
 const termClass = 'has-background-grey-lighter has-text-centered'
 const termStyle = {

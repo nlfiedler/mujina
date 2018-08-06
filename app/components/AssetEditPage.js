@@ -1,28 +1,21 @@
 //
-// Copyright (c) 2017 Nathan Fiedler
+// Copyright (c) 2018 Nathan Fiedler
 //
 const React = require('react')
 const PropTypes = require('prop-types')
-const {
-  Tile
-} = require('bloomer')
 const {AssetDetails} = require('../containers/AssetDetails')
 const {AssetEdit} = require('../containers/AssetEdit')
 
 const AssetEditPage = () => {
   return (
-    <Tile isAncestor isMarginless>
-      <Tile isSize={3} isVertical isParent isPaddingless>
-        <Tile isChild>
-          <AssetDetails />
-        </Tile>
-      </Tile>
-      <Tile isSize={9} isParent>
-        <Tile isChild>
-          <AssetEdit />
-        </Tile>
-      </Tile>
-    </Tile>
+    <div style={{'display': 'flex'}}>
+      <div style={{'width': '25%'}}>
+        <AssetDetails />
+      </div>
+      <div style={{'width': '75%'}}>
+        <AssetEdit />
+      </div>
+    </div>
   )
 }
 
