@@ -19,7 +19,7 @@ reduxStore.dispatch(actions.requestTags())
 reduxStore.dispatch(actions.requestYears())
 reduxStore.dispatch(push('/'))
 
-window.addEventListener('load', function () {
+window.addEventListener('load', () => {
   attachReact()
   initDragAndDrop()
 }, false)
@@ -50,7 +50,7 @@ function initDragAndDrop () {
     cleanUp(ev)
   }, false)
 
-  document.addEventListener('drop', function (ev) {
+  document.addEventListener('drop', (ev) => {
     // stop the browser from redirecting to the file
     ev.preventDefault()
     // hack a generator as an iterator onto the transfer object
