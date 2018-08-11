@@ -1,6 +1,7 @@
 //
 // Copyright (c) 2018 Nathan Fiedler
 //
+const _ = require('lodash')
 const React = require('react')
 const PropTypes = require('prop-types')
 const {
@@ -20,13 +21,14 @@ const preview = require('../preview')
 
 const NewFile = (entry) => {
   const thumbnail = preview.createThumbnailElement(entry.image, entry.mimetype)
+  const filename = _.truncate(entry.name)
   // If identifier is provided, we assume other properties are defined, too.
   return 'identifier' in entry ? (
     <Box>
       <Media>
         <MediaLeft>
           {thumbnail}
-          <Label isSize='small'>{entry.name}</Label>
+          <Label isSize='small'>{filename}</Label>
         </MediaLeft>
         <MediaContent>
           <Field isHorizontal>
@@ -68,7 +70,7 @@ const NewFile = (entry) => {
         </MediaLeft>
         <MediaContent>
           <Field>
-            <Label>{entry.name}</Label>
+            <Label>{filename}</Label>
             <Control isExpanded hasIcons={['left', 'right']}>
               <rrf.Control.text
                 model={`drops[${entry.checksum}].caption`}

@@ -72,18 +72,18 @@
 
 **** TODO Tag and location completion on uploads page
 **** TODO Add a button to remove a single upload entry from the list
-**** TODO Can the upload thumbnails be improved, they are kinda grainy
 **** TODO Upload progress bar needs to be made visible
 - Either squeeze it between the save/cancel buttons
 - Or scroll down to the bottom fo the page when save button is pressed
 
 **** TODO Consider how to show uploads.error in NewFileList page
 **** TODO Sometimes dropping an image just opens the image
-- The mouse pointer has a green plus when it works, and not when it won't work
+- Pretty difficult to reproduce
+- Mouse pointer may or may not have green plus icon, means nothing
+- Modifier keys make no difference
+- Showing a thumbnail or showing just a filename during drag means nothing
 - Is there a React event that App can listen for, like "unmount"?
   - and if that happens, fire an action to navigate back home
-- How to prevent this behavior?
-- http://www.danieleckermann.com/blog/electron-prevent-dropped-file-from-opening
 - Maybe intercept the 'will-nagivate' event?
   - Would need to know if our app initiated the event
 - Maybe a menu item to get back "Home"
