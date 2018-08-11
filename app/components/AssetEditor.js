@@ -15,7 +15,6 @@ const {
   FieldBody,
   FieldLabel,
   Icon,
-  Image,
   Navbar,
   NavbarBrand,
   NavbarEnd,
@@ -182,6 +181,8 @@ class AssetEditor extends React.Component {
 }
 
 AssetEditor.propTypes = {
+  // encapsulate the asset properties in another object for the sake
+  // of easy copying using Object.assign()
   details: PropTypes.shape({
     identifier: PropTypes.string.isRequired,
     filename: PropTypes.string.isRequired,

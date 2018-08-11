@@ -5,9 +5,7 @@ const {connect} = require('react-redux')
 const {AssetPreview} = require('../components/AssetPreview')
 
 const mapStateToProps = state => {
-  return {
-    details: state.details.single
-  }
+  return state.details.single
 }
 
 const mapDispatchToProps = dispatch => {

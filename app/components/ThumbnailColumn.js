@@ -9,15 +9,17 @@ const {
 const VisibilitySensor = require('react-visibility-sensor')
 const config = require('../config')
 
-const imagePlaceholder = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'
-
 class ThumbnailImage extends React.Component {
   constructor (props) {
     super(props)
     // Do _not_ stash props on this, otherwise react/redux has no way of
     // knowing if the changing props have any effect on this component.
     this.onVisibilityChange = this.onVisibilityChange.bind(this)
-    this.state = {visible: false}
+    this.onError = this.onError.bind(this)
+    this.state = {
+      imageUrl: config.serverUrl({pathname: '/thumbnail/' + this.props.identifier}),
+      visible: false
+    }
   }
 
   onVisibilityChange (isVisible) {
@@ -27,18 +29,25 @@ class ThumbnailImage extends React.Component {
     })
   }
 
+  onError () {
+    this.setState({
+      imageUrl: 'images/picture-1.svg'
+    })
+  }
+
   getImageComponent () {
     const {identifier, onClick} = this.props
     return this.state.visible ? (
       <img
         style={{'objectFit': 'cover', 'height': '96px', 'width': '96px'}}
-        src={config.serverUrl({pathname: '/thumbnail/' + identifier})}
+        src={this.state.imageUrl}
+        onError={this.onError}
         onClick={() => onClick(identifier)}
       />
     ) : (
       <img
-        style={{'objectFit': 'cover', 'height': '96px', 'width': '96px'}}
-        src={imagePlaceholder}
+        style={{'height': '96px', 'width': '96px'}}
+        src='images/picture-1.svg'
       />
     )
   }

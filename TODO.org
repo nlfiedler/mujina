@@ -1,7 +1,6 @@
 * Mujina
 ** Next
 *** Asset page
-**** TODO ThumbnailColumn should use (visible) placeholders while image loads
 **** TODO ThumbnailColumn images should have tiny margins
 **** TODO Clicking on asset in preview screen should show it full size
 - Need a semi-transparent "delete" button in the corner to go back
@@ -10,10 +9,9 @@
 - There are lots and lots of these
 - c.f. https://github.com/benhowell/react-grid-gallery
 
+*** TODO Update dependencies with minor changes only
 *** Thumbnail view
-**** TODO Have a sensible placeholder for the broken images
-- Select "angela" in "2016" to see an example
-
+**** TODO FiltersPanel setState() should use form that receives previous state
 **** TODO Fetch results as needed, rather than all at once
 - Have to fetch for =AssetSelector= component as well
 - Because of the thumbnail size calculation, first fetch is really slow
@@ -24,8 +22,10 @@
 
 **** TODO Hover should show asset date/time, caption, maybe filename
 - See =Image.js= in https://github.com/benhowell/react-grid-gallery
+
 **** TODO Use hover "overlay" button to select assets to operate on
 - See =CheckButton.js= in https://github.com/benhowell/react-grid-gallery
+
 *** Quick Ones
 **** TODO Allow editing the media type of assets
 *** Glitches

@@ -8,21 +8,42 @@ const config = require('../config')
 
 // Use https://github.com/Swizec/react-lazyload-fadein to lazily load the image
 // when the component becomes visible, then fade in the image using CSS.
-const ThumbnailCard = (props) => (
-  <FadeIn height={props.thumbHeight} duration={300}>
-    {(onload) => (
-      <figure className='image' style={{'cursor': 'pointer'}}>
-        <img
-          alt={props.filename}
-          style={props.imageStyle}
-          src={config.serverUrl({pathname: '/widethumb/' + props.identifier})}
-          onLoad={onload}
-          onClick={() => props.onClick(props.identifier)}
-        />
-      </figure>
-    )}
-  </FadeIn>
-)
+class ThumbnailCard extends React.Component {
+  constructor (props) {
+    super(props)
+    // Do _not_ stash props on this, otherwise react/redux has no way of
+    // knowing if the changing props have any effect on this component.
+    this.state = {
+      imageUrl: config.serverUrl({pathname: '/widethumb/' + props.identifier})
+    }
+    this.onError = this.onError.bind(this)
+  }
+
+  onError () {
+    this.setState({
+      imageUrl: 'images/picture-1.svg'
+    })
+  }
+
+  render () {
+    return (
+      <FadeIn height={this.props.thumbHeight} duration={300}>
+        {(onload) => (
+          <figure className='image' style={{'cursor': 'pointer'}}>
+            <img
+              alt={this.props.filename}
+              style={this.props.imageStyle}
+              src={this.state.imageUrl}
+              onLoad={onload}
+              onError={this.onError}
+              onClick={() => this.props.onClick(this.props.identifier)}
+            />
+          </figure>
+        )}
+      </FadeIn>
+    )
+  }
+}
 
 ThumbnailCard.propTypes = {
   identifier: PropTypes.string.isRequired,

@@ -10,7 +10,6 @@ const {
   CardImage,
   Delete,
   Icon,
-  Image,
   Navbar,
   NavbarBrand,
   NavbarEnd,
@@ -21,78 +20,116 @@ const {
 const config = require('../config')
 const {history} = require('../store')
 
-function makeImage (details) {
-  // just serve up the full asset, no need for a "preview" that looks grainy
-  // when the window is larger in size
-  const srcUrl = config.serverUrl({pathname: '/asset/' + details.identifier})
-  return (
-    <Image alt={details.identifier} src={srcUrl} />
-  )
-}
+class AssetPreview extends React.Component {
+  constructor (props) {
+    super(props)
+    // Do _not_ stash props on this, otherwise react/redux has no way of
+    // knowing if the changing props have any effect on this component.
+    this.state = AssetPreview.pristineState(props)
+    this.onError = this.onError.bind(this)
+  }
 
-function makeVideo (details) {
-  const srcUrl = config.serverUrl({pathname: '/asset/' + details.identifier})
-  // Treat quicktime videos as MP4 so that Chromium will display it without
-  // the need for plugins.
-  const mimetype = details.mimetype === 'video/quicktime' ? 'video/mp4' : details.mimetype
-  return (
-    <video controls preload='auto' style={{'width': '100%', 'height': '100%'}}>
-      <source src={srcUrl} type={mimetype} />
-      'Bummer, your browser does not support the HTML5'
-      <code>video</code>
-      'tag.'
-    </video>
-  )
-}
+  onError () {
+    this.setState({
+      imageUrl: 'images/picture-1.svg',
+      imageStyle: {
+        'width': '240px',
+        'height': '240px'
+      }
+    })
+  }
 
-const AssetPreview = ({details}) => {
-  return (
-    <Card>
-      <CardHeader>
-        <Navbar isTransparent style={{'width': '100%'}}>
-          <NavbarBrand>
-            <NavbarItem>
-              {details.filename}
-            </NavbarItem>
-          </NavbarBrand>
-          <NavbarMenu>
-            <NavbarStart>
+  static pristineState (props) {
+    return {
+      // used to update the state when necessary
+      assetId: props.identifier,
+      // use the full asset, 'preview' looks grainy
+      imageUrl: config.serverUrl({pathname: '/asset/' + props.identifier}),
+      imageStyle: {
+        'width': '100%',
+        'height': 'auto'
+      }
+    }
+  }
+
+  static getDerivedStateFromProps (props, state) {
+    if (props.identifier !== state.assetId) {
+      return AssetPreview.pristineState(props)
+    }
+    return null
+  }
+
+  getVideoComponent () {
+    // Treat quicktime videos as MP4 so that Chromium will display it without
+    // the need for plugins.
+    const mimetype = this.props.mimetype === 'video/quicktime' ? 'video/mp4' : this.props.mimetype
+    return (
+      <video controls preload='auto' style={{'width': '100%', 'height': '100%'}}>
+        <source src={this.state.imageUrl} type={mimetype} />
+        'Bummer, your browser does not support the HTML5'
+        <code>video</code>
+        'tag.'
+      </video>
+    )
+  }
+
+  render () {
+    const component = this.props.mimetype.startsWith('video/') ? (
+      this.getVideoComponent()
+    ) : (
+      <img
+        alt={this.props.identifier}
+        style={this.state.imageStyle}
+        src={this.state.imageUrl}
+        onError={this.onError}
+      />
+    )
+    return (
+      <Card>
+        <CardHeader>
+          <Navbar isTransparent style={{'width': '100%'}}>
+            <NavbarBrand>
               <NavbarItem>
-                <Button onClick={() => history.push('/edit/' + details.identifier)}>
-                  <Icon isSize='medium' className='fa fa-edit' />
-                </Button>
+                {this.props.filename}
               </NavbarItem>
-            </NavbarStart>
-            <NavbarEnd>
-              <NavbarItem>
-                <Delete onClick={() => history.push('/')} />
-              </NavbarItem>
-            </NavbarEnd>
-          </NavbarMenu>
-        </Navbar>
-      </CardHeader>
-      <CardImage hasTextAlign='centered'>
-        {details.mimetype.startsWith('video/') ? makeVideo(details) : makeImage(details)}
-      </CardImage>
-    </Card>
-  )
+            </NavbarBrand>
+            <NavbarMenu>
+              <NavbarStart>
+                <NavbarItem>
+                  <Button onClick={() => history.push('/edit/' + this.props.identifier)}>
+                    <Icon isSize='medium' className='fa fa-edit' />
+                  </Button>
+                </NavbarItem>
+              </NavbarStart>
+              <NavbarEnd>
+                <NavbarItem>
+                  <Delete onClick={() => history.push('/')} />
+                </NavbarItem>
+              </NavbarEnd>
+            </NavbarMenu>
+          </Navbar>
+        </CardHeader>
+        <CardImage hasTextAlign='centered'>
+          {component}
+        </CardImage>
+      </Card>
+    )
+  }
 }
 
 AssetPreview.propTypes = {
-  details: PropTypes.shape({
-    identifier: PropTypes.string.isRequired,
-    filename: PropTypes.string.isRequired,
-    filesize: PropTypes.number.isRequired,
-    datetime: PropTypes.instanceOf(Date).isRequired,
-    mimetype: PropTypes.string.isRequired,
-    location: PropTypes.string,
-    userdate: PropTypes.instanceOf(Date),
-    caption: PropTypes.string,
-    duration: PropTypes.number,
-    tags: PropTypes.arrayOf(
-      PropTypes.string.isRequired
-    ).isRequired
-  }).isRequired
+  identifier: PropTypes.string.isRequired,
+  filename: PropTypes.string.isRequired,
+  filesize: PropTypes.number.isRequired,
+  datetime: PropTypes.instanceOf(Date).isRequired,
+  mimetype: PropTypes.string.isRequired,
+  location: PropTypes.string,
+  userdate: PropTypes.instanceOf(Date),
+  caption: PropTypes.string,
+  duration: PropTypes.number,
+  tags: PropTypes.arrayOf(
+    PropTypes.string.isRequired
+  ).isRequired
 }
 
 module.exports = {

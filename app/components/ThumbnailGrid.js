@@ -30,8 +30,8 @@ class ThumbnailGrid extends React.Component {
     const items = this.state.containerWidth ? (
       this.computeThumbSizes(this.state.containerWidth, this.props.assets).map(asset => (
         <ThumbnailCard key={asset.identifier} imageStyle={{
-          'width': asset.scaleWidth,
-          'height': asset.scaleHeight,
+          'width': asset.scaleWidth > 0 ? asset.scaleWidth : 120,
+          'height': asset.scaleHeight > 0 ? asset.scaleHeight : 120,
           'marginBottom': '6px'
         }} {...asset} onClick={this.props.onClick} />
       ))
@@ -39,11 +39,11 @@ class ThumbnailGrid extends React.Component {
       this.props.assets.map(asset => (
         <ThumbnailCard key={asset.identifier} imageStyle={{
           'width': 'auto',
-          'height': asset.thumbHeight
+          'height': asset.thumbHeight > 0 ? asset.thumbHeight : 120
         }} {...asset} onClick={this.props.onClick} />
       ))
     )
-    // Let the Tile use flex to manage the row wrapping of the thumbnails.
+    // Let the div use flex to manage the row wrapping of the thumbnails.
     // No need for margins on the images, space-around will do that.
     return (
       <div style={{
@@ -84,7 +84,13 @@ class ThumbnailGrid extends React.Component {
     let rowWidth = 0
     const margin = this.props.imageMargin * 2
     do {
-      rowWidth += assets[offset].thumbWidth + margin
+      if (assets[offset].thumbWidth > 0) {
+        rowWidth += assets[offset].thumbWidth + margin
+      } else {
+        // An asset for which there is no thumbnail available will have invalid
+        // dimensions. As such, we will put in a placeholder of a fixed size.
+        rowWidth += 120 + margin
+      }
       offset++
     } while (rowWidth < containerWidth && offset < assets.length)
     if (rowWidth > containerWidth) {
