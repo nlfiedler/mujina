@@ -40,7 +40,7 @@ class FiltersPanel extends React.Component {
     // Do _not_ stash props on this, otherwise react/redux has no way of
     // knowing if the changing props have any effect on this component.
     this.state = {
-      activeTabIndex: 0
+      activeTabIndex: props.defaultActiveTabIndex
     }
     this.handleTabClick = this.handleTabClick.bind(this)
   }
@@ -52,8 +52,13 @@ class FiltersPanel extends React.Component {
   }
 
   handleTabClick (tabIndex) {
-    this.setState({
-      activeTabIndex: tabIndex === this.state.activeTabIndex ? this.props.defaultActiveTabIndex : tabIndex
+    this.setState((prevState, props) => {
+      if (tabIndex !== prevState.activeTabIndex) {
+        return {
+          activeTabIndex: tabIndex
+        }
+      }
+      return null
     })
   }
 
@@ -112,6 +117,10 @@ class FiltersPanel extends React.Component {
       </div>
     )
   }
+}
+
+FiltersPanel.defaultProps = {
+  defaultActiveTabIndex: 0
 }
 
 module.exports = {

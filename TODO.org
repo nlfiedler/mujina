@@ -10,7 +10,6 @@
 - c.f. https://github.com/benhowell/react-grid-gallery
 
 *** Thumbnail view
-**** TODO FiltersPanel setState() should use form that receives previous state
 **** TODO Fetch results as needed, rather than all at once
 - Have to fetch for =AssetSelector= component as well
 - Because of the thumbnail size calculation, first fetch is really slow
