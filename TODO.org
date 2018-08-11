@@ -9,15 +9,6 @@
 - There are lots and lots of these
 - c.f. https://github.com/benhowell/react-grid-gallery
 
-*** TODO Update dependencies with minor changes only [3/7]
-- [X] electron-rebuild                 1.8.1          1.8.2   1.8.2
-- [X] nock                             9.4.1          9.6.0   9.6.0
-- [ ] react                           16.4.1         16.4.2  16.4.2
-- [ ] react-dom                       16.4.1         16.4.2  16.4.2
-- [ ] react-resize-detector            3.1.0          3.1.1   3.1.1
-- [ ] react-visibility-sensor         3.11.0         3.11.1  3.11.1
-- [X] request                         2.87.0         2.88.0  2.88.0
-
 *** Thumbnail view
 **** TODO FiltersPanel setState() should use form that receives previous state
 **** TODO Fetch results as needed, rather than all at once
