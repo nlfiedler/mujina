@@ -1,36 +1,33 @@
 //
 // Copyright (c) 2018 Nathan Fiedler
 //
-const _ = require('lodash')
 const React = require('react')
 const PropTypes = require('prop-types')
 const {
   Box,
+  Column,
+  Columns,
   Control,
   Field,
   FieldBody,
   Icon,
   Input,
-  Label,
-  Media,
-  MediaContent,
-  MediaLeft
+  Label
 } = require('bloomer')
 const rrf = require('react-redux-form')
 const preview = require('../preview')
 
 const NewFile = (entry) => {
   const thumbnail = preview.createThumbnailElement(entry.image, entry.mimetype)
-  const filename = _.truncate(entry.name)
   // If identifier is provided, we assume other properties are defined, too.
   return 'identifier' in entry ? (
     <Box>
-      <Media>
-        <MediaLeft>
+      <Columns>
+        <Column className='is-one-fifth'>
           {thumbnail}
-          <Label isSize='small'>{filename}</Label>
-        </MediaLeft>
-        <MediaContent>
+          <Label isSize='small' style={{'wordWrap': 'break-word'}}>{entry.name}</Label>
+        </Column>
+        <Column className='is-four-fifths'>
           <Field isHorizontal>
             <FieldBody>
               <Field isGrouped>
@@ -59,18 +56,18 @@ const NewFile = (entry) => {
               </Field>
             </FieldBody>
           </Field>
-        </MediaContent>
-      </Media>
+        </Column>
+      </Columns>
     </Box>
   ) : (
     <Box>
-      <Media>
-        <MediaLeft>
+      <Columns>
+        <Column className='is-one-fifth'>
           {thumbnail}
-        </MediaLeft>
-        <MediaContent>
+        </Column>
+        <Column className='is-four-fifths'>
           <Field>
-            <Label>{filename}</Label>
+            <Label style={{'wordWrap': 'break-word'}}>{entry.name}</Label>
             <Control isExpanded hasIcons={['left', 'right']}>
               <rrf.Control.text
                 model={`drops[${entry.checksum}].caption`}
@@ -83,8 +80,8 @@ const NewFile = (entry) => {
               <p className='help'>Enter a description, including #tags and @location</p>
             </Control>
           </Field>
-        </MediaContent>
-      </Media>
+        </Column>
+      </Columns>
     </Box>
   )
 }

@@ -63,7 +63,6 @@
   - [ ] change media type
 
 *** Uploads
-**** TODO Try to center the thumbnail vertically on the dropped files page
 **** TODO Show a larger thumbnail on hover over small thumbnail
 **** TODO Add menu/button to navigate to upload screen
 - Big "primary" style button on home screen?
@@ -72,10 +71,6 @@
 
 **** TODO Tag and location completion on uploads page
 **** TODO Add a button to remove a single upload entry from the list
-**** TODO Upload progress bar needs to be made visible
-- Either squeeze it between the save/cancel buttons
-- Or scroll down to the bottom fo the page when save button is pressed
-
 **** TODO Consider how to show uploads.error in NewFileList page
 **** TODO Sometimes dropping an image just opens the image
 - Pretty difficult to reproduce

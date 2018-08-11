@@ -10,6 +10,7 @@ const {
   Icon
 } = require('bloomer')
 const {NewFile} = require('./NewFile')
+const {UploadingFiles} = require('../containers/UploadingFiles')
 const {Form} = require('react-redux-form')
 const {history} = require('../store')
 
@@ -63,10 +64,13 @@ class NewFileList extends React.Component {
         {message}
         {inner}
         <Columns>
-          <Column>
+          <Column hasTextAlign='centered' className='is-one-fifth'>
             <Button isActive isColor='primary' type='submit'>Save</Button>
           </Column>
-          <Column hasTextAlign='right'>
+          <Column className='is-three-fifths'>
+            <UploadingFiles />
+          </Column>
+          <Column hasTextAlign='centered' className='is-one-fifth'>
             <Button isOutlined isColor='warning' onClick={() => this.handleReject()}>
               <Icon isSize='medium' className='fa fa-trash' />
             </Button>

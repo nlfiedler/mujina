@@ -6,16 +6,13 @@ const {
   Tile
 } = require('bloomer')
 const {DroppedFiles} = require('../containers/DroppedFiles')
-const {UploadingFiles} = require('../containers/UploadingFiles')
 
+// Simple page for now, Tile serves to add padding.
 const UploadPage = () => (
   <Tile isAncestor isMarginless>
     <Tile isSize={12} isVertical isParent>
       <Tile isChild>
         <DroppedFiles />
-      </Tile>
-      <Tile isChild>
-        <UploadingFiles />
       </Tile>
     </Tile>
   </Tile>
