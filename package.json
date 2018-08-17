@@ -6,7 +6,8 @@
   "scripts": {
     "prestart": "gulp",
     "start": "electron ./build/",
-    "test": "NODE_ENV=test electron-mocha"
+    "test": "NODE_ENV=test electron-mocha",
+    "lick": "license-checker --production --exclude MIT,ISC,LGPL,WTFPL,Apache-2.0,BSD-3-Clause,BSD-2-Clause,MPL-2.0,Unlicense"
   },
   "keywords": [
     "photos",
@@ -55,6 +56,7 @@
     "electron-rebuild": "^1.8.2",
     "gulp": "^3.9.1",
     "gulp-babel": "^7.0.1",
+    "license-checker": "^20.2.0",
     "mocha": "^5.2.0",
     "nock": "^9.6.0",
     "redux-immutable-state-invariant": "^2.1.0",

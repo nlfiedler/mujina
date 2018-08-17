@@ -2,6 +2,9 @@
 ** Next
 *** Asset page
 **** TODO ThumbnailColumn images should have tiny margins
+**** TODO Use a =:hover= style to accent the images on mouseover
+Lighten them perhaps?
+
 **** TODO Clicking on asset in preview screen should show it full size
 - Need a semi-transparent "delete" button in the corner to go back
 
@@ -9,6 +12,7 @@
 - There are lots and lots of these
 - c.f. https://github.com/benhowell/react-grid-gallery
 
+**** TODO Show image/video resolution in asset sidebar
 *** Thumbnail view
 **** TODO Fetch results as needed, rather than all at once
 - Have to fetch for =AssetSelector= component as well
@@ -24,8 +28,17 @@
 **** TODO Use hover "overlay" button to select assets to operate on
 - See =CheckButton.js= in https://github.com/benhowell/react-grid-gallery
 
+**** TODO Show "No matching assets" when asset list is empty (and filters are set)
 *** Quick Ones
 **** TODO Allow editing the media type of assets
+**** TODO Change buttons to use textual labels versus icons
+The icons are kinda cryptic, text is much more obvious
+
+**** TODO Some text should not be selectable, Bloomer has isUnselectable
+**** TODO Asset edit page button improvements
+- "Edit" changes to "Cancel" when editing
+- "Save" button at the bottom of the screen
+
 *** Glitches
 **** TODO When scrolling thumbnails very quickly, seems to stop rendering at all
 **** TODO Does =react-lazyload-fadein= support unloading the images when they are no longer visible?
@@ -37,6 +50,10 @@
 - Currently, once the query is wrong, you can never fix it because it directly goes to the error page
 
 **** TODO Show helpful text and examples on search page instead of results
+**** TODO Attribute selection change frequency may need deboucing
+- In =sagas.js= consider a delay with =watchSelectorToggles= to avoid frequent fetching
+  (see "Debouncing" in [[https://redux-saga.js.org/docs/recipes/][recipes]] on redux-sagas site)
+
 *** Bulk Edit
 **** TODO Short term solution akin to perkeep web interface [0/4]
 - [ ] Easy selection with hover checkbox button
@@ -49,8 +66,8 @@
 
 **** TODO Design bulk edit solution, probably similar to JIRA [0/5]
 - [ ] Access the bulk edit screen via a menu item
-- [ ] Use same search form as webui
-- [ ] Perform search, present list of results in a scrollable list
+- [ ] Use search form
+- [ ] Perform search, present results using "list" view
 - [ ] Check off results as desired
 - [ ] Next page presents several operations [0/8]
   - [ ] add location
@@ -74,6 +91,7 @@
 **** TODO Consider how to show uploads.error in NewFileList page
 **** TODO Sometimes dropping an image just opens the image
 - Pretty difficult to reproduce
+- Handle 'open-url' and/or 'open-file' on the app instance in main.js
 - Mouse pointer may or may not have green plus icon, means nothing
 - Modifier keys make no difference
 - Showing a thumbnail or showing just a filename during drag means nothing
@@ -100,9 +118,9 @@
 **** TODO Use video tag for thumbnail view
 **** TODO Show 5 or so frames from the video on hover
 **** TODO Show placeholder icons for videos that fail to load
-
 *** TODO Update Electron
 ** Investigate
+*** TODO What format are =AAE= files and can we show them somehow?
 *** TODO How to search for assets with no tags or location?
 - GraphQL works, but it is beyond the capability of non-technical people
 
@@ -121,55 +139,35 @@
 - Handle 'open-url' and/or 'open-file' on the app instance in main.js
 - Maybe look at that relatively new DataTransfer API business
 
-** Upcoming
-*** Refinements
-**** TODO Show filters tab containing first selection
+*** TODO Look for library to connect to devices to extract photos
+** Refinements
+*** TODO Toolbar buttons (or something) to change thumbnail view
+- See lynapp.com screenshot
+- Icon view: the 240x240 thumbnails with some details as captions
+- Gallery view: the justified progressive image-only layout
+- List view: show 96x96 thumbnails and details in list format
+  - should have column resizing
+
+*** TODO Show filters tab containing first selection
 That is, if only a location is selected, when switching back to the home page,
 the tags tab is selected by default, and the locations is not showing.
 
-**** TODO Advanced search features
-***** TODO "is:image" and similar are converted to "mimetype:image/*" :tanuki:
-***** TODO "with:<name>" for searching people
-***** TODO logical operators (and, or) and grouping with parentheses
+*** TODO Advanced search features
+**** TODO "is:image" and similar are converted to "mimetype:image/*" :tanuki:
+**** TODO "with:<name>" for searching people
+**** TODO logical operators (and, or) and grouping with parentheses
 
-**** TODO Have a timeline feature like Google Photos
+*** TODO Have a timeline feature like Google Photos
 - Looks like Time Machine timeline, with marks and years, expands on hover
+- See the Bulma-Extensions Timeline component
 
-**** TODO Show N most recent assets by default (timeline style)
-**** TODO Use bulma Level to make a toolbar sort of thing at the top/bottom
-**** TODO Consider setting the application menu appropriately for macOS and win32
-**** TODO Create a "New Window" menu item that invokes createWindow()
-**** TODO Set the browser window title (in index.html) to something sensible
-**** TODO When selecting attributes, disable those that no longer help
-**** TODO Maybe a set of Tabs to select between Pictures, Music, Videos, Documents, etc
-**** TODO Read https://fb.me/react-error-boundaries to learn about error handling
-
-*** Bulma Extensions
-**** TODO use https://wikiki.github.io for bulma extensions
-- Tooltip, Tags input, Accordion, Carousel, QuickView, Timeline
-
-**** TODO employ tooltip feature for the following [0/4]
-- [ ] Edit button on the asset preview page
-- [ ] Save button on asset edit page
-- [ ] Asset preview image, show the asset ID, file size, media type
-- [ ] Show full asset identifier as tooltip on asset sidebar
-
-**** TODO For making text not selectable, Bloomer has isUnselectable
-
-**** Carousel
-- Bulma extensions has a Carousel component
-- Good for swiping through a bunch of assets
-- Need to make clicking the arrows fire a fetchAsset action
-- Use this in the ThumbnailColumn component
-
-**** Timeline
-- Use the Bulma-Extensions Timeline component to show assets sorted by date
-
-**** Better tags input
+*** TODO Better tags input
 - Use Bulma-Extensions TagsInput on the asset edit screen
 
-*** File export
-**** TODO Allow dragging out images (and videos?) as a form of export
-- Likely need a "File > Export" option with Save dialog for larger files
-- https://electronjs.org/docs/tutorial/native-file-drag-drop
-
+*** TODO Consider setting the application menu appropriately for macOS and win32
+*** TODO Create a "New Window" menu item that invokes createWindow()
+*** TODO Set the browser window title (in index.html) to something sensible
+*** TODO When selecting attributes, disable those that no longer help
+*** TODO Maybe a set of Tabs to select between Pictures, Music, Videos, Documents, etc
+*** TODO Read https://fb.me/react-error-boundaries to learn about error handling
+*** TODO Decent about window (c.f. [[https://github.com/rhysd/electron-about-window][electron-about-window]])
