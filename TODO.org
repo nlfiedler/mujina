@@ -1,13 +1,12 @@
 * Mujina
 ** Next
 *** Build
-**** DONE Built =pkg= is missing node module dependencies [6/6]
+**** DONE Built =pkg= is missing node module dependencies [5/5]
 - [X] Rename directory =app= as =src=
 - [X] Update =gulpfile.js= replacing =app= with =src=
 - [X] Update =gulpfile.js= replacing =build= with =app=
 - [X] Update =package.json= replacing =./build/= with =./app/=
 - [X] Update =gulpfile.js= removing =package.json= from =scriptSrc=
-- [X] Update =gulpfile.js= adding task to copy =package.json= to =app=
 
 **** DONE Run =gulp= before =electron-builder=
 **** DONE Can use =electron-builder= instead of =electron-rebuild=
