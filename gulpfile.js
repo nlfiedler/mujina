@@ -1,17 +1,16 @@
 //
-// Copyright (c) 2017 Nathan Fiedler
+// Copyright (c) 2018 Nathan Fiedler
 //
 const gulp = require('gulp')
 const babel = require('gulp-babel')
 const del = require('del')
 
 const reactSrc = [
-  'app/components/**/*.js'
+  'src/components/**/*.js'
 ]
 const scriptSrc = [
-  'app/**/*.js',
-  'app/package.json',
-  '!app/components/**'
+  'src/**/*.js',
+  '!src/components/**'
 ]
 const assetSrc = [
   'assets/**/*.css',
@@ -21,25 +20,25 @@ const assetSrc = [
 ]
 
 gulp.task('compile:react', () => {
-  return gulp.src(reactSrc, {base: 'app'})
+  return gulp.src(reactSrc, {base: 'src'})
     .pipe(babel({
       presets: ['env', 'react']
     }))
-    .pipe(gulp.dest('build'))
+    .pipe(gulp.dest('app'))
 })
 
 gulp.task('copy:scripts', () => {
-  return gulp.src(scriptSrc, {base: 'app'})
-    .pipe(gulp.dest('build'))
+  return gulp.src(scriptSrc, {base: 'src'})
+    .pipe(gulp.dest('app'))
 })
 
 gulp.task('copy:assets', () => {
   return gulp.src(assetSrc, {base: 'assets'})
-    .pipe(gulp.dest('build'))
+    .pipe(gulp.dest('app'))
 })
 
 gulp.task('clean', () => {
-  return del(['build'])
+  return del(['app', 'build', 'dist'])
 })
 
 gulp.task('build', [
