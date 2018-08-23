@@ -1,22 +1,5 @@
 * Mujina
 ** Next
-*** Build
-**** DONE Built =pkg= is missing node module dependencies [5/5]
-- [X] Rename directory =app= as =src=
-- [X] Update =gulpfile.js= replacing =app= with =src=
-- [X] Update =gulpfile.js= replacing =build= with =app=
-- [X] Update =package.json= replacing =./build/= with =./app/=
-- [X] Update =gulpfile.js= removing =package.json= from =scriptSrc=
-
-**** DONE Run =gulp= before =electron-builder=
-**** DONE Can use =electron-builder= instead of =electron-rebuild=
-: electron-rebuild not required if you use electron-builder, please consider
-: to remove excess dependency from devDependencies
-
-: To ensure your native dependencies are always matched electron version,
-: simply add script `"postinstall": "electron-builder install-app-deps" to
-: your `package.json`
-
 *** Asset page
 **** TODO Resize window and observe that middle component does not resize well
 **** TODO ThumbnailColumn images should have tiny margins
