@@ -1,5 +1,64 @@
 * Mujina
 ** Next
+*** ReasonML
+**** TODO Understand how =redux-saga= works and how ReasonML can do something similar
+***** TODO See [[http://2ality.com/2018/01/iterators-reasonml.html][ReasonML iterators]] for an alternative to generators seen in redux-saga
+***** TODO See [[https://redux-observable.js.org][redux-observable]] for an alternative method that does not use generators
+**** TODO Consider how to interact with React libraries from ReasonReact
+- react-lazyload-fadein
+- react-resize-detector
+- react-visibility-sensor
+
+**** TODO Consider how to organize the source code; Reason tends to be flat
+**** TODO Consider how to handle =react-redux= containers in Reason
+**** TODO Consider how to use =reductive= instead of =redux= and =react-redux=
+- Instead of =mapStateToProps()= we would use =shouldUpdate()= on each component
+- Consider using "lenses"
+  - c.f. https://github.com/jonlaing/rationale for =Lens.re=
+- =react-redux= "selector" does the comparison of old and new mapped props
+
+**** TODO Convert some React components to ReasonReact [0/22]
+- [ ] AssetEditPage
+- [ ] AssetEditor
+- [ ] AssetPage
+- [ ] AssetPreview
+- [ ] AssetSidebar
+- [ ] Attribute
+- [ ] AttributeList
+- [ ] ErrorMessage
+- [ ] ErrorPage
+- [ ] FiltersPanel
+- [ ] HomePage
+- [ ] NewFile
+- [ ] NewFileList
+- [ ] OptionsForm
+- [ ] OptionsPage
+- [ ] SearchBar
+- [ ] SearchPage
+- [ ] ThumbnailCard
+- [ ] ThumbnailColumn
+- [ ] ThumbnailGrid
+- [ ] UploadPage
+- [ ] UploadProgress
+
+**** TODO Convert some JavaScript to ReasonML [0/11]
+- [ ] actions.js
+- [ ] api.js
+- [ ] config.js
+- [ ] main.js
+- [ ] menu.js
+- [ ] preview.js
+- [ ] query.js
+- [ ] reducers.js
+- [ ] renderer.js
+- [ ] sagas.js
+- [ ] store.js
+
+**** TODO Rewrite the =App= component in ReasonML and use ReasonReact router
+***** TODO Adapt the ReasonReact router to use its =push= function
+***** TODO Remove =react-router= and =react-router-redux= dependencies
+**** TODO Remove =PropTypes= once conversion to ReasonReact is complete
+***** TODO Remove =prop-types= dependency
 *** Asset page
 **** TODO Resize window and observe that middle component does not resize well
 **** TODO ThumbnailColumn images should have tiny margins
@@ -16,6 +75,8 @@ Lighten them perhaps?
 **** TODO Show image/video resolution in asset sidebar
 *** Thumbnail view
 **** TODO Fetch results as needed, rather than all at once
+- c.f. https://github.com/reasonml-community/reason-react-hacker-news/blob/master/src/TopStoriesPage.re
+  - listens for scroll event on the window and fetches more content
 - Have to fetch for =AssetSelector= component as well
 - Because of the thumbnail size calculation, first fetch is really slow
 - Should fetch new results as the user scrolls down
@@ -31,6 +92,7 @@ Lighten them perhaps?
 
 **** TODO Show "No matching assets" when asset list is empty (and filters are set)
 *** Quick Ones
+**** TODO [[https://github.com/you-dont-need/You-Dont-Need-Lodash-Underscore][You may not need lodash]]
 **** TODO Allow editing the media type of assets
 **** TODO Change buttons to use textual labels versus icons
 The icons are kinda cryptic, text is much more obvious
@@ -51,6 +113,8 @@ The icons are kinda cryptic, text is much more obvious
 - Currently, once the query is wrong, you can never fix it because it directly goes to the error page
 
 **** TODO Show helpful text and examples on search page instead of results
+- See Sublime Merge "search" screen as a nice example
+
 **** TODO Attribute selection change frequency may need deboucing
 - In =sagas.js= consider a delay with =watchSelectorToggles= to avoid frequent fetching
   (see "Debouncing" in [[https://redux-saga.js.org/docs/recipes/][recipes]] on redux-sagas site)
@@ -93,6 +157,7 @@ The icons are kinda cryptic, text is much more obvious
 **** TODO Sometimes dropping an image just opens the image
 - Pretty difficult to reproduce
 - Handle 'open-url' and/or 'open-file' on the app instance in main.js
+- Is there a browser event when the page is about to unload?
 - Mouse pointer may or may not have green plus icon, means nothing
 - Modifier keys make no difference
 - Showing a thumbnail or showing just a filename during drag means nothing
