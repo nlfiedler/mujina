@@ -59,6 +59,7 @@
 ***** TODO Remove =react-router= and =react-router-redux= dependencies
 **** TODO Remove =PropTypes= once conversion to ReasonReact is complete
 ***** TODO Remove =prop-types= dependency
+*** TODO Consider how to migrate to [[https://tailwindcss.com/docs/what-is-tailwind/][Tailwind CSS]]
 *** Asset page
 **** TODO Resize window and observe that middle component does not resize well
 **** TODO ThumbnailColumn images should have tiny margins
