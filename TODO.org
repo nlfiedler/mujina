@@ -1,9 +1,10 @@
 * Mujina
 ** Next
-*** ReasonML
+*** ReasonML migration
 **** TODO Understand how =redux-saga= works and how ReasonML can do something similar
 ***** TODO See [[http://2ality.com/2018/01/iterators-reasonml.html][ReasonML iterators]] for an alternative to generators seen in redux-saga
 ***** TODO See [[https://redux-observable.js.org][redux-observable]] for an alternative method that does not use generators
+**** TODO Look at https://github.com/cristianoc/genType for JavaScript interop
 **** TODO Consider how to interact with React libraries from ReasonReact
 - react-lazyload-fadein
 - react-resize-detector
@@ -156,6 +157,7 @@ The icons are kinda cryptic, text is much more obvious
 **** TODO Add a button to remove a single upload entry from the list
 **** TODO Consider how to show uploads.error in NewFileList page
 **** TODO Sometimes dropping an image just opens the image
+- c.f. https://www.smashingmagazine.com/2018/01/drag-drop-file-uploader-vanilla-js/
 - Pretty difficult to reproduce
 - Handle 'open-url' and/or 'open-file' on the app instance in main.js
 - Is there a browser event when the page is about to unload?
@@ -201,6 +203,7 @@ The icons are kinda cryptic, text is much more obvious
 - uses gulp to minify and uglify everything
 
 *** TODO Drag and drop from Photos is not working
+- See the yelp.com page for adding photos, it works with Photos app
 - No drag events are fired at all, it just does nothing
 - See the Electron guide for native drag & drop
 - Handle 'open-url' and/or 'open-file' on the app instance in main.js

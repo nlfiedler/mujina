@@ -1,8 +1,8 @@
 //
-// Copyright (c) 2017 Nathan Fiedler
+// Copyright (c) 2018 Nathan Fiedler
 //
-const {assert} = require('chai')
-const {afterEach, before, describe, it} = require('mocha')
+const { assert } = require('chai')
+const { afterEach, before, describe, it } = require('mocha')
 const nock = require('nock')
 const createInvariantMiddleware = require('redux-immutable-state-invariant').default
 const actions = require('../app/actions')
@@ -15,7 +15,7 @@ describe('Reducers', () => {
     const middleware = [
       createInvariantMiddleware()
     ]
-    store = appStore.configureStore({middleware})
+    store = appStore.configureStore({ middleware })
   })
 
   describe('Tags', () => {
@@ -47,8 +47,8 @@ describe('Reducers', () => {
         .reply(200, {
           data: {
             tags: [
-              {value: 'pie', count: 4},
-              {value: 'cake', count: 2}
+              { value: 'pie', count: 4 },
+              { value: 'cake', count: 2 }
             ]
           }
         })
@@ -58,8 +58,8 @@ describe('Reducers', () => {
         // 2. called again after fetch complete, with items
         if (!state.isPending) {
           assert.deepEqual(state.items, [
-            {label: 'pie', count: 4, active: false},
-            {label: 'cake', count: 2, active: false}
+            { label: 'pie', count: 4, active: false },
+            { label: 'cake', count: 2, active: false }
           ])
           unsubscribe()
           done()
@@ -72,8 +72,8 @@ describe('Reducers', () => {
       const unsubscribe = store.subscribe(() => {
         const state = store.getState().tags
         assert.deepEqual(state.items, [
-          {label: 'pie', count: 4, active: true},
-          {label: 'cake', count: 2, active: false}
+          { label: 'pie', count: 4, active: true },
+          { label: 'cake', count: 2, active: false }
         ])
         unsubscribe()
         done()
@@ -111,8 +111,8 @@ describe('Reducers', () => {
         .reply(200, {
           data: {
             years: [
-              {value: 2007, count: 9},
-              {value: 2015, count: 81}
+              { value: 2007, count: 9 },
+              { value: 2015, count: 81 }
             ]
           }
         })
@@ -122,8 +122,8 @@ describe('Reducers', () => {
         // 2. called again after fetch complete, with items
         if (!state.isPending) {
           assert.deepEqual(state.items, [
-            {label: '2007', count: 9, active: false},
-            {label: '2015', count: 81, active: false}
+            { label: '2007', count: 9, active: false },
+            { label: '2015', count: 81, active: false }
           ])
           unsubscribe()
           done()
@@ -136,8 +136,8 @@ describe('Reducers', () => {
       const unsubscribe = store.subscribe(() => {
         const state = store.getState().years
         assert.deepEqual(state.items, [
-          {label: '2007', count: 9, active: false},
-          {label: '2015', count: 81, active: true}
+          { label: '2007', count: 9, active: false },
+          { label: '2015', count: 81, active: true }
         ])
         unsubscribe()
         done()
@@ -175,8 +175,8 @@ describe('Reducers', () => {
         .reply(200, {
           data: {
             locations: [
-              {value: 'outside', count: 11},
-              {value: 'inside', count: 5}
+              { value: 'outside', count: 11 },
+              { value: 'inside', count: 5 }
             ]
           }
         })
@@ -186,8 +186,8 @@ describe('Reducers', () => {
         // 2. called again after fetch complete, with items
         if (!state.isPending) {
           assert.deepEqual(state.items, [
-            {label: 'outside', count: 11, active: false},
-            {label: 'inside', count: 5, active: false}
+            { label: 'outside', count: 11, active: false },
+            { label: 'inside', count: 5, active: false }
           ])
           unsubscribe()
           done()
@@ -200,8 +200,8 @@ describe('Reducers', () => {
       const unsubscribe = store.subscribe(() => {
         const state = store.getState().locations
         assert.deepEqual(state.items, [
-          {label: 'outside', count: 11, active: false},
-          {label: 'inside', count: 5, active: true}
+          { label: 'outside', count: 11, active: false },
+          { label: 'inside', count: 5, active: true }
         ])
         unsubscribe()
         done()
@@ -247,8 +247,8 @@ describe('Reducers', () => {
         }
       })
       store.dispatch(actions.dropFiles([
-        {path: 'test/fixtures/lorem-ipsum.txt', mimetype: 'text/plain'},
-        {path: 'test/fixtures/128x128.png', mimetype: 'image/png'}
+        { path: 'test/fixtures/lorem-ipsum.txt', mimetype: 'text/plain' },
+        { path: 'test/fixtures/128x128.png', mimetype: 'image/png' }
       ]))
     })
 
@@ -260,11 +260,11 @@ describe('Reducers', () => {
       //
       const id1 = 'made_up_identifier'
       nock('http://localhost:3000')
-        .post('/api/assets')
-        .reply(200, {status: 'success', id: id1})
+        .post('/graphql', /upload/)
+        .reply(200, { data: { upload: id1 } })
       nock('http://localhost:3000')
         .post('/graphql', /query/)
-        .reply(200, {data: {update: {location: 'outside', tags: ['one', 'two']}}})
+        .reply(200, { data: { update: { location: 'outside', tags: ['one', 'two'] } } })
       const unsubscribe = store.subscribe(() => {
         const state = store.getState().uploads
         // 1. called when uploading

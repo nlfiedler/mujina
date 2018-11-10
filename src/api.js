@@ -37,7 +37,7 @@ function maybeError (error, response) {
 function fetchAttributes (key) {
   return new Promise((resolve, reject) => {
     request.post({
-      url: config.serverUrl({pathname: '/graphql'}),
+      url: config.serverUrl({ pathname: '/graphql' }),
       json: {
         query: `query {
           ${key} {
@@ -78,7 +78,7 @@ exports.fetchLocations = () => {
 exports.lookupAsset = (checksum) => {
   return new Promise((resolve, reject) => {
     request.post({
-      url: config.serverUrl({pathname: '/graphql'}),
+      url: config.serverUrl({ pathname: '/graphql' }),
       json: {
         query: `query {
           lookup(checksum: "${checksum}") {
@@ -113,7 +113,7 @@ exports.lookupAsset = (checksum) => {
 exports.fetchAsset = (identifier) => {
   return new Promise((resolve, reject) => {
     request.post({
-      url: config.serverUrl({pathname: '/graphql'}),
+      url: config.serverUrl({ pathname: '/graphql' }),
       json: {
         query: `query {
           asset(id: "${identifier}") {
@@ -157,7 +157,7 @@ exports.updateAsset = (details) => {
   const datetime = details.userdate ? details.userdate.getTime() : null
   return new Promise((resolve, reject) => {
     request.post({
-      url: config.serverUrl({pathname: '/graphql'}),
+      url: config.serverUrl({ pathname: '/graphql' }),
       json: {
         variables: JSON.stringify({
           input: {
@@ -194,7 +194,7 @@ exports.updateAsset = (details) => {
 function runQuery (params) {
   return new Promise((resolve, reject) => {
     request.post({
-      url: config.serverUrl({pathname: '/graphql'}),
+      url: config.serverUrl({ pathname: '/graphql' }),
       json: {
         variables: JSON.stringify({
           params
@@ -276,7 +276,22 @@ exports.uploadFile = (file) => {
   return new Promise((resolve, reject) => {
     // First upload the asset itself and get the identifier.
     let formData = {
-      asset: {
+      // graphql-upload expects the multi-part request to look a certain way
+      // c.f. https://github.com/jaydenseric/graphql-multipart-request-spec
+      //
+      // Because form-data orders the fields by name, use a prefix for
+      // the file map, so that the files come _after_ the "operations"
+      // and "map" fields, as expected by the server.
+      //
+      'operations': JSON.stringify({
+        variables: { file: null },
+        operationName: 'Upload',
+        query: `mutation Upload($file: Upload!) {
+          upload(file: $file)
+        }`
+      }),
+      'map': JSON.stringify({ 'x1': ['variables.file'] }),
+      'x1': {
         value: fs.createReadStream(file.path),
         options: {
           filename: file.name,
@@ -286,7 +301,7 @@ exports.uploadFile = (file) => {
     }
     // use multipart/form-data request form
     request.post({
-      url: config.serverUrl({pathname: '/api/assets'}),
+      url: config.serverUrl({ pathname: '/graphql' }),
       formData
     }, (err, response, body) => {
       const error = maybeError(err, response)
@@ -295,7 +310,7 @@ exports.uploadFile = (file) => {
       } else {
         const parsedBody = JSON.parse(body)
         resolve(Object.assign({}, file, {
-          identifier: parsedBody.id
+          identifier: parsedBody.data.upload
         }))
       }
     })
