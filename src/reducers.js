@@ -1,10 +1,10 @@
 //
 // Copyright (c) 2018 Nathan Fiedler
 //
-const {combineReducers} = require('redux')
+const { combineReducers } = require('redux')
 const actions = require('./actions')
-const {routerReducer} = require('react-router-redux')
-const {modelReducer, formReducer} = require('react-redux-form')
+const { routerReducer } = require('react-router-redux')
+const { modelReducer, formReducer } = require('react-redux-form')
 
 function tags (
   state = {
@@ -167,7 +167,9 @@ function assets (
             datetime: new Date(item.datetime),
             location: item.location,
             thumbWidth: item.thumbWidth,
-            thumbHeight: item.thumbHeight
+            thumbHeight: item.thumbHeight,
+            thumbnailUrl: item.thumbnailUrl,
+            widethumbUrl: item.widethumbUrl
           }
         }),
         error: null
@@ -214,6 +216,8 @@ function details (
           caption: action.payload.caption || '',
           duration: action.payload.duration,
           tags: action.payload.tags,
+          previewUrl: action.payload.previewUrl,
+          assetUrl: action.payload.assetUrl,
           userdate
         },
         error: null
@@ -341,9 +345,9 @@ function toggleActive (state, action, exclusive = false) {
   return Object.assign({}, state, {
     items: state.items.map(item => {
       if (item.label === action.payload) {
-        return Object.assign({}, item, {active: !item.active})
+        return Object.assign({}, item, { active: !item.active })
       } else if (exclusive && item.active) {
-        return Object.assign({}, item, {active: false})
+        return Object.assign({}, item, { active: false })
       } else {
         return item
       }
@@ -353,7 +357,7 @@ function toggleActive (state, action, exclusive = false) {
 
 function resetSelections (state) {
   return Object.assign({}, state, {
-    items: state.items.map(item => Object.assign({}, item, {active: false}))
+    items: state.items.map(item => Object.assign({}, item, { active: false }))
   })
 }
 

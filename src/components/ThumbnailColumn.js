@@ -17,7 +17,7 @@ class ThumbnailImage extends React.Component {
     this.onVisibilityChange = this.onVisibilityChange.bind(this)
     this.onError = this.onError.bind(this)
     this.state = {
-      imageUrl: config.serverUrl({pathname: '/thumbnail/' + this.props.identifier}),
+      imageUrl: config.serverUrl({ pathname: this.props.thumbnailUrl }),
       visible: false
     }
   }
@@ -36,17 +36,17 @@ class ThumbnailImage extends React.Component {
   }
 
   getImageComponent () {
-    const {identifier, onClick} = this.props
+    const { identifier, onClick } = this.props
     return this.state.visible ? (
       <img
-        style={{'objectFit': 'cover', 'height': '96px', 'width': '96px'}}
+        style={{ 'objectFit': 'cover', 'height': '96px', 'width': '96px' }}
         src={this.state.imageUrl}
         onError={this.onError}
         onClick={() => onClick(identifier)}
       />
     ) : (
       <img
-        style={{'height': '96px', 'width': '96px'}}
+        style={{ 'height': '96px', 'width': '96px' }}
         src='images/picture-1.svg'
       />
     )
@@ -75,7 +75,7 @@ class ThumbnailImage extends React.Component {
   }
 }
 
-const ThumbnailColumn = ({assets, onClick}) => {
+const ThumbnailColumn = ({ assets, onClick }) => {
   const items = assets.map(asset => (
     <ThumbnailImage key={asset.identifier} onClick={onClick} {...asset} />
   ))
@@ -118,7 +118,8 @@ ThumbnailColumn.propTypes = {
       identifier: PropTypes.string.isRequired,
       filename: PropTypes.string.isRequired,
       datetime: PropTypes.instanceOf(Date).isRequired,
-      location: PropTypes.string
+      location: PropTypes.string,
+      thumbnailUrl: PropTypes.string.isRequired
     }).isRequired
   ).isRequired,
   onClick: PropTypes.func.isRequired

@@ -128,6 +128,8 @@ exports.fetchAsset = (identifier) => {
             mimetype
             tags
             userdate
+            previewUrl
+            assetUrl
           }
         }`
       }
@@ -209,6 +211,8 @@ function runQuery (params) {
               location
               thumbWidth
               thumbHeight
+              thumbnailUrl
+              widethumbUrl
             }
             count
           }

@@ -14,7 +14,7 @@ class ThumbnailCard extends React.Component {
     // Do _not_ stash props on this, otherwise react/redux has no way of
     // knowing if the changing props have any effect on this component.
     this.state = {
-      imageUrl: config.serverUrl({pathname: '/widethumb/' + props.identifier})
+      imageUrl: config.serverUrl({ pathname: props.widethumbUrl })
     }
     this.onError = this.onError.bind(this)
   }
@@ -29,7 +29,7 @@ class ThumbnailCard extends React.Component {
     return (
       <FadeIn height={this.props.thumbHeight} duration={300}>
         {(onload) => (
-          <figure className='image' style={{'cursor': 'pointer'}}>
+          <figure className='image' style={{ 'cursor': 'pointer' }}>
             <img
               alt={this.props.filename}
               style={this.props.imageStyle}
@@ -51,7 +51,8 @@ ThumbnailCard.propTypes = {
   datetime: PropTypes.instanceOf(Date).isRequired,
   location: PropTypes.string,
   thumbWidth: PropTypes.number.isRequired,
-  thumbHeight: PropTypes.number.isRequired
+  thumbHeight: PropTypes.number.isRequired,
+  widethumbUrl: PropTypes.string.isRequired
 }
 
 module.exports = {

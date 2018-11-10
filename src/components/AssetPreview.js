@@ -18,7 +18,7 @@ const {
   NavbarStart
 } = require('bloomer')
 const config = require('../config')
-const {history} = require('../store')
+const { history } = require('../store')
 
 class AssetPreview extends React.Component {
   constructor (props) {
@@ -44,7 +44,7 @@ class AssetPreview extends React.Component {
       // used to update the state when necessary
       assetId: props.identifier,
       // use the full asset, 'preview' looks grainy
-      imageUrl: config.serverUrl({pathname: '/asset/' + props.identifier}),
+      imageUrl: config.serverUrl({ pathname: props.assetUrl }),
       imageStyle: {
         'width': '100%',
         'height': 'auto'
@@ -64,7 +64,7 @@ class AssetPreview extends React.Component {
     // the need for plugins.
     const mimetype = this.props.mimetype === 'video/quicktime' ? 'video/mp4' : this.props.mimetype
     return (
-      <video controls preload='auto' style={{'width': '100%', 'height': '100%'}}>
+      <video controls preload='auto' style={{ 'width': '100%', 'height': '100%' }}>
         <source src={this.state.imageUrl} type={mimetype} />
         'Bummer, your browser does not support the HTML5'
         <code>video</code>
@@ -87,7 +87,7 @@ class AssetPreview extends React.Component {
     return (
       <Card>
         <CardHeader>
-          <Navbar isTransparent style={{'width': '100%'}}>
+          <Navbar isTransparent style={{ 'width': '100%' }}>
             <NavbarBrand>
               <NavbarItem>
                 {this.props.filename}
@@ -129,7 +129,8 @@ AssetPreview.propTypes = {
   duration: PropTypes.number,
   tags: PropTypes.arrayOf(
     PropTypes.string.isRequired
-  ).isRequired
+  ).isRequired,
+  assetUrl: PropTypes.string.isRequired
 }
 
 module.exports = {

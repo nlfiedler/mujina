@@ -24,7 +24,7 @@ const {
 } = require('bloomer')
 const rrf = require('react-redux-form')
 const config = require('../config')
-const {history} = require('../store')
+const { history } = require('../store')
 const datefmt = require('date-fns/format')
 
 class AssetEditor extends React.Component {
@@ -63,12 +63,12 @@ class AssetEditor extends React.Component {
   }
 
   render () {
-    const {identifier, filename} = this.props.details
-    const previewUrl = config.serverUrl({pathname: '/preview/' + identifier})
+    const { identifier, filename, previewUrl } = this.props.details
+    const fullPreviewUrl = config.serverUrl({ pathname: previewUrl })
     return (
       <Card>
         <CardHeader>
-          <Navbar isTransparent style={{'width': '100%'}}>
+          <Navbar isTransparent style={{ 'width': '100%' }}>
             <NavbarBrand>
               <NavbarItem>
                 {filename}
@@ -94,7 +94,7 @@ class AssetEditor extends React.Component {
           'paddingTop': '1em'
         }}>
           <figure alt={identifier} className='image'>
-            <img src={previewUrl} style={{
+            <img src={fullPreviewUrl} style={{
               'display': 'inline-block',
               'width': '400px',
               'height': '400px',
@@ -195,7 +195,8 @@ AssetEditor.propTypes = {
     duration: PropTypes.number,
     tags: PropTypes.arrayOf(
       PropTypes.string.isRequired
-    ).isRequired
+    ).isRequired,
+    previewUrl: PropTypes.string.isRequired
   }).isRequired
 }
 
