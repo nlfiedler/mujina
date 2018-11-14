@@ -20,7 +20,7 @@ const assetSrc = [
 ]
 
 gulp.task('compile:react', () => {
-  return gulp.src(reactSrc, {base: 'src'})
+  return gulp.src(reactSrc, { base: 'src' })
     .pipe(babel({
       presets: ['env', 'react']
     }))
@@ -28,12 +28,12 @@ gulp.task('compile:react', () => {
 })
 
 gulp.task('copy:scripts', () => {
-  return gulp.src(scriptSrc, {base: 'src'})
+  return gulp.src(scriptSrc, { base: 'src' })
     .pipe(gulp.dest('app'))
 })
 
 gulp.task('copy:assets', () => {
-  return gulp.src(assetSrc, {base: 'assets'})
+  return gulp.src(assetSrc, { base: 'assets' })
     .pipe(gulp.dest('app'))
 })
 
@@ -41,10 +41,4 @@ gulp.task('clean', () => {
   return del(['app', 'build', 'dist'])
 })
 
-gulp.task('build', [
-  'compile:react',
-  'copy:scripts',
-  'copy:assets'
-])
-
-gulp.task('default', ['build'])
+gulp.task('default', gulp.series('compile:react', 'copy:scripts', 'copy:assets'))

@@ -73,7 +73,7 @@
     "electron": "^1.8.7",
     "electron-builder": "^20.28.1",
     "electron-mocha": "^6.0.4",
-    "gulp": "^3.9.1",
+    "gulp": "^4.0.0",
     "gulp-babel": "^7.0.1",
     "license-checker": "^20.2.0",
     "mocha": "^5.2.0",
