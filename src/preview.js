@@ -70,8 +70,12 @@ async function generateThumbnail (mimetype, filepath, pixels) {
     // fit the image into a box of the given size, convert to jpeg,
     // and auto-rotate as needed (server makes the final correction)
     let bits = await sharp(filepath)
-      .resize(pixels, pixels)
-      .crop(sharp.strategy.entropy)
+      .resize({
+        width: pixels,
+        height: pixels,
+        fit: sharp.fit.cover,
+        position: sharp.strategy.entropy
+      })
       .rotate()
       .toFormat('jpeg')
       .toBuffer()

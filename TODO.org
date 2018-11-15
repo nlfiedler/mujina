@@ -1,5 +1,6 @@
 * Mujina
 ** Next
+*** TODO Can =npm test= rebuild the code first without doing "test" build?
 *** ReasonML migration
 **** TODO Understand how =redux-saga= works and how ReasonML can do something similar
 ***** TODO See [[http://2ality.com/2018/01/iterators-reasonml.html][ReasonML iterators]] for an alternative to generators seen in redux-saga
