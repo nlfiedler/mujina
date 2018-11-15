@@ -3,6 +3,11 @@
 *** TODO Can =npm test= rebuild the code first without doing "test" build?
 *** TODO FontAwesome icons are missing pretty much everywhere
 **** Could have been caused by bloomer upgrade
+*** TODO Update Electron
+**** TODO Test it on a Windows VM /before/ updating
+**** TODO Also update electron-store, which now requires Electron 2.0
+**** TODO Test on a Windows VM to make sure it still works
+*** TODO Start using ReasonReact in mujina
 *** ReasonML migration
 **** TODO Understand how =redux-saga= works and how ReasonML can do something similar
 ***** TODO See [[http://2ality.com/2018/01/iterators-reasonml.html][ReasonML iterators]] for an alternative to generators seen in redux-saga
