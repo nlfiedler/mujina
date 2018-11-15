@@ -71,7 +71,7 @@
     "chai": "^4.1.2",
     "del": "^3.0.0",
     "electron": "^1.8.7",
-    "electron-builder": "^20.28.1",
+    "electron-builder": "^20.34.0",
     "electron-mocha": "^6.0.4",
     "gulp": "^4.0.0",
     "gulp-babel": "^7.0.1",
