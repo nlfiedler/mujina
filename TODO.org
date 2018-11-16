@@ -1,8 +1,6 @@
 * Mujina
 ** Next
 *** TODO Can =npm test= rebuild the code first without doing "test" build?
-*** TODO FontAwesome icons are missing pretty much everywhere
-**** Could have been caused by bloomer upgrade
 *** TODO Update Electron
 **** TODO Test it on a Windows VM /before/ updating
 **** TODO Also update electron-store, which now requires Electron 2.0

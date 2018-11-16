@@ -119,8 +119,8 @@ class AssetEditor extends React.Component {
                       className='input'
                       placeholder='Description with optional #tags and a @location'
                     />
-                    <Icon isSize='small' isAlign='left'><span className='fa fa-quote-left' /></Icon>
-                    <Icon isSize='small' isAlign='right'><span className='fa fa-quote-right' /></Icon>
+                    <Icon isSize='small' isAlign='left' className='fa fa-quote-left' />
+                    <Icon isSize='small' isAlign='right' className='fa fa-quote-right' />
                   </Control>
                 </Field>
               </FieldBody>
@@ -135,7 +135,7 @@ class AssetEditor extends React.Component {
                       id='editor.location'
                       className='input'
                     />
-                    <Icon isSize='small' isAlign='left'><span className='fa fa-map-marker' /></Icon>
+                    <Icon isSize='small' isAlign='left' className='fa fa-map-marker' />
                   </Control>
                 </Field>
               </FieldBody>
@@ -151,7 +151,7 @@ class AssetEditor extends React.Component {
                       className='input'
                       placeholder='Comma-separated keywords'
                     />
-                    <Icon isSize='small' isAlign='left'><span className='fa fa-tag' /></Icon>
+                    <Icon isSize='small' isAlign='left' className='fa fa-tag' />
                   </Control>
                 </Field>
               </FieldBody>
@@ -168,7 +168,7 @@ class AssetEditor extends React.Component {
                       className='input'
                       placeholder='Optional custom date/time'
                     />
-                    <Icon isSize='small' isAlign='left'><span className='fa fa-calendar' /></Icon>
+                    <Icon isSize='small' isAlign='left' className='fa fa-calendar' />
                   </Control>
                 </Field>
               </FieldBody>

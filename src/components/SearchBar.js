@@ -14,7 +14,7 @@ const {
   NavbarMenu
 } = require('bloomer')
 const rrf = require('react-redux-form')
-const {history} = require('../store')
+const { history } = require('../store')
 
 class SearchBar extends React.Component {
   constructor (props) {
@@ -45,18 +45,18 @@ class SearchBar extends React.Component {
         'position': 'sticky',
         'top': 0
       }}>
-        <NavbarMenu style={{'width': '100%'}}>
-          <NavbarEnd style={{'width': '100%'}}>
+        <NavbarMenu style={{ 'width': '100%' }}>
+          <NavbarEnd style={{ 'width': '100%' }}>
             <NavbarItem>
               <Button isLink isOutlined onClick={() => history.push('/')}>
                 <Icon isSize='medium' className='fa fa-home' />
               </Button>
             </NavbarItem>
-            <NavbarItem style={{'flexGrow': 1}}>
+            <NavbarItem style={{ 'flexGrow': 1 }}>
               <rrf.Form
                 model='search'
                 onSubmit={(values) => this.handleSubmit(values)}
-                style={{'width': '100%'}}
+                style={{ 'width': '100%' }}
               >
                 <Field isHorizontal>
                   <FieldBody>
@@ -68,9 +68,7 @@ class SearchBar extends React.Component {
                           className='input is-small'
                           placeholder='Search'
                         />
-                        <Icon isSize='small' isAlign='left'>
-                          <span className='fa fa-search' />
-                        </Icon>
+                        <Icon isSize='small' isAlign='left' className='fa fa-search' />
                       </Control>
                       <Control>
                         <Button isActive isColor='light' isSize='small' type='submit'>Search</Button>

@@ -25,7 +25,7 @@ const NewFile = (entry) => {
       <Columns>
         <Column className='is-one-fifth'>
           {thumbnail}
-          <Label isSize='small' style={{'wordWrap': 'break-word'}}>{entry.name}</Label>
+          <Label isSize='small' style={{ 'wordWrap': 'break-word' }}>{entry.name}</Label>
         </Column>
         <Column className='is-four-fifths'>
           <Field isHorizontal>
@@ -33,13 +33,13 @@ const NewFile = (entry) => {
               <Field isGrouped>
                 <Control isExpanded hasIcons='left'>
                   <Input type='text' disabled value={entry.tags || ''} placeholder='Tags' />
-                  <Icon isSize='small' isAlign='left'><span className='fa fa-tag' /></Icon>
+                  <Icon isSize='small' isAlign='left' className='fa fa-tag' />
                 </Control>
               </Field>
               <Field>
                 <Control isExpanded hasIcons='left'>
                   <Input type='text' disabled value={entry.location || ''} placeholder='Location' />
-                  <Icon isSize='small' isAlign='left'><span className='fa fa-map-marker' /></Icon>
+                  <Icon isSize='small' isAlign='left' className='fa fa-map-marker' />
                 </Control>
               </Field>
             </FieldBody>
@@ -49,8 +49,8 @@ const NewFile = (entry) => {
               <Field>
                 <Control isExpanded hasIcons={['left', 'right']}>
                   <Input type='text' disabled value={entry.caption || ''} placeholder='Caption' />
-                  <Icon isSize='small' isAlign='left'><span className='fa fa-quote-left' /></Icon>
-                  <Icon isSize='small' isAlign='right'><span className='fa fa-quote-right' /></Icon>
+                  <Icon isSize='small' isAlign='left' className='fa fa-quote-left' />
+                  <Icon isSize='small' isAlign='right' className='fa fa-quote-right' />
                 </Control>
                 <p className='help'>This asset was saved previously</p>
               </Field>
@@ -67,7 +67,7 @@ const NewFile = (entry) => {
         </Column>
         <Column className='is-four-fifths'>
           <Field>
-            <Label style={{'wordWrap': 'break-word'}}>{entry.name}</Label>
+            <Label style={{ 'wordWrap': 'break-word' }}>{entry.name}</Label>
             <Control isExpanded hasIcons={['left', 'right']}>
               <rrf.Control.text
                 model={`drops[${entry.checksum}].caption`}
@@ -75,8 +75,8 @@ const NewFile = (entry) => {
                 className='input'
                 placeholder='Caption with #tags and @location or @"some location"'
               />
-              <Icon isSize='small' isAlign='left'><span className='fa fa-quote-left' /></Icon>
-              <Icon isSize='small' isAlign='right'><span className='fa fa-quote-right' /></Icon>
+              <Icon isSize='small' isAlign='left' className='fa fa-quote-left' />
+              <Icon isSize='small' isAlign='right' className='fa fa-quote-right' />
               <p className='help'>Enter a description, including #tags and @location</p>
             </Control>
           </Field>
