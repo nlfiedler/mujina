@@ -6,7 +6,7 @@ const PropTypes = require('prop-types')
 const {
   Box
 } = require('bloomer')
-const VisibilitySensor = require('react-visibility-sensor')
+const VisibilitySensor = require('react-visibility-sensor').default
 const config = require('../config')
 
 class ThumbnailImage extends React.Component {
