@@ -96,6 +96,21 @@ if (process.platform === 'darwin') {
     {type: 'separator'},
     {role: 'front'}
   ]
+} else {
+  template.unshift({
+    label: 'File',
+    submenu: [
+      {role: 'about'},
+      {type: 'separator'},
+      {
+        label: 'Preferences',
+        click: showPreferences,
+        accelerator: 'CmdOrCtrl+,'
+      },
+      {type: 'separator'},
+      {role: 'quit'}
+    ]
+  })
 }
 
 exports.setMainMenu = () => {
