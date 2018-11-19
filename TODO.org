@@ -1,16 +1,12 @@
 * Mujina
 ** Next
 *** TODO Can =npm test= rebuild the code first without doing "test" build?
-*** TODO Update Electron
-**** DONE Test it on a Windows VM /before/ updating
-**** TODO Also update electron-store, which now requires Electron 2.0
-**** DONE Test on a Windows VM to make sure it still works
-*** Rewrite interface using [[https://tailwindcss.com/docs/what-is-tailwind/][Tailwind CSS]]
+*** TODO Fix the [[https://electronjs.org/docs/tutorial/security][content security policy]] thing
+*** TODO Rewrite interface using [[https://tailwindcss.com/docs/what-is-tailwind/][Tailwind CSS]]
 **** Completely redesign the interface, I don't like the current one
 ***** I keep looking for a button at the top left to go back to the previous screen
 **** Issues to address
 ***** Closing the asset preview page goes Home, instead of the previous page, e.g. Search
-
 *** TODO Start using ReasonReact in mujina
 *** ReasonML migration
 **** TODO Understand how =redux-saga= works and how ReasonML can do something similar
@@ -72,7 +68,6 @@
 ***** TODO Remove =react-router= and =react-router-redux= dependencies
 **** TODO Remove =PropTypes= once conversion to ReasonReact is complete
 ***** TODO Remove =prop-types= dependency
-*** TODO Consider how to migrate to [[https://tailwindcss.com/docs/what-is-tailwind/][Tailwind CSS]]
 *** Asset page
 **** TODO Resize window and observe that middle component does not resize well
 **** TODO ThumbnailColumn images should have tiny margins
