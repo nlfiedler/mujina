@@ -1,12 +1,12 @@
 //
 // Copyright (c) 2018 Nathan Fiedler
 //
-const {all, call, put, select, takeEvery, takeLatest} = require('redux-saga/effects')
-const {push} = require('react-router-redux')
+const { all, call, put, select, takeEvery, takeLatest } = require('redux-saga/effects')
+const { push } = require('react-router-redux')
 const Api = require('./api')
 const actions = require('./actions')
 const config = require('./config')
-const {getSelectedAttrs} = require('./query')
+const { getSelectedAttrs } = require('./query')
 const preview = require('./preview')
 
 function * fetchTags (action) {

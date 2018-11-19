@@ -7,12 +7,12 @@
 //
 const React = require('react')
 const ReactDOM = require('react-dom')
-const {Provider} = require('react-redux')
-const {App} = require('./components/App')
+const { Provider } = require('react-redux')
+const { App } = require('./components/App')
 const actions = require('./actions')
 const reduxStore = require('./store').configureStore()
-const {push} = require('react-router-redux')
-const {ipcRenderer} = require('electron')
+const { push } = require('react-router-redux')
+const { ipcRenderer } = require('electron')
 
 reduxStore.dispatch(actions.requestLocations())
 reduxStore.dispatch(actions.requestTags())
@@ -26,7 +26,7 @@ window.addEventListener('load', () => {
 
 function attachReact () {
   const app = React.createElement(App)
-  const provider = React.createElement(Provider, {store: reduxStore}, app)
+  const provider = React.createElement(Provider, { store: reduxStore }, app)
   ReactDOM.render(provider, document.getElementById('app'))
 }
 

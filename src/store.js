@@ -1,13 +1,13 @@
 //
 // Copyright (c) 2018 Nathan Fiedler
 //
-const {createStore, applyMiddleware} = require('redux')
+const { createStore, applyMiddleware } = require('redux')
 const createSagaMiddleware = require('redux-saga').default
-const {reducer} = require('./reducers')
-const {rootSaga} = require('./sagas')
-const {routerMiddleware} = require('react-router-redux')
+const { reducer } = require('./reducers')
+const { rootSaga } = require('./sagas')
+const { routerMiddleware } = require('react-router-redux')
 const createHistory = require('history/createMemoryHistory').default
-const {createLogger} = require('redux-logger')
+const { createLogger } = require('redux-logger')
 
 exports.history = createHistory()
 
@@ -21,7 +21,7 @@ const isDevMode = process.defaultApp || /node_modules[\\/]electron[\\/]/.test(pr
  * @param {Array} arguments.middleware list of optional middleware; default []
  * @return {Object} configured redux store
  */
-exports.configureStore = ({middleware = []} = {}) => {
+exports.configureStore = ({ middleware = [] } = {}) => {
   const initialState = {}
   const sagaMiddleware = createSagaMiddleware()
   // Make a copy of the provided middleware and then make the necessary

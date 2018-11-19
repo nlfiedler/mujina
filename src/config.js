@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2017 Nathan Fiedler
+// Copyright (c) 2018 Nathan Fiedler
 //
 const url = require('url')
 const Store = require('electron-store')
@@ -11,7 +11,7 @@ const defaults = {
   backend_port: 3000
 }
 
-const store = new Store({defaults})
+const store = new Store({ defaults })
 
 /**
  * Construct and return a URL-formatted string for making a request to
@@ -21,7 +21,7 @@ const store = new Store({defaults})
  * @param {String} options.pathname - URL path, defaults to ''
  * @param {String} options.search - URL search (sans ?), defaults to ''
  */
-function serverUrl ({pathname = '', search = ''} = {}) {
+function serverUrl ({ pathname = '', search = '' } = {}) {
   const hostname = store.get('backend_host')
   const port = store.get('backend_port')
   return url.format({

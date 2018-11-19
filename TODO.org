@@ -2,9 +2,15 @@
 ** Next
 *** TODO Can =npm test= rebuild the code first without doing "test" build?
 *** TODO Update Electron
-**** TODO Test it on a Windows VM /before/ updating
+**** DONE Test it on a Windows VM /before/ updating
 **** TODO Also update electron-store, which now requires Electron 2.0
-**** TODO Test on a Windows VM to make sure it still works
+**** DONE Test on a Windows VM to make sure it still works
+*** Rewrite interface using [[https://tailwindcss.com/docs/what-is-tailwind/][Tailwind CSS]]
+**** Completely redesign the interface, I don't like the current one
+***** I keep looking for a button at the top left to go back to the previous screen
+**** Issues to address
+***** Closing the asset preview page goes Home, instead of the previous page, e.g. Search
+
 *** TODO Start using ReasonReact in mujina
 *** ReasonML migration
 **** TODO Understand how =redux-saga= works and how ReasonML can do something similar
@@ -193,7 +199,6 @@ The icons are kinda cryptic, text is much more obvious
 **** TODO Use video tag for thumbnail view
 **** TODO Show 5 or so frames from the video on hover
 **** TODO Show placeholder icons for videos that fail to load
-*** TODO Update Electron
 ** Investigate
 *** TODO What format are =AAE= files and can we show them somehow?
 *** TODO How to search for assets with no tags or location?
@@ -209,6 +214,7 @@ The icons are kinda cryptic, text is much more obvious
 - uses gulp to minify and uglify everything
 
 *** TODO Drag and drop from Photos is not working
+- Update: it works as of 2018-11-17, but the filenames are weird, and seemingly not full quality
 - See the yelp.com page for adding photos, it works with Photos app
 - No drag events are fired at all, it just does nothing
 - See the Electron guide for native drag & drop
