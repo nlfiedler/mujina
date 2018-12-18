@@ -5,6 +5,10 @@ const React = require('react')
 const fs = require('fs')
 const sharp = require('sharp')
 const ffmpeg = require('fluent-ffmpeg')
+const ffmpegStatic = require('ffmpeg-static')
+ffmpeg.setFfmpegPath(ffmpegStatic.path.replace('app.asar', 'app.asar.unpacked'))
+const ffmpegProbe = require('ffprobe-static')
+ffmpeg.setFfprobePath(ffmpegProbe.path.replace('app.asar', 'app.asar.unpacked'))
 const {
   Icon
 } = require('bloomer')

@@ -3,13 +3,22 @@
 *** TODO Can =npm test= rebuild the code first without doing "test" build?
 *** TODO Fix the [[https://electronjs.org/docs/tutorial/security][content security policy]] thing
 *** TODO Rewrite interface using [[https://tailwindcss.com/docs/what-is-tailwind/][Tailwind CSS]]
+**** c.f. https://adamwathan.me/css-utility-classes-and-separation-of-concerns/
 **** Completely redesign the interface, I don't like the current one
 ***** I keep looking for a button at the top left to go back to the previous screen
+***** Selectors should be collapsed to a narrow vertical bar on left side
+***** Clicking on selectors will display a slideout panel to show all selectors
+***** Currently selected attributes are shown at the top
+***** Currently selected attributes have an ~X~ button to deselect
 **** Issues to address
 ***** Closing the asset preview page goes Home, instead of the previous page, e.g. Search
+****** Should probably use the history to go back to the previous route
 *** TODO Start using ReasonReact in mujina
 *** ReasonML migration
 **** TODO Understand how =redux-saga= works and how ReasonML can do something similar
+***** reductive has a bunch of "thunk" examples that may be what was intended
+***** reductive has =middleware.re= which is an example of how to do it
+***** Extract that middleware example into a utility function
 ***** TODO See [[http://2ality.com/2018/01/iterators-reasonml.html][ReasonML iterators]] for an alternative to generators seen in redux-saga
 ***** TODO See [[https://redux-observable.js.org][redux-observable]] for an alternative method that does not use generators
 **** TODO Look at https://github.com/cristianoc/genType for JavaScript interop
@@ -242,6 +251,48 @@ the tags tab is selected by default, and the locations is not showing.
 - Use Bulma-Extensions TagsInput on the asset edit screen
 
 *** TODO Consider setting the application menu appropriately for macOS and win32
+*** TODO Consider not packing ffmpeg/ffprobe into the build, they are huge
+**** Instead, download the appropriate version on the first run.
+**** c.f. https://github.com/orionhealth/electron-packager-plugin-non-proprietary-codecs-ffmpeg
+- pertinent code from the above project
+#+BEGIN_SRC javascript
+const downloadFFMPEG = (electronVersion, platform, arch) =>
+  new Promise((resolve, reject) => {
+    if (!semver.satisfies(electronVersion, '>=0.36.8')) return reject(new Error('Electron version too low'));
+    if (!process.env.TESTING) console.log(`Downloading patent safe FFMPEG for platform ${platform} ${arch} using electron v${electronVersion}`);
+
+    const tmpPath = path.resolve(os.tmpdir(), 'tmp-safe-ffmpeg');
+    mkdirp(tmpPath, (err) => {
+      if (err) return reject(err);
+
+      const ffmpegFileName = `ffmpeg-v${electronVersion}-${platform}-${arch}.zip`;
+      const downloadPath = path.resolve(tmpPath, ffmpegFileName);
+
+      if (fs.existsSync(downloadPath)) return resolve(downloadPath);
+
+      const downloadStream = fs.createWriteStream(downloadPath);
+      request({
+        url: `https://github.com/electron/electron/releases/download/v${electronVersion}/${ffmpegFileName}`,
+        followAllRedirects: true,
+        timeout: 10000,
+        gzip: true,
+      })
+      .on('error', (downloadError) => {
+        reject(downloadError);
+      })
+      .pipe(downloadStream)
+      .on('close', () => {
+        resolve(downloadPath);
+      });
+    });
+  });
+#+END_SRC
+
+*** TODO Consider whether we need to exclude proprietary version of ffmpeg
+- it comes with electron for some reason
+- see if it is the encumbered version or not
+- c.f. [[https://github.com/orionhealth/electron-packager-plugin-non-proprietary-codecs-ffmpeg][electron-packager-plugin-non-proprietary-codecs-ffmpeg]]
+
 *** TODO Create a "New Window" menu item that invokes createWindow()
 *** TODO Set the browser window title (in index.html) to something sensible
 *** TODO When selecting attributes, disable those that no longer help
