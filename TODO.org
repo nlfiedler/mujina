@@ -250,6 +250,10 @@ the tags tab is selected by default, and the locations is not showing.
 *** TODO Better tags input
 - Use Bulma-Extensions TagsInput on the asset edit screen
 
+*** TODO Look at using webpack to produce concise output for main and renderer
+**** Can then make all dependencies "devDependencies" to shrink the build down
+**** c.f. https://hackernoon.com/electron-on-the-appstore-pain-tears-ii-88414921e72d
+**** Also note their advice on removing unsupported languages
 *** TODO Consider setting the application menu appropriately for macOS and win32
 *** TODO Consider not packing ffmpeg/ffprobe into the build, they are huge
 **** Instead, download the appropriate version on the first run.
