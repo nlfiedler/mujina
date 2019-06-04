@@ -84,7 +84,7 @@
     "electron-mocha": "^6.0.4",
     "gulp": "^4.0.2",
     "gulp-babel": "^7.0.1",
-    "license-checker": "^24.1.0",
+    "license-checker": "^25.0.1",
     "mocha": "^5.2.0",
     "nock": "^10.0.6",
     "redux-immutable-state-invariant": "^2.1.0",
