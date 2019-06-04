@@ -1,20 +1,8 @@
 * Mujina
 ** Next
-*** TODO Can =npm test= rebuild the code first without doing "test" build?
-*** TODO Fix the [[https://electronjs.org/docs/tutorial/security][content security policy]] thing
-*** TODO Rewrite interface using [[https://tailwindcss.com/docs/what-is-tailwind/][Tailwind CSS]]
-**** c.f. https://adamwathan.me/css-utility-classes-and-separation-of-concerns/
-**** Completely redesign the interface, I don't like the current one
-***** I keep looking for a button at the top left to go back to the previous screen
-***** Selectors should be collapsed to a narrow vertical bar on left side
-***** Clicking on selectors will display a slideout panel to show all selectors
-***** Currently selected attributes are shown at the top
-***** Currently selected attributes have an ~X~ button to deselect
-**** Issues to address
-***** Closing the asset preview page goes Home, instead of the previous page, e.g. Search
-****** Should probably use the history to go back to the previous route
-*** TODO Start using ReasonReact in mujina
-*** ReasonML migration
+*** TODO Need to handle the =BigInt= type in the GraphQL schema wrt =filesize=
+*** TODO Consider rewrite using ReasonML
+**** One commercial developer strongly advocates using ReasonML with Electron
 **** TODO Understand how =redux-saga= works and how ReasonML can do something similar
 ***** reductive has a bunch of "thunk" examples that may be what was intended
 ***** reductive has =middleware.re= which is an example of how to do it
@@ -28,13 +16,7 @@
 - react-visibility-sensor
 
 **** TODO Consider how to organize the source code; Reason tends to be flat
-**** TODO Consider how to handle =react-redux= containers in Reason
 **** TODO Consider how to use =reductive= instead of =redux= and =react-redux=
-- Instead of =mapStateToProps()= we would use =shouldUpdate()= on each component
-- Consider using "lenses"
-  - c.f. https://github.com/jonlaing/rationale for =Lens.re=
-- =react-redux= "selector" does the comparison of old and new mapped props
-
 **** TODO Convert some React components to ReasonReact [0/22]
 - [ ] AssetEditPage
 - [ ] AssetEditor
@@ -77,6 +59,29 @@
 ***** TODO Remove =react-router= and =react-router-redux= dependencies
 **** TODO Remove =PropTypes= once conversion to ReasonReact is complete
 ***** TODO Remove =prop-types= dependency
+*** TODO Consider translating to TypeScript if ReasonML proves difficult
+**** works well with redux.js
+*** TODO Consider using [[https://github.com/neon-bindings/neon][Neon bindings]] to write some parts in Rust
+*** TODO Can =npm test= rebuild the code first without doing "test" build?
+*** TODO Fix the [[https://electronjs.org/docs/tutorial/security][content security policy]] thing
+*** TODO Tags edit needs to refresh tags list, clear affected selections
+**** select a wonky tag, edit the asset(s), tag is effectively gone now
+**** tags list needs to be refreshed
+**** selected tags need to have removed tag cleared
+*** TODO Rewrite interface using [[https://tailwindcss.com/docs/what-is-tailwind/][Tailwind CSS]]
+**** Look at https://github.com/Pagedraw/pagedraw for building the interface
+**** Look at Sketch or Figma for designing the interface
+**** c.f. https://adamwathan.me/css-utility-classes-and-separation-of-concerns/
+**** Completely redesign the interface, I don't like the current one
+***** I keep looking for a button at the top left to go back to the previous screen
+***** Selectors should be collapsed to a narrow vertical bar on left side
+***** Clicking on selectors will display a slideout panel to show all selectors
+***** Currently selected attributes are shown at the top
+***** Currently selected attributes have an ~X~ button to deselect
+**** Issues to address
+***** Closing the asset preview page goes Home, instead of the previous page, e.g. Search
+****** Should probably use the history to go back to the previous route
+** Anytime
 *** Asset page
 **** TODO Resize window and observe that middle component does not resize well
 **** TODO ThumbnailColumn images should have tiny margins
@@ -194,15 +199,92 @@ The icons are kinda cryptic, text is much more obvious
 
 *** Videos
 **** TODO Get video playback working again
-- Also does not work with webui in Chrome
-- Seems to work with some videos (like potowatomi from 2014)
-
+***** c.f. https://github.com/matvp91/indigo-player
+***** Also does not work with webui in Chrome
+***** Seems to work with some videos (like potowatomi from 2014)
 **** TODO How to get large videos into storage?
 - Files up to 100MB seem to be okay, but what about really large files?
 
 **** TODO Use video tag for thumbnail view
 **** TODO Show 5 or so frames from the video on hover
 **** TODO Show placeholder icons for videos that fail to load
+*** Refinements
+**** TODO Toolbar buttons (or something) to change thumbnail view
+ - See lynapp.com screenshot
+ - Icon view: the 240x240 thumbnails with some details as captions
+ - Gallery view: the justified progressive image-only layout
+ - List view: show 96x96 thumbnails and details in list format
+   - should have column resizing
+
+**** TODO Show filters tab containing first selection
+ That is, if only a location is selected, when switching back to the home page,
+ the tags tab is selected by default, and the locations is not showing.
+
+**** TODO Advanced search features
+***** TODO "is:image" and similar are converted to "mimetype:image/*" :tanuki:
+***** TODO "with:<name>" for searching people
+***** TODO logical operators (and, or) and grouping with parentheses
+
+**** TODO Have a timeline feature like Google Photos
+ - Looks like Time Machine timeline, with marks and years, expands on hover
+ - See the Bulma-Extensions Timeline component
+
+**** TODO Better tags input
+ - Use Bulma-Extensions TagsInput on the asset edit screen
+
+**** TODO Look at using webpack to produce concise output for main and renderer
+***** Can then make all dependencies "devDependencies" to shrink the build down
+***** c.f. https://hackernoon.com/electron-on-the-appstore-pain-tears-ii-88414921e72d
+***** Also note their advice on removing unsupported languages
+**** TODO Consider setting the application menu appropriately for macOS and win32
+**** TODO Consider not packing ffmpeg/ffprobe into the build, they are huge
+***** Instead, download the appropriate version on the first run.
+***** c.f. https://github.com/orionhealth/electron-packager-plugin-non-proprietary-codecs-ffmpeg
+ - pertinent code from the above project
+ #+BEGIN_SRC javascript
+ const downloadFFMPEG = (electronVersion, platform, arch) =>
+   new Promise((resolve, reject) => {
+     if (!semver.satisfies(electronVersion, '>=0.36.8')) return reject(new Error('Electron version too low'));
+     if (!process.env.TESTING) console.log(`Downloading patent safe FFMPEG for platform ${platform} ${arch} using electron v${electronVersion}`);
+
+     const tmpPath = path.resolve(os.tmpdir(), 'tmp-safe-ffmpeg');
+     mkdirp(tmpPath, (err) => {
+       if (err) return reject(err);
+
+       const ffmpegFileName = `ffmpeg-v${electronVersion}-${platform}-${arch}.zip`;
+       const downloadPath = path.resolve(tmpPath, ffmpegFileName);
+
+       if (fs.existsSync(downloadPath)) return resolve(downloadPath);
+
+       const downloadStream = fs.createWriteStream(downloadPath);
+       request({
+         url: `https://github.com/electron/electron/releases/download/v${electronVersion}/${ffmpegFileName}`,
+         followAllRedirects: true,
+         timeout: 10000,
+         gzip: true,
+       })
+       .on('error', (downloadError) => {
+         reject(downloadError);
+       })
+       .pipe(downloadStream)
+       .on('close', () => {
+         resolve(downloadPath);
+       });
+     });
+   });
+ #+END_SRC
+
+**** TODO Consider whether we need to exclude proprietary version of ffmpeg
+ - it comes with electron for some reason
+ - see if it is the encumbered version or not
+ - c.f. [[https://github.com/orionhealth/electron-packager-plugin-non-proprietary-codecs-ffmpeg][electron-packager-plugin-non-proprietary-codecs-ffmpeg]]
+
+**** TODO Create a "New Window" menu item that invokes createWindow()
+**** TODO Set the browser window title (in index.html) to something sensible
+**** TODO When selecting attributes, disable those that no longer help
+**** TODO Maybe a set of Tabs to select between Pictures, Music, Videos, Documents, etc
+**** TODO Read https://fb.me/react-error-boundaries to learn about error handling
+**** TODO Decent about window (c.f. [[https://github.com/rhysd/electron-about-window][electron-about-window]])
 ** Investigate
 *** TODO What format are =AAE= files and can we show them somehow?
 *** TODO How to search for assets with no tags or location?
@@ -226,80 +308,3 @@ The icons are kinda cryptic, text is much more obvious
 - Maybe look at that relatively new DataTransfer API business
 
 *** TODO Look for library to connect to devices to extract photos
-** Refinements
-*** TODO Toolbar buttons (or something) to change thumbnail view
-- See lynapp.com screenshot
-- Icon view: the 240x240 thumbnails with some details as captions
-- Gallery view: the justified progressive image-only layout
-- List view: show 96x96 thumbnails and details in list format
-  - should have column resizing
-
-*** TODO Show filters tab containing first selection
-That is, if only a location is selected, when switching back to the home page,
-the tags tab is selected by default, and the locations is not showing.
-
-*** TODO Advanced search features
-**** TODO "is:image" and similar are converted to "mimetype:image/*" :tanuki:
-**** TODO "with:<name>" for searching people
-**** TODO logical operators (and, or) and grouping with parentheses
-
-*** TODO Have a timeline feature like Google Photos
-- Looks like Time Machine timeline, with marks and years, expands on hover
-- See the Bulma-Extensions Timeline component
-
-*** TODO Better tags input
-- Use Bulma-Extensions TagsInput on the asset edit screen
-
-*** TODO Look at using webpack to produce concise output for main and renderer
-**** Can then make all dependencies "devDependencies" to shrink the build down
-**** c.f. https://hackernoon.com/electron-on-the-appstore-pain-tears-ii-88414921e72d
-**** Also note their advice on removing unsupported languages
-*** TODO Consider setting the application menu appropriately for macOS and win32
-*** TODO Consider not packing ffmpeg/ffprobe into the build, they are huge
-**** Instead, download the appropriate version on the first run.
-**** c.f. https://github.com/orionhealth/electron-packager-plugin-non-proprietary-codecs-ffmpeg
-- pertinent code from the above project
-#+BEGIN_SRC javascript
-const downloadFFMPEG = (electronVersion, platform, arch) =>
-  new Promise((resolve, reject) => {
-    if (!semver.satisfies(electronVersion, '>=0.36.8')) return reject(new Error('Electron version too low'));
-    if (!process.env.TESTING) console.log(`Downloading patent safe FFMPEG for platform ${platform} ${arch} using electron v${electronVersion}`);
-
-    const tmpPath = path.resolve(os.tmpdir(), 'tmp-safe-ffmpeg');
-    mkdirp(tmpPath, (err) => {
-      if (err) return reject(err);
-
-      const ffmpegFileName = `ffmpeg-v${electronVersion}-${platform}-${arch}.zip`;
-      const downloadPath = path.resolve(tmpPath, ffmpegFileName);
-
-      if (fs.existsSync(downloadPath)) return resolve(downloadPath);
-
-      const downloadStream = fs.createWriteStream(downloadPath);
-      request({
-        url: `https://github.com/electron/electron/releases/download/v${electronVersion}/${ffmpegFileName}`,
-        followAllRedirects: true,
-        timeout: 10000,
-        gzip: true,
-      })
-      .on('error', (downloadError) => {
-        reject(downloadError);
-      })
-      .pipe(downloadStream)
-      .on('close', () => {
-        resolve(downloadPath);
-      });
-    });
-  });
-#+END_SRC
-
-*** TODO Consider whether we need to exclude proprietary version of ffmpeg
-- it comes with electron for some reason
-- see if it is the encumbered version or not
-- c.f. [[https://github.com/orionhealth/electron-packager-plugin-non-proprietary-codecs-ffmpeg][electron-packager-plugin-non-proprietary-codecs-ffmpeg]]
-
-*** TODO Create a "New Window" menu item that invokes createWindow()
-*** TODO Set the browser window title (in index.html) to something sensible
-*** TODO When selecting attributes, disable those that no longer help
-*** TODO Maybe a set of Tabs to select between Pictures, Music, Videos, Documents, etc
-*** TODO Read https://fb.me/react-error-boundaries to learn about error handling
-*** TODO Decent about window (c.f. [[https://github.com/rhysd/electron-about-window][electron-about-window]])

@@ -6,7 +6,7 @@ const createSagaMiddleware = require('redux-saga').default
 const { reducer } = require('./reducers')
 const { rootSaga } = require('./sagas')
 const { routerMiddleware } = require('react-router-redux')
-const createHistory = require('history/createMemoryHistory').default
+const createHistory = require('history').createMemoryHistory
 const { createLogger } = require('redux-logger')
 
 exports.history = createHistory()
