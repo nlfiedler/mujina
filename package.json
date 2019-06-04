@@ -10,7 +10,7 @@
     "postinstall": "electron-builder install-app-deps",
     "start": "electron .",
     "pretest": "gulp",
-    "test": "NODE_ENV=test electron-mocha",
+    "test": "NODE_ENV=test electron-mocha --color",
     "lick": "license-checker --production --exclude MIT,ISC,LGPL,WTFPL,Apache-2.0,BSD-3-Clause,BSD-2-Clause,MPL-2.0,Unlicense",
     "pack": "gulp && electron-builder --dir",
     "dist": "gulp && electron-builder"
@@ -81,11 +81,11 @@
     "del": "^3.0.0",
     "electron": "^3.1.10",
     "electron-builder": "^20.43.0",
-    "electron-mocha": "^6.0.4",
+    "electron-mocha": "^8.0.2",
     "gulp": "^4.0.2",
     "gulp-babel": "^7.0.1",
     "license-checker": "^25.0.1",
-    "mocha": "^5.2.0",
+    "mocha": "^6.1.4",
     "nock": "^10.0.6",
     "redux-immutable-state-invariant": "^2.1.0",
     "redux-mock-store": "^1.5.3"
