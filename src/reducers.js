@@ -1,9 +1,8 @@
 //
-// Copyright (c) 2018 Nathan Fiedler
+// Copyright (c) 2019 Nathan Fiedler
 //
 const { combineReducers } = require('redux')
 const actions = require('./actions')
-const { routerReducer } = require('react-router-redux')
 const { modelReducer, formReducer } = require('react-redux-form')
 
 function tags (
@@ -369,7 +368,6 @@ exports.reducer = combineReducers({
   assets,
   details,
   uploads,
-  router: routerReducer,
   drops: modelReducer('drops'),
   editor: modelReducer('editor'),
   options: modelReducer('options'),

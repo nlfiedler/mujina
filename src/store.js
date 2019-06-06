@@ -1,11 +1,10 @@
 //
-// Copyright (c) 2018 Nathan Fiedler
+// Copyright (c) 2019 Nathan Fiedler
 //
 const { createStore, applyMiddleware } = require('redux')
 const createSagaMiddleware = require('redux-saga').default
 const { reducer } = require('./reducers')
 const { rootSaga } = require('./sagas')
-const { routerMiddleware } = require('react-router-redux')
 const createHistory = require('history').createMemoryHistory
 const { createLogger } = require('redux-logger')
 
@@ -28,7 +27,6 @@ exports.configureStore = ({ middleware = [] } = {}) => {
   // adjustments for the router and logging middleware.
   const midware = Array.from(middleware)
   midware.unshift(sagaMiddleware)
-  midware.push(routerMiddleware(exports.history))
   if (isDevMode && process.env.NODE_ENV !== 'test') {
     midware.push(createLogger())
   }

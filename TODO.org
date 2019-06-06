@@ -1,6 +1,16 @@
 * Mujina
 ** Next
+*** TODO Fix the broken tests (redux-saga changed, tests need updating)
+*** TODO Search page seems to be broken, displays nothing
 *** TODO Need to handle the =BigInt= type in the GraphQL schema wrt =filesize=
+*** DONE Update =react-redux= to 7.0, remove =react-router-redux=
+*** TODO See how to use =Link=, =NavLink=, and =Redirect= from =react-router=
+*** TODO Updating =gulp-babel= will require updating babel as well
+*** TODO Updating react-resize-detector causes thumbnail layout to be broken
+**** huge gaps and everything seems off
+*** TODO Should replace =react-redux-form= with =formik=
+**** =react-redux-form= is now in maintenance mode
+**** c.f. https://github.com/jaredpalmer/formik
 *** TODO Consider rewrite using ReasonML
 **** One commercial developer strongly advocates using ReasonML with Electron
 **** TODO Understand how =redux-saga= works and how ReasonML can do something similar

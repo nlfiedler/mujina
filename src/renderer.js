@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2018 Nathan Fiedler
+// Copyright (c) 2019 Nathan Fiedler
 //
 // This file is required by the index.html file and will
 // be executed in the renderer process for that window.
@@ -10,14 +10,14 @@ const ReactDOM = require('react-dom')
 const { Provider } = require('react-redux')
 const { App } = require('./components/App')
 const actions = require('./actions')
-const reduxStore = require('./store').configureStore()
-const { push } = require('react-router-redux')
+const { configureStore, history } = require('./store')
 const { ipcRenderer } = require('electron')
 
+const reduxStore = configureStore()
 reduxStore.dispatch(actions.requestLocations())
 reduxStore.dispatch(actions.requestTags())
 reduxStore.dispatch(actions.requestYears())
-reduxStore.dispatch(push('/'))
+history.push('/')
 
 window.addEventListener('load', () => {
   attachReact()
@@ -90,7 +90,7 @@ function initDragAndDrop () {
 
 ipcRenderer.on('route:options', (event, arg) => {
   if (arg === 'go') {
-    reduxStore.dispatch(push('/options'))
+    history.push('/options')
   } else {
     console.warn(`received ${arg} for route:options event`)
   }
