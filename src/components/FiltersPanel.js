@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2018 Nathan Fiedler
+// Copyright (c) 2019 Nathan Fiedler
 //
 const React = require('react')
 const {
@@ -9,11 +9,11 @@ const {
   PanelTab,
   PanelTabs
 } = require('bloomer')
-const {LocationList} = require('../containers/LocationList')
-const {ResetFilters} = require('../containers/ResetFilters')
-const {TagList} = require('../containers/TagList')
-const {YearList} = require('../containers/YearList')
-const {history} = require('../store')
+const { LocationList } = require('../containers/LocationList')
+const { ResetFilters } = require('../containers/ResetFilters')
+const { TagList } = require('../containers/TagList')
+const { YearList } = require('../containers/YearList')
+const { history } = require('../api')
 
 const tabLabels = [
   'Tags',
@@ -95,12 +95,12 @@ class FiltersPanel extends React.Component {
           'flexDirection': 'column',
           'height': '100%'
         }}>
-          <PanelBlock style={{'flexShrink': 0}}>
+          <PanelBlock style={{ 'flexShrink': 0 }}>
             <Button isSize='small' isLink isOutlined isFullWidth onClick={() => history.push('/search')}>
               Search
             </Button>
           </PanelBlock>
-          <PanelTabs style={{'flexShrink': 0}}>
+          <PanelTabs style={{ 'flexShrink': 0 }}>
             {filterTabs}
           </PanelTabs>
           <PanelBlock style={{
@@ -110,7 +110,7 @@ class FiltersPanel extends React.Component {
           }}>
             {panelContent}
           </PanelBlock>
-          <PanelBlock style={{'flexShrink': 0}}>
+          <PanelBlock style={{ 'flexShrink': 0 }}>
             <ResetFilters />
           </PanelBlock>
         </Panel>

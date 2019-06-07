@@ -7,12 +7,6 @@ const actions = require('./actions')
 const config = require('./config')
 const { getSelectedAttrs } = require('./query')
 const preview = require('./preview')
-//
-// Would import history this way but it doesn't work with sagas or something?
-// Works just fine everywhere else; another JavaScript mystery...
-//
-// const { history } = require('./store')
-const store = require('./store')
 
 function * fetchTags (action) {
   try {
@@ -44,7 +38,7 @@ function * fetchLocations (action) {
 function * checksumDrops (action) {
   try {
     // head to the upload screen immediately to show progress
-    yield call(store.history.push, '/upload')
+    yield call(Api.history.push, '/upload')
     for (let file of action.payload) {
       // file = {
       //   name,
@@ -77,7 +71,7 @@ function * checksumDrops (action) {
   } catch (err) {
     yield put(actions.failDropFiles(err))
     yield put(actions.setError(err))
-    yield call(store.history.push, '/error')
+    yield call(Api.history.push, '/error')
   }
 }
 
@@ -104,11 +98,11 @@ function * uploadFiles (action) {
     yield put(actions.requestTags())
     yield put(actions.requestLocations())
     yield put(actions.requestYears())
-    yield call(store.history.push, '/')
+    yield call(Api.history.push, '/')
   } catch (err) {
     yield put(actions.failUploadFiles(err))
     yield put(actions.setError(err))
-    yield call(store.history.push, '/error')
+    yield call(Api.history.push, '/error')
   }
 }
 
@@ -121,7 +115,7 @@ function * getAssets (action) {
   } catch (err) {
     yield put(actions.failAssets(err))
     yield put(actions.setError(err))
-    yield call(store.history.push, '/error')
+    yield call(Api.history.push, '/error')
   }
 }
 
@@ -132,7 +126,7 @@ function * searchAssets (action) {
   } catch (err) {
     yield put(actions.failAssets(err))
     yield put(actions.setError(err))
-    yield call(store.history.push, '/error')
+    yield call(Api.history.push, '/error')
   }
 }
 
@@ -140,11 +134,11 @@ function * fetchAssetDetails (action) {
   try {
     const details = yield call(Api.fetchAsset, action.payload)
     yield put(actions.receiveAssetDetails(details))
-    yield call(store.history.push, '/asset/' + action.payload)
+    yield call(Api.history.push, '/asset/' + action.payload)
   } catch (err) {
     yield put(actions.failAssetDetails(err))
     yield put(actions.setError(err))
-    yield call(store.history.push, '/error')
+    yield call(Api.history.push, '/error')
   }
 }
 
@@ -153,14 +147,14 @@ function * updateAssetDetails (action) {
     const result = yield call(Api.updateAsset, action.payload)
     yield put(actions.receiveAssetUpdate(result))
     // go back to the asset detail page
-    yield call(store.history.push, '/asset/' + action.payload.identifier)
+    yield call(Api.history.push, '/asset/' + action.payload.identifier)
     yield put(actions.requestTags())
     yield put(actions.requestLocations())
     yield put(actions.requestYears())
   } catch (err) {
     yield put(actions.failAssetUpdate(err))
     yield put(actions.setError(err))
-    yield call(store.history.push, '/error')
+    yield call(Api.history.push, '/error')
   }
 }
 
@@ -170,10 +164,10 @@ function * saveOptions (action) {
     yield put(actions.requestTags())
     yield put(actions.requestLocations())
     yield put(actions.requestYears())
-    yield call(store.history.push, '/')
+    yield call(Api.history.push, '/')
   } catch (err) {
     yield put(actions.setError(err))
-    yield call(store.history.push, '/error')
+    yield call(Api.history.push, '/error')
   }
 }
 

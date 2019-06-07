@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2017 Nathan Fiedler
+// Copyright (c) 2019 Nathan Fiedler
 //
 const React = require('react')
 const {
@@ -7,8 +7,8 @@ const {
   Icon,
   Tile
 } = require('bloomer')
-const {ErrorReporter} = require('../containers/ErrorReporter')
-const {history} = require('../store')
+const { ErrorReporter } = require('../containers/ErrorReporter')
+const { history } = require('../api')
 
 const ErrorPage = () => (
   <Tile isAncestor isMarginless>

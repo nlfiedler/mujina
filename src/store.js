@@ -5,10 +5,7 @@ const { createStore, applyMiddleware } = require('redux')
 const createSagaMiddleware = require('redux-saga').default
 const { reducer } = require('./reducers')
 const { rootSaga } = require('./sagas')
-const createHistory = require('history').createMemoryHistory
 const { createLogger } = require('redux-logger')
-
-exports.history = createHistory()
 
 // Detect if we are running in development mode or not.
 const isDevMode = process.defaultApp || /node_modules[\\/]electron[\\/]/.test(process.execPath)

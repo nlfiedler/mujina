@@ -1,11 +1,15 @@
 //
-// Copyright (c) 2018 Nathan Fiedler
+// Copyright (c) 2019 Nathan Fiedler
 //
 const crypto = require('crypto')
 const fs = require('fs')
 const request = require('request')
 const config = require('./config')
 const query = require('./query')
+const { createMemoryHistory } = require('history')
+
+// Expose the history so it can be modified anywhere in the application.
+exports.history = createMemoryHistory()
 
 /**
  * Check for an error condition, whether from a failed request or

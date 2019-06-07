@@ -1,6 +1,5 @@
 * Mujina
 ** Next
-*** TODO Fix the broken tests (redux-saga changed, tests need updating)
 *** TODO Search page seems to be broken, displays nothing
 *** TODO Need to handle the =BigInt= type in the GraphQL schema wrt =filesize=
 *** DONE Update =react-redux= to 7.0, remove =react-router-redux=

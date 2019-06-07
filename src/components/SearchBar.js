@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2018 Nathan Fiedler
+// Copyright (c) 2019 Nathan Fiedler
 //
 const React = require('react')
 const {
@@ -14,7 +14,7 @@ const {
   NavbarMenu
 } = require('bloomer')
 const rrf = require('react-redux-form')
-const { history } = require('../store')
+const { history } = require('../api')
 
 class SearchBar extends React.Component {
   constructor (props) {

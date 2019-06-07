@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2018 Nathan Fiedler
+// Copyright (c) 2019 Nathan Fiedler
 //
 const React = require('react')
 const PropTypes = require('prop-types')
@@ -9,10 +9,10 @@ const {
   Columns,
   Icon
 } = require('bloomer')
-const {NewFile} = require('./NewFile')
-const {UploadingFiles} = require('../containers/UploadingFiles')
-const {Form} = require('react-redux-form')
-const {history} = require('../store')
+const { NewFile } = require('./NewFile')
+const { UploadingFiles } = require('../containers/UploadingFiles')
+const { Form } = require('react-redux-form')
+const { history } = require('../api')
 
 class NewFileList extends React.Component {
   constructor (props) {

@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2017 Nathan Fiedler
+// Copyright (c) 2019 Nathan Fiedler
 //
 const React = require('react')
 const {
@@ -13,7 +13,7 @@ const {
 } = require('bloomer')
 const rrf = require('react-redux-form')
 const config = require('../config')
-const {history} = require('../store')
+const { history } = require('../api')
 
 class OptionsForm extends React.Component {
   constructor (props) {

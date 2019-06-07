@@ -10,7 +10,7 @@ const { HomePage } = require('./HomePage')
 const { OptionsPage } = require('./OptionsPage')
 const { SearchPage } = require('./SearchPage')
 const { UploadPage } = require('./UploadPage')
-const { history } = require('../store')
+const { history } = require('../api')
 
 // Using Router since our application is not really a browser, running entirely
 // off of local files (not URLs), and we have a custom history, so we are not

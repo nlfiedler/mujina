@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2018 Nathan Fiedler
+// Copyright (c) 2019 Nathan Fiedler
 //
 const React = require('react')
 const PropTypes = require('prop-types')
@@ -18,7 +18,7 @@ const {
   NavbarStart
 } = require('bloomer')
 const config = require('../config')
-const { history } = require('../store')
+const { history } = require('../api')
 
 class AssetPreview extends React.Component {
   constructor (props) {
