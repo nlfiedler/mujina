@@ -1,8 +1,5 @@
 * Mujina
 ** Next
-*** TODO Need to handle the =BigInt= type in the GraphQL schema wrt =filesize=
-*** DONE Update =react-redux= to 7.0, remove =react-router-redux=
-*** TODO See how to use =Link=, =NavLink=, and =Redirect= from =react-router=
 *** TODO Improve the search interface a bit so it saves me time and trouble
 **** TODO Handle search query string errors better
 - Currently, an error in the query goes to the error page without any helpful hint
