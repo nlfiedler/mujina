@@ -26,7 +26,10 @@ const createWindow = () => {
     width: windowState.width,
     height: windowState.height,
     minWidth: 400,
-    minHeight: 300
+    minHeight: 300,
+    webPreferences: {
+      nodeIntegration: true
+    }
   })
   windowState.manage(win)
   let winId = win.id
