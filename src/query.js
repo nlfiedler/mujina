@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2018 Nathan Fiedler
+// Copyright (c) 2019 Nathan Fiedler
 //
 
 /**
@@ -134,7 +134,7 @@ function interpret (tree, params) {
   if (tree.type === 'operator' && tree.value === ':') {
     const pred = tree.children[0]
     const arg = tree.children[1]
-    if (pred.value === 'loc') {
+    if (pred.value === 'loc' || pred.value === 'location') {
       params.locations.push(arg.value)
     } else if (pred.value === 'tag') {
       params.tags.push(arg.value)
