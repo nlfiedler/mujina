@@ -4,12 +4,12 @@
 const React = require('react')
 const PropTypes = require('prop-types')
 const ResizeDetector = require('react-resize-detector').default
-const {ThumbnailCard} = require('./ThumbnailCard')
+const { ThumbnailCard } = require('./ThumbnailCard')
 
 class ThumbnailGrid extends React.Component {
   constructor (props) {
     super(props)
-    this.state = {containerWidth: 0}
+    this.state = { containerWidth: 0 }
     // Do _not_ stash props on this, otherwise react/redux has no way of
     // knowing if the changing props have any effect on this component.
     this.handleResize = this.handleResize.bind(this)

@@ -7,8 +7,6 @@
 - Should instead catch the error and show it below the search bar
 **** TODO Show helpful text and examples on search page instead of results
 - See Sublime Merge "search" screen as a nice example
-*** TODO Updating react-resize-detector causes thumbnail layout to be broken
-**** huge gaps and everything seems off
 ** Interface Rewrite
 *** TODO Should combine this with ReasonML rewrite, it's a major overhaul
 *** TODO Rewrite interface using [[https://tailwindcss.com/docs/what-is-tailwind/][Tailwind CSS]]
