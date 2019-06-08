@@ -1,19 +1,32 @@
 * Mujina
-** Next
+** Short Term
 *** TODO Improve the search interface a bit so it saves me time and trouble
 **** TODO Handle search query string errors better
 - Currently, an error in the query goes to the error page without any helpful hint
 - Currently, once the query is wrong, you can never fix it because it directly goes to the error page
-
+- Should instead catch the error and show it below the search bar
 **** TODO Show helpful text and examples on search page instead of results
 - See Sublime Merge "search" screen as a nice example
-
-*** TODO Updating =gulp-babel= will require updating babel as well
 *** TODO Updating react-resize-detector causes thumbnail layout to be broken
 **** huge gaps and everything seems off
-*** TODO Should replace =react-redux-form= with =formik=
-**** =react-redux-form= is now in maintenance mode
-**** c.f. https://github.com/jaredpalmer/formik
+** Interface Rewrite
+*** TODO Should combine this with ReasonML rewrite, it's a major overhaul
+*** TODO Rewrite interface using [[https://tailwindcss.com/docs/what-is-tailwind/][Tailwind CSS]]
+**** Copy the build pipeline from ungaikyou
+**** Look at https://github.com/Pagedraw/pagedraw for building the interface
+**** Look at Sketch or Figma for designing the interface
+**** c.f. https://adamwathan.me/css-utility-classes-and-separation-of-concerns/
+**** Completely redesign the interface, I don't like the current one
+***** I keep looking for a button at the top left to go back to the previous screen
+***** Selectors should be collapsed to a narrow vertical bar on left side
+***** Clicking on selectors will display a slideout panel to show all selectors
+***** Currently selected attributes are shown at the top
+***** Currently selected attributes have an ~X~ button to deselect
+**** Issues to address
+***** Closing the asset preview page goes Home, instead of the previous page, e.g. Search
+****** Should probably use the history to go back to the previous route
+** ReasonML Rewrite
+*** TODO Use a development branch so current code can be maintained
 *** TODO Consider rewrite using ReasonML
 **** One commercial developer strongly advocates using ReasonML with Electron
 **** TODO Understand how =redux-saga= works and how ReasonML can do something similar
@@ -72,28 +85,19 @@
 ***** TODO Remove =react-router= and =react-router-redux= dependencies
 **** TODO Remove =PropTypes= once conversion to ReasonReact is complete
 ***** TODO Remove =prop-types= dependency
+** TypeScript Rewrite
 *** TODO Consider translating to TypeScript if ReasonML proves difficult
 **** works well with redux.js
-*** TODO Consider using [[https://github.com/neon-bindings/neon][Neon bindings]] to write some parts in Rust
-*** TODO Can =npm test= rebuild the code first without doing "test" build?
+**** doubles the number of dependencies because of @types
+** JavaScript maintenance (if not rewriting in Something Else)
+*** TODO Should replace =react-redux-form= with =formik=
+**** =react-redux-form= is now in maintenance mode
+**** c.f. https://github.com/jaredpalmer/formik
+**** if using ReasonML, then =bs-reform= takes the place of this
+*** TODO Updating =gulp-babel= will require updating babel as well
+**** babel goes away if using ReasonML (it only compiles the JSX)
+** Later
 *** TODO Fix the [[https://electronjs.org/docs/tutorial/security][content security policy]] thing
-*** TODO Tags edit needs to refresh tags list, clear affected selections
-**** select a wonky tag, edit the asset(s), tag is effectively gone now
-**** tags list needs to be refreshed
-**** selected tags need to have removed tag cleared
-*** TODO Rewrite interface using [[https://tailwindcss.com/docs/what-is-tailwind/][Tailwind CSS]]
-**** Look at https://github.com/Pagedraw/pagedraw for building the interface
-**** Look at Sketch or Figma for designing the interface
-**** c.f. https://adamwathan.me/css-utility-classes-and-separation-of-concerns/
-**** Completely redesign the interface, I don't like the current one
-***** I keep looking for a button at the top left to go back to the previous screen
-***** Selectors should be collapsed to a narrow vertical bar on left side
-***** Clicking on selectors will display a slideout panel to show all selectors
-***** Currently selected attributes are shown at the top
-***** Currently selected attributes have an ~X~ button to deselect
-**** Issues to address
-***** Closing the asset preview page goes Home, instead of the previous page, e.g. Search
-****** Should probably use the history to go back to the previous route
 ** Anytime
 *** Asset page
 **** TODO Resize window and observe that middle component does not resize well
@@ -207,7 +211,9 @@ The icons are kinda cryptic, text is much more obvious
 **** TODO Get video playback working again
 ***** c.f. https://github.com/matvp91/indigo-player
 ***** Also does not work with webui in Chrome
-***** Seems to work with some videos (like potowatomi from 2014)
+***** Seems to work with some videos
+****** potowatomi from 2014
+****** "jolene" tagged videos
 **** TODO How to get large videos into storage?
 - Files up to 100MB seem to be okay, but what about really large files?
 
@@ -292,6 +298,7 @@ The icons are kinda cryptic, text is much more obvious
 **** TODO Read https://fb.me/react-error-boundaries to learn about error handling
 **** TODO Decent about window (c.f. [[https://github.com/rhysd/electron-about-window][electron-about-window]])
 ** Investigate
+*** TODO Consider using [[https://github.com/neon-bindings/neon][Neon bindings]] to write some parts in Rust
 *** TODO What format are =AAE= files and can we show them somehow?
 *** TODO How to search for assets with no tags or location?
 - GraphQL works, but it is beyond the capability of non-technical people
