@@ -1,5 +1,8 @@
 * Mujina
 ** Short Term
+*** TODO Fix all StandardJS warnings
+*** TODO Update node module dependencies
+*** TODO Update the gulpfile format
 *** TODO Improve the search interface a bit so it saves me time and trouble
 **** TODO Handle search query string errors better
 - Currently, an error in the query goes to the error page without any helpful hint
