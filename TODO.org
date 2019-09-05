@@ -2,7 +2,7 @@
 ** Short Term
 *** DONE Fix all StandardJS warnings
 *** DONE Update node module dependencies
-*** TODO Updating sharp fails because electron-builder is not invoked?
+*** DONE Updating sharp fails because electron-builder is not invoked?
 **** installing sharp 0.22 invokes electron-builder
 **** installing sharp 0.23 does not, and thus the tests fail to start
 *** DONE Update the gulpfile format
