@@ -2,7 +2,7 @@
 ** Short Term
 *** TODO Fix all StandardJS warnings
 *** TODO Update node module dependencies
-*** TODO Update the gulpfile format
+*** DONE Update the gulpfile format
 *** TODO Improve the search interface a bit so it saves me time and trouble
 **** TODO Handle search query string errors better
 - Currently, an error in the query goes to the error page without any helpful hint
@@ -300,6 +300,7 @@ The icons are kinda cryptic, text is much more obvious
 **** TODO Decent about window (c.f. [[https://github.com/rhysd/electron-about-window][electron-about-window]])
 ** Investigate
 *** TODO Consider using [[https://github.com/neon-bindings/neon][Neon bindings]] to write some parts in Rust
+**** c.f. https://gitlab.com/z0mbie42/rust_gui_ecosystem_overview
 *** TODO What format are =AAE= files and can we show them somehow?
 *** TODO How to search for assets with no tags or location?
 - GraphQL works, but it is beyond the capability of non-technical people

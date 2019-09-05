@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2018 Nathan Fiedler
+// Copyright (c) 2019 Nathan Fiedler
 //
 const gulp = require('gulp')
 const babel = require('gulp-babel')
@@ -19,26 +19,27 @@ const assetSrc = [
   'assets/images/**/*'
 ]
 
-gulp.task('compile:react', () => {
+function compileReact () {
   return gulp.src(reactSrc, { base: 'src' })
     .pipe(babel({
       presets: ['env', 'react']
     }))
     .pipe(gulp.dest('app'))
-})
+}
 
-gulp.task('copy:scripts', () => {
+function copyScripts () {
   return gulp.src(scriptSrc, { base: 'src' })
     .pipe(gulp.dest('app'))
-})
+}
 
-gulp.task('copy:assets', () => {
+function copyAssets () {
   return gulp.src(assetSrc, { base: 'assets' })
     .pipe(gulp.dest('app'))
-})
+}
 
-gulp.task('clean', () => {
+function clean () {
   return del(['app', 'build', 'dist'])
-})
+}
 
-gulp.task('default', gulp.series('compile:react', 'copy:scripts', 'copy:assets'))
+exports.clean = clean
+exports.default = gulp.series(compileReact, copyScripts, copyAssets)
