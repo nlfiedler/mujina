@@ -31,9 +31,6 @@
   "main": "app/main.js",
   "build": {
     "appId": "com.example.mujina",
-    "directories": {
-      "app": "."
-    },
     "mac": {
       "category": "public.app-category.productivity",
       "target": "pkg",
@@ -48,7 +45,7 @@
   "dependencies": {
     "bloomer": "^0.6.5",
     "date-fns": "^2.0.1",
-    "electron-store": "^3.3.0",
+    "electron-store": "^4.0.0",
     "electron-window-state": "^5.0.3",
     "ffmpeg-static": "^2.6.0",
     "ffprobe-static": "^3.0.0",
@@ -78,8 +75,8 @@
     "babel-preset-react": "^6.24.1",
     "chai": "^4.1.2",
     "del": "^5.1.0",
-    "electron": "^5.0.10",
-    "electron-builder": "^20.44.4",
+    "electron": "^6.0.7",
+    "electron-builder": "^21.2.0",
     "electron-mocha": "^8.1.1",
     "gulp": "^4.0.2",
     "gulp-babel": "^7.0.1",
