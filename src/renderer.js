@@ -58,20 +58,20 @@ function initDragAndDrop () {
     ev.dataTransfer[Symbol.iterator] = function * () {
       if (ev.dataTransfer.items) {
         // Use DataTransferItemList interface to access the file(s)
-        for (let item of ev.dataTransfer.items) {
+        for (const item of ev.dataTransfer.items) {
           if (item.kind === 'file') {
             yield item.getAsFile()
           }
         }
       } else {
         // Use DataTransfer interface to access the file(s)
-        for (let file of ev.dataTransfer.files) {
+        for (const file of ev.dataTransfer.files) {
           yield file
         }
       }
     }
-    let files = []
-    for (let file of ev.dataTransfer) {
+    const files = []
+    for (const file of ev.dataTransfer) {
       files.push({
         // just the file name
         name: file.name,

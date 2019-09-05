@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2018 Nathan Fiedler
+// Copyright (c) 2019 Nathan Fiedler
 //
 const React = require('react')
 const fs = require('fs')
@@ -46,9 +46,9 @@ function createThumbnailElement (image, mimetype) {
     const dimension = `${imageSize}px`
     const imgElement = React.createElement('img', {
       style: {
-        'objectFit': 'cover',
-        'height': dimension,
-        'width': dimension
+        objectFit: 'cover',
+        height: dimension,
+        width: dimension
       },
       src: image
     })
@@ -73,7 +73,7 @@ async function generateThumbnail (mimetype, filepath, pixels) {
   } else if (mimetype.startsWith('image/')) {
     // fit the image into a box of the given size, convert to jpeg,
     // and auto-rotate as needed (server makes the final correction)
-    let bits = await sharp(filepath)
+    const bits = await sharp(filepath)
       .resize({
         width: pixels,
         height: pixels,
@@ -105,7 +105,7 @@ function generateVideoThumbnail (filepath, pixels) {
     const filename = `${filepath}.jpg`
     ffmpeg(filepath)
       .on('end', function () {
-        let binary = fs.readFileSync(filename)
+        const binary = fs.readFileSync(filename)
         fs.unlinkSync(filename)
         resolve({
           binary,

@@ -3,16 +3,16 @@
 //
 const React = require('react')
 const PropTypes = require('prop-types')
-const {AssetDetails} = require('../containers/AssetDetails')
-const {AssetEdit} = require('../containers/AssetEdit')
+const { AssetDetails } = require('../containers/AssetDetails')
+const { AssetEdit } = require('../containers/AssetEdit')
 
 const AssetEditPage = () => {
   return (
-    <div style={{'display': 'flex'}}>
-      <div style={{'width': '25%'}}>
+    <div style={{ display: 'flex' }}>
+      <div style={{ width: '25%' }}>
         <AssetDetails />
       </div>
-      <div style={{'width': '75%'}}>
+      <div style={{ width: '75%' }}>
         <AssetEdit />
       </div>
     </div>

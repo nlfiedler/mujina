@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2018 Nathan Fiedler
+// Copyright (c) 2019 Nathan Fiedler
 //
 const { app, BrowserWindow } = require('electron')
 const path = require('path')
@@ -12,15 +12,15 @@ const isDevMode = process.defaultApp || /node_modules[\\/]electron[\\/]/.test(pr
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
-let mainWindows = new Map()
+const mainWindows = new Map()
 
 const createWindow = () => {
   // Create the browser window.
-  let windowState = windowStateKeeper({
+  const windowState = windowStateKeeper({
     defaultWidth: 800,
     defaultHeight: 600
   })
-  let win = new BrowserWindow({
+  const win = new BrowserWindow({
     x: windowState.x,
     y: windowState.y,
     width: windowState.width,
@@ -32,7 +32,7 @@ const createWindow = () => {
     }
   })
   windowState.manage(win)
-  let winId = win.id
+  const winId = win.id
   mainWindows.set(winId, win)
 
   if (isDevMode) {

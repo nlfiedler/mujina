@@ -1,9 +1,9 @@
 //
-// Copyright (c) 2018 Nathan Fiedler
+// Copyright (c) 2019 Nathan Fiedler
 //
-const {connect} = require('react-redux')
-const {fetchAssetDetails} = require('../actions')
-const {ThumbnailColumn} = require('../components/ThumbnailColumn')
+const { connect } = require('react-redux')
+const { fetchAssetDetails } = require('../actions')
+const { ThumbnailColumn } = require('../components/ThumbnailColumn')
 
 const mapStateToProps = state => {
   return {

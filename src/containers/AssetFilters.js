@@ -1,9 +1,9 @@
 //
-// Copyright (c) 2018 Nathan Fiedler
+// Copyright (c) 2019 Nathan Fiedler
 //
-const {connect} = require('react-redux')
-const {requestAssets} = require('../actions')
-const {FiltersPanel} = require('../components/FiltersPanel')
+const { connect } = require('react-redux')
+const { requestAssets } = require('../actions')
+const { FiltersPanel } = require('../components/FiltersPanel')
 
 const mapStateToProps = state => {
   return {

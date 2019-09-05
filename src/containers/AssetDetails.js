@@ -1,8 +1,8 @@
 //
-// Copyright (c) 2017 Nathan Fiedler
+// Copyright (c) 2019 Nathan Fiedler
 //
-const {connect} = require('react-redux')
-const {AssetSidebar} = require('../components/AssetSidebar')
+const { connect } = require('react-redux')
+const { AssetSidebar } = require('../components/AssetSidebar')
 
 const mapStateToProps = state => {
   return {

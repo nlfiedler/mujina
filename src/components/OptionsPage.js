@@ -1,12 +1,12 @@
 //
-// Copyright (c) 2017 Nathan Fiedler
+// Copyright (c) 2019 Nathan Fiedler
 //
 const React = require('react')
 const {
   Tile,
   Title
 } = require('bloomer')
-const {OptionsEditor} = require('../containers/OptionsEditor')
+const { OptionsEditor } = require('../containers/OptionsEditor')
 
 const OptionsPage = () => (
   <Tile isAncestor isMarginless>

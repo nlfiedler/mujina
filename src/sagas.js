@@ -39,7 +39,7 @@ function * checksumDrops (action) {
   try {
     // head to the upload screen immediately to show progress
     yield call(Api.history.push, '/upload')
-    for (let file of action.payload) {
+    for (const file of action.payload) {
       // file = {
       //   name,
       //   path,
@@ -48,7 +48,7 @@ function * checksumDrops (action) {
       // }
       const checksum = yield call(Api.checksumFile, file.path)
       const dataUrl = yield call(preview.generateThumbnailData, file.path, file.mimetype)
-      let entry = Object.assign({}, file, {
+      const entry = Object.assign({}, file, {
         checksum,
         image: dataUrl
       })
@@ -77,8 +77,8 @@ function * checksumDrops (action) {
 
 function * uploadFiles (action) {
   try {
-    let files = []
-    for (let file of action.payload) {
+    const files = []
+    for (const file of action.payload) {
       // fire the progress first to show that something is happening
       // during the time the file is uploading
       yield put(actions.uploadFilesProgress(files.length, file.name))
@@ -87,7 +87,7 @@ function * uploadFiles (action) {
         // the already existing file details will suffice
         files.push(file)
       } else {
-        let newfile = yield call(Api.uploadFile, file)
+        const newfile = yield call(Api.uploadFile, file)
         files.push(newfile)
       }
     }

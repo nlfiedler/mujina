@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2018 Nathan Fiedler
+// Copyright (c) 2019 Nathan Fiedler
 //
 const React = require('react')
 const PropTypes = require('prop-types')
@@ -25,7 +25,7 @@ const NewFile = (entry) => {
       <Columns>
         <Column className='is-one-fifth'>
           {thumbnail}
-          <Label isSize='small' style={{ 'wordWrap': 'break-word' }}>{entry.name}</Label>
+          <Label isSize='small' style={{ wordWrap: 'break-word' }}>{entry.name}</Label>
         </Column>
         <Column className='is-four-fifths'>
           <Field isHorizontal>
@@ -67,7 +67,7 @@ const NewFile = (entry) => {
         </Column>
         <Column className='is-four-fifths'>
           <Field>
-            <Label style={{ 'wordWrap': 'break-word' }}>{entry.name}</Label>
+            <Label style={{ wordWrap: 'break-word' }}>{entry.name}</Label>
             <Control isExpanded hasIcons={['left', 'right']}>
               <rrf.Control.text
                 model={`drops[${entry.checksum}].caption`}

@@ -3,24 +3,25 @@
 //
 const React = require('react')
 const PropTypes = require('prop-types')
-const {Asset} = require('../containers/Asset')
-const {AssetSelector} = require('../containers/AssetSelector')
-const {AssetDetails} = require('../containers/AssetDetails')
+const { Asset } = require('../containers/Asset')
+const { AssetSelector } = require('../containers/AssetSelector')
+const { AssetDetails } = require('../containers/AssetDetails')
 
 const AssetPage = () => {
   return (
-    <div style={{'display': 'flex'}}>
-      <div style={{'width': '25%'}}>
+    <div style={{ display: 'flex' }}>
+      <div style={{ width: '25%' }}>
         <AssetSelector />
       </div>
       <div style={{
-        'width': '50%',
-        'paddingTop': '1em',
-        'paddingBottom': '1em'
-      }}>
+        width: '50%',
+        paddingTop: '1em',
+        paddingBottom: '1em'
+      }}
+      >
         <Asset />
       </div>
-      <div style={{'width': '25%'}}>
+      <div style={{ width: '25%' }}>
         <AssetDetails />
       </div>
     </div>

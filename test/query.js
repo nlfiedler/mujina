@@ -1,27 +1,27 @@
 //
-// Copyright (c) 2018 Nathan Fiedler
+// Copyright (c) 2019 Nathan Fiedler
 //
-const {assert} = require('chai')
-const {describe, it} = require('mocha')
+const { assert } = require('chai')
+const { describe, it } = require('mocha')
 const query = require('../app/query')
 
 describe('Query', () => {
   describe('Lexer', () => {
     it('tokenizes a query string', async function () {
       const expected = [
-        {children: [], start: 0, type: 'predicate', value: 'tag'},
-        {children: [], start: 3, type: 'operator', value: ':'},
-        {children: [], start: 4, type: 'argument', value: 'beach'},
-        {children: [], start: 10, type: 'operator', value: 'and'},
-        {children: [], start: 14, type: 'operator', value: '('},
-        {children: [], start: 15, type: 'predicate', value: 'loc'},
-        {children: [], start: 18, type: 'operator', value: ':'},
-        {children: [], start: 19, type: 'argument', value: 'hawaii'},
-        {children: [], start: 26, type: 'operator', value: 'or'},
-        {children: [], start: 29, type: 'predicate', value: 'tag'},
-        {children: [], start: 32, type: 'operator', value: ':'},
-        {children: [], start: 33, type: 'quotedArg', value: '"cute girl"'},
-        {children: [], start: 44, type: 'operator', value: ')'}
+        { children: [], start: 0, type: 'predicate', value: 'tag' },
+        { children: [], start: 3, type: 'operator', value: ':' },
+        { children: [], start: 4, type: 'argument', value: 'beach' },
+        { children: [], start: 10, type: 'operator', value: 'and' },
+        { children: [], start: 14, type: 'operator', value: '(' },
+        { children: [], start: 15, type: 'predicate', value: 'loc' },
+        { children: [], start: 18, type: 'operator', value: ':' },
+        { children: [], start: 19, type: 'argument', value: 'hawaii' },
+        { children: [], start: 26, type: 'operator', value: 'or' },
+        { children: [], start: 29, type: 'predicate', value: 'tag' },
+        { children: [], start: 32, type: 'operator', value: ':' },
+        { children: [], start: 33, type: 'quotedArg', value: '"cute girl"' },
+        { children: [], start: 44, type: 'operator', value: ')' }
       ]
       const actual = query.lex('tag:beach and (loc:hawaii or tag:"cute girl")')
       assert.deepEqual(actual, expected)
@@ -40,8 +40,8 @@ describe('Query', () => {
             value: ':',
             start: 3,
             children: [
-              {children: [], start: 0, type: 'predicate', value: 'tag'},
-              {children: [], start: 4, type: 'argument', value: 'beach'}
+              { children: [], start: 0, type: 'predicate', value: 'tag' },
+              { children: [], start: 4, type: 'argument', value: 'beach' }
             ]
           },
           {
@@ -54,8 +54,8 @@ describe('Query', () => {
                 value: ':',
                 start: 18,
                 children: [
-                  {children: [], start: 15, type: 'predicate', value: 'loc'},
-                  {children: [], start: 19, type: 'argument', value: 'hawaii'}
+                  { children: [], start: 15, type: 'predicate', value: 'loc' },
+                  { children: [], start: 19, type: 'argument', value: 'hawaii' }
                 ]
               },
               {
@@ -63,8 +63,8 @@ describe('Query', () => {
                 value: ':',
                 start: 32,
                 children: [
-                  {children: [], start: 29, type: 'predicate', value: 'tag'},
-                  {children: [], start: 33, type: 'argument', value: 'cute girl'}
+                  { children: [], start: 29, type: 'predicate', value: 'tag' },
+                  { children: [], start: 33, type: 'argument', value: 'cute girl' }
                 ]
               }
             ]
@@ -81,8 +81,8 @@ describe('Query', () => {
         value: ':',
         start: 3,
         children: [
-          {children: [], start: 0, type: 'predicate', value: 'tag'},
-          {children: [], start: 4, type: 'argument', value: 'beach'}
+          { children: [], start: 0, type: 'predicate', value: 'tag' },
+          { children: [], start: 4, type: 'argument', value: 'beach' }
         ]
       }
       const actual = query.parse('tag:beach')
@@ -95,8 +95,8 @@ describe('Query', () => {
         value: 'and',
         start: 0,
         children: [
-          {children: [], start: 0, type: 'literal', value: 'beach'},
-          {children: [], start: 6, type: 'literal', value: 'hawaii'}
+          { children: [], start: 0, type: 'literal', value: 'beach' },
+          { children: [], start: 6, type: 'literal', value: 'hawaii' }
         ]
       }
       const actual = query.parse('beach hawaii')
@@ -113,8 +113,8 @@ describe('Query', () => {
           value: ':',
           start: 3,
           children: [
-            {children: [], start: 0, type: 'predicate', value: 'tag'},
-            {children: [], start: 4, type: 'argument', value: 'beach'}
+            { children: [], start: 0, type: 'predicate', value: 'tag' },
+            { children: [], start: 4, type: 'argument', value: 'beach' }
           ]
         },
         {
@@ -122,8 +122,8 @@ describe('Query', () => {
           value: ':',
           start: 13,
           children: [
-            {children: [], start: 10, type: 'predicate', value: 'loc'},
-            {children: [], start: 14, type: 'argument', value: 'hawaii'}
+            { children: [], start: 10, type: 'predicate', value: 'loc' },
+            { children: [], start: 14, type: 'argument', value: 'hawaii' }
           ]
         }]
       }

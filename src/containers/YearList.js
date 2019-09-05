@@ -1,9 +1,9 @@
 //
-// Copyright (c) 2018 Nathan Fiedler
+// Copyright (c) 2019 Nathan Fiedler
 //
-const {connect} = require('react-redux')
-const {toggleYear} = require('../actions')
-const {AttributeList} = require('../components/AttributeList')
+const { connect } = require('react-redux')
+const { toggleYear } = require('../actions')
+const { AttributeList } = require('../components/AttributeList')
 
 const mapStateToProps = state => {
   // Sort the years in descending order so the most recent appears first in the

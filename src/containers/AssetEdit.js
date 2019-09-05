@@ -1,10 +1,10 @@
 //
-// Copyright (c) 2017 Nathan Fiedler
+// Copyright (c) 2019 Nathan Fiedler
 //
-const {connect} = require('react-redux')
-const {actions} = require('react-redux-form')
-const {updateAssetDetails} = require('../actions')
-const {AssetEditor} = require('../components/AssetEditor')
+const { connect } = require('react-redux')
+const { actions } = require('react-redux-form')
+const { updateAssetDetails } = require('../actions')
+const { AssetEditor } = require('../components/AssetEditor')
 
 const mapStateToProps = state => {
   return {

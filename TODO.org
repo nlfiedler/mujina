@@ -1,6 +1,6 @@
 * Mujina
 ** Short Term
-*** TODO Fix all StandardJS warnings
+*** DONE Fix all StandardJS warnings
 *** TODO Update node module dependencies
 *** DONE Update the gulpfile format
 *** TODO Improve the search interface a bit so it saves me time and trouble

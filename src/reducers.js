@@ -18,7 +18,7 @@ function tags (
       return Object.assign({}, state, {
         isPending: true
       })
-    case actions.GET_TAGS_FULFILLED:
+    case actions.GET_TAGS_FULFILLED: {
       const activeSet = getActiveSet(state.items)
       return Object.assign({}, state, {
         isPending: false,
@@ -31,6 +31,7 @@ function tags (
         }),
         error: null
       })
+    }
     case actions.GET_TAGS_REJECTED:
       return Object.assign({}, state, {
         isPending: false,
@@ -59,7 +60,7 @@ function years (
       return Object.assign({}, state, {
         isPending: true
       })
-    case actions.GET_YEARS_FULFILLED:
+    case actions.GET_YEARS_FULFILLED: {
       const activeSet = getActiveSet(state.items)
       return Object.assign({}, state, {
         isPending: false,
@@ -73,6 +74,7 @@ function years (
         }),
         error: null
       })
+    }
     case actions.GET_YEARS_REJECTED:
       return Object.assign({}, state, {
         isPending: false,
@@ -101,7 +103,7 @@ function locations (
       return Object.assign({}, state, {
         isPending: true
       })
-    case actions.GET_LOCATIONS_FULFILLED:
+    case actions.GET_LOCATIONS_FULFILLED: {
       const activeSet = getActiveSet(state.items)
       return Object.assign({}, state, {
         isPending: false,
@@ -114,6 +116,7 @@ function locations (
         }),
         error: null
       })
+    }
     case actions.GET_LOCATIONS_REJECTED:
       return Object.assign({}, state, {
         isPending: false,
@@ -197,7 +200,7 @@ function details (
       return Object.assign({}, state, {
         isPending: true
       })
-    case actions.FETCH_ASSET_FULFILLED:
+    case actions.FETCH_ASSET_FULFILLED: {
       const userdate = action.payload.userdate ? (
         new Date(action.payload.userdate)
       ) : null
@@ -221,6 +224,7 @@ function details (
         },
         error: null
       })
+    }
     case actions.FETCH_ASSET_REJECTED:
       return Object.assign({}, state, {
         isPending: false,

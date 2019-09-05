@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2018 Nathan Fiedler
+// Copyright (c) 2019 Nathan Fiedler
 //
 const React = require('react')
 const PropTypes = require('prop-types')
@@ -16,10 +16,10 @@ class ThumbnailCard extends React.Component {
     this.state = {
       imageUrl: config.serverUrl({ pathname: props.widethumbUrl })
     }
-    this.onError = this.onError.bind(this)
+    this.handleError = this.handleError.bind(this)
   }
 
-  onError () {
+  handleError () {
     this.setState({
       imageUrl: 'images/picture-1.svg'
     })
@@ -29,13 +29,13 @@ class ThumbnailCard extends React.Component {
     return (
       <FadeIn height={this.props.thumbHeight} duration={300}>
         {(onload) => (
-          <figure className='image' style={{ 'cursor': 'pointer' }}>
+          <figure className='image' style={{ cursor: 'pointer' }}>
             <img
               alt={this.props.filename}
               style={this.props.imageStyle}
               src={this.state.imageUrl}
               onLoad={onload}
-              onError={this.onError}
+              onError={this.handleError}
               onClick={() => this.props.onClick(this.props.identifier)}
             />
           </figure>

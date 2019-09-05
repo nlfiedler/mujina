@@ -26,15 +26,15 @@ class AssetPreview extends React.Component {
     // Do _not_ stash props on this, otherwise react/redux has no way of
     // knowing if the changing props have any effect on this component.
     this.state = AssetPreview.pristineState(props)
-    this.onError = this.onError.bind(this)
+    this.onError = this.handleError.bind(this)
   }
 
-  onError () {
+  handleError () {
     this.setState({
       imageUrl: 'images/picture-1.svg',
       imageStyle: {
-        'width': '240px',
-        'height': '240px'
+        width: '240px',
+        height: '240px'
       }
     })
   }
@@ -46,8 +46,8 @@ class AssetPreview extends React.Component {
       // use the full asset, 'preview' looks grainy
       imageUrl: config.serverUrl({ pathname: props.assetUrl }),
       imageStyle: {
-        'width': '100%',
-        'height': 'auto'
+        width: '100%',
+        height: 'auto'
       }
     }
   }
@@ -64,7 +64,7 @@ class AssetPreview extends React.Component {
     // the need for plugins.
     const mimetype = this.props.mimetype === 'video/quicktime' ? 'video/mp4' : this.props.mimetype
     return (
-      <video controls preload='auto' style={{ 'width': '100%', 'height': '100%' }}>
+      <video controls preload='auto' style={{ width: '100%', height: '100%' }}>
         <source src={this.state.imageUrl} type={mimetype} />
         'Bummer, your browser does not support the HTML5'
         <code>video</code>
@@ -81,13 +81,13 @@ class AssetPreview extends React.Component {
         alt={this.props.identifier}
         style={this.state.imageStyle}
         src={this.state.imageUrl}
-        onError={this.onError}
+        onError={this.handleError}
       />
     )
     return (
       <Card>
         <CardHeader>
-          <Navbar isTransparent style={{ 'width': '100%' }}>
+          <Navbar isTransparent style={{ width: '100%' }}>
             <NavbarBrand>
               <NavbarItem>
                 {this.props.filename}

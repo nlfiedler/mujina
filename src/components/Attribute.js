@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2018 Nathan Fiedler
+// Copyright (c) 2019 Nathan Fiedler
 //
 const React = require('react')
 const PropTypes = require('prop-types')
@@ -7,10 +7,11 @@ const {
   Tag
 } = require('bloomer')
 
-const Attribute = ({onClick, label, active}) => {
+const Attribute = ({ onClick, label, active }) => {
   const color = active ? 'dark' : 'light'
   return (
-    <Tag tag='a'
+    <Tag
+      tag='a'
       isColor={color}
       onClick={e => {
         e.preventDefault()

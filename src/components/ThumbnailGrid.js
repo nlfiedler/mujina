@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2018 Nathan Fiedler
+// Copyright (c) 2019 Nathan Fiedler
 //
 const React = require('react')
 const PropTypes = require('prop-types')
@@ -29,30 +29,34 @@ class ThumbnailGrid extends React.Component {
   render () {
     const items = this.state.containerWidth ? (
       this.computeThumbSizes(this.state.containerWidth, this.props.assets).map(asset => (
-        <ThumbnailCard key={asset.identifier} imageStyle={{
-          'width': asset.scaleWidth > 0 ? asset.scaleWidth : 120,
-          'height': asset.scaleHeight > 0 ? asset.scaleHeight : 120,
-          'marginBottom': '6px'
-        }} {...asset} onClick={this.props.onClick} />
+        <ThumbnailCard
+          key={asset.identifier} imageStyle={{
+            width: asset.scaleWidth > 0 ? asset.scaleWidth : 120,
+            height: asset.scaleHeight > 0 ? asset.scaleHeight : 120,
+            marginBottom: '6px'
+          }} {...asset} onClick={this.props.onClick}
+        />
       ))
     ) : (
       this.props.assets.map(asset => (
-        <ThumbnailCard key={asset.identifier} imageStyle={{
-          'width': 'auto',
-          'height': asset.thumbHeight > 0 ? asset.thumbHeight : 120
-        }} {...asset} onClick={this.props.onClick} />
+        <ThumbnailCard
+          key={asset.identifier} imageStyle={{
+            width: 'auto',
+            height: asset.thumbHeight > 0 ? asset.thumbHeight : 120
+          }} {...asset} onClick={this.props.onClick}
+        />
       ))
     )
     // Let the div use flex to manage the row wrapping of the thumbnails.
     // No need for margins on the images, space-around will do that.
     return (
       <div style={{
-        'display': 'flex',
-        'flexFlow': 'row wrap',
-        'justifyContent': 'space-around',
-        'alignItems': 'center'
-      }}>
-        {items}
+        display: 'flex',
+        flexFlow: 'row wrap',
+        justifyContent: 'space-around',
+        alignItems: 'center'
+      }}
+      >{items}
         <ResizeDetector handleWidth onResize={this.handleResize} />
       </div>
     )

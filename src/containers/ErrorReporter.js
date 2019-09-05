@@ -1,8 +1,8 @@
 //
-// Copyright (c) 2017 Nathan Fiedler
+// Copyright (c) 2019 Nathan Fiedler
 //
-const {connect} = require('react-redux')
-const {ErrorMessage} = require('../components/ErrorMessage')
+const { connect } = require('react-redux')
+const { ErrorMessage } = require('../components/ErrorMessage')
 
 const mapStateToProps = state => {
   return {

@@ -1,11 +1,11 @@
 //
-// Copyright (c) 2017 Nathan Fiedler
+// Copyright (c) 2019 Nathan Fiedler
 //
 const React = require('react')
 const {
   Tile
 } = require('bloomer')
-const {DroppedFiles} = require('../containers/DroppedFiles')
+const { DroppedFiles } = require('../containers/DroppedFiles')
 
 // Simple page for now, Tile serves to add padding.
 const UploadPage = () => (

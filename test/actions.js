@@ -1,12 +1,12 @@
 //
-// Copyright (c) 2017 Nathan Fiedler
+// Copyright (c) 2019 Nathan Fiedler
 //
-const {assert} = require('chai')
-const {describe, it} = require('mocha')
+const { assert } = require('chai')
+const { describe, it } = require('mocha')
 const actions = require('../app/actions')
 const configureStore = require('redux-mock-store').default
 const createSagaMiddleware = require('redux-saga').default
-const {rootSaga} = require('../app/sagas')
+const { rootSaga } = require('../app/sagas')
 
 // set up the mock redux store
 const sagaMiddleware = createSagaMiddleware()
@@ -17,7 +17,7 @@ describe('Async Actions', () => {
     const store = mockStore({})
     sagaMiddleware.run(rootSaga)
     const expectedActions = [
-      {type: actions.GET_TAGS, payload: null}
+      { type: actions.GET_TAGS, payload: null }
     ]
     store.subscribe(() => {
       // once both actions have dispatched, then compare

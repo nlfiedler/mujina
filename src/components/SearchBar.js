@@ -41,22 +41,23 @@ class SearchBar extends React.Component {
     // stretch to fill the window, without squeezing anything else out.
     return (
       <Navbar style={{
-        'boxShadow': '0px 0px 0px 0px',
-        'position': 'sticky',
-        'top': 0
-      }}>
-        <NavbarMenu style={{ 'width': '100%' }}>
-          <NavbarEnd style={{ 'width': '100%' }}>
+        boxShadow: '0px 0px 0px 0px',
+        position: 'sticky',
+        top: 0
+      }}
+      >
+        <NavbarMenu style={{ width: '100%' }}>
+          <NavbarEnd style={{ width: '100%' }}>
             <NavbarItem>
               <Button isLink isOutlined onClick={() => history.push('/')}>
                 <Icon isSize='medium' className='fa fa-home' />
               </Button>
             </NavbarItem>
-            <NavbarItem style={{ 'flexGrow': 1 }}>
+            <NavbarItem style={{ flexGrow: 1 }}>
               <rrf.Form
                 model='search'
                 onSubmit={(values) => this.handleSubmit(values)}
-                style={{ 'width': '100%' }}
+                style={{ width: '100%' }}
               >
                 <Field isHorizontal>
                   <FieldBody>

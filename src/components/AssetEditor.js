@@ -68,7 +68,7 @@ class AssetEditor extends React.Component {
     return (
       <Card>
         <CardHeader>
-          <Navbar isTransparent style={{ 'width': '100%' }}>
+          <Navbar isTransparent style={{ width: '100%' }}>
             <NavbarBrand>
               <NavbarItem>
                 {filename}
@@ -90,16 +90,21 @@ class AssetEditor extends React.Component {
             </NavbarMenu>
           </Navbar>
         </CardHeader>
-        <CardImage hasTextAlign='centered' style={{
-          'paddingTop': '1em'
-        }}>
+        <CardImage
+          hasTextAlign='centered' style={{
+            paddingTop: '1em'
+          }}
+        >
           <figure alt={identifier} className='image'>
-            <img src={fullPreviewUrl} style={{
-              'display': 'inline-block',
-              'width': '400px',
-              'height': '400px',
-              'objectFit': 'cover'
-            }} />
+            <img
+              src={fullPreviewUrl}
+              style={{
+                display: 'inline-block',
+                width: '400px',
+                height: '400px',
+                objectFit: 'cover'
+              }}
+            />
           </figure>
         </CardImage>
         <CardContent>

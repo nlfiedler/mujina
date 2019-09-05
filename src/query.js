@@ -257,7 +257,7 @@ class Parser {
     // node, which is then pushed back on the argument stack. Note that the
     // trees on the argument stack represent the right and left arguments,
     // respectively.
-    let top = this.operators.pop()
+    const top = this.operators.pop()
     if (top.isBinary) {
       const arg2 = this.arguments.pop()
       const arg1 = this.arguments.pop()
@@ -296,7 +296,7 @@ class Token {
   }
 
   addChildren (...children) {
-    for (let child of children) {
+    for (const child of children) {
       this.children.push(child)
     }
   }
@@ -415,7 +415,7 @@ class Lexer {
   }
 
   acceptString (str) {
-    for (let c of str) {
+    for (const c of str) {
       if (this.next() !== c) {
         this.backup()
         return false

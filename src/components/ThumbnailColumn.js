@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2018 Nathan Fiedler
+// Copyright (c) 2019 Nathan Fiedler
 //
 const React = require('react')
 const PropTypes = require('prop-types')
@@ -15,7 +15,7 @@ class ThumbnailImage extends React.Component {
     // Do _not_ stash props on this, otherwise react/redux has no way of
     // knowing if the changing props have any effect on this component.
     this.onVisibilityChange = this.onVisibilityChange.bind(this)
-    this.onError = this.onError.bind(this)
+    this.handleError = this.handleError.bind(this)
     this.state = {
       imageUrl: config.serverUrl({ pathname: this.props.thumbnailUrl }),
       visible: false
@@ -29,7 +29,7 @@ class ThumbnailImage extends React.Component {
     })
   }
 
-  onError () {
+  handleError () {
     this.setState({
       imageUrl: 'images/picture-1.svg'
     })
@@ -39,14 +39,14 @@ class ThumbnailImage extends React.Component {
     const { identifier, onClick } = this.props
     return this.state.visible ? (
       <img
-        style={{ 'objectFit': 'cover', 'height': '96px', 'width': '96px' }}
+        style={{ objectFit: 'cover', height: '96px', width: '96px' }}
         src={this.state.imageUrl}
-        onError={this.onError}
+        onError={this.handleError}
         onClick={() => onClick(identifier)}
       />
     ) : (
       <img
-        style={{ 'height': '96px', 'width': '96px' }}
+        style={{ height: '96px', width: '96px' }}
         src='images/picture-1.svg'
       />
     )
@@ -57,12 +57,13 @@ class ThumbnailImage extends React.Component {
     // img with the styles applied on the appropriate element, and Image does
     // not offer that level of control.
     const figure = (
-      <figure className='image is-96x96' style={{
-        'flex': 'initial',
-        'flexShrink': 0,
-        'cursor': 'pointer'
-      }}>
-        {this.getImageComponent()}
+      <figure
+        className='image is-96x96' style={{
+          flex: 'initial',
+          flexShrink: 0,
+          cursor: 'pointer'
+        }}
+      >{this.getImageComponent()}
       </figure>
     )
     // For some strange reason, VisibilitySensor was getting multiple children
@@ -86,26 +87,28 @@ const ThumbnailColumn = ({ assets, onClick }) => {
   //
   return (
     <div style={{
-      'height': '100vh',
-      'width': '25%',
-      'position': 'fixed',
-      'top': 0,
-      'left': 0
-    }}>
+      height: '100vh',
+      width: '25%',
+      position: 'fixed',
+      top: 0,
+      left: 0
+    }}
+    >
       <Box style={{
-        'margin': '1rem',
-        'padding': '1rem',
-        'display': 'flex',
-        'height': '95%',
-        'width': '20em'
-      }}>
+        margin: '1rem',
+        padding: '1rem',
+        display: 'flex',
+        height: '95%',
+        width: '20em'
+      }}
+      >
         <div style={{
-          'display': 'flex',
-          'flexFlow': 'row wrap',
-          'overflowY': 'auto',
-          'alignContent': 'flex-start'
-        }}>
-          {items}
+          display: 'flex',
+          flexFlow: 'row wrap',
+          overflowY: 'auto',
+          alignContent: 'flex-start'
+        }}
+        >{items}
         </div>
       </Box>
     </div>

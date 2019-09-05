@@ -26,7 +26,7 @@ function maybeError (error, response) {
     return error
   }
   if (response.statusCode >= 400) {
-    let err = new Error(response.statusMessage || 'no status message')
+    const err = new Error(response.statusMessage || 'no status message')
     err.code = response.statusCode
     return err
   }
@@ -283,7 +283,7 @@ exports.checksumFile = (filepath) => {
 exports.uploadFile = (file) => {
   return new Promise((resolve, reject) => {
     // First upload the asset itself and get the identifier.
-    let formData = {
+    const formData = {
       // graphql-upload expects the multi-part request to look a certain way
       // c.f. https://github.com/jaydenseric/graphql-multipart-request-spec
       //
@@ -291,15 +291,15 @@ exports.uploadFile = (file) => {
       // the file map, so that the files come _after_ the "operations"
       // and "map" fields, as expected by the server.
       //
-      'operations': JSON.stringify({
+      operations: JSON.stringify({
         variables: { file: null },
         operationName: 'Upload',
         query: `mutation Upload($file: Upload!) {
           upload(file: $file)
         }`
       }),
-      'map': JSON.stringify({ 'x1': ['variables.file'] }),
-      'x1': {
+      map: JSON.stringify({ x1: ['variables.file'] }),
+      x1: {
         value: fs.createReadStream(file.path),
         options: {
           filename: file.name,

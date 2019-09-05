@@ -1,12 +1,12 @@
 //
-// Copyright (c) 2018 Nathan Fiedler
+// Copyright (c) 2019 Nathan Fiedler
 //
-const {connect} = require('react-redux')
+const { connect } = require('react-redux')
 const {
   failUploadFiles,
   uploadFiles
 } = require('../actions')
-const {NewFileList} = require('../components/NewFileList')
+const { NewFileList } = require('../components/NewFileList')
 
 const mapStateToProps = state => {
   return {

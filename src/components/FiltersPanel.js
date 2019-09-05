@@ -22,16 +22,19 @@ const tabLabels = [
 ]
 // Keep the order for tabLabels and panelContents synchronized.
 const panelContents = [
-  <TagList />,
-  <LocationList />,
-  <YearList />
+  <TagList key='tags' />,
+  <LocationList key='locations' />,
+  <YearList key='years' />
 ]
 
 const FilterTab = (props) => (
-  <PanelTab tag='a' isActive={props.isActive} onClick={(event) => {
-    event.preventDefault()
-    props.onClick(props.tabIndex)
-  }}>{props.tabLabel}</PanelTab>
+  <PanelTab
+    tag='a' isActive={props.isActive} onClick={(event) => {
+      event.preventDefault()
+      props.onClick(props.tabIndex)
+    }}
+  >{props.tabLabel}
+  </PanelTab>
 )
 
 class FiltersPanel extends React.Component {
@@ -69,7 +72,8 @@ class FiltersPanel extends React.Component {
         isActive={this.state.activeTabIndex === index}
         tabIndex={index}
         tabLabel={label}
-        onClick={this.handleTabClick} />
+        onClick={this.handleTabClick}
+      />
     ))
     const panelContent = panelContents[this.state.activeTabIndex]
     //
@@ -84,33 +88,36 @@ class FiltersPanel extends React.Component {
     //
     return (
       <div style={{
-        'height': '100vh',
-        'width': '20%',
-        'position': 'fixed',
-        'top': 0,
-        'left': 0
-      }}>
-        <Panel tag='div' style={{
-          'display': 'flex',
-          'flexDirection': 'column',
-          'height': '100%'
-        }}>
-          <PanelBlock style={{ 'flexShrink': 0 }}>
+        height: '100vh',
+        width: '20%',
+        position: 'fixed',
+        top: 0,
+        left: 0
+      }}
+      >
+        <Panel
+          tag='div' style={{
+            display: 'flex',
+            flexDirection: 'column',
+            height: '100%'
+          }}
+        >
+          <PanelBlock style={{ flexShrink: 0 }}>
             <Button isSize='small' isLink isOutlined isFullWidth onClick={() => history.push('/search')}>
               Search
             </Button>
           </PanelBlock>
-          <PanelTabs style={{ 'flexShrink': 0 }}>
+          <PanelTabs style={{ flexShrink: 0 }}>
             {filterTabs}
           </PanelTabs>
           <PanelBlock style={{
-            'alignItems': 'flex-start',
-            'flexGrow': 1,
-            'overflowY': 'auto'
-          }}>
-            {panelContent}
+            alignItems: 'flex-start',
+            flexGrow: 1,
+            overflowY: 'auto'
+          }}
+          >{panelContent}
           </PanelBlock>
-          <PanelBlock style={{ 'flexShrink': 0 }}>
+          <PanelBlock style={{ flexShrink: 0 }}>
             <ResetFilters />
           </PanelBlock>
         </Panel>

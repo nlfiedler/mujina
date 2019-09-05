@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2018 Nathan Fiedler
+// Copyright (c) 2019 Nathan Fiedler
 //
 const React = require('react')
 const PropTypes = require('prop-types')
@@ -9,18 +9,18 @@ const {
   Progress
 } = require('bloomer')
 
-const UploadProgress = ({progress, total}) => (
+const UploadProgress = ({ progress, total }) => (
   <Columns isCentered>
-    { progress.filename && (
+    {progress.filename && (
       <Column isSize='1/4'>
         Uploading {progress.filename}...
       </Column>
-    ) }
-    { progress.count >= 0 && (
+    )}
+    {progress.count >= 0 && (
       <Column isSize='1/2'>
         <Progress isColor='info' value={progress.count} max={total} />
       </Column>
-    ) }
+    )}
   </Columns>
 )
 

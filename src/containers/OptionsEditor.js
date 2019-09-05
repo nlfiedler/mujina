@@ -1,10 +1,10 @@
 //
-// Copyright (c) 2017 Nathan Fiedler
+// Copyright (c) 2019 Nathan Fiedler
 //
-const {connect} = require('react-redux')
-const {actions} = require('react-redux-form')
-const {saveOptions} = require('../actions')
-const {OptionsForm} = require('../components/OptionsForm')
+const { connect } = require('react-redux')
+const { actions } = require('react-redux-form')
+const { saveOptions } = require('../actions')
+const { OptionsForm } = require('../components/OptionsForm')
 
 const mapStateToProps = state => {
   return {

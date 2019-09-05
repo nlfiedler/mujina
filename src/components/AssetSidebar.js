@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2018 Nathan Fiedler
+// Copyright (c) 2019 Nathan Fiedler
 //
 const React = require('react')
 const PropTypes = require('prop-types')
@@ -8,20 +8,20 @@ const {
 } = require('bloomer')
 
 const boxStyle = {
-  'margin': '1rem',
-  'padding': '1rem'
+  margin: '1rem',
+  padding: '1rem'
 }
 const termClass = 'has-background-grey-lighter has-text-centered'
 const termStyle = {
-  'fontSize': '0.75em',
-  'textTransform': 'uppercase'
+  fontSize: '0.75em',
+  textTransform: 'uppercase'
 }
 const dataStyle = {
-  'margin': '0',
-  'wordWrap': 'break-word'
+  margin: '0',
+  wordWrap: 'break-word'
 }
 const numberFormatter = new Intl.NumberFormat()
-const durationFormatter = new Intl.NumberFormat({maximumFractionDigits: 1})
+const durationFormatter = new Intl.NumberFormat({ maximumFractionDigits: 1 })
 
 function formatDuration (value) {
   if (!value) {
@@ -33,7 +33,7 @@ function formatDuration (value) {
   return durationFormatter.format(Math.round(value)) + ' seconds'
 }
 
-const AssetSidebar = ({details}) => {
+const AssetSidebar = ({ details }) => {
   const term = (content) => (
     <dt className={termClass} style={termStyle}>{content}</dt>
   )

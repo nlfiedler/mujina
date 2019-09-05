@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2017 Nathan Fiedler
+// Copyright (c) 2019 Nathan Fiedler
 //
 const React = require('react')
 const PropTypes = require('prop-types')
@@ -9,7 +9,7 @@ const {
   MessageHeader
 } = require('bloomer')
 
-const ErrorMessage = ({error}) => (
+const ErrorMessage = ({ error }) => (
   <Message>
     <MessageHeader>
       <p>Uh oh, something went wrong...</p>

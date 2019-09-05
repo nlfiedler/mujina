@@ -1,12 +1,12 @@
 //
-// Copyright (c) 2018 Nathan Fiedler
+// Copyright (c) 2019 Nathan Fiedler
 //
 const React = require('react')
 const {
   Button
 } = require('bloomer')
-const {connect} = require('react-redux')
-const {resetFilters} = require('../actions')
+const { connect } = require('react-redux')
+const { resetFilters } = require('../actions')
 
 const mapStateToProps = state => {
   return {

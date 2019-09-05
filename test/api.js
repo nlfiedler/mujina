@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2018 Nathan Fiedler
+// Copyright (c) 2019 Nathan Fiedler
 //
 const { assert } = require('chai')
 const { afterEach, describe, it } = require('mocha')
@@ -14,8 +14,8 @@ describe('API', () => {
 
     it('retrieves tags from the backend', async function () {
       const expected = [
-        { 'tag': 'audio', 'count': 1 },
-        { 'tag': 'cake', 'count': 1 }
+        { tag: 'audio', count: 1 },
+        { tag: 'cake', count: 1 }
       ]
       nock('http://localhost:3000')
         .post('/graphql', /query/)

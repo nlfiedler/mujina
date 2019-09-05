@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2018 Nathan Fiedler
+// Copyright (c) 2019 Nathan Fiedler
 //
 const url = require('url')
 const Store = require('electron-store')
@@ -41,7 +41,7 @@ function serverUrl ({ pathname = '', search = '' } = {}) {
  */
 function getOptions () {
   const result = {}
-  for (let prop in defaults) {
+  for (const prop in defaults) {
     result[prop] = store.get(prop)
   }
   return result
@@ -54,7 +54,7 @@ function getOptions () {
  * @param {Object} options new option values.
  */
 function setOptions (options) {
-  for (let prop in defaults) {
+  for (const prop in defaults) {
     store.set(prop, options[prop])
   }
 }

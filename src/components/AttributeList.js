@@ -3,9 +3,9 @@
 //
 const React = require('react')
 const PropTypes = require('prop-types')
-const {Attribute} = require('./Attribute')
+const { Attribute } = require('./Attribute')
 
-const AttributeList = ({attributes, onAttrClick}) => {
+const AttributeList = ({ attributes, onAttrClick }) => {
   let inner = null
   if (attributes.isPending) {
     inner = 'loading...'
@@ -28,10 +28,12 @@ const AttributeList = ({attributes, onAttrClick}) => {
   // Use block formatting instead of flex, otherwise the elements spread out
   // vertically and there is seemingly no flex way to fix that.
   return (
-    <div className='tags' style={{
-      'display': 'block',
-      'height': '100%'
-    }}>
+    <div
+      className='tags' style={{
+        display: 'block',
+        height: '100%'
+      }}
+    >
       {inner}
     </div>
   )

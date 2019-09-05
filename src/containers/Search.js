@@ -1,9 +1,9 @@
 //
-// Copyright (c) 2018 Nathan Fiedler
+// Copyright (c) 2019 Nathan Fiedler
 //
-const {connect} = require('react-redux')
-const {searchAssets} = require('../actions')
-const {SearchBar} = require('../components/SearchBar')
+const { connect } = require('react-redux')
+const { searchAssets } = require('../actions')
+const { SearchBar } = require('../components/SearchBar')
 
 const mapStateToProps = state => {
   return {

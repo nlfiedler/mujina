@@ -35,7 +35,7 @@ class NewFileList extends React.Component {
     for (const prop in drops) {
       // Not all properties of the drops object are keyed inputs;
       // seems like a $form property is also introduced at some point.
-      if (drops.hasOwnProperty(prop) && filesByKey.has(prop)) {
+      if ({}.hasOwnProperty.call(drops, prop) && filesByKey.has(prop)) {
         Object.assign(filesByKey.get(prop), drops[prop])
       }
     }
@@ -50,10 +50,10 @@ class NewFileList extends React.Component {
   }
 
   render () {
-    let message = this.props.uploads.isPending && (
+    const message = this.props.uploads.isPending && (
       <p><em>Processing uploads...</em></p>
     )
-    let inner = this.props.uploads.pending.map((file) => (
+    const inner = this.props.uploads.pending.map((file) => (
       <NewFile key={file.checksum} {...file} />
     ))
     return (

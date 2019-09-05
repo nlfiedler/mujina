@@ -1,8 +1,8 @@
 //
-// Copyright (c) 2018 Nathan Fiedler
+// Copyright (c) 2019 Nathan Fiedler
 //
-const {connect} = require('react-redux')
-const {UploadProgress} = require('../components/UploadProgress')
+const { connect } = require('react-redux')
+const { UploadProgress } = require('../components/UploadProgress')
 
 const mapStateToProps = state => {
   const total = state.uploads.outgoing ? state.uploads.outgoing.length : 0

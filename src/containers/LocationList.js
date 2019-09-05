@@ -1,9 +1,9 @@
 //
 // Copyright (c) 2017 Nathan Fiedler
 //
-const {connect} = require('react-redux')
-const {toggleLocation} = require('../actions')
-const {AttributeList} = require('../components/AttributeList')
+const { connect } = require('react-redux')
+const { toggleLocation } = require('../actions')
+const { AttributeList } = require('../components/AttributeList')
 
 const mapStateToProps = state => {
   return {
