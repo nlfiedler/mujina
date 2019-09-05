@@ -1,11 +1,74 @@
 * Mujina
-** Short Term
-*** DONE Fix all StandardJS warnings
-*** DONE Update node module dependencies
-*** DONE Updating sharp fails because electron-builder is not invoked?
-**** installing sharp 0.22 invokes electron-builder
-**** installing sharp 0.23 does not, and thus the tests fail to start
-*** DONE Update the gulpfile format
+** Complete Rewrite
+*** Use ReasonML
+**** It is much better than JavaScript and TypeScript in many ways
+**** One commercial developer strongly advocates using ReasonML with Electron
+*** Use [[https://tailwindcss.com/docs/what-is-tailwind/][Tailwind CSS]]
+**** Copy the build pipeline from ungaikyou
+**** c.f. https://adamwathan.me/css-utility-classes-and-separation-of-concerns/
+*** New Interface
+**** Look at https://github.com/Pagedraw/pagedraw for building the interface
+**** Look at Sketch or Figma for designing the interface
+**** List of grievances
+***** Closing the asset preview page goes Home, instead of the previous page, e.g. Search
+****** Should probably use the history to go back to the previous route
+***** I keep looking for a button at the top left to go back to the previous screen
+**** Proposed improvements
+***** Selectors should be collapsed to a narrow vertical bar on left side
+***** Clicking on selectors will display a slideout panel to show all selectors
+***** Currently selected attributes are shown at the top
+***** Currently selected attributes have an ~X~ button to deselect
+*** Action Plan
+**** TODO Use a development branch so current code can be maintained
+**** TODO Keep the existing code in place, only build setup changes
+**** TODO Copy build pipeline from ungaikyou to get things started
+**** TODO Set up reductive for state management
+**** TODO Port underlying "API" code
+**** TODO Get automated tests in place for API module
+**** TODO Port the query code, write tests
+**** TODO Set up top-level "App" component with routing
+***** TODO Adapt the ReasonReact router to use its =push= function
+**** TODO Get configuration screen and storage working
+**** TODO Understand how =redux-saga= works and how ReasonML can do something similar
+***** reductive has a bunch of "thunk" examples that may be what was intended
+***** reductive has =middleware.re= which is an example of how to do it
+***** c.f. [[http://2ality.com/2018/01/iterators-reasonml.html][ReasonML iterators]] for an alternative to generators seen in redux-saga
+***** c.f. [[https://redux-observable.js.org][redux-observable]] for an alternative method that does not use generators
+**** TODO Consider how to interact with React libraries from ReasonReact
+- react-lazyload-fadein
+- react-resize-detector
+- react-visibility-sensor
+**** TODO Ensure unnecessary dependencies are removed
+- babel
+- babel-core
+- babel-preset-env
+- babel-preset-react
+- bloomer
+- chai
+- electron-mocha
+- gulp
+- license-checker
+- mocha
+- prop-types
+- react-redux
+- react-redux-form
+- react-router
+- redux
+- redux-logger
+- redux-mock-store
+- redux-saga
+**** TODO Build interface for selecting tags
+**** TODO Build interface for selecting locations
+**** TODO Build interface for selecting years
+**** TODO Use selections to query for assets, display raw results
+**** TODO Selecting a result displays asset details in a new page
+**** TODO Show image thumbnails in query results page
+**** TODO Show preview image in asset details page
+**** TODO Implement asset edit page
+**** TODO Implement drag and drop and upload page
+**** TODO Implement search page (with improvements noted elsewhere)
+** Later
+*** TODO Fix the [[https://electronjs.org/docs/tutorial/security][content security policy]] thing
 *** TODO Improve the search interface a bit so it saves me time and trouble
 **** TODO Handle search query string errors better
 - Currently, an error in the query goes to the error page without any helpful hint
@@ -13,95 +76,6 @@
 - Should instead catch the error and show it below the search bar
 **** TODO Show helpful text and examples on search page instead of results
 - See Sublime Merge "search" screen as a nice example
-** Interface Rewrite
-*** TODO Should combine this with ReasonML rewrite, it's a major overhaul
-*** TODO Rewrite interface using [[https://tailwindcss.com/docs/what-is-tailwind/][Tailwind CSS]]
-**** Copy the build pipeline from ungaikyou
-**** Look at https://github.com/Pagedraw/pagedraw for building the interface
-**** Look at Sketch or Figma for designing the interface
-**** c.f. https://adamwathan.me/css-utility-classes-and-separation-of-concerns/
-**** Completely redesign the interface, I don't like the current one
-***** I keep looking for a button at the top left to go back to the previous screen
-***** Selectors should be collapsed to a narrow vertical bar on left side
-***** Clicking on selectors will display a slideout panel to show all selectors
-***** Currently selected attributes are shown at the top
-***** Currently selected attributes have an ~X~ button to deselect
-**** Issues to address
-***** Closing the asset preview page goes Home, instead of the previous page, e.g. Search
-****** Should probably use the history to go back to the previous route
-** ReasonML Rewrite
-*** TODO Use a development branch so current code can be maintained
-*** TODO Consider rewrite using ReasonML
-**** One commercial developer strongly advocates using ReasonML with Electron
-**** TODO Understand how =redux-saga= works and how ReasonML can do something similar
-***** reductive has a bunch of "thunk" examples that may be what was intended
-***** reductive has =middleware.re= which is an example of how to do it
-***** Extract that middleware example into a utility function
-***** TODO See [[http://2ality.com/2018/01/iterators-reasonml.html][ReasonML iterators]] for an alternative to generators seen in redux-saga
-***** TODO See [[https://redux-observable.js.org][redux-observable]] for an alternative method that does not use generators
-**** TODO Look at https://github.com/cristianoc/genType for JavaScript interop
-**** TODO Consider how to interact with React libraries from ReasonReact
-- react-lazyload-fadein
-- react-resize-detector
-- react-visibility-sensor
-
-**** TODO Consider how to organize the source code; Reason tends to be flat
-**** TODO Consider how to use =reductive= instead of =redux= and =react-redux=
-**** TODO Convert some React components to ReasonReact [0/22]
-- [ ] AssetEditPage
-- [ ] AssetEditor
-- [ ] AssetPage
-- [ ] AssetPreview
-- [ ] AssetSidebar
-- [ ] Attribute
-- [ ] AttributeList
-- [ ] ErrorMessage
-- [ ] ErrorPage
-- [ ] FiltersPanel
-- [ ] HomePage
-- [ ] NewFile
-- [ ] NewFileList
-- [ ] OptionsForm
-- [ ] OptionsPage
-- [ ] SearchBar
-- [ ] SearchPage
-- [ ] ThumbnailCard
-- [ ] ThumbnailColumn
-- [ ] ThumbnailGrid
-- [ ] UploadPage
-- [ ] UploadProgress
-
-**** TODO Convert some JavaScript to ReasonML [0/11]
-- [ ] actions.js
-- [ ] api.js
-- [ ] config.js
-- [ ] main.js
-- [ ] menu.js
-- [ ] preview.js
-- [ ] query.js
-- [ ] reducers.js
-- [ ] renderer.js
-- [ ] sagas.js
-- [ ] store.js
-
-**** TODO Rewrite the =App= component in ReasonML and use ReasonReact router
-***** TODO Adapt the ReasonReact router to use its =push= function
-***** TODO Remove =react-router= and =react-router-redux= dependencies
-**** TODO Remove =PropTypes= once conversion to ReasonReact is complete
-***** TODO Remove =prop-types= dependency
-** TypeScript Rewrite
-*** TODO Consider translating to TypeScript if ReasonML proves difficult
-**** works well with redux.js
-**** doubles the number of dependencies because of @types
-** JavaScript maintenance (if not rewriting in Something Else)
-*** TODO Should replace =react-redux-form= with =formik=
-**** =react-redux-form= is now in maintenance mode
-**** c.f. https://github.com/jaredpalmer/formik
-**** if using ReasonML, then =bs-reform= takes the place of this
-*** TODO Updating =gulp-babel= will require updating babel as well
-**** babel goes away if using ReasonML (it only compiles the JSX)
-** Later
-*** TODO Fix the [[https://electronjs.org/docs/tutorial/security][content security policy]] thing
 ** Anytime
 *** Asset page
 **** TODO Resize window and observe that middle component does not resize well
@@ -307,16 +281,13 @@ The icons are kinda cryptic, text is much more obvious
 *** TODO What format are =AAE= files and can we show them somehow?
 *** TODO How to search for assets with no tags or location?
 - GraphQL works, but it is beyond the capability of non-technical people
-
 *** TODO What does supporting emoji codes (in captions/comments) entail?
 *** TODO Investigate how to localize the app
 - https://www.npmjs.com/package/oftn-l10n
 - https://developer.mozilla.org/en-US/docs/Mozilla/Localization/Localization_content_best_practices
-
 *** TODO Find out how to handle unresponsive windows
 *** TODO See https://github.com/Quramy/electron-jsx-babel-boilerplate/
 - uses gulp to minify and uglify everything
-
 *** TODO Drag and drop from Photos is not working
 - Update: it works as of 2018-11-17, but the filenames are weird, and seemingly not full quality
 - See the yelp.com page for adding photos, it works with Photos app
@@ -324,5 +295,4 @@ The icons are kinda cryptic, text is much more obvious
 - See the Electron guide for native drag & drop
 - Handle 'open-url' and/or 'open-file' on the app instance in main.js
 - Maybe look at that relatively new DataTransfer API business
-
 *** TODO Look for library to connect to devices to extract photos
