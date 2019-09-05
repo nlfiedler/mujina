@@ -54,7 +54,7 @@ class AssetEditor extends React.Component {
   componentWillMount () {
     const userdate = this.props.details.userdate ? (
       // yes, a date library just so we can format the date, seriously
-      datefmt(this.props.details.userdate, 'YYYY-MM-DD[T]HH:mm:ss')
+      datefmt(this.props.details.userdate, "yyyy-MM-dd'T'HH:mm:ss")
     ) : ''
     this.props.populateForm(Object.assign({}, this.props.details, {
       tags: this.props.details.tags.join(', '),

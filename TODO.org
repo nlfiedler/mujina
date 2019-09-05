@@ -2,6 +2,9 @@
 ** Short Term
 *** DONE Fix all StandardJS warnings
 *** TODO Update node module dependencies
+*** TODO Updating sharp fails because electron-builder is not invoked?
+**** installing sharp 0.22 invokes electron-builder
+**** installing sharp 0.23 does not, and thus the tests fail to start
 *** DONE Update the gulpfile format
 *** TODO Improve the search interface a bit so it saves me time and trouble
 **** TODO Handle search query string errors better
