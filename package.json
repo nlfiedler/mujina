@@ -45,7 +45,7 @@
   "dependencies": {
     "bloomer": "^0.6.5",
     "date-fns": "^2.0.1",
-    "electron-store": "^4.0.0",
+    "electron-store": "^5.0.0",
     "electron-window-state": "^5.0.3",
     "ffmpeg-static": "^2.7.0",
     "ffprobe-static": "^3.0.0",
