@@ -82,7 +82,7 @@
     "gulp-babel": "^7.0.1",
     "license-checker": "^25.0.1",
     "mocha": "^6.2.2",
-    "nock": "^11.3.1",
+    "nock": "^11.6.0",
     "redux-immutable-state-invariant": "^2.1.0",
     "redux-mock-store": "^1.5.3"
   }
