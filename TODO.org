@@ -1,4 +1,7 @@
 * Mujina
+** Node modules
+*** Cannot upgrade =electron= until =sharp= is updated to support it
+*** Probably cannot upgrade =gulp-babel= carelessly
 ** Complete Rewrite
 *** Use ReasonML
 **** It is much better than JavaScript and TypeScript in many ways
@@ -7,6 +10,7 @@
 **** Copy the build pipeline from ungaikyou
 **** c.f. https://adamwathan.me/css-utility-classes-and-separation-of-concerns/
 *** New Interface
+**** Look at [[https://www.material.io][Material Design]] for icons and such
 **** Look at https://github.com/Pagedraw/pagedraw for building the interface
 **** Look at Sketch or Figma for designing the interface
 **** List of grievances
@@ -18,6 +22,8 @@
 ***** Clicking on selectors will display a slideout panel to show all selectors
 ***** Currently selected attributes are shown at the top
 ***** Currently selected attributes have an ~X~ button to deselect
+***** Asset preview will show search result thumbnails along the top
+****** having them on the side seems uncommon, most apps have them at the top
 *** Action Plan
 **** TODO Use a development branch so current code can be maintained
 **** TODO Keep the existing code in place, only build setup changes
@@ -35,9 +41,30 @@
 ***** c.f. [[http://2ality.com/2018/01/iterators-reasonml.html][ReasonML iterators]] for an alternative to generators seen in redux-saga
 ***** c.f. [[https://redux-observable.js.org][redux-observable]] for an alternative method that does not use generators
 **** TODO Consider how to interact with React libraries from ReasonReact
-- react-lazyload-fadein
-- react-resize-detector
-- react-visibility-sensor
+***** react-lazyload-fadein
+***** react-resize-detector
+***** react-visibility-sensor
+****** c.f. ~useIsInView~ hook code from https://wattenberger.com/blog/react-hooks
+#+BEGIN_SRC javascript
+const useIsInView = (margin="0px") => {
+  const [isIntersecting, setIntersecting] = useState(false)
+  const ref = useRef()
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(([ entry ]) => {
+      setIntersecting(entry.isIntersecting)
+    }, { margin })
+    if (ref.current) {
+      observer.observe(ref.current)
+    }
+    return () => {
+      observer.unobserve(ref.current)
+    }
+  }, [])
+
+  return [ref, isIntersecting]
+}
+#+END_SRC
 **** TODO Ensure unnecessary dependencies are removed
 - babel
 - babel-core
@@ -76,6 +103,17 @@
 - Should instead catch the error and show it below the search bar
 **** TODO Show helpful text and examples on search page instead of results
 - See Sublime Merge "search" screen as a nice example
+*** TODO Support features
+**** An about dialog that shows all the versions, with a copy button
+: Version: 1.38.1
+: Commit: b37e54c98e1a74ba89e03073e5a3761284e3ffb0
+: Date: 2019-09-11T13:31:32.854Z
+: Electron: 4.2.10
+: Chrome: 69.0.3497.128
+: Node.js: 10.11.0
+: V8: 6.9.427.31-electron.0
+: OS: Darwin x64 18.7.0
+
 ** Anytime
 *** Asset page
 **** TODO Resize window and observe that middle component does not resize well
