@@ -51,7 +51,7 @@ class AssetEditor extends React.Component {
     this.props.onSubmit(updated)
   }
 
-  componentWillMount () {
+  UNSAFE_componentWillMount () {
     const userdate = this.props.details.userdate ? (
       // yes, a date library just so we can format the date, seriously
       datefmt(this.props.details.userdate, "yyyy-MM-dd'T'HH:mm:ss")
