@@ -5,22 +5,10 @@ const gulp = require('gulp')
 const babel = require('gulp-babel')
 const del = require('del')
 
-const reactSrc = [
-  'src/components/**/*.js'
-]
-const scriptSrc = [
-  'src/**/*.js',
-  '!src/components/**'
-]
-const assetSrc = [
-  'assets/**/*.css',
-  'assets/**/*.html',
-  'assets/webfonts/**/*',
-  'assets/images/**/*'
-]
-
 function compileReact () {
-  return gulp.src(reactSrc, { base: 'src' })
+  return gulp.src([
+    'src/components/**/*.js'
+  ], { base: 'src' })
     .pipe(babel({
       presets: ['env', 'react']
     }))
@@ -28,12 +16,20 @@ function compileReact () {
 }
 
 function copyScripts () {
-  return gulp.src(scriptSrc, { base: 'src' })
+  return gulp.src([
+    'src/**/*.js',
+    '!src/components/**'
+  ], { base: 'src' })
     .pipe(gulp.dest('app'))
 }
 
 function copyAssets () {
-  return gulp.src(assetSrc, { base: 'assets' })
+  return gulp.src([
+    'assets/**/*.css',
+    'assets/**/*.html',
+    'assets/webfonts/**/*',
+    'assets/images/**/*'
+  ], { base: 'assets' })
     .pipe(gulp.dest('app'))
 }
 
@@ -42,4 +38,5 @@ function clean () {
 }
 
 exports.clean = clean
-exports.default = gulp.series(compileReact, copyScripts, copyAssets)
+exports.build = gulp.series(compileReact, copyScripts, copyAssets)
+exports.default = exports.build

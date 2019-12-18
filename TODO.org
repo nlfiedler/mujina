@@ -3,6 +3,16 @@
 *** Cannot upgrade =electron= until =sharp= is updated to support it
 *** Probably cannot upgrade =gulp-babel= carelessly
 ** Complete Rewrite
+*** Consider desktop framework (alternatives to Electron)
+**** Dart/Flutter for Desktop
+***** compiles to native code
+***** work in progress as of 2019/12
+***** https://flutter.dev/desktop
+***** https://github.com/flutter/flutter/wiki/Desktop-shells
+**** ReasonML/Revery
+***** compiles to native code
+***** work in progress as of 2019/12
+***** https://github.com/revery-ui/revery
 *** Use ReasonML
 **** It is much better than JavaScript and TypeScript in many ways
 **** One commercial developer strongly advocates using ReasonML with Electron
@@ -249,6 +259,9 @@ The icons are kinda cryptic, text is much more obvious
  the tags tab is selected by default, and the locations is not showing.
 
 **** TODO Advanced search features
+***** TODO allow fuzzy searching
+****** c.f. https://www.npmjs.com/package/react-use-fuzzy
+****** c.f. https://github.com/krisk/fuse
 ***** TODO "is:image" and similar are converted to "mimetype:image/*" :tanuki:
 ***** TODO "with:<name>" for searching people
 ***** TODO logical operators (and, or) and grouping with parentheses
